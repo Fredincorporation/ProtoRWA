@@ -1,0 +1,1795 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#bbcabf",
+              "on-secondary-fixed-variant": "#004e5c",
+              "primary-fixed": "#6ffbbe",
+              "on-error": "#690005",
+              outline: "#86948a",
+              "on-background": "#dee2ee",
+              "tertiary-container": "#e29100",
+              "surface-container-highest": "#30353e",
+              "secondary-container": "#03b5d3",
+              secondary: "#4cd7f6",
+              "on-primary-fixed-variant": "#005236",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#4edea3",
+              "secondary-fixed-dim": "#4cd7f6",
+              "secondary-fixed": "#acedff",
+              "on-tertiary-fixed": "#2a1700",
+              primary: "#4edea3",
+              "inverse-surface": "#dee2ee",
+              "tertiary-fixed": "#ffddb8",
+              "surface-dim": "#0f141c",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-secondary-container": "#00424e",
+              tertiary: "#ffb95f",
+              "surface-variant": "#30353e",
+              "on-primary-container": "#00422b",
+              "on-primary-fixed": "#002113",
+              "outline-variant": "#3c4a42",
+              error: "#ffb4ab",
+              "surface-container-high": "#252a33",
+              "on-secondary-fixed": "#001f26",
+              "surface-bright": "#343942",
+              "surface-container-lowest": "#090e16",
+              "primary-container": "#10b981",
+              "primary-fixed-dim": "#4edea3",
+              "on-surface": "#dee2ee",
+              background: "#0f141c",
+              surface: "#0f141c",
+              "on-tertiary-fixed-variant": "#653e00",
+              "inverse-primary": "#006c49",
+              "on-tertiary-container": "#523200",
+              "on-primary": "#003824",
+              "on-secondary": "#003640",
+              "error-container": "#93000a",
+              "surface-container-low": "#171c24",
+              "on-tertiary": "#472a00",
+              "inverse-on-surface": "#2c3139",
+              "surface-container": "#1b2028",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              gutter: "1.5rem",
+              "space-xl": "2.5rem",
+              "margin-mobile": "1rem",
+              "space-sm": "0.5rem",
+              margin: "2.5rem",
+              "space-md": "1rem",
+              "space-xs": "0.25rem",
+              "space-lg": "1.5rem",
+              "gutter-mobile": "1rem",
+            },
+            fontFamily: {
+              "headline-lg-mobile": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "body-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-lg": ["Space Grotesk"],
+              "headline-md": ["Space Grotesk"],
+              "headline-sm": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "display-lg": ["Space Grotesk"],
+              "label-md": ["JetBrains Mono"],
+              "body-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface antialiased">
+    <aside
+      class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md"
+    >
+      <div class="flex flex-col gap-space-md">
+        <div class="px-space-md flex items-center gap-space-sm">
+          <div
+            class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center"
+          >
+            <span class="font-label-lg text-label-lg font-bold text-on-primary"
+              >P</span
+            >
+          </div>
+          <div>
+            <div
+              class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight"
+            >
+              ProtoRWA
+            </div>
+            <div
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+            >
+              Terminal Engine
+            </div>
+          </div>
+        </div>
+        <nav
+          class="flex flex-col gap-space-xs px-space-sm"
+          data-active-classes="bg-surface-container-high text-primary font-label-md text-label-md rounded-lg"
+        >
+          <a
+            aria-current="page"
+            class="px-space-sm py-2 transition-colors bg-surface-container-high text-primary font-label-md text-label-md rounded-lg"
+            data-path="founder-studio"
+            href="#"
+            >Founder Studio</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="investor-portfolio"
+            href="#"
+            >Investor Portfolio</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="project-terminal"
+            href="#"
+            >Project Terminal</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="secondary-claims-market"
+            href="#"
+            >Secondary Claims Market</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="explore-projects"
+            href="#"
+            >Explore Projects</a
+          >
+        </nav>
+      </div>
+      <div class="px-space-md flex flex-col gap-space-xs">
+        <div class="p-space-sm rounded-lg bg-surface-container-low">
+          <div
+            class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+          >
+            Active Network
+          </div>
+          <div class="font-label-md text-label-md text-primary font-bold">
+            Robinhood Subnet #14
+          </div>
+          <div class="font-label-sm text-label-sm text-outline">
+            Gas: 0.001 Gwei
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="pl-64">
+      <header
+        class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 flex items-center justify-between px-gutter"
+      >
+        <div class="flex items-center gap-space-sm">
+          <div
+            class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low"
+          >
+            <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <span class="font-label-sm text-label-sm text-on-surface uppercase"
+              >Robinhood Chain</span
+            >
+          </div>
+          <span
+            class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase"
+            >RWA SUB-PROTOCOL</span
+          >
+        </div>
+        <div class="flex items-center gap-space-sm">
+          <div
+            class="flex items-center rounded-lg bg-surface-container-high p-0.5"
+          >
+            <div
+              class="px-space-sm py-1 font-label-md text-label-md text-primary font-semibold"
+            >
+              42,500 USDC
+            </div>
+            <div
+              class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium"
+            >
+              0x71C...4f9b
+            </div>
+          </div>
+          <button
+            class="relative p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary"
+            ></span></button
+          ><img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+          />
+        </div>
+      </header>
+      <main class="relative pt-16 bg-surface min-h-screen px-gutter">
+        <div class="flex flex-col w-full pb-16">
+          <!-- Interactive Header & Workflow Stage Tracker -->
+          <div class="flex flex-col gap-6 mb-8">
+            <!-- Breadcrumb & Architecture Tag -->
+            <div class="flex items-center justify-between">
+              <div
+                class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >
+                <span
+                  class="hover:text-primary transition-colors cursor-pointer"
+                  >Projects</span
+                >
+                <span>/</span>
+                <span
+                  class="hover:text-primary transition-colors cursor-pointer"
+                  >ProtoEngine Alpha</span
+                >
+                <span>/</span>
+                <span class="text-primary font-semibold"
+                  >Contract Deployment Architect</span
+                >
+              </div>
+              <div
+                class="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"
+                ></span>
+                <span class="text-on-surface font-mono"
+                  >SPEC_VERSION::v3.42-STABLE</span
+                >
+              </div>
+            </div>
+            <!-- Stepper Navigation Bar (12-Col Segmented Matrix) -->
+            <div class="bg-surface-container rounded-xl p-4 shadow-md">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-3 relative">
+                <!-- Step 1: Completed -->
+                <div
+                  class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low"
+                >
+                  <div
+                    class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center text-on-primary"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >check</span
+                    >
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Step 01</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-on-surface truncate font-semibold"
+                      >Hardware Specs</span
+                    >
+                  </div>
+                </div>
+                <!-- Step 2: Completed -->
+                <div
+                  class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low"
+                >
+                  <div
+                    class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center text-on-primary"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >check</span
+                    >
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Step 02</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-on-surface truncate font-semibold"
+                      >BOM & Custody</span
+                    >
+                  </div>
+                </div>
+                <!-- Step 3 & 4 Active Matrix -->
+                <div
+                  class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-highest shadow-inner"
+                >
+                  <div
+                    class="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md font-bold"
+                  >
+                    3
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="font-label-sm text-label-sm text-primary uppercase font-bold"
+                        >Step 03</span
+                      >
+                      <span
+                        class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"
+                      ></span>
+                    </div>
+                    <span
+                      class="font-label-md text-label-md text-on-surface truncate font-bold"
+                      >Escrow Tranches</span
+                    >
+                  </div>
+                </div>
+                <!-- Step 4 Active/Final Review -->
+                <div
+                  class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-high"
+                >
+                  <div
+                    class="w-7 h-7 rounded-lg bg-surface-bright text-secondary flex items-center justify-center font-label-md text-label-md font-bold"
+                  >
+                    4
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span
+                      class="font-label-sm text-label-sm text-secondary uppercase font-semibold"
+                      >Step 04</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-on-surface-variant truncate"
+                      >On-Chain Sign-off</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Title & Action Ribbon -->
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-4"
+            >
+              <div>
+                <div
+                  class="flex items-center gap-2 font-label-sm text-label-sm text-secondary uppercase tracking-widest font-semibold mb-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >account_tree</span
+                  >
+                  Autonomous Hardware Escrow Configuration
+                </div>
+                <h1
+                  class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight"
+                >
+                  Program Milestone Escrow & Revenue-Share Claims
+                </h1>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1"
+                >
+                  Define automated capital tranches unlocked exclusively via
+                  multi-party oracle attestations. Claim tokens vest dynamically
+                  against verified Shenzhen & US manufacturing telemetry.
+                </p>
+              </div>
+              <div class="flex items-center gap-3 self-start md:self-auto">
+                <button
+                  class="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm transition-colors shadow-sm"
+                >
+                  <span
+                    class="material-symbols-outlined text-[16px] text-primary"
+                    >data_saver_on</span
+                  >
+                  <span>Draft State Synced</span>
+                </button>
+                <button
+                  class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >terminal</span
+                  >
+                  <span>Open Contract CLI</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Primary Asymmetric Grid (65% Builder / 35% Simulation Pane) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- LEFT & CENTER COLUMN: Configuration & Timelines (8 cols -> ~66%) -->
+            <div class="lg:col-span-8 flex flex-col gap-8">
+              <!-- Funding Target & Tokenomics Configuration Bento Box -->
+              <div
+                class="bg-surface-container-low rounded-xl p-6 shadow-md flex flex-col gap-6"
+              >
+                <div class="flex items-center justify-between pb-4">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-[20px] text-primary"
+                      >toll</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                      >Macro Tokenomics & Underwriting Cap</span
+                    >
+                  </div>
+                  <span
+                    class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm"
+                  >
+                    USDC Collateralized
+                  </span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <!-- Total Raise Goal Card -->
+                  <div
+                    class="bg-surface-container rounded-lg p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-all"
+                  >
+                    <div
+                      class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm uppercase"
+                    >
+                      <span>Total Raise Goal</span>
+                      <span
+                        class="material-symbols-outlined text-[16px] text-secondary"
+                        >payments</span
+                      >
+                    </div>
+                    <div class="my-3">
+                      <div
+                        class="font-label-lg text-[28px] font-bold text-on-surface leading-tight tracking-tight"
+                      >
+                        $1,200,000
+                      </div>
+                      <div
+                        class="font-label-sm text-label-sm text-primary font-medium mt-1"
+                      >
+                        USDC (100% On-Chain Escrow)
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center justify-between pt-2 text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span>Hard Cap: $1.2M</span>
+                      <span class="text-primary font-bold"
+                        >Min Soft: $800k</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Revenue-Share Model Card -->
+                  <div
+                    class="bg-surface-container rounded-lg p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-all"
+                  >
+                    <div
+                      class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm uppercase"
+                    >
+                      <span>Revenue-Share Terms</span>
+                      <span
+                        class="material-symbols-outlined text-[16px] text-tertiary"
+                        >pie_chart</span
+                      >
+                    </div>
+                    <div class="my-3">
+                      <div
+                        class="font-label-lg text-[28px] font-bold text-tertiary leading-tight tracking-tight"
+                      >
+                        12.5%
+                      </div>
+                      <div
+                        class="font-label-sm text-label-sm text-on-surface-variant font-medium mt-1 truncate"
+                      >
+                        Gross Hardware Device Sales
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center justify-between pt-2 text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span>2.5x Total Return Cap</span>
+                      <span class="text-tertiary font-bold">$3,000,000</span>
+                    </div>
+                  </div>
+                  <!-- Total Claim Tokens Card -->
+                  <div
+                    class="bg-surface-container rounded-lg p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-all"
+                  >
+                    <div
+                      class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm uppercase"
+                    >
+                      <span>Claim Tokens Issued</span>
+                      <span
+                        class="material-symbols-outlined text-[16px] text-primary"
+                        >token</span
+                      >
+                    </div>
+                    <div class="my-3">
+                      <div
+                        class="font-label-lg text-[28px] font-bold text-secondary leading-tight tracking-tight"
+                      >
+                        1,200,000
+                      </div>
+                      <div
+                        class="font-label-sm text-label-sm text-on-surface-variant font-medium mt-1 truncate"
+                      >
+                        Ticker: $SAPULSE (ERC-20/4626)
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center justify-between pt-2 text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span>Unit Price</span>
+                      <span class="text-secondary font-bold"
+                        >$1.00 USDC / Token</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- Tranche Visual Progress Bar -->
+                <div class="flex flex-col gap-2 pt-2">
+                  <div
+                    class="flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm"
+                  >
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-primary"></span>
+                      <span class="text-on-surface font-semibold"
+                        >Tranche Allocation Weight</span
+                      >
+                    </div>
+                    <span class="font-mono text-primary"
+                      >4 / 4 Tranches Configured (100%)</span
+                    >
+                  </div>
+                  <div
+                    class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden flex shadow-inner"
+                  >
+                    <div
+                      class="h-full bg-primary hover:opacity-90 transition-all cursor-pointer relative group"
+                      style="width: 30%"
+                    ></div>
+                    <div
+                      class="h-full bg-secondary hover:opacity-90 transition-all cursor-pointer relative group"
+                      style="width: 25%"
+                    ></div>
+                    <div
+                      class="h-full bg-tertiary hover:opacity-90 transition-all cursor-pointer relative group"
+                      style="width: 25%"
+                    ></div>
+                    <div
+                      class="h-full bg-primary-fixed hover:opacity-90 transition-all cursor-pointer relative group"
+                      style="width: 20%"
+                    ></div>
+                  </div>
+                  <div
+                    class="grid grid-cols-4 gap-2 text-center font-label-sm text-label-sm text-on-surface-variant pt-1"
+                  >
+                    <div class="text-left">
+                      <span class="text-primary font-bold">M1:</span> 30%
+                      ($360k)
+                    </div>
+                    <div class="text-center">
+                      <span class="text-secondary font-bold">M2:</span> 25%
+                      ($300k)
+                    </div>
+                    <div class="text-center">
+                      <span class="text-tertiary font-bold">M3:</span> 25%
+                      ($300k)
+                    </div>
+                    <div class="text-right">
+                      <span class="text-primary-fixed font-bold">M4:</span> 20%
+                      ($240k)
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Milestone Escrow Builder (Interactive Cards) -->
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-[22px] text-primary"
+                      >flag</span
+                    >
+                    <h2
+                      class="font-headline-md text-headline-md text-on-surface font-bold"
+                    >
+                      Milestone Escrow Tranche Program
+                    </h2>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm transition-colors shadow-sm"
+                      id="auto-balance-btn"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"
+                        >auto_awesome</span
+                      >
+                      <span>AI Auto-Balance</span>
+                    </button>
+                  </div>
+                </div>
+                <!-- Milestone Card 1 -->
+                <div
+                  class="bg-surface-container-low hover:bg-surface-container transition-all rounded-xl p-6 shadow-md relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"
+                  ></div>
+                  <div
+                    class="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-4"
+                  >
+                    <div class="flex items-start gap-4">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-label-lg font-bold shadow-inner"
+                      >
+                        01
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <h3
+                            class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                          >
+                            Tooling & Injection Mold Fabrication
+                          </h3>
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-primary/15 text-primary font-label-sm text-label-sm uppercase font-semibold"
+                          >
+                            Tranche Phase 1
+                          </span>
+                        </div>
+                        <div
+                          class="flex items-center gap-4 mt-1 font-label-sm text-label-sm text-on-surface-variant"
+                        >
+                          <span
+                            class="flex items-center gap-1 text-on-surface font-medium"
+                          >
+                            <span
+                              class="material-symbols-outlined text-[15px] text-primary"
+                              >schedule</span
+                            >
+                            Est. T+45 Days Post-Closing
+                          </span>
+                          <span>•</span>
+                          <span>Shenzhen Precision Tooling Lab</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="text-right flex md:flex-col justify-between items-end"
+                    >
+                      <div
+                        class="font-label-lg text-headline-sm font-bold text-primary"
+                      >
+                        $360,000
+                        <span
+                          class="text-label-sm font-normal text-on-surface-variant"
+                          >USDC</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold"
+                        >30.0% Allocation</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Technical Criteria Section -->
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 bg-surface-container-lowest/60 p-4 rounded-lg"
+                  >
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-secondary"
+                          >verified</span
+                        >
+                        Deliverable Validation Criteria
+                      </div>
+                      <ul
+                        class="flex flex-col gap-1.5 font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-primary mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >Signed structural factory inspection report
+                            (ISO-9001).</span
+                          >
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-primary mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >4K CNC tooling process video directly streamed from
+                            Bao'an facility.</span
+                          >
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-primary mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >IPFS Evidence Hash pinned via decentralized file
+                            storage.</span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary"
+                          >lock_clock</span
+                        >
+                        Oracle & Release Protocol
+                      </div>
+                      <div
+                        class="bg-surface-container-high rounded p-2.5 flex flex-col gap-1.5 text-label-sm font-label-sm"
+                      >
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Oracle Engine:</span
+                          >
+                          <span class="font-mono text-secondary"
+                            >SGS Certified Hardware Inspector</span
+                          >
+                        </div>
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Consensus Requirement:</span
+                          >
+                          <span class="font-mono text-primary"
+                            >Dual MultiSig (2 of 3)</span
+                          >
+                        </div>
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Hash Check:</span
+                          >
+                          <span
+                            class="font-mono text-on-surface-variant truncate max-w-[140px]"
+                            >ipfs://QmZb8...9x2d</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Milestone Card 2 -->
+                <div
+                  class="bg-surface-container-low hover:bg-surface-container transition-all rounded-xl p-6 shadow-md relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"
+                  ></div>
+                  <div
+                    class="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-4"
+                  >
+                    <div class="flex items-start gap-4">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary font-label-lg font-bold shadow-inner"
+                      >
+                        02
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <h3
+                            class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                          >
+                            Pilot Batch Assembly (100 Pre-production Units)
+                          </h3>
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm uppercase font-semibold"
+                          >
+                            Tranche Phase 2
+                          </span>
+                        </div>
+                        <div
+                          class="flex items-center gap-4 mt-1 font-label-sm text-label-sm text-on-surface-variant"
+                        >
+                          <span
+                            class="flex items-center gap-1 text-on-surface font-medium"
+                          >
+                            <span
+                              class="material-symbols-outlined text-[15px] text-secondary"
+                              >schedule</span
+                            >
+                            Est. T+90 Days Post-Closing
+                          </span>
+                          <span>•</span>
+                          <span>Automated SMT Line 4</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="text-right flex md:flex-col justify-between items-end"
+                    >
+                      <div
+                        class="font-label-lg text-headline-sm font-bold text-secondary"
+                      >
+                        $300,000
+                        <span
+                          class="text-label-sm font-normal text-on-surface-variant"
+                          >USDC</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold"
+                        >25.0% Allocation</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 bg-surface-container-lowest/60 p-4 rounded-lg"
+                  >
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-secondary"
+                          >verified</span
+                        >
+                        Deliverable Validation Criteria
+                      </div>
+                      <ul
+                        class="flex flex-col gap-1.5 font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-secondary mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >100 PCB functional test telemetry logs
+                            cryptographically signed.</span
+                          >
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-secondary mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >Automated sensor calibration run across all
+                            pre-production units.</span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary"
+                          >lock_clock</span
+                        >
+                        Oracle & Release Protocol
+                      </div>
+                      <div
+                        class="bg-surface-container-high rounded p-2.5 flex flex-col gap-1.5 text-label-sm font-label-sm"
+                      >
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Telemetry Oracle:</span
+                          >
+                          <span class="font-mono text-secondary"
+                            >Chainlink IoT Bridge Node</span
+                          >
+                        </div>
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Release Criteria:</span
+                          >
+                          <span class="font-mono text-primary"
+                            >>98.5% Pass Yield Rate</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Milestone Card 3 -->
+                <div
+                  class="bg-surface-container-low hover:bg-surface-container transition-all rounded-xl p-6 shadow-md relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary"
+                  ></div>
+                  <div
+                    class="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-4"
+                  >
+                    <div class="flex items-start gap-4">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary font-label-lg font-bold shadow-inner"
+                      >
+                        03
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <h3
+                            class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                          >
+                            CE / FCC Regulatory Certifications
+                          </h3>
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-tertiary/15 text-tertiary font-label-sm text-label-sm uppercase font-semibold"
+                          >
+                            Tranche Phase 3
+                          </span>
+                        </div>
+                        <div
+                          class="flex items-center gap-4 mt-1 font-label-sm text-label-sm text-on-surface-variant"
+                        >
+                          <span
+                            class="flex items-center gap-1 text-on-surface font-medium"
+                          >
+                            <span
+                              class="material-symbols-outlined text-[15px] text-tertiary"
+                              >schedule</span
+                            >
+                            Est. T+135 Days Post-Closing
+                          </span>
+                          <span>•</span>
+                          <span>TÜV Rheinland Testing Chamber</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="text-right flex md:flex-col justify-between items-end"
+                    >
+                      <div
+                        class="font-label-lg text-headline-sm font-bold text-tertiary"
+                      >
+                        $300,000
+                        <span
+                          class="text-label-sm font-normal text-on-surface-variant"
+                          >USDC</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold"
+                        >25.0% Allocation</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 bg-surface-container-lowest/60 p-4 rounded-lg"
+                  >
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-secondary"
+                          >verified</span
+                        >
+                        Deliverable Validation Criteria
+                      </div>
+                      <ul
+                        class="flex flex-col gap-1.5 font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-tertiary mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >Official compliance test lab report (FCC Part 15 /
+                            CE RED directive).</span
+                          >
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-tertiary mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >RoHS / REACH compliance declaration
+                            repository.</span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary"
+                          >lock_clock</span
+                        >
+                        Oracle & Release Protocol
+                      </div>
+                      <div
+                        class="bg-surface-container-high rounded p-2.5 flex flex-col gap-1.5 text-label-sm font-label-sm"
+                      >
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Auditor Attestation:</span
+                          >
+                          <span class="font-mono text-secondary"
+                            >CertiDoc Legal Oracle</span
+                          >
+                        </div>
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Verification Key:</span
+                          >
+                          <span class="font-mono text-primary"
+                            >TUV_RH_#8849-01</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Milestone Card 4 -->
+                <div
+                  class="bg-surface-container-low hover:bg-surface-container transition-all rounded-xl p-6 shadow-md relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-fixed"
+                  ></div>
+                  <div
+                    class="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-4"
+                  >
+                    <div class="flex items-start gap-4">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-primary-fixed/15 flex items-center justify-center text-primary-fixed font-label-lg font-bold shadow-inner"
+                      >
+                        04
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <h3
+                            class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                          >
+                            Commercial Batch Shipping & Warehouse Delivery
+                          </h3>
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-primary-fixed/20 text-primary-fixed font-label-sm text-label-sm uppercase font-semibold"
+                          >
+                            Final Tranche
+                          </span>
+                        </div>
+                        <div
+                          class="flex items-center gap-4 mt-1 font-label-sm text-label-sm text-on-surface-variant"
+                        >
+                          <span
+                            class="flex items-center gap-1 text-on-surface font-medium"
+                          >
+                            <span
+                              class="material-symbols-outlined text-[15px] text-primary-fixed"
+                              >schedule</span
+                            >
+                            Est. T+180 Days Post-Closing
+                          </span>
+                          <span>•</span>
+                          <span>Port of Long Beach Bonded Logistics</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="text-right flex md:flex-col justify-between items-end"
+                    >
+                      <div
+                        class="font-label-lg text-headline-sm font-bold text-primary-fixed"
+                      >
+                        $240,000
+                        <span
+                          class="text-label-sm font-normal text-on-surface-variant"
+                          >USDC</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold"
+                        >20.0% Allocation</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 bg-surface-container-lowest/60 p-4 rounded-lg"
+                  >
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-secondary"
+                          >verified</span
+                        >
+                        Deliverable Validation Criteria
+                      </div>
+                      <ul
+                        class="flex flex-col gap-1.5 font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-primary-fixed mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >Certified Ocean Freight Bill of Lading (BoL)
+                            cryptographic manifest.</span
+                          >
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span
+                            class="material-symbols-outlined text-[14px] text-primary-fixed mt-0.5"
+                            >check_circle</span
+                          >
+                          <span
+                            >Customs clearance documentation & bonded warehouse
+                            3PL arrival confirmation.</span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <div
+                        class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary"
+                          >lock_clock</span
+                        >
+                        Oracle & Release Protocol
+                      </div>
+                      <div
+                        class="bg-surface-container-high rounded p-2.5 flex flex-col gap-1.5 text-label-sm font-label-sm"
+                      >
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Custodian Anchor:</span
+                          >
+                          <span class="font-mono text-secondary"
+                            >Flexport Freight API</span
+                          >
+                        </div>
+                        <div class="flex justify-between text-on-surface">
+                          <span class="text-on-surface-variant"
+                            >Release Verification:</span
+                          >
+                          <span class="font-mono text-primary"
+                            >Warehouse Ingest Hook</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Add Custom Milestone Action -->
+                <button
+                  class="w-full py-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-all flex items-center justify-center gap-2 font-label-md text-label-md group shadow-sm"
+                >
+                  <div
+                    class="w-6 h-6 rounded-full bg-surface-container-highest group-hover:bg-primary/20 flex items-center justify-center transition-colors"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[18px] text-primary"
+                      >add</span
+                    >
+                  </div>
+                  <span class="font-semibold"
+                    >+ Add Custom Production Milestone Tranche</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-outline group-hover:text-on-surface-variant transition-colors ml-2"
+                    >(Max 8 Tranches)</span
+                  >
+                </button>
+              </div>
+              <!-- On-Chain Deployment Parameters Summary (Step 4 Preview) -->
+              <div
+                class="bg-surface-container-low rounded-xl p-6 shadow-md flex flex-col gap-4"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-[20px] text-secondary"
+                      >memory</span
+                    >
+                    <h3
+                      class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                    >
+                      On-Chain Deployment Parameters
+                    </h3>
+                  </div>
+                  <span
+                    class="px-2.5 py-1 rounded bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase font-semibold"
+                  >
+                    Bytecode Verified
+                  </span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="p-3 rounded-lg bg-surface-container">
+                    <div
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                    >
+                      Target Network
+                    </div>
+                    <div
+                      class="font-label-md text-label-md text-on-surface font-bold mt-1"
+                    >
+                      Robinhood Subnet #14
+                    </div>
+                    <div
+                      class="font-label-sm text-label-sm text-primary flex items-center gap-1 mt-0.5"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                      Arbitrum L2 Settlement
+                    </div>
+                  </div>
+                  <div class="p-3 rounded-lg bg-surface-container">
+                    <div
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                    >
+                      Escrow Template
+                    </div>
+                    <div
+                      class="font-label-md text-label-md text-on-surface font-bold mt-1"
+                    >
+                      ProtoEscrow v3.4
+                    </div>
+                    <div
+                      class="font-label-sm text-label-sm text-secondary truncate mt-0.5"
+                    >
+                      MultiSig 2-of-3 + Oracle Trigger
+                    </div>
+                  </div>
+                  <div class="p-3 rounded-lg bg-surface-container">
+                    <div
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                    >
+                      Gasless Founder Mode
+                    </div>
+                    <div
+                      class="font-label-md text-label-md text-primary font-bold mt-1"
+                    >
+                      Relayer Active
+                    </div>
+                    <div
+                      class="font-label-sm text-label-sm text-outline mt-0.5"
+                    >
+                      0.000 ETH Required for Deploy
+                    </div>
+                  </div>
+                </div>
+                <!-- Embedded Visual Hardware Factory Inspector Verification Box -->
+                <div
+                  class="bg-surface-container rounded-lg p-4 flex flex-col md:flex-row items-center gap-4 mt-2"
+                >
+                  <div
+                    class="relative w-full md:w-36 h-24 rounded-lg overflow-hidden flex-shrink-0 shadow-md"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="High precision industrial automated robotic arms welding circuit boards with cool cyan and emerald LED telemetry readouts in Shenzhen cleanroom electronics manufacturing plant"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCan3ul-Stor3F0FXH5J7UT_06pYLHjI5g2HnGChX9eNg1NrZPdvhOfu_YV_ze2MrCf_QazwE-aROB0jgoumpP4TNFZ7AlDVvE6DEcLIrE2K8C6IsSkzg-PNGXIapZaBK6snov0ach9p_7aVJMoG9YgnyJ-6U8wBN7r7BaL2Qwa-h4V7WVwhyUm7vcT3HfOpYvKvZJAGrVXRi8vSPbyOYHBB--Ut15G61nTiFPF8b2zJ6QYd2zIvxpX"
+                    />
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 to-transparent flex items-end p-1.5"
+                    >
+                      <span
+                        class="font-label-sm text-[10px] text-primary font-mono uppercase"
+                        >Shenzhen Cam #08</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1 text-on-surface-variant">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-semibold"
+                        >Decentralized Telemetry Ingestion Node</span
+                      >
+                      <span
+                        class="px-1.5 py-0.5 rounded bg-primary/20 text-primary font-label-sm text-label-sm"
+                        >LIVE</span
+                      >
+                    </div>
+                    <p class="font-body-sm text-body-sm">
+                      All 4 escrow tranches are pre-configured to receive
+                      cryptographically signed SHA-256 batch logs directly from
+                      verified hardware facility inspection cameras and
+                      automated testing rigs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- RIGHT COLUMN: Review, Investor Simulation & CTA Terminal (4 cols -> ~34%) -->
+            <div class="lg:col-span-4 flex flex-col gap-6 sticky top-24">
+              <!-- Investor Dynamic Simulation Card -->
+              <div
+                class="bg-surface-container-low rounded-xl p-6 shadow-xl flex flex-col gap-5 relative overflow-hidden"
+              >
+                <div
+                  class="absolute -right-8 -top-8 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none"
+                ></div>
+                <div class="flex items-center justify-between pb-3">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-[20px] text-primary"
+                      >analytics</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                      >Investor Simulator</span
+                    >
+                  </div>
+                  <span
+                    class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm uppercase font-mono"
+                  >
+                    Interactive
+                  </span>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Adjust the commitment amount to preview investor yield rights
+                  and fractional governance voting weight.
+                </p>
+                <!-- Simulated Commitment Input -->
+                <div class="flex flex-col gap-2">
+                  <div
+                    class="flex justify-between items-center font-label-sm text-label-sm"
+                  >
+                    <span class="text-on-surface font-semibold uppercase"
+                      >Commitment Value</span
+                    >
+                    <span class="text-primary font-mono font-bold"
+                      >$10,000 USDC</span
+                    >
+                  </div>
+                  <div
+                    class="relative flex items-center bg-surface-container-lowest rounded-lg p-1 shadow-inner"
+                  >
+                    <input
+                      class="w-full accent-primary h-2 bg-surface-container-highest rounded-lg cursor-pointer mx-2"
+                      id="sim-slider"
+                      max="100000"
+                      min="1000"
+                      step="1000"
+                      type="range"
+                      value="10000"
+                    />
+                  </div>
+                  <div
+                    class="flex justify-between text-on-surface-variant font-label-sm text-label-sm"
+                  >
+                    <span>Min: $1,000</span>
+                    <span>Max: $100,000</span>
+                  </div>
+                </div>
+                <!-- Simulation Metric Matrix -->
+                <div class="flex flex-col gap-2.5 pt-2">
+                  <div
+                    class="flex items-center justify-between p-3 rounded-lg bg-surface-container"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Tokens Received:</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-on-surface font-bold font-mono"
+                      id="sim-tokens"
+                      >10,000 SAPULSE</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center justify-between p-3 rounded-lg bg-surface-container"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Est. 2.5x Capped Return:</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-primary font-bold font-mono"
+                      id="sim-returns"
+                      >$25,000.00 USDC</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center justify-between p-3 rounded-lg bg-surface-container"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Governance Voting Weight:</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-secondary font-bold font-mono"
+                      id="sim-weight"
+                      >0.833%</span
+                    >
+                  </div>
+                </div>
+                <!-- Sparkline Visualization -->
+                <div
+                  class="bg-surface-container-lowest rounded-lg p-3 flex flex-col gap-2"
+                >
+                  <div
+                    class="flex justify-between text-label-sm font-label-sm text-on-surface-variant"
+                  >
+                    <span>Projected Cashflow Curve (12.5% RevShare)</span>
+                    <span class="text-primary">Break-Even M+8</span>
+                  </div>
+                  <svg
+                    class="w-full h-12 text-primary"
+                    fill="none"
+                    viewbox="0 0 300 50"
+                  >
+                    <path
+                      d="M0 45 Q 60 40, 100 28 T 200 12 T 300 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-width="2.5"
+                    ></path>
+                    <path
+                      d="M0 45 Q 60 40, 100 28 T 200 12 T 300 4 L 300 50 L 0 50 Z"
+                      fill="currentColor"
+                      fill-opacity="0.08"
+                    ></path>
+                    <circle
+                      class="fill-primary"
+                      cx="100"
+                      cy="28"
+                      r="3.5"
+                    ></circle>
+                    <circle
+                      class="fill-secondary"
+                      cx="200"
+                      cy="12"
+                      r="3.5"
+                    ></circle>
+                    <circle
+                      class="fill-tertiary"
+                      cx="295"
+                      cy="4"
+                      r="3.5"
+                    ></circle>
+                  </svg>
+                </div>
+              </div>
+              <!-- Escrow Release Health Check Card -->
+              <div
+                class="bg-surface-container-low rounded-xl p-6 shadow-lg flex flex-col gap-4"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-[20px] text-primary"
+                      >security</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                      >Escrow Health Index</span
+                    >
+                  </div>
+                  <span
+                    class="font-label-md text-label-md text-primary font-bold font-mono"
+                    >98% PASS</span
+                  >
+                </div>
+                <!-- Mini Radial Gauge & Stats -->
+                <div
+                  class="flex items-center gap-4 bg-surface-container rounded-lg p-3.5"
+                >
+                  <div
+                    class="relative w-14 h-14 flex items-center justify-center flex-shrink-0"
+                  >
+                    <svg
+                      class="w-full h-full transform -rotate-90"
+                      viewbox="0 0 36 36"
+                    >
+                      <path
+                        class="text-surface-container-highest stroke-current"
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke-width="3.5"
+                      ></path>
+                      <path
+                        class="text-primary stroke-current"
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke-dasharray="98, 100"
+                        stroke-linecap="round"
+                        stroke-width="3.5"
+                      ></path>
+                    </svg>
+                    <span
+                      class="absolute font-label-sm text-[11px] font-bold text-on-surface"
+                      >98%</span
+                    >
+                  </div>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-md text-label-md text-on-surface font-semibold"
+                      >Institutional Grade Security</span
+                    >
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                      >Meets accredited investor protection thresholds on
+                      Robinhood Subnets.</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col gap-2 font-label-sm text-label-sm text-on-surface-variant"
+                >
+                  <div class="flex justify-between items-center py-1">
+                    <span class="flex items-center gap-1.5">
+                      <span
+                        class="material-symbols-outlined text-[15px] text-primary"
+                        >timer</span
+                      >
+                      Milestone Challenge Window
+                    </span>
+                    <span class="text-on-surface font-mono font-semibold"
+                      >72 Hours Post-Signal</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center py-1">
+                    <span class="flex items-center gap-1.5">
+                      <span
+                        class="material-symbols-outlined text-[15px] text-secondary"
+                        >gavel</span
+                      >
+                      Arbitration Fallback
+                    </span>
+                    <span class="text-on-surface font-mono font-semibold"
+                      >UMA Protocol V2</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center py-1">
+                    <span class="flex items-center gap-1.5">
+                      <span
+                        class="material-symbols-outlined text-[15px] text-tertiary"
+                        >emergency_home</span
+                      >
+                      Emergency Clawback Threshold
+                    </span>
+                    <span class="text-on-surface font-mono font-semibold"
+                      >66.7% Tokenholder Quorum</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- Deployment Call to Action Block -->
+              <div
+                class="bg-surface-container rounded-xl p-6 shadow-xl flex flex-col gap-4"
+              >
+                <div class="flex flex-col gap-1">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"
+                    ></span>
+                    <span
+                      class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider"
+                      >Ready for Factory Settlement</span
+                    >
+                  </div>
+                  <div
+                    class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                  >
+                    Execute On-Chain Deployment
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Compiles the milestone smart contract, initializes the claim
+                    token pool, and pushes factory escrow registry to Robinhood
+                    Subnet #14.
+                  </p>
+                </div>
+                <!-- Primary Deploy Button -->
+                <button
+                  class="w-full py-3.5 px-4 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-bold tracking-wide transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-primary-container/20 group cursor-pointer active:scale-[0.99]"
+                  id="deploy-btn"
+                >
+                  <span
+                    class="material-symbols-outlined text-[20px] group-hover:rotate-45 transition-transform duration-300"
+                    >rocket_launch</span
+                  >
+                  <span>Deploy Milestone Escrow & Mint Claims</span>
+                </button>
+                <!-- Secondary Testnet Button -->
+                <button
+                  class="w-full py-2.5 px-4 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >science</span
+                  >
+                  <span>Testnet Dry Run on Sepolia Subnet</span>
+                </button>
+                <div
+                  class="flex items-center justify-center gap-2 text-on-surface-variant font-label-sm text-label-sm pt-1"
+                >
+                  <span
+                    class="material-symbols-outlined text-[14px] text-primary"
+                    >lock</span
+                  >
+                  <span
+                    >Hardware Multisig (Robinhood Secure Enclave Signed)</span
+                  >
+                </div>
+              </div>
+              <!-- Secondary Visual Badge / Regulatory Stamp -->
+              <div
+                class="flex items-center justify-between p-3.5 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="material-symbols-outlined text-[18px] text-secondary"
+                    >verified_user</span
+                  >
+                  <span>FinCEN / Reg CF Compliant Architecture</span>
+                </div>
+                <span class="font-mono text-[10px] text-outline"
+                  >SEC_ID::#094-1182</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Micro-Interactions Script -->
+        <script>
+          // Dynamic Investor Simulation Slider Logic
+          const simSlider = document.getElementById("sim-slider");
+          const simTokens = document.getElementById("sim-tokens");
+          const simReturns = document.getElementById("sim-returns");
+          const simWeight = document.getElementById("sim-weight");
+          const totalRaise = 1200000;
+
+          if (simSlider) {
+            simSlider.addEventListener("input", (e) => {
+              const val = parseFloat(e.target.value);
+              simTokens.textContent = `${val.toLocaleString()} SAPULSE`;
+              const returns = val * 2.5;
+              simReturns.textContent = `$${returns.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDC`;
+              const weight = ((val / totalRaise) * 100).toFixed(3);
+              simWeight.textContent = `${weight}%`;
+            });
+          }
+
+          // AI Auto-balance Notification Trigger
+          const autoBalanceBtn = document.getElementById("auto-balance-btn");
+          if (autoBalanceBtn) {
+            autoBalanceBtn.addEventListener("click", () => {
+              autoBalanceBtn.innerHTML =
+                '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Optimizing Shenzhen BOM...</span>';
+              setTimeout(() => {
+                autoBalanceBtn.innerHTML =
+                  '<span class="material-symbols-outlined text-[16px] text-primary">done_all</span><span>Optimized to 30/25/25/20</span>';
+                setTimeout(() => {
+                  autoBalanceBtn.innerHTML =
+                    '<span class="material-symbols-outlined text-[16px]">auto_awesome</span><span>AI Auto-Balance</span>';
+                }, 3000);
+              }, 1000);
+            });
+          }
+
+          // Deploy Button State Simulation
+          const deployBtn = document.getElementById("deploy-btn");
+          if (deployBtn) {
+            deployBtn.addEventListener("click", () => {
+              deployBtn.innerHTML =
+                '<span class="material-symbols-outlined text-[20px] animate-spin">sync</span><span>Broadcasting to Subnet #14...</span>';
+              deployBtn.classList.remove("bg-primary-container");
+              deployBtn.classList.add("bg-surface-bright");
+              setTimeout(() => {
+                deployBtn.innerHTML =
+                  '<span class="material-symbols-outlined text-[20px] text-primary">task_alt</span><span>Smart Contract Deployed!</span>';
+                deployBtn.classList.remove("bg-surface-bright");
+                deployBtn.classList.add("bg-primary-container");
+              }, 2000);
+            });
+          }
+        </script>
+      </main>
+    </div>
+  </body>
+</html>

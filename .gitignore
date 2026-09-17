@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# Foundry
+contracts/out/
+contracts/cache/
+# Keep broadcast receipts — show deployed contract addresses for judges
+# contracts/broadcast/
+
+# Rust / Cargo — exclude target dirs (large) but keep compiled wasm artifact
+contracts/stylus/*/target/
+!contracts/stylus/hardware-verifier/target/wasm32-unknown-unknown/release/hardware_verifier.wasm
+
+# Environment - never commit real keys.
+# `.env.example` is a template with no secrets and SHOULD be committed, so the
+# negation below is required (and must come after the exclusions).
+.env
+.env.*
+!.env.example
+
+# Design source screenshots are large; keep the HTML + manifest, ignore shots
+design-source/screens/*.png
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*.log

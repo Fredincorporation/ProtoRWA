@@ -1,0 +1,22 @@
+[package]
+name = "hardware-verifier"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+stylus-sdk = "0.10.9"
+alloy-primitives = { version = "=0.8.21", default-features = false, features = ["tiny-keccak"] }
+alloy-sol-types = { version = "=0.8.21", default-features = false }
+
+[features]
+export-abi = ["stylus-sdk/export-abi"]
+
+[lib]
+crate-type = ["lib", "cdylib"]
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+panic = "abort"
+strip = true

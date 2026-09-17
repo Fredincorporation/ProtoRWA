@@ -1,0 +1,1983 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#bbcabf",
+              "on-secondary-fixed-variant": "#004e5c",
+              "primary-fixed": "#6ffbbe",
+              "on-error": "#690005",
+              outline: "#86948a",
+              "on-background": "#dee2ee",
+              "tertiary-container": "#e29100",
+              "surface-container-highest": "#30353e",
+              "secondary-container": "#03b5d3",
+              secondary: "#4cd7f6",
+              "on-primary-fixed-variant": "#005236",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#4edea3",
+              "secondary-fixed-dim": "#4cd7f6",
+              "secondary-fixed": "#acedff",
+              "on-tertiary-fixed": "#2a1700",
+              primary: "#4edea3",
+              "inverse-surface": "#dee2ee",
+              "tertiary-fixed": "#ffddb8",
+              "surface-dim": "#0f141c",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-secondary-container": "#00424e",
+              tertiary: "#ffb95f",
+              "surface-variant": "#30353e",
+              "on-primary-container": "#00422b",
+              "on-primary-fixed": "#002113",
+              "outline-variant": "#3c4a42",
+              error: "#ffb4ab",
+              "surface-container-high": "#252a33",
+              "on-secondary-fixed": "#001f26",
+              "surface-bright": "#343942",
+              "surface-container-lowest": "#090e16",
+              "primary-container": "#10b981",
+              "primary-fixed-dim": "#4edea3",
+              "on-surface": "#dee2ee",
+              background: "#0f141c",
+              surface: "#0f141c",
+              "on-tertiary-fixed-variant": "#653e00",
+              "inverse-primary": "#006c49",
+              "on-tertiary-container": "#523200",
+              "on-primary": "#003824",
+              "on-secondary": "#003640",
+              "error-container": "#93000a",
+              "surface-container-low": "#171c24",
+              "on-tertiary": "#472a00",
+              "inverse-on-surface": "#2c3139",
+              "surface-container": "#1b2028",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              gutter: "1.5rem",
+              "space-xl": "2.5rem",
+              "margin-mobile": "1rem",
+              "space-sm": "0.5rem",
+              margin: "2.5rem",
+              "space-md": "1rem",
+              "space-xs": "0.25rem",
+              "space-lg": "1.5rem",
+              "gutter-mobile": "1rem",
+            },
+            fontFamily: {
+              "headline-lg-mobile": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "body-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-lg": ["Space Grotesk"],
+              "headline-md": ["Space Grotesk"],
+              "headline-sm": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "display-lg": ["Space Grotesk"],
+              "label-md": ["JetBrains Mono"],
+              "body-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface antialiased">
+    <header
+      class="fixed top-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"
+    >
+      <div class="h-16 w-full px-gutter flex items-center justify-between">
+        <div class="flex items-center gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <div
+              class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center"
+            >
+              <span
+                class="font-label-lg text-label-lg font-bold text-on-primary"
+                >P</span
+              >
+            </div>
+            <span
+              class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold"
+              >ProtoRWA</span
+            ><span
+              class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase"
+              >RWA • ROBINHOOD CHAIN</span
+            >
+          </div>
+          <nav
+            class="hidden xl:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-primary font-label-md text-label-md rounded-lg"
+          >
+            <a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="explore-projects"
+              href="#"
+              >Explore Projects</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="project-detail"
+              href="#"
+              >Project Detail & Terminal</a
+            ><a
+              aria-current="page"
+              class="px-space-sm py-1.5 transition-colors bg-surface-container text-primary font-label-md text-label-md rounded-lg"
+              data-path="secondary-claims-market"
+              href="#"
+              >Secondary Claims Market</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="investor-dashboard-governance"
+              href="#"
+              >Investor Dashboard & Governance</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-sm">
+          <div
+            class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low"
+          >
+            <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <span class="font-label-sm text-label-sm text-on-surface uppercase"
+              >Robinhood Chain</span
+            >
+          </div>
+          <div
+            class="flex items-center rounded-lg bg-surface-container-high p-0.5"
+          >
+            <div
+              class="px-space-sm py-1 font-label-md text-label-md text-primary font-semibold"
+            >
+              42,500 USDC
+            </div>
+            <div
+              class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium"
+            >
+              0x71C...4f9b
+            </div>
+          </div>
+          <button
+            class="relative p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary"
+            ></span></button
+          ><img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+          />
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-16 bg-surface min-h-screen">
+      <div class="flex flex-col w-full">
+        <!-- Top Market Metrics Ticker & Header Banner -->
+        <section
+          class="w-full bg-surface-container-lowest px-gutter py-space-lg"
+        >
+          <div class="w-full max-w-[1400px] mx-auto flex flex-col gap-space-lg">
+            <!-- Primary Title Group -->
+            <div
+              class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md"
+            >
+              <div class="flex flex-col gap-space-xs">
+                <div class="flex items-center gap-space-xs">
+                  <span
+                    class="px-space-xs py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm uppercase tracking-wider"
+                    >ProtoRWA Orderbook Engine</span
+                  >
+                  <span class="text-outline-variant font-label-sm text-label-sm"
+                    >•</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"
+                    ></span>
+                    P2P Milestone Liquidity Active
+                  </span>
+                </div>
+                <h1
+                  class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight"
+                >
+                  ProtoRWA Secondary Claims Exchange
+                </h1>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant max-w-2xl"
+                >
+                  Instant on-chain liquidity for physical product revenue-share
+                  tokens prior to product commercial completion. Exit early or
+                  accumulate yield-bearing manufacturing claims on Robinhood
+                  Chain.
+                </p>
+              </div>
+              <!-- System Latency & Contract Pill -->
+              <div
+                class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-xs rounded-xl self-start lg:self-auto"
+              >
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-sm text-label-sm text-outline uppercase tracking-wider"
+                    >Subsidized Relayer</span
+                  >
+                  <span
+                    class="font-label-md text-label-md text-primary font-bold"
+                    >Robinhood L2 Gasless</span
+                  >
+                </div>
+                <div class="w-px h-6 bg-surface-container-highest"></div>
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-sm text-label-sm text-outline uppercase tracking-wider"
+                    >Settlement Engine</span
+                  >
+                  <span
+                    class="font-label-md text-label-md text-secondary font-bold"
+                    >ProtoEscrow v2.4</span
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Key Metrics Ribbon (4-Tile Modular Strip) -->
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-sm"
+            >
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group"
+              >
+                <div
+                  class="absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-primary/5 group-hover:bg-primary/10 transition-colors"
+                ></div>
+                <div class="flex items-center justify-between text-outline">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider"
+                    >24h Trading Volume</span
+                  >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >candlestick_chart</span
+                  >
+                </div>
+                <div class="mt-space-sm flex items-baseline gap-space-xs">
+                  <span
+                    class="font-display-lg text-display-lg font-bold text-on-surface tracking-tight"
+                    >$1,842,500</span
+                  >
+                  <span
+                    class="font-label-md text-label-md text-primary font-semibold"
+                    >+18.4%</span
+                  >
+                </div>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                  >Settled across 1,192 transactions</span
+                >
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group"
+              >
+                <div
+                  class="absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-secondary/5 group-hover:bg-secondary/10 transition-colors"
+                ></div>
+                <div class="flex items-center justify-between text-outline">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider"
+                    >Tradable Product Claims</span
+                  >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >precision_manufacturing</span
+                  >
+                </div>
+                <div class="mt-space-sm flex items-baseline gap-space-xs">
+                  <span
+                    class="font-display-lg text-display-lg font-bold text-on-surface tracking-tight"
+                    >14</span
+                  >
+                  <span
+                    class="font-label-md text-label-md text-secondary font-medium"
+                    >Hardware Projects</span
+                  >
+                </div>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                  >4 pending milestone verification</span
+                >
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group"
+              >
+                <div
+                  class="absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-tertiary/5 group-hover:bg-tertiary/10 transition-colors"
+                ></div>
+                <div class="flex items-center justify-between text-outline">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider"
+                    >Avg. Secondary Spread</span
+                  >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >trending_up</span
+                  >
+                </div>
+                <div class="mt-space-sm flex items-baseline gap-space-xs">
+                  <span
+                    class="font-display-lg text-display-lg font-bold text-tertiary tracking-tight"
+                    >+6.4%</span
+                  >
+                  <span class="font-label-md text-label-md text-outline"
+                    >Premium</span
+                  >
+                </div>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                  >Vs initial funding face value ($1.00)</span
+                >
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group"
+              >
+                <div
+                  class="absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-primary-container/10 group-hover:bg-primary-container/20 transition-colors"
+                ></div>
+                <div class="flex items-center justify-between text-outline">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider"
+                    >Total Distributed Yield</span
+                  >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >payments</span
+                  >
+                </div>
+                <div class="mt-space-sm flex items-baseline gap-space-xs">
+                  <span
+                    class="font-display-lg text-display-lg font-bold text-primary tracking-tight"
+                    >$3,210,000</span
+                  >
+                  <span class="font-label-md text-label-md text-outline"
+                    >USDC</span
+                  >
+                </div>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                  >To 4,320 unique liquidity holders</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Main Trading Terminal Workstation: Split Screen Layout -->
+        <section class="w-full px-gutter py-space-lg flex-1">
+          <div
+            class="w-full max-w-[1400px] mx-auto grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start"
+          >
+            <!-- LEFT SIDE (7 Cols on Desktop): Active Market Watchlist / Claims Table -->
+            <div class="xl:col-span-7 flex flex-col gap-space-md">
+              <!-- Table Control Bar & Filtering Filters -->
+              <div
+                class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm"
+              >
+                <div class="flex items-center gap-space-xs flex-wrap">
+                  <button
+                    class="px-space-sm py-1 rounded bg-surface-container-high text-primary font-label-sm text-label-sm uppercase font-semibold"
+                  >
+                    All Hardware
+                  </button>
+                  <button
+                    class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-sm text-label-sm uppercase transition-colors"
+                  >
+                    CleanTech
+                  </button>
+                  <button
+                    class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-sm text-label-sm uppercase transition-colors"
+                  >
+                    Robotics
+                  </button>
+                  <button
+                    class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-sm text-label-sm uppercase transition-colors"
+                  >
+                    IoT & Sensors
+                  </button>
+                </div>
+                <div class="flex items-center gap-space-xs">
+                  <div class="relative">
+                    <span
+                      class="material-symbols-outlined absolute left-2 top-2 text-[16px] text-outline"
+                      >search</span
+                    >
+                    <input
+                      class="bg-surface-container-lowest text-on-surface font-label-sm text-label-sm pl-7 pr-space-sm py-1.5 rounded focus:outline-none focus:bg-surface-container-high text-outline placeholder:text-outline w-44"
+                      placeholder="Filter ticker or SKU..."
+                      type="text"
+                    />
+                  </div>
+                  <button
+                    class="p-1.5 rounded bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors"
+                    title="Refresh Orderbooks"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >tune</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <!-- Market Watchlist Table Card -->
+              <div
+                class="bg-surface-container-low rounded-xl shadow-sm overflow-hidden flex flex-col"
+              >
+                <div
+                  class="p-space-md flex items-center justify-between bg-surface-container"
+                >
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >table_chart</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+                      >Live Product Claims</span
+                    >
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-outline uppercase tracking-wider"
+                    >Auto-settling robinhood escrows</span
+                  >
+                </div>
+                <!-- Responsive Data Table -->
+                <div class="w-full overflow-x-auto">
+                  <table class="w-full text-left font-body-sm text-body-sm">
+                    <thead
+                      class="bg-surface-container-lowest text-outline font-label-sm text-label-sm uppercase tracking-wider select-none"
+                    >
+                      <tr>
+                        <th class="py-space-sm px-space-md">Product / Token</th>
+                        <th
+                          class="py-space-sm px-space-xs hidden md:table-cell"
+                        >
+                          Stage
+                        </th>
+                        <th class="py-space-sm px-space-xs text-right">Face</th>
+                        <th class="py-space-sm px-space-xs text-right">
+                          Last Price
+                        </th>
+                        <th
+                          class="py-space-sm px-space-xs text-right hidden sm:table-cell"
+                        >
+                          24h Chg
+                        </th>
+                        <th
+                          class="py-space-sm px-space-xs text-right hidden lg:table-cell"
+                        >
+                          Multiple
+                        </th>
+                        <th class="py-space-sm px-space-xs text-right">
+                          Sec. APY
+                        </th>
+                        <th
+                          class="py-space-sm px-space-xs text-right hidden sm:table-cell"
+                        >
+                          Depth
+                        </th>
+                        <th class="py-space-sm px-space-md text-right">
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="divide-y-0 text-on-surface font-label-md text-label-md"
+                    >
+                      <!-- Row 1: HelioFrost Pro ($HLFROST) [ACTIVE SELECTED] -->
+                      <tr
+                        class="bg-surface-container-high/60 hover:bg-surface-container-high transition-colors cursor-pointer group"
+                        onclick="
+                          selectToken(
+                            'HLFROST',
+                            'HelioFrost Pro',
+                            '1.08',
+                            '+8.0%',
+                            '2.8x',
+                            '24.2%',
+                            '$240K',
+                          )
+                        "
+                      >
+                        <td class="py-space-md px-space-md">
+                          <div class="flex items-center gap-space-xs">
+                            <div
+                              class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary font-bold"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[18px]"
+                                >solar_power</span
+                              >
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                              <div class="flex items-center gap-1">
+                                <span
+                                  class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                                  >HelioFrost Pro</span
+                                >
+                                <span
+                                  class="px-1 py-0.2 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm"
+                                  >$HLFROST</span
+                                >
+                              </div>
+                              <span
+                                class="text-outline font-label-sm text-label-sm truncate"
+                                >CleanTech • Solar Cold Chain</span
+                              >
+                            </div>
+                          </div>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs hidden md:table-cell"
+                        >
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm whitespace-nowrap flex items-center gap-1 w-fit"
+                          >
+                            <span
+                              class="w-1.5 h-1.5 rounded-full bg-secondary"
+                            ></span>
+                            Stage 2: Tooling
+                          </span>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline font-label-sm text-label-sm"
+                        >
+                          $1.00
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right font-bold text-on-surface"
+                        >
+                          $1.08
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-semibold hidden sm:table-cell"
+                        >
+                          +8.0%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline hidden lg:table-cell font-label-sm text-label-sm"
+                        >
+                          2.8x
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-bold"
+                        >
+                          24.2%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-on-surface-variant hidden sm:table-cell font-label-sm text-label-sm"
+                        >
+                          $240K
+                        </td>
+                        <td class="py-space-md px-space-md text-right">
+                          <button
+                            class="px-space-sm py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-fixed transition-colors shadow-sm"
+                          >
+                            Trade
+                          </button>
+                        </td>
+                      </tr>
+                      <!-- Row 2: AeroPulse M2 ($APULSE) -->
+                      <tr
+                        class="hover:bg-surface-container-high transition-colors cursor-pointer group"
+                        onclick="
+                          selectToken(
+                            'APULSE',
+                            'AeroPulse M2',
+                            '1.15',
+                            '+15.0%',
+                            '2.5x',
+                            '31.0%',
+                            '$510K',
+                          )
+                        "
+                      >
+                        <td class="py-space-md px-space-md">
+                          <div class="flex items-center gap-space-xs">
+                            <div
+                              class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary font-bold"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[18px]"
+                                >flight</span
+                              >
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                              <div class="flex items-center gap-1">
+                                <span
+                                  class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                                  >AeroPulse M2</span
+                                >
+                                <span
+                                  class="px-1 py-0.2 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm"
+                                  >$APULSE</span
+                                >
+                              </div>
+                              <span
+                                class="text-outline font-label-sm text-label-sm truncate"
+                                >Commercial Drones • Delivery</span
+                              >
+                            </div>
+                          </div>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs hidden md:table-cell"
+                        >
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm whitespace-nowrap flex items-center gap-1 w-fit"
+                          >
+                            <span
+                              class="w-1.5 h-1.5 rounded-full bg-primary"
+                            ></span>
+                            Stage 3: Assembly
+                          </span>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline font-label-sm text-label-sm"
+                        >
+                          $1.00
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right font-bold text-on-surface"
+                        >
+                          $1.15
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-semibold hidden sm:table-cell"
+                        >
+                          +15.0%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline hidden lg:table-cell font-label-sm text-label-sm"
+                        >
+                          2.5x
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-bold"
+                        >
+                          31.0%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-on-surface-variant hidden sm:table-cell font-label-sm text-label-sm"
+                        >
+                          $510K
+                        </td>
+                        <td class="py-space-md px-space-md text-right">
+                          <button
+                            class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-primary hover:text-on-primary transition-colors"
+                          >
+                            Trade
+                          </button>
+                        </td>
+                      </tr>
+                      <!-- Row 3: OmniHaptic X1 ($OMNIX) -->
+                      <tr
+                        class="hover:bg-surface-container-high transition-colors cursor-pointer group"
+                        onclick="
+                          selectToken(
+                            'OMNIX',
+                            'OmniHaptic X1',
+                            '0.94',
+                            '-6.0%',
+                            '3.2x',
+                            '42.5%',
+                            '$120K',
+                          )
+                        "
+                      >
+                        <td class="py-space-md px-space-md">
+                          <div class="flex items-center gap-space-xs">
+                            <div
+                              class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary font-bold"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[18px]"
+                                >view_in_ar</span
+                              >
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                              <div class="flex items-center gap-1">
+                                <span
+                                  class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                                  >OmniHaptic X1</span
+                                >
+                                <span
+                                  class="px-1 py-0.2 rounded bg-surface-container-highest text-tertiary font-label-sm text-label-sm"
+                                  >$OMNIX</span
+                                >
+                              </div>
+                              <span
+                                class="text-outline font-label-sm text-label-sm truncate"
+                                >Robotics/VR • Teleoperation</span
+                              >
+                            </div>
+                          </div>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs hidden md:table-cell"
+                        >
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm whitespace-nowrap flex items-center gap-1 w-fit"
+                          >
+                            <span
+                              class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"
+                            ></span>
+                            Stage 2: Voting
+                          </span>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline font-label-sm text-label-sm"
+                        >
+                          $1.00
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right font-bold text-on-surface"
+                        >
+                          $0.94
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-error font-semibold hidden sm:table-cell"
+                        >
+                          -6.0%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline hidden lg:table-cell font-label-sm text-label-sm"
+                        >
+                          3.2x
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-bold"
+                        >
+                          42.5%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-on-surface-variant hidden sm:table-cell font-label-sm text-label-sm"
+                        >
+                          $120K
+                        </td>
+                        <td class="py-space-md px-space-md text-right">
+                          <button
+                            class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-primary hover:text-on-primary transition-colors"
+                          >
+                            Trade
+                          </button>
+                        </td>
+                      </tr>
+                      <!-- Row 4: TerraSense IoT ($TSENSE) -->
+                      <tr
+                        class="hover:bg-surface-container-high transition-colors cursor-pointer group"
+                        onclick="
+                          selectToken(
+                            'TSENSE',
+                            'TerraSense IoT',
+                            '1.32',
+                            '+32.0%',
+                            '2.2x',
+                            '19.4%',
+                            '$890K',
+                          )
+                        "
+                      >
+                        <td class="py-space-md px-space-md">
+                          <div class="flex items-center gap-space-xs">
+                            <div
+                              class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary-container font-bold"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[18px]"
+                                >sensors</span
+                              >
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                              <div class="flex items-center gap-1">
+                                <span
+                                  class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                                  >TerraSense IoT</span
+                                >
+                                <span
+                                  class="px-1 py-0.2 rounded bg-surface-container-highest text-primary-container font-label-sm text-label-sm"
+                                  >$TSENSE</span
+                                >
+                              </div>
+                              <span
+                                class="text-outline font-label-sm text-label-sm truncate"
+                                >AgTech • Soil Monitoring</span
+                              >
+                            </div>
+                          </div>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs hidden md:table-cell"
+                        >
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm whitespace-nowrap flex items-center gap-1 w-fit"
+                          >
+                            <span class="material-symbols-outlined text-[12px]"
+                              >verified</span
+                            >
+                            Stage 4: Shipped
+                          </span>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline font-label-sm text-label-sm"
+                        >
+                          $1.00
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right font-bold text-on-surface"
+                        >
+                          $1.32
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-semibold hidden sm:table-cell"
+                        >
+                          +32.0%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline hidden lg:table-cell font-label-sm text-label-sm"
+                        >
+                          2.2x
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-bold"
+                        >
+                          19.4%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-on-surface-variant hidden sm:table-cell font-label-sm text-label-sm"
+                        >
+                          $890K
+                        </td>
+                        <td class="py-space-md px-space-md text-right">
+                          <button
+                            class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-primary hover:text-on-primary transition-colors"
+                          >
+                            Trade
+                          </button>
+                        </td>
+                      </tr>
+                      <!-- Row 5: NovaBreeze Air ($NBREZ) -->
+                      <tr
+                        class="hover:bg-surface-container-high transition-colors cursor-pointer group"
+                        onclick="
+                          selectToken(
+                            'NBREZ',
+                            'NovaBreeze Air',
+                            '0.98',
+                            '-2.0%',
+                            '2.6x',
+                            '28.0%',
+                            '$95K',
+                          )
+                        "
+                      >
+                        <td class="py-space-md px-space-md">
+                          <div class="flex items-center gap-space-xs">
+                            <div
+                              class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary-fixed font-bold"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[18px]"
+                                >air</span
+                              >
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                              <div class="flex items-center gap-1">
+                                <span
+                                  class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                                  >NovaBreeze Air</span
+                                >
+                                <span
+                                  class="px-1 py-0.2 rounded bg-surface-container-highest text-secondary-fixed font-label-sm text-label-sm"
+                                  >$NBREZ</span
+                                >
+                              </div>
+                              <span
+                                class="text-outline font-label-sm text-label-sm truncate"
+                                >Smart Home • Micro-HVAC</span
+                              >
+                            </div>
+                          </div>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs hidden md:table-cell"
+                        >
+                          <span
+                            class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap flex items-center gap-1 w-fit"
+                          >
+                            <span
+                              class="w-1.5 h-1.5 rounded-full bg-outline"
+                            ></span>
+                            Stage 1: Prototype
+                          </span>
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline font-label-sm text-label-sm"
+                        >
+                          $1.00
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right font-bold text-on-surface"
+                        >
+                          $0.98
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-error font-semibold hidden sm:table-cell"
+                        >
+                          -2.0%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-outline hidden lg:table-cell font-label-sm text-label-sm"
+                        >
+                          2.6x
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-primary font-bold"
+                        >
+                          28.0%
+                        </td>
+                        <td
+                          class="py-space-md px-space-xs text-right text-on-surface-variant hidden sm:table-cell font-label-sm text-label-sm"
+                        >
+                          $95K
+                        </td>
+                        <td class="py-space-md px-space-md text-right">
+                          <button
+                            class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-primary hover:text-on-primary transition-colors"
+                          >
+                            Trade
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Hardware Claim Lifecycle Schematic Explainer Card -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="material-symbols-outlined text-secondary text-[18px]"
+                      >verified_user</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+                      >Physical RWA Milestones & Secondary Liquidity</span
+                    >
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-primary font-bold"
+                    >SMART ESCROW GUARANTEED</span
+                  >
+                </div>
+                <!-- Progress Track -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-space-sm">
+                  <div
+                    class="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1 relative"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-sm text-label-sm text-primary font-bold"
+                        >01. PROTOTYPE</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-primary text-[14px]"
+                        >check_circle</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      CAD, BOM & Initial Lab Proof validated by nodes.
+                    </p>
+                    <div class="h-1 w-full bg-primary rounded-full mt-1"></div>
+                  </div>
+                  <div
+                    class="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1 relative"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-sm text-label-sm text-secondary font-bold"
+                        >02. TOOLING</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-secondary font-semibold"
+                        >CURRENT</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Injection molds fabricated; on-site oracle photo check.
+                    </p>
+                    <div
+                      class="h-1 w-full bg-secondary rounded-full mt-1"
+                    ></div>
+                  </div>
+                  <div
+                    class="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1 opacity-70"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-sm text-label-sm text-outline font-bold"
+                        >03. ASSEMBLY</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-outline text-[14px]"
+                        >lock</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Pilot batch 2,500 units assembled & tested.
+                    </p>
+                    <div
+                      class="h-1 w-full bg-surface-container-highest rounded-full mt-1"
+                    ></div>
+                  </div>
+                  <div
+                    class="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1 opacity-70"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-sm text-label-sm text-outline font-bold"
+                        >04. PAYOUT</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-outline text-[14px]"
+                        >lock</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Distributor revenue flows back to claim holders.
+                    </p>
+                    <div
+                      class="h-1 w-full bg-surface-container-highest rounded-full mt-1"
+                    ></div>
+                  </div>
+                </div>
+                <!-- Product Image & Inspection Proof Showcase -->
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-space-xs"
+                >
+                  <div
+                    class="bg-surface-container rounded-lg p-space-sm flex items-center gap-space-sm"
+                  >
+                    <img
+                      class="w-16 h-16 rounded object-cover"
+                      data-alt="High-tech industrial CleanTech solar refrigeration prototype in clean laboratory setting with copper cooling loops and digital telemetry displays, dark industrial aesthetic with emerald LED indicator accents"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKN1T9bT_dBpcseGKMSspDonzwBmVA-Wppj1FPLRf9pgLK9_OW6H6OgAu91X8Y1J5iMQyDr_f15dFU9kpInBn2xiThGVot-njLjqyLTp04GDeKJqAV5NgZGfZ71yK9uUFmQv_sK3yKcqht8wc6HxZs2iXg0tYVWUPB2-QbgfSPup5SIpEhxIZKCoQtTzUJXViR1h1UoJc_gG94cDPemLLymtEfjnDavLzUildj4mFDil7gTpd6EGw9"
+                    />
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-outline uppercase"
+                        >Hardware Inspection Oracle</span
+                      >
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface truncate"
+                        >HelioFrost Core Unit #04</span
+                      >
+                      <span class="font-label-sm text-label-sm text-primary"
+                        >IPFS Evidence Verified</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="bg-surface-container rounded-lg p-space-sm flex items-center gap-space-sm"
+                  >
+                    <img
+                      class="w-16 h-16 rounded object-cover"
+                      data-alt="Commercial delivery drone carbon fiber avionics chassis undergoing mechanical stress testing in automated robotics facility with teal lighting and digital readouts"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMuMHtke2Q2niOuvAepkCxX_lwfgdpyPeSpKTwps3saEdl-EzfWV_T2UJOs5zXWo3VUdIWA42yzaPq6Rl92yydDwm2dga-SpU1nH8pMImLBSPzgIJynDnB_mYP0UgJ-tZG6twxXbx4rIDkwQ_hwpDqLzVaAZ9QdjmEj9KS0R4vcqEZZQUMTDyaJHqnzLrI8hxokctk8Y0QoZtcAe_QjnErJqbIfBXMFZBte2rFpQj_EcYPg3yZgN4B"
+                    />
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-outline uppercase"
+                        >Factory Escrow Monitor</span
+                      >
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface truncate"
+                        >AeroPulse M2 Tooling Spec</span
+                      >
+                      <span class="font-label-sm text-label-sm text-secondary"
+                        >Passed 4/4 Milestones</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- RIGHT SIDE (5 Cols on Desktop): Selected Token Order Book & Execution Terminal -->
+            <div class="xl:col-span-5 flex flex-col gap-space-md">
+              <!-- Terminal Master Container -->
+              <div
+                class="bg-surface-container-low rounded-xl shadow-md overflow-hidden flex flex-col"
+              >
+                <!-- Terminal Header: Active Token Profile -->
+                <div
+                  class="p-space-md bg-surface-container flex flex-col gap-space-xs"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-space-xs">
+                      <span
+                        class="px-2 py-0.5 rounded bg-primary text-on-primary font-label-md text-label-md font-bold"
+                        id="selected-ticker-badge"
+                        >$HLFROST</span
+                      >
+                      <span class="text-outline font-label-md text-label-md"
+                        >/ USDC</span
+                      >
+                      <span
+                        class="px-1.5 py-0.5 rounded bg-surface-container-highest text-outline font-label-sm text-label-sm"
+                        >ERC-3643 CLAIM</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full bg-primary"></span>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                        >Robinhood Relayer Online</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex items-baseline justify-between mt-1">
+                    <div class="flex items-baseline gap-space-xs">
+                      <span
+                        class="font-display-lg text-display-lg font-bold text-on-surface"
+                        id="selected-price-display"
+                        >$1.08</span
+                      >
+                      <span class="font-label-md text-label-md text-outline"
+                        >USDC</span
+                      >
+                      <span
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        id="selected-change-display"
+                        >(+8.0%)</span
+                      >
+                    </div>
+                    <div class="text-right flex flex-col">
+                      <span
+                        class="font-label-sm text-label-sm text-outline uppercase"
+                        >Target Multiple</span
+                      >
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-bold"
+                        id="selected-multiple-display"
+                        >2.8x Target</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- Mini Depth Chart / Visual Ladder Representation -->
+                <div
+                  class="p-space-md bg-surface-container-lowest flex flex-col gap-space-xs"
+                >
+                  <div
+                    class="flex items-center justify-between text-outline font-label-sm text-label-sm uppercase"
+                  >
+                    <span>Order Book Ladder</span>
+                    <span>Total Size: 184,200 $HLFROST</span>
+                  </div>
+                  <!-- SVG Depth Sparkline / Visualizer -->
+                  <div class="w-full h-14 relative flex items-center">
+                    <svg
+                      class="w-full h-full"
+                      preserveaspectratio="none"
+                      viewbox="0 0 320 40"
+                    >
+                      <!-- Bids Area (Green Gradient) -->
+                      <path
+                        class="text-primary/20"
+                        d="M 0 38 L 40 32 L 80 28 L 120 22 L 155 18 L 155 40 L 0 40 Z"
+                        fill="currentColor"
+                      ></path>
+                      <path
+                        class="text-primary"
+                        d="M 0 38 L 40 32 L 80 28 L 120 22 L 155 18"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      ></path>
+                      <!-- Midpoint Indicator -->
+                      <line
+                        class="text-outline-variant"
+                        stroke="currentColor"
+                        stroke-dasharray="2 2"
+                        x1="160"
+                        x2="160"
+                        y1="5"
+                        y2="40"
+                      ></line>
+                      <!-- Asks Area (Red/Amber Gradient) -->
+                      <path
+                        class="text-error/20"
+                        d="M 165 19 L 200 24 L 240 30 L 280 34 L 320 38 L 320 40 L 165 40 Z"
+                        fill="currentColor"
+                      ></path>
+                      <path
+                        class="text-error"
+                        d="M 165 19 L 200 24 L 240 30 L 280 34 L 320 38"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      ></path>
+                    </svg>
+                    <div
+                      class="absolute inset-0 flex items-center justify-between px-space-sm text-[10px] font-label-sm pointer-events-none"
+                    >
+                      <span class="text-primary font-semibold"
+                        >BIDS ($1.04 - $1.07)</span
+                      >
+                      <span class="text-error font-semibold"
+                        >ASKS ($1.08 - $1.14)</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Compact Asks Ladder (Red) -->
+                  <div
+                    class="flex flex-col text-[11px] font-label-sm gap-0.5 mt-1"
+                  >
+                    <div
+                      class="flex justify-between items-center text-outline-variant px-1"
+                    >
+                      <span>PRICE (USDC)</span>
+                      <span>SIZE</span>
+                      <span>TOTAL</span>
+                    </div>
+                    <div
+                      class="flex justify-between items-center py-0.5 px-1 relative bg-error/5 hover:bg-error/10 rounded cursor-pointer"
+                    >
+                      <span class="text-error font-medium">1.100</span>
+                      <span class="text-on-surface-variant">14,200</span>
+                      <span class="text-outline">15,620</span>
+                    </div>
+                    <div
+                      class="flex justify-between items-center py-0.5 px-1 relative bg-error/10 hover:bg-error/15 rounded cursor-pointer"
+                    >
+                      <span class="text-error font-bold">1.090</span>
+                      <span class="text-on-surface-variant">28,500</span>
+                      <span class="text-outline">31,065</span>
+                    </div>
+                    <div
+                      class="flex justify-between items-center py-0.5 px-1 relative bg-error/15 hover:bg-error/20 rounded cursor-pointer"
+                    >
+                      <span class="text-error font-bold">1.085</span>
+                      <span class="text-on-surface-variant">42,000</span>
+                      <span class="text-outline">45,570</span>
+                    </div>
+                    <!-- Spread Indicator Bar -->
+                    <div
+                      class="py-1 my-0.5 bg-surface-container-high px-2 rounded flex items-center justify-between font-bold text-outline text-[10px]"
+                    >
+                      <span class="text-on-surface flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-[14px] text-primary"
+                          >arrow_upward</span
+                        >
+                        1.080 USDC
+                      </span>
+                      <span class="tracking-wider uppercase"
+                        >Spread: 0.005 USDC (0.46%)</span
+                      >
+                    </div>
+                    <!-- Compact Bids Ladder (Green) -->
+                    <div
+                      class="flex justify-between items-center py-0.5 px-1 relative bg-primary/15 hover:bg-primary/20 rounded cursor-pointer"
+                    >
+                      <span class="text-primary font-bold">1.075</span>
+                      <span class="text-on-surface-variant">36,000</span>
+                      <span class="text-outline">38,700</span>
+                    </div>
+                    <div
+                      class="flex justify-between items-center py-0.5 px-1 relative bg-primary/10 hover:bg-primary/15 rounded cursor-pointer"
+                    >
+                      <span class="text-primary font-medium">1.070</span>
+                      <span class="text-on-surface-variant">19,500</span>
+                      <span class="text-outline">20,865</span>
+                    </div>
+                    <div
+                      class="flex justify-between items-center py-0.5 px-1 relative bg-primary/5 hover:bg-primary/10 rounded cursor-pointer"
+                    >
+                      <span class="text-primary font-medium">1.060</span>
+                      <span class="text-on-surface-variant">55,000</span>
+                      <span class="text-outline">58,300</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Order Input Form Section -->
+                <div
+                  class="p-space-md bg-surface-container-low flex flex-col gap-space-md"
+                >
+                  <!-- Buy / Sell Mode Tabs -->
+                  <div
+                    class="grid grid-cols-2 p-1 rounded-lg bg-surface-container-highest"
+                  >
+                    <button
+                      class="py-1.5 text-center rounded font-label-md text-label-md font-bold bg-primary text-on-primary transition-all"
+                      id="tab-buy"
+                      onclick="setOrderSide('buy')"
+                    >
+                      Buy Claims
+                    </button>
+                    <button
+                      class="py-1.5 text-center rounded font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-all"
+                      id="tab-sell"
+                      onclick="setOrderSide('sell')"
+                    >
+                      Sell Claims
+                    </button>
+                  </div>
+                  <!-- Limit vs Market Toggles -->
+                  <div class="flex items-center justify-between text-outline">
+                    <div class="flex items-center gap-space-xs">
+                      <button
+                        class="px-space-sm py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold"
+                        id="btn-limit"
+                        onclick="setOrderType('limit')"
+                      >
+                        Limit
+                      </button>
+                      <button
+                        class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm"
+                        id="btn-market"
+                        onclick="setOrderType('market')"
+                      >
+                        Market
+                      </button>
+                    </div>
+                    <div
+                      class="flex items-center gap-1 font-label-sm text-label-sm"
+                    >
+                      <span>Avail:</span>
+                      <span class="text-on-surface font-semibold"
+                        >42,500 USDC</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Price Input -->
+                  <div class="flex flex-col gap-1">
+                    <label
+                      class="font-label-sm text-label-sm text-outline flex justify-between"
+                    >
+                      <span>Price per Claim</span>
+                      <span class="text-primary font-medium"
+                        >Best Ask: 1.08 USDC</span
+                      >
+                    </label>
+                    <div
+                      class="flex items-center bg-surface-container-lowest rounded px-space-sm py-2"
+                    >
+                      <span
+                        class="text-outline font-label-md text-label-md mr-2"
+                        >$</span
+                      >
+                      <input
+                        class="w-full bg-transparent text-on-surface font-label-md text-label-md font-bold focus:outline-none"
+                        id="input-price"
+                        oninput="calculateTotal()"
+                        step="0.01"
+                        type="number"
+                        value="1.08"
+                      />
+                      <span
+                        class="text-outline font-label-sm text-label-sm uppercase ml-2"
+                        >USDC</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Amount Input -->
+                  <div class="flex flex-col gap-1">
+                    <label
+                      class="font-label-sm text-label-sm text-outline flex justify-between"
+                    >
+                      <span>Claim Amount</span>
+                      <span
+                        class="text-outline-variant font-label-sm text-label-sm"
+                        >Min: 10 Tokens</span
+                      >
+                    </label>
+                    <div
+                      class="flex items-center bg-surface-container-lowest rounded px-space-sm py-2"
+                    >
+                      <span
+                        class="material-symbols-outlined text-outline text-[18px] mr-2"
+                        >token</span
+                      >
+                      <input
+                        class="w-full bg-transparent text-on-surface font-label-md text-label-md font-bold focus:outline-none"
+                        id="input-amount"
+                        oninput="calculateTotal()"
+                        step="100"
+                        type="number"
+                        value="1000"
+                      />
+                      <span
+                        class="text-outline font-label-sm text-label-sm uppercase ml-2"
+                        id="amount-unit-label"
+                        >$HLFROST</span
+                      >
+                    </div>
+                    <!-- Quick Percent Buttons -->
+                    <div class="grid grid-cols-4 gap-1 mt-1">
+                      <button
+                        class="py-1 rounded bg-surface-container hover:bg-surface-container-high text-outline font-label-sm text-label-sm"
+                        onclick="setAmountRatio(0.25)"
+                      >
+                        25%
+                      </button>
+                      <button
+                        class="py-1 rounded bg-surface-container hover:bg-surface-container-high text-outline font-label-sm text-label-sm"
+                        onclick="setAmountRatio(0.5)"
+                      >
+                        50%
+                      </button>
+                      <button
+                        class="py-1 rounded bg-surface-container hover:bg-surface-container-high text-outline font-label-sm text-label-sm"
+                        onclick="setAmountRatio(0.75)"
+                      >
+                        75%
+                      </button>
+                      <button
+                        class="py-1 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold"
+                        onclick="setAmountRatio(1.0)"
+                      >
+                        100% (Max)
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Order Cost Breakdown Box -->
+                  <div
+                    class="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1 text-on-surface-variant font-label-sm text-label-sm"
+                  >
+                    <div class="flex justify-between items-center">
+                      <span>Gross Settlement:</span>
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-semibold"
+                        id="gross-total-label"
+                        >1,080.00 USDC</span
+                      >
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="flex items-center gap-1">
+                        Exchange Protocol Fee (0.15%):
+                        <span
+                          class="material-symbols-outlined text-[14px] text-outline"
+                          title="Includes smart escrow safety pool and Robinhood Relayer subsidy"
+                          >info</span
+                        >
+                      </span>
+                      <span class="text-on-surface" id="fee-total-label"
+                        >1.62 USDC</span
+                      >
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span>Gas Execution Cost:</span>
+                      <span class="text-primary font-bold uppercase"
+                        >0.00 USDC (Subsidized)</span
+                      >
+                    </div>
+                    <div
+                      class="w-full h-px bg-surface-container-highest my-1"
+                    ></div>
+                    <div
+                      class="flex justify-between items-center text-on-surface font-bold text-label-md"
+                    >
+                      <span>Net Total Required:</span>
+                      <span class="text-primary" id="net-total-label"
+                        >1,081.62 USDC</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Primary Execution Action Button -->
+                  <button
+                    class="w-full py-space-md rounded bg-primary text-on-primary font-headline-sm text-headline-sm font-bold hover:bg-primary-fixed transition-all shadow-md flex items-center justify-center gap-space-xs group"
+                    id="btn-submit-order"
+                    onclick="executeTrade()"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform"
+                      >bolt</span
+                    >
+                    <span id="action-btn-text">Execute Instant Trade</span>
+                  </button>
+                  <div
+                    class="flex items-center justify-center gap-1 text-outline font-label-sm text-label-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[14px] text-primary"
+                      >verified</span
+                    >
+                    <span>Custody claims auto-vest into Robinhood Wallet</span>
+                  </div>
+                </div>
+                <!-- Accordion 1: Recent Executed Trades Feed -->
+                <div
+                  class="bg-surface-container px-space-md py-space-sm flex items-center justify-between border-t border-surface-container-highest cursor-pointer select-none"
+                  onclick="toggleSection('feed-trades')"
+                >
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >history</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+                      >Recent Market Trades</span
+                    >
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-outline text-[20px]"
+                    id="feed-trades-icon"
+                    >expand_less</span
+                  >
+                </div>
+                <div
+                  class="bg-surface-container-lowest p-space-sm flex flex-col gap-1 overflow-x-auto max-h-48"
+                  id="feed-trades"
+                >
+                  <table class="w-full text-left font-label-sm text-label-sm">
+                    <thead class="text-outline uppercase text-[10px]">
+                      <tr>
+                        <th class="py-1 px-1">Time</th>
+                        <th class="py-1 px-1">Price</th>
+                        <th class="py-1 px-1 text-right">Size</th>
+                        <th class="py-1 px-1 text-right">Tx Hash</th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-on-surface font-label-sm">
+                      <tr class="hover:bg-surface-container">
+                        <td class="py-1 px-1 text-outline">14:32:18</td>
+                        <td class="py-1 px-1 text-primary font-bold">$1.08</td>
+                        <td class="py-1 px-1 text-right">2,400</td>
+                        <td
+                          class="py-1 px-1 text-right text-secondary hover:underline cursor-pointer"
+                        >
+                          0x9d4a...e12
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container">
+                        <td class="py-1 px-1 text-outline">14:28:44</td>
+                        <td class="py-1 px-1 text-primary font-bold">$1.08</td>
+                        <td class="py-1 px-1 text-right">1,000</td>
+                        <td
+                          class="py-1 px-1 text-right text-secondary hover:underline cursor-pointer"
+                        >
+                          0x3b89...110
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container">
+                        <td class="py-1 px-1 text-outline">14:15:02</td>
+                        <td class="py-1 px-1 text-error font-bold">$1.07</td>
+                        <td class="py-1 px-1 text-right">5,500</td>
+                        <td
+                          class="py-1 px-1 text-right text-secondary hover:underline cursor-pointer"
+                        >
+                          0x7c41...98f
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container">
+                        <td class="py-1 px-1 text-outline">13:58:39</td>
+                        <td class="py-1 px-1 text-primary font-bold">$1.08</td>
+                        <td class="py-1 px-1 text-right">800</td>
+                        <td
+                          class="py-1 px-1 text-right text-secondary hover:underline cursor-pointer"
+                        >
+                          0x2ef0...7bb
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Accordion 2: My Active Orders Tab -->
+                <div
+                  class="bg-surface-container px-space-md py-space-sm flex items-center justify-between border-t border-surface-container-highest cursor-pointer select-none"
+                  onclick="toggleSection('my-orders')"
+                >
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="material-symbols-outlined text-secondary text-[18px]"
+                      >receipt_long</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+                      >My Active Orders</span
+                    >
+                    <span
+                      class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-primary font-label-sm text-label-sm font-bold"
+                      >1 Open</span
+                    >
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-outline text-[20px]"
+                    id="my-orders-icon"
+                    >expand_more</span
+                  >
+                </div>
+                <div
+                  class="bg-surface-container-lowest p-space-md flex flex-col gap-space-xs hidden"
+                  id="my-orders"
+                >
+                  <div
+                    class="bg-surface-container p-space-sm rounded-lg flex items-center justify-between"
+                  >
+                    <div class="flex flex-col">
+                      <div class="flex items-center gap-1">
+                        <span
+                          class="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-bold"
+                          >BUY LIMIT</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface font-bold"
+                          >$HLFROST</span
+                        >
+                      </div>
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >Price: $1.05 • 2,000 Claims (Unfilled)</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-space-xs">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                        >2,100 USDC</span
+                      >
+                      <button
+                        class="p-1 rounded bg-error/10 hover:bg-error/20 text-error font-label-sm text-label-sm"
+                        title="Cancel Limit Order"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >close</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="text-center py-1 text-outline font-label-sm text-label-sm"
+                  >
+                    No further pending escrow bids on Robinhood Chain
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Interactive Scripts for Terminal Computation & Token Selection -->
+        <script>
+          let currentSide = "buy";
+          let currentOrderType = "limit";
+          let currentTicker = "HLFROST";
+          let currentPrice = 1.08;
+
+          function selectToken(
+            ticker,
+            name,
+            price,
+            change,
+            multiple,
+            apy,
+            depth,
+          ) {
+            currentTicker = ticker;
+            currentPrice = parseFloat(price);
+
+            document.getElementById("selected-ticker-badge").innerText =
+              "$" + ticker;
+            document.getElementById("amount-unit-label").innerText =
+              "$" + ticker;
+            document.getElementById("selected-price-display").innerText =
+              "$" + price;
+            document.getElementById("selected-change-display").innerText =
+              "(" + change + ")";
+            document.getElementById("selected-multiple-display").innerText =
+              multiple + " Target";
+            document.getElementById("input-price").value = price;
+
+            calculateTotal();
+          }
+
+          function setOrderSide(side) {
+            currentSide = side;
+            const buyTab = document.getElementById("tab-buy");
+            const sellTab = document.getElementById("tab-sell");
+            const actionBtn = document.getElementById("btn-submit-order");
+            const actionText = document.getElementById("action-btn-text");
+
+            if (side === "buy") {
+              buyTab.className =
+                "py-1.5 text-center rounded font-label-md text-label-md font-bold bg-primary text-on-primary transition-all";
+              sellTab.className =
+                "py-1.5 text-center rounded font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-all";
+              actionBtn.className =
+                "w-full py-space-md rounded bg-primary text-on-primary font-headline-sm text-headline-sm font-bold hover:bg-primary-fixed transition-all shadow-md flex items-center justify-center gap-space-xs group";
+              actionText.innerText =
+                "Execute Instant Buy (" + currentTicker + ")";
+            } else {
+              sellTab.className =
+                "py-1.5 text-center rounded font-label-md text-label-md font-bold bg-error text-white transition-all";
+              buyTab.className =
+                "py-1.5 text-center rounded font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-all";
+              actionBtn.className =
+                "w-full py-space-md rounded bg-error text-white font-headline-sm text-headline-sm font-bold hover:opacity-90 transition-all shadow-md flex items-center justify-center gap-space-xs group";
+              actionText.innerText = "List Claims for Sale";
+            }
+            calculateTotal();
+          }
+
+          function setOrderType(type) {
+            currentOrderType = type;
+            const btnLimit = document.getElementById("btn-limit");
+            const btnMarket = document.getElementById("btn-market");
+            const inputPrice = document.getElementById("input-price");
+
+            if (type === "limit") {
+              btnLimit.className =
+                "px-space-sm py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold";
+              btnMarket.className =
+                "px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm";
+              inputPrice.disabled = false;
+              inputPrice.classList.remove("opacity-50");
+            } else {
+              btnMarket.className =
+                "px-space-sm py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold";
+              btnLimit.className =
+                "px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm";
+              inputPrice.disabled = true;
+              inputPrice.classList.add("opacity-50");
+            }
+            calculateTotal();
+          }
+
+          function setAmountRatio(ratio) {
+            const maxPossible = 10000;
+            const val = Math.floor(maxPossible * ratio);
+            document.getElementById("input-amount").value = val;
+            calculateTotal();
+          }
+
+          function calculateTotal() {
+            const p =
+              parseFloat(document.getElementById("input-price").value) || 0;
+            const a =
+              parseFloat(document.getElementById("input-amount").value) || 0;
+            const gross = p * a;
+            const fee = gross * 0.0015;
+            const net = currentSide === "buy" ? gross + fee : gross - fee;
+
+            document.getElementById("gross-total-label").innerText =
+              gross.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " USDC";
+            document.getElementById("fee-total-label").innerText =
+              fee.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " USDC";
+            document.getElementById("net-total-label").innerText =
+              net.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " USDC";
+          }
+
+          function executeTrade() {
+            const btn = document.getElementById("btn-submit-order");
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML =
+              '<span class="material-symbols-outlined animate-spin text-[20px]">sync</span><span>Routing via Robinhood Escrow...</span>';
+            setTimeout(() => {
+              btn.innerHTML =
+                '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Order Settled On-Chain!</span>';
+              setTimeout(() => {
+                btn.innerHTML = originalHtml;
+              }, 2200);
+            }, 1200);
+          }
+
+          function toggleSection(id) {
+            const el = document.getElementById(id);
+            const icon = document.getElementById(id + "-icon");
+            if (el.classList.contains("hidden")) {
+              el.classList.remove("hidden");
+              if (icon) icon.innerText = "expand_less";
+            } else {
+              el.classList.add("hidden");
+              if (icon) icon.innerText = "expand_more";
+            }
+          }
+        </script>
+      </div>
+    </main>
+    <footer class="w-full bg-surface-container-lowest py-space-xl">
+      <div
+        class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md"
+      >
+        <div class="flex flex-col gap-space-xs">
+          <div class="flex items-center gap-space-sm">
+            <span
+              class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+              >ProtoRWA Protocol</span
+            ><span
+              class="px-space-xs py-0.5 rounded-lg bg-primary/10 text-primary font-label-sm text-label-sm"
+              >AUDITED: OPENZEPPELIN & TRAIL OF BITS</span
+            >
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Institutional Hardware Verification & Decentralized Asset
+            Underwriting Infrastructure.
+          </p>
+        </div>
+        <div class="flex items-center gap-space-xl text-right">
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Total Value Locked</span
+            ><span class="font-label-lg text-label-lg text-on-surface font-bold"
+              >$184,920,400</span
+            >
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Active Custody Oracles</span
+            ><span class="font-label-lg text-label-lg text-primary font-bold"
+              >1,248 Nodes</span
+            >
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Settlement Layer</span
+            ><span class="font-label-lg text-label-lg text-secondary font-bold"
+              >Robinhood & Arbitrum</span
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

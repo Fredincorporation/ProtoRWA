@@ -1,0 +1,1409 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#dee2ee",
+              "surface-dim": "#0f141c",
+              "on-tertiary-fixed": "#2a1700",
+              "error-container": "#93000a",
+              "on-secondary": "#003640",
+              "on-primary-fixed-variant": "#005236",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-surface": "#dee2ee",
+              "primary-container": "#10b981",
+              "secondary-fixed-dim": "#4cd7f6",
+              error: "#ffb4ab",
+              "on-surface-variant": "#bbcabf",
+              "primary-fixed-dim": "#4edea3",
+              "on-secondary-container": "#00424e",
+              "on-secondary-fixed": "#001f26",
+              "primary-fixed": "#6ffbbe",
+              background: "#0f141c",
+              "surface-container-high": "#252a33",
+              "on-tertiary": "#472a00",
+              "inverse-primary": "#006c49",
+              "secondary-fixed": "#acedff",
+              primary: "#4edea3",
+              "secondary-container": "#03b5d3",
+              "surface-variant": "#30353e",
+              "on-primary-fixed": "#002113",
+              "inverse-on-surface": "#2c3139",
+              "outline-variant": "#3c4a42",
+              "on-secondary-fixed-variant": "#004e5c",
+              "inverse-surface": "#dee2ee",
+              "surface-bright": "#343942",
+              surface: "#0f141c",
+              secondary: "#4cd7f6",
+              "tertiary-fixed": "#ffddb8",
+              "surface-tint": "#4edea3",
+              "surface-container": "#1b2028",
+              tertiary: "#ffb95f",
+              "tertiary-container": "#e29100",
+              outline: "#86948a",
+              "on-error": "#690005",
+              "on-primary-container": "#00422b",
+              "surface-container-low": "#171c24",
+              "on-tertiary-fixed-variant": "#653e00",
+              "surface-container-lowest": "#090e16",
+              "on-error-container": "#ffdad6",
+              "on-primary": "#003824",
+              "surface-container-highest": "#30353e",
+              "on-tertiary-container": "#523200",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "space-xl": "2.5rem",
+              "space-xs": "0.25rem",
+              "space-md": "1rem",
+              "space-sm": "0.5rem",
+              "space-lg": "1.5rem",
+              gutter: "1.5rem",
+              margin: "2.5rem",
+              "margin-mobile": "1rem",
+              "gutter-mobile": "1rem",
+            },
+            fontFamily: {
+              "body-sm": ["Inter"],
+              "display-lg": ["Space Grotesk"],
+              "body-md": ["Inter"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "label-md": ["JetBrains Mono"],
+              "headline-lg": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "headline-sm": ["Space Grotesk"],
+              "headline-md": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+              "body-lg": ["Inter"],
+              "headline-lg-mobile": ["Space Grotesk"],
+            },
+            fontSize: {
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface antialiased">
+    <header
+      class="fixed top-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"
+    >
+      <div class="h-16 w-full px-gutter flex items-center justify-between">
+        <div class="flex items-center gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <div
+              class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center"
+            >
+              <span
+                class="font-label-lg text-label-lg font-bold text-on-primary"
+                >P</span
+              >
+            </div>
+            <span
+              class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold"
+              >ProtoRWA</span
+            ><span
+              class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase"
+              >RWA • ROBINHOOD CHAIN</span
+            >
+          </div>
+          <nav
+            class="hidden xl:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-primary font-label-md text-label-md rounded-lg"
+          >
+            <a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="explore-projects"
+              href="#"
+              >Explore Projects</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="project-detail"
+              href="#"
+              >Project Detail & Terminal</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="secondary-claims-market"
+              href="#"
+              >Secondary Claims Market</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="investor-dashboard-governance"
+              href="#"
+              >Investor Dashboard & Governance</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="support-documentation"
+              href="#"
+              >Support / Documentation</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="legal-compliance"
+              href="#"
+              >Legal Compliance</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-sm">
+          <div
+            class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low"
+          >
+            <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <span class="font-label-sm text-label-sm text-on-surface uppercase"
+              >Robinhood Subnet #14</span
+            >
+          </div>
+          <div
+            class="flex items-center rounded-lg bg-surface-container-high p-0.5"
+          >
+            <div
+              class="px-space-sm py-1 font-label-md text-label-md text-primary font-semibold"
+            >
+              42,500 USDC
+            </div>
+            <div
+              class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium"
+            >
+              0x71C...4f9b
+            </div>
+          </div>
+          <a
+            class="relative p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors inline-flex items-center justify-center"
+            data-path="notifications"
+            href="#"
+            title="Notifications"
+            ><span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary"
+            ></span></a
+          ><a
+            class="inline-block rounded-full ring-1 ring-outline-variant hover:ring-primary transition-all"
+            data-path="account"
+            href="#"
+            title="Account Profile"
+            ><img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+          /></a>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-16 bg-surface min-h-screen">
+      <div class="flex flex-col w-full">
+        <!-- Subtle Ambient Glow Element -->
+        <div class="relative w-full overflow-hidden">
+          <div
+            class="absolute -top-32 left-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"
+          ></div>
+          <div
+            class="absolute top-20 right-10 w-80 h-80 bg-secondary-container/5 rounded-full blur-3xl pointer-events-none"
+          ></div>
+          <div
+            class="w-full px-gutter py-space-lg flex flex-col gap-space-lg max-w-[1720px] mx-auto"
+          >
+            <!-- Top Title Bar & Status Telemetry -->
+            <div
+              class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md"
+            >
+              <div class="flex flex-col gap-space-xs">
+                <div class="flex items-center gap-space-sm">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold px-space-xs py-0.5 rounded-lg bg-surface-container-high"
+                    >Live Ingest Daemon</span
+                  >
+                  <span
+                    class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"
+                    ></span>
+                    Subnet WebSocket: syncd (#14,892,104)
+                  </span>
+                </div>
+                <h1
+                  class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight"
+                >
+                  Notifications & On-Chain Alert Stream
+                </h1>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant max-w-3xl"
+                >
+                  Real-time alerts for milestone votes, escrow payouts, oracle
+                  metrology events, and secondary trade fills across registered
+                  physical RWA asset contracts.
+                </p>
+              </div>
+              <!-- Global Quick Actions -->
+              <div
+                class="flex items-center gap-space-sm self-start lg:self-end"
+              >
+                <button
+                  class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm"
+                  id="mark-all-read-btn"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >done_all</span
+                  >
+                  <span>Mark All Read</span>
+                </button>
+                <button
+                  class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container hover:bg-primary-fixed-dim text-on-primary font-label-md text-label-md font-semibold transition-all shadow-[0_0_20px_-3px_rgba(16,185,129,0.35)]"
+                  id="toggle-drawer-btn"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >tune</span
+                  >
+                  <span>Dispatch Channels</span>
+                </button>
+              </div>
+            </div>
+            <!-- Filter Matrix Bar -->
+            <div
+              class="w-full bg-surface-container-low rounded-xl p-space-sm flex flex-wrap items-center justify-between gap-space-sm"
+            >
+              <div
+                class="flex flex-wrap items-center gap-space-xs"
+                id="filter-pills-container"
+              >
+                <button
+                  class="filter-pill active px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold transition-colors flex items-center gap-2"
+                  data-filter="all"
+                >
+                  <span>All Alerts</span>
+                  <span
+                    class="bg-surface-dim/40 px-1.5 py-0.5 rounded text-[10px] font-label-sm"
+                    >28</span
+                  >
+                </button>
+                <button
+                  class="filter-pill px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-2"
+                  data-filter="urgent"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  <span>Action Required</span>
+                  <span
+                    class="bg-tertiary/20 text-tertiary px-1.5 py-0.5 rounded text-[10px] font-label-sm"
+                    >3</span
+                  >
+                </button>
+                <button
+                  class="filter-pill px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors flex items-center gap-2"
+                  data-filter="votes"
+                >
+                  <span>Milestone Votes</span>
+                  <span
+                    class="bg-surface-container-highest px-1.5 py-0.5 rounded text-[10px] font-label-sm"
+                    >8</span
+                  >
+                </button>
+                <button
+                  class="filter-pill px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors flex items-center gap-2"
+                  data-filter="payouts"
+                >
+                  <span>Payouts & Yield</span>
+                  <span
+                    class="bg-surface-container-highest px-1.5 py-0.5 rounded text-[10px] font-label-sm"
+                    >11</span
+                  >
+                </button>
+                <button
+                  class="filter-pill px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors flex items-center gap-2"
+                  data-filter="market"
+                >
+                  <span>Secondary Market</span>
+                  <span
+                    class="bg-surface-container-highest px-1.5 py-0.5 rounded text-[10px] font-label-sm"
+                    >4</span
+                  >
+                </button>
+                <button
+                  class="filter-pill px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors flex items-center gap-2"
+                  data-filter="system"
+                >
+                  <span>System & Security</span>
+                  <span
+                    class="bg-surface-container-highest px-1.5 py-0.5 rounded text-[10px] font-label-sm"
+                    >2</span
+                  >
+                </button>
+              </div>
+              <div
+                class="flex items-center gap-space-xs text-on-surface-variant text-label-sm font-label-sm px-space-xs"
+              >
+                <span class="material-symbols-outlined text-[16px] text-primary"
+                  >rss_feed</span
+                >
+                <span>Web3 Gas Policy: Subsidized</span>
+              </div>
+            </div>
+            <!-- Urgent Action Required Banner (High Contrast Structural Block) -->
+            <div
+              class="relative w-full rounded-xl bg-gradient-to-r from-surface-container-highest via-surface-container-high to-surface-container p-space-md lg:p-space-lg shadow-xl overflow-hidden"
+            >
+              <div
+                class="absolute top-0 left-0 bottom-0 w-1.5 bg-tertiary"
+              ></div>
+              <div
+                class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg"
+              >
+                <div class="flex items-start gap-space-md">
+                  <div
+                    class="w-12 h-12 rounded-xl bg-tertiary-container/30 flex items-center justify-center shrink-0 text-tertiary-fixed"
+                  >
+                    <span class="material-symbols-outlined text-[28px]"
+                      >how_to_vote</span
+                    >
+                  </div>
+                  <div class="flex flex-col gap-1 min-w-0">
+                    <div class="flex flex-wrap items-center gap-space-xs">
+                      <span
+                        class="px-space-xs py-0.5 rounded bg-tertiary/20 text-tertiary font-label-sm text-label-sm font-bold tracking-wider uppercase"
+                        >Action Mandate</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >ESCROW CONTRACT #0x82a9...3b94</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-tertiary-fixed flex items-center gap-1 font-semibold"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >timer</span
+                        >
+                        Closes in 13h 48m 12s
+                      </span>
+                    </div>
+                    <h2
+                      class="font-headline-sm text-headline-sm text-on-surface font-bold truncate"
+                    >
+                      Milestone 02 Voting Ending Soon: HelioFrost Pro
+                      Cold-Storage System
+                    </h2>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant max-w-2xl"
+                    >
+                      Tranche 02 disbursement ($220,000 USDC) requires multi-sig
+                      quorum. SGS Metrology key #0x4f delivered certified
+                      dimensional laser inspection pass. Your voting allocation
+                      carries decisive weight.
+                    </p>
+                  </div>
+                </div>
+                <!-- Action Cluster -->
+                <div
+                  class="flex flex-wrap items-center gap-space-sm shrink-0 lg:pl-space-lg"
+                >
+                  <a
+                    class="flex items-center gap-1.5 px-space-md py-2.5 rounded-lg bg-surface-bright hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-colors"
+                    data-path="project-detail"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >biotech</span
+                    >
+                    <span>Inspect Proofs</span>
+                  </a>
+                  <button
+                    class="flex items-center gap-2 px-space-lg py-2.5 rounded-lg bg-tertiary hover:bg-tertiary-fixed-dim text-on-tertiary font-label-md text-label-md font-bold transition-all shadow-[0_0_18px_rgba(255,185,95,0.3)]"
+                    id="urgent-vote-btn"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >verified</span
+                    >
+                    <span>Cast Vote (15,000 Votes)</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Main Layout Grid: Feed + Right Telemetry Sidebar -->
+            <div
+              class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start"
+            >
+              <!-- Center Notification Stream (8 Cols) -->
+              <div
+                class="xl:col-span-8 flex flex-col gap-space-lg"
+                id="feed-container"
+              >
+                <!-- Section: Today -->
+                <div class="flex flex-col gap-space-sm">
+                  <div
+                    class="flex items-center justify-between px-space-xs py-1"
+                  >
+                    <div class="flex items-center gap-space-sm">
+                      <span
+                        class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold"
+                        >Today</span
+                      >
+                      <span
+                        class="w-12 h-px bg-surface-container-highest"
+                      ></span>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >3 unread notifications</span
+                      >
+                    </div>
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                      >UTC EPOCH 17740.8</span
+                    >
+                  </div>
+                  <!-- Notification 1: Yield Distributed -->
+                  <div
+                    class="notification-item group relative rounded-xl bg-surface-container p-space-md transition-all hover:bg-surface-container-high shadow-sm"
+                    data-category="payouts"
+                  >
+                    <div class="flex items-start gap-space-md">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5"
+                      >
+                        <span class="material-symbols-outlined text-[22px]"
+                          >payments</span
+                        >
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0 gap-1">
+                        <div
+                          class="flex flex-wrap items-center justify-between gap-space-xs"
+                        >
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold uppercase"
+                              >USDC Yield Payout</span
+                            >
+                            <span
+                              class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                              >TX #0x9df1...e02b</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >18 mins ago</span
+                          >
+                        </div>
+                        <h3
+                          class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                        >
+                          USDC Revenue Yield Distributed: +$840.00 USDC
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                        >
+                          Settlement received from HelioFrost Pro Batch #01
+                          wholesale receipts via Robinhood Subnet #14 liquidity
+                          pool. Transferred directly to your connected
+                          settlement address.
+                        </p>
+                        <div class="flex items-center gap-space-md pt-2">
+                          <a
+                            class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1"
+                            href="#"
+                          >
+                            <span>View In Subnet Explorer</span>
+                            <span class="material-symbols-outlined text-[14px]"
+                              >arrow_outward</span
+                            >
+                          </a>
+                          <span class="text-surface-variant">•</span>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                            >Yield APR: 14.82%</span
+                          >
+                        </div>
+                      </div>
+                      <div class="shrink-0 flex items-center">
+                        <div
+                          class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(78,222,163,0.8)]"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Notification 2: Secondary Order Fill -->
+                  <div
+                    class="notification-item group relative rounded-xl bg-surface-container p-space-md transition-all hover:bg-surface-container-high shadow-sm"
+                    data-category="market"
+                  >
+                    <div class="flex items-start gap-space-md">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center shrink-0 mt-0.5"
+                      >
+                        <span class="material-symbols-outlined text-[22px]"
+                          >swap_horiz</span
+                        >
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0 gap-1">
+                        <div
+                          class="flex flex-wrap items-center justify-between gap-space-xs"
+                        >
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="px-space-xs py-0.5 rounded bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold uppercase"
+                              >Secondary Market</span
+                            >
+                            <span
+                              class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                              >ORDER ID: #LM-94022</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >2 hrs ago</span
+                          >
+                        </div>
+                        <h3
+                          class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                        >
+                          Secondary Order Partially Filled: 2,500 SHLFROST
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                        >
+                          Limit Sell order for 2,500 SHLFROST filled @ $1.085
+                          USDC. Net instant settlement:
+                          <span class="text-on-surface font-semibold"
+                            >+$2,712.50 USDC</span
+                          >
+                          (0.15% maker fee deducted). Remaining: 1,500 SHLFROST.
+                        </p>
+                        <div class="flex items-center gap-space-md pt-2">
+                          <a
+                            class="font-label-sm text-label-sm text-secondary hover:underline flex items-center gap-1"
+                            data-path="secondary-claims-market"
+                            href="#"
+                          >
+                            <span>Go to Claims Market Terminal</span>
+                            <span class="material-symbols-outlined text-[14px]"
+                              >open_in_new</span
+                            >
+                          </a>
+                        </div>
+                      </div>
+                      <div class="shrink-0 flex items-center">
+                        <div
+                          class="w-2.5 h-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(76,215,246,0.8)]"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Notification 3: Physical Proof Upload -->
+                  <div
+                    class="notification-item group relative rounded-xl bg-surface-container p-space-md transition-all hover:bg-surface-container-high shadow-sm"
+                    data-category="votes"
+                  >
+                    <div class="flex items-start gap-space-md">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0 mt-0.5"
+                      >
+                        <span class="material-symbols-outlined text-[22px]"
+                          >video_file</span
+                        >
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0 gap-1">
+                        <div
+                          class="flex flex-wrap items-center justify-between gap-space-xs"
+                        >
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="px-space-xs py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm font-semibold uppercase"
+                              >Hardware Verification</span
+                            >
+                            <span
+                              class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                              >IPFS: QmX8...9zF</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >4 hrs ago</span
+                          >
+                        </div>
+                        <h3
+                          class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                        >
+                          New Physical Proof Uploaded: AeroPulse M2 Flight
+                          Computer
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                        >
+                          AeroPulse M2 team uploaded 4K SMT line verification
+                          video and Keyence optical scan report verifying zero
+                          solder void defects across 500 avionics units.
+                        </p>
+                        <!-- Embedded Micro Evidence Card -->
+                        <div
+                          class="mt-2 p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between gap-space-sm"
+                        >
+                          <div class="flex items-center gap-space-sm">
+                            <span
+                              class="material-symbols-outlined text-primary text-[20px]"
+                              >verified_user</span
+                            >
+                            <div class="flex flex-col">
+                              <span
+                                class="font-label-sm text-label-sm text-on-surface font-medium"
+                                >Keyence Optical Report #KY-8821.pdf</span
+                              >
+                              <span
+                                class="font-body-sm text-[11px] text-on-surface-variant"
+                                >SHA-256: 4e82b7c...99a0 | 14.2 MB</span
+                              >
+                            </div>
+                          </div>
+                          <a
+                            class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-bright font-label-sm text-label-sm text-on-surface transition-colors"
+                            href="#"
+                          >
+                            Download Hash
+                          </a>
+                        </div>
+                      </div>
+                      <div class="shrink-0 flex items-center">
+                        <div
+                          class="w-2.5 h-2.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(255,185,95,0.8)]"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Section: Yesterday -->
+                <div class="flex flex-col gap-space-sm pt-space-md">
+                  <div
+                    class="flex items-center justify-between px-space-xs py-1"
+                  >
+                    <div class="flex items-center gap-space-sm">
+                      <span
+                        class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-bold"
+                        >Yesterday</span
+                      >
+                      <span
+                        class="w-12 h-px bg-surface-container-highest"
+                      ></span>
+                    </div>
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                      >UTC EPOCH 17739.0</span
+                    >
+                  </div>
+                  <!-- Notification 4: Oracle Attestation -->
+                  <div
+                    class="notification-item group relative rounded-xl bg-surface-container/75 p-space-md transition-all hover:bg-surface-container-high shadow-sm opacity-90"
+                    data-category="system"
+                  >
+                    <div class="flex items-start gap-space-md">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0 mt-0.5"
+                      >
+                        <span class="material-symbols-outlined text-[22px]"
+                          >sensors</span
+                        >
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0 gap-1">
+                        <div
+                          class="flex flex-wrap items-center justify-between gap-space-xs"
+                        >
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold uppercase"
+                              >Oracle Metrology</span
+                            >
+                            <span
+                              class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                              >NODE #01 (FRANKFURT)</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >Yesterday 18:40 UTC</span
+                          >
+                        </div>
+                        <h3
+                          class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                        >
+                          Oracle Attestation Verified: OmniHaptic X1
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                        >
+                          SGS Metrology Node #01 verified thermal chamber
+                          tolerance for OmniHaptic X1 under -40°C to +85°C load
+                          cycling. State lock registered in Block #14,887,209.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Notification 5: Escrow Released -->
+                  <div
+                    class="notification-item group relative rounded-xl bg-surface-container/75 p-space-md transition-all hover:bg-surface-container-high shadow-sm opacity-90"
+                    data-category="payouts"
+                  >
+                    <div class="flex items-start gap-space-md">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0 mt-0.5"
+                      >
+                        <span class="material-symbols-outlined text-[22px]"
+                          >lock_open</span
+                        >
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0 gap-1">
+                        <div
+                          class="flex flex-wrap items-center justify-between gap-space-xs"
+                        >
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold uppercase"
+                              >Escrow Disbursed</span
+                            >
+                            <span
+                              class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                              >ESCROW ID: #TR-01-HL</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >Yesterday 14:15 UTC</span
+                          >
+                        </div>
+                        <h3
+                          class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                        >
+                          Milestone Escrow Released: $150,000 USDC
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                        >
+                          $150,000 USDC successfully disbursed to Makino
+                          Machining Corp for HelioFrost Tranche 01 tooling
+                          completion following 94.2% community affirmative vote.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Notification 6: Security Subnet Anchor -->
+                  <div
+                    class="notification-item group relative rounded-xl bg-surface-container/75 p-space-md transition-all hover:bg-surface-container-high shadow-sm opacity-90"
+                    data-category="system"
+                  >
+                    <div class="flex items-start gap-space-md">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0 mt-0.5"
+                      >
+                        <span class="material-symbols-outlined text-[22px]"
+                          >security</span
+                        >
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0 gap-1">
+                        <div
+                          class="flex flex-wrap items-center justify-between gap-space-xs"
+                        >
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold uppercase"
+                              >Security Sentinel</span
+                            >
+                            <span
+                              class="font-label-sm text-label-sm text-on-surface-variant font-mono"
+                              >SYS-DEFENSE</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >Yesterday 09:12 UTC</span
+                          >
+                        </div>
+                        <h3
+                          class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                        >
+                          Multi-Sig Key Rotation Confirmed
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                        >
+                          Custody Oracle Group B has finalized quarterly key
+                          rotation with 5/7 signers verified on Robinhood Chain
+                          Core Validator registry.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Pagination / Stream Health Footer -->
+                <div
+                  class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary"></span>
+                    <span
+                      >Event Stream Buffer: 28 items cached (All verified)</span
+                    >
+                  </div>
+                  <button
+                    class="hover:text-primary font-semibold transition-colors flex items-center gap-1"
+                  >
+                    <span>Load 50 Historical Block Events</span>
+                    <span class="material-symbols-outlined text-[16px]"
+                      >expand_more</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <!-- Right Side: Preferences Panel & Institutional Webhook Drawer (4 Cols) -->
+              <div class="xl:col-span-4 flex flex-col gap-space-lg">
+                <!-- Dispatch Channels Card -->
+                <div
+                  class="w-full bg-surface-container rounded-xl p-space-lg flex flex-col gap-space-md shadow-lg"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-space-xs">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px]"
+                        >notifications_active</span
+                      >
+                      <h3
+                        class="font-headline-sm text-[18px] text-on-surface font-semibold"
+                      >
+                        Dispatch Channels
+                      </h3>
+                    </div>
+                    <span
+                      class="font-label-sm text-label-sm text-primary uppercase bg-primary-container/20 px-space-xs py-0.5 rounded"
+                      >Active Sync</span
+                    >
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Manage multi-channel delivery routes for real-time
+                    institutional hardware execution alerts.
+                  </p>
+                  <!-- Toggles List -->
+                  <div class="flex flex-col gap-space-sm pt-space-xs">
+                    <!-- Channel 1: Mobile Push -->
+                    <div
+                      class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors"
+                    >
+                      <div class="flex items-center gap-space-sm">
+                        <span
+                          class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                          >smartphone</span
+                        >
+                        <div class="flex flex-col">
+                          <span
+                            class="font-label-md text-label-md text-on-surface font-semibold"
+                            >Robinhood Chain Push</span
+                          >
+                          <span
+                            class="font-body-sm text-[11px] text-on-surface-variant"
+                            >Mobile app instant notifications</span
+                          >
+                        </div>
+                      </div>
+                      <button
+                        class="toggle-btn w-10 h-6 bg-primary rounded-full relative p-0.5 transition-colors focus:outline-none"
+                        data-state="true"
+                      >
+                        <span
+                          class="block w-5 h-5 bg-on-primary rounded-full transition-transform translate-x-4"
+                        ></span>
+                      </button>
+                    </div>
+                    <!-- Channel 2: Email Digest -->
+                    <div
+                      class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors"
+                    >
+                      <div class="flex items-center gap-space-sm">
+                        <span
+                          class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                          >mail</span
+                        >
+                        <div class="flex flex-col">
+                          <span
+                            class="font-label-md text-label-md text-on-surface font-semibold"
+                            >Email Digest (Form 1099-DA)</span
+                          >
+                          <span
+                            class="font-body-sm text-[11px] text-on-surface-variant"
+                            >Tax reports & weekly payout totals</span
+                          >
+                        </div>
+                      </div>
+                      <button
+                        class="toggle-btn w-10 h-6 bg-primary rounded-full relative p-0.5 transition-colors focus:outline-none"
+                        data-state="true"
+                      >
+                        <span
+                          class="block w-5 h-5 bg-on-primary rounded-full transition-transform translate-x-4"
+                        ></span>
+                      </button>
+                    </div>
+                    <!-- Channel 3: Telegram Bot -->
+                    <div
+                      class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors"
+                    >
+                      <div class="flex items-center gap-space-sm">
+                        <span
+                          class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                          >send</span
+                        >
+                        <div class="flex flex-col">
+                          <span
+                            class="font-label-md text-label-md text-on-surface font-semibold"
+                            >Telegram Escrow Bot</span
+                          >
+                          <span class="font-body-sm text-[11px] text-primary"
+                            >@ProtoRWA_Alerts_Bot (Linked)</span
+                          >
+                        </div>
+                      </div>
+                      <button
+                        class="toggle-btn w-10 h-6 bg-primary rounded-full relative p-0.5 transition-colors focus:outline-none"
+                        data-state="true"
+                      >
+                        <span
+                          class="block w-5 h-5 bg-on-primary rounded-full transition-transform translate-x-4"
+                        ></span>
+                      </button>
+                    </div>
+                    <!-- Channel 4: High Slippage Alerts -->
+                    <div
+                      class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors"
+                    >
+                      <div class="flex items-center gap-space-sm">
+                        <span
+                          class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                          >warning</span
+                        >
+                        <div class="flex flex-col">
+                          <span
+                            class="font-label-md text-label-md text-on-surface font-semibold"
+                            >High Slippage Alerts</span
+                          >
+                          <span
+                            class="font-body-sm text-[11px] text-on-surface-variant"
+                            >Flag secondary fills > 1.5% slip</span
+                          >
+                        </div>
+                      </div>
+                      <button
+                        class="toggle-btn w-10 h-6 bg-primary rounded-full relative p-0.5 transition-colors focus:outline-none"
+                        data-state="true"
+                      >
+                        <span
+                          class="block w-5 h-5 bg-on-primary rounded-full transition-transform translate-x-4"
+                        ></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Web3 Webhook Institutional Integration Module -->
+                <div
+                  class="w-full bg-surface-container rounded-xl p-space-lg flex flex-col gap-space-md shadow-lg relative overflow-hidden"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-space-xs">
+                      <span
+                        class="material-symbols-outlined text-secondary text-[20px]"
+                        >hub</span
+                      >
+                      <h3
+                        class="font-headline-sm text-[18px] text-on-surface font-semibold"
+                      >
+                        Family Office Webhook
+                      </h3>
+                    </div>
+                    <span
+                      class="font-label-sm text-label-sm text-secondary bg-secondary-container/20 px-space-xs py-0.5 rounded"
+                      >HMAC-SHA256</span
+                    >
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Stream raw JSON events directly into your institutional ERP,
+                    fund custody API, or Fireblocks policy engine.
+                  </p>
+                  <div class="flex flex-col gap-space-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Endpoint URL</label
+                    >
+                    <div class="relative">
+                      <input
+                        class="w-full bg-surface-dim text-on-surface font-mono text-label-sm px-space-md py-2 rounded-lg pr-10 focus:outline-none"
+                        readonly=""
+                        type="text"
+                        value="https://api.stratawealth.fi/v2/rwainflow"
+                      />
+                      <button
+                        class="absolute right-2 top-2 text-on-surface-variant hover:text-primary transition-colors"
+                        title="Copy endpoint"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >content_copy</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1"
+                  >
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-on-surface-variant"
+                        >Avg Ingest Latency</span
+                      >
+                      <span class="text-primary font-bold">142 ms</span>
+                    </div>
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-on-surface-variant"
+                        >Signature Secret</span
+                      >
+                      <span class="text-on-surface font-mono"
+                        >whsec_99a8...3bf0</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-on-surface-variant"
+                        >Delivery Success (30d)</span
+                      >
+                      <span class="text-on-surface font-bold">99.98%</span>
+                    </div>
+                  </div>
+                  <button
+                    class="w-full py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-2"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >send_time_extension</span
+                    >
+                    <span>Send Test Ping Event</span>
+                  </button>
+                </div>
+                <!-- Metrology Verification Live Telemetry Box -->
+                <div
+                  class="w-full bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm"
+                >
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold"
+                      >Oracle Metrology Network</span
+                    >
+                    <span class="w-2 h-2 rounded-full bg-primary"></span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-space-sm">
+                    <div
+                      class="bg-surface-container p-space-sm rounded-lg flex flex-col"
+                    >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >SGS Nodes Active</span
+                      >
+                      <span
+                        class="font-label-lg text-label-lg font-bold text-on-surface"
+                        >14 Nodes</span
+                      >
+                    </div>
+                    <div
+                      class="bg-surface-container p-space-sm rounded-lg flex flex-col"
+                    >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Pending Hashes</span
+                      >
+                      <span
+                        class="font-label-lg text-label-lg font-bold text-tertiary"
+                        >3 Hashes</span
+                      >
+                    </div>
+                  </div>
+                  <a
+                    class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors flex items-center justify-between pt-1"
+                    data-path="legal-compliance"
+                    href="#"
+                  >
+                    <span>View SGS Metrology SLA Agreement</span>
+                    <span class="material-symbols-outlined text-[14px]"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        // Interactive UI Micro-interactions for Notifications Hub
+        (function () {
+          // Filter Pills handler
+          const filterPills = document.querySelectorAll(".filter-pill");
+          const items = document.querySelectorAll(".notification-item");
+
+          filterPills.forEach((pill) => {
+            pill.addEventListener("click", () => {
+              // Toggle active styling
+              filterPills.forEach((p) => {
+                p.classList.remove(
+                  "bg-primary",
+                  "text-on-primary",
+                  "font-semibold",
+                );
+                p.classList.add(
+                  "bg-surface-container",
+                  "text-on-surface-variant",
+                );
+              });
+              pill.classList.remove(
+                "bg-surface-container",
+                "text-on-surface-variant",
+              );
+              pill.classList.add(
+                "bg-primary",
+                "text-on-primary",
+                "font-semibold",
+              );
+
+              const filter = pill.getAttribute("data-filter");
+              items.forEach((item) => {
+                const category = item.getAttribute("data-category");
+                if (filter === "all") {
+                  item.style.display = "block";
+                } else if (filter === "urgent") {
+                  // Action required corresponds to votes and payouts
+                  item.style.display =
+                    category === "votes" || category === "payouts"
+                      ? "block"
+                      : "none";
+                } else if (category === filter) {
+                  item.style.display = "block";
+                } else {
+                  item.style.display = "none";
+                }
+              });
+            });
+          });
+
+          // Mark All as Read Button
+          const markReadBtn = document.getElementById("mark-all-read-btn");
+          if (markReadBtn) {
+            markReadBtn.addEventListener("click", () => {
+              const unreadIndicators = document.querySelectorAll(
+                ".notification-item .rounded-full.bg-primary, .notification-item .rounded-full.bg-secondary, .notification-item .rounded-full.bg-tertiary",
+              );
+              unreadIndicators.forEach((dot) => {
+                dot.style.opacity = "0";
+                setTimeout(() => dot.remove(), 200);
+              });
+              markReadBtn.innerHTML =
+                '<span class="material-symbols-outlined text-[18px]">check</span><span>Stream Cleared</span>';
+              markReadBtn.classList.add("opacity-75", "pointer-events-none");
+            });
+          }
+
+          // Toggle Button States
+          const toggleBtns = document.querySelectorAll(".toggle-btn");
+          toggleBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const active = btn.getAttribute("data-state") === "true";
+              const circle = btn.querySelector("span");
+              if (active) {
+                btn.setAttribute("data-state", "false");
+                btn.classList.remove("bg-primary");
+                btn.classList.add("bg-surface-container-highest");
+                circle.classList.remove("translate-x-4");
+                circle.classList.add("translate-x-0", "bg-on-surface-variant");
+              } else {
+                btn.setAttribute("data-state", "true");
+                btn.classList.remove("bg-surface-container-highest");
+                btn.classList.add("bg-primary");
+                circle.classList.remove(
+                  "translate-x-0",
+                  "bg-on-surface-variant",
+                );
+                circle.classList.add("translate-x-4", "bg-on-primary");
+              }
+            });
+          });
+
+          // Urgent Vote Mock Click
+          const urgentVoteBtn = document.getElementById("urgent-vote-btn");
+          if (urgentVoteBtn) {
+            urgentVoteBtn.addEventListener("click", () => {
+              urgentVoteBtn.innerHTML =
+                '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Submitting to Robinhood Chain...</span>';
+              setTimeout(() => {
+                urgentVoteBtn.innerHTML =
+                  '<span class="material-symbols-outlined text-[18px]">done</span><span>15,000 Votes Registered</span>';
+                urgentVoteBtn.classList.remove(
+                  "bg-tertiary",
+                  "text-on-tertiary",
+                );
+                urgentVoteBtn.classList.add("bg-primary", "text-on-primary");
+              }, 1200);
+            });
+          }
+        })();
+      </script>
+    </main>
+    <footer class="w-full bg-surface-container-lowest py-space-xl">
+      <div
+        class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md"
+      >
+        <div class="flex flex-col gap-space-xs">
+          <div class="flex items-center gap-space-sm">
+            <span
+              class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+              >ProtoRWA Protocol</span
+            ><span
+              class="px-space-xs py-0.5 rounded-lg bg-primary/10 text-primary font-label-sm text-label-sm"
+              >AUDITED: OPENZEPPELIN & TRAIL OF BITS</span
+            >
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Institutional Hardware Verification & Decentralized Asset
+            Underwriting Infrastructure.
+          </p>
+        </div>
+        <div class="flex items-center gap-space-xl text-right">
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Total Value Locked</span
+            ><span class="font-label-lg text-label-lg text-on-surface font-bold"
+              >$184,920,400</span
+            >
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Active Custody Oracles</span
+            ><span class="font-label-lg text-label-lg text-primary font-bold"
+              >1,248 Nodes</span
+            >
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Settlement Layer</span
+            ><span class="font-label-lg text-label-lg text-secondary font-bold"
+              >Robinhood Subnet #14</span
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+packages:
+  - 'contracts'
+  - 'frontend'
+  - 'shared'
+# Native modules that legitimately need their install scripts. Everything else
+# stays blocked, so a compromised transitive dep cannot run code at install time.
+allowBuilds:
+  bufferutil: true # optional ws acceleration (wagmi/walletconnect)
+  esbuild: true # bundler used by vitest/playwright
+  keccak: true # hashing used by viem
+  sharp: true # image optimisation for next/image
+  unrs-resolver: true # eslint resolver native binding
+  utf-8-validate: true # optional ws acceleration

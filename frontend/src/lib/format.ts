@@ -1,0 +1,147 @@
+/**
+ * Shared formatting helpers.
+ *
+ * Crypto UIs are full of raw wei and basis points; these convert to the exact
+ * presentation used across the designs (mono labels, tabular numbers).
+ */
+
+import { PROTOCOL } from '@protorwa/shared';
+
+const WEI_PER_ETHER = 10n ** 18n;
+
+/** Formats a wei amount as a compact ETH string, e.g. "12.5 ETH". */
+export function formatEth(wei: bigint | string, options?: { maxDecimals?: number }): string {
+  const value = typeof wei === 'string' ? BigInt(wei || '0') : wei;
+  const maxDecimals = options?.maxDecimals ?? 4;
+
+  const whole = value / WEI_PER_ETHER;
+  const fraction = value % WEI_PER_ETHER;
+
+  if (fraction === 0n) return `${whole} ETH`;
+
+  // Pad the fraction so we can slice a fixed number of decimals.
+  const fractionStr = fraction.toString().padStart(18, '0').slice(0, maxDecimals);
+  const trimmed = fractionStr.replace(/0+$/, '');
+
+  return trimmed.length > 0 ? `${whole}.${trimmed} ETH` : `${whole} ETH`;
+}
+
+/** Formats wei as a plain decimal number string (no unit suffix). */
+export function formatEthNumber(wei: bigint | string, maxDecimals = 4): string {
+  return formatEth(wei, { maxDecimals }).replace(' ETH', '');
+}
+
+/** Formats a large integer with thousands separators, e.g. "10,000". */
+export function formatNumber(value: bigint | number | string): string {
+  const asString = typeof value === 'bigint' ? value.toString() : String(value);
+  return asString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/** Converts basis points to a percentage string, e.g. 6000 -> "60%". */
+export function formatBps(bps: number | bigint): string {
+  const value = typeof bps === 'bigint' ? Number(bps) : bps;
+  const percent = value / (PROTOCOL.BPS_DENOMINATOR / 100);
+  // Trim trailing zeros: 62.50 -> 62.5, 60.00 -> 60
+  return `${parseFloat(percent.toFixed(2))}%`;
+}
+
+/** Truncates an address for display, e.g. "0x1234…abcd". */
+export function shortenAddress(address: string, chars = 4): string {
+  if (!address) return '';
+  if (address.length <= chars * 2 + 2) return address;
+  return `${address.slice(0, chars + 2)}…${address.slice(-chars)}`;
+}
+
+/** Formats an ISO timestamp as a short relative time, e.g. "3d ago". */
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso).getTime();
+  if (Number.isNaN(then)) return '—';
+
+  const seconds = Math.floor((now.getTime() - then) / 1000);
+  if (seconds < 60) return 'just now';
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+  if (seconds < 604800) return `${Math.floor(seconds / 86400)}d ago`;
+  return `${Math.floor(seconds / 604800)}w ago`;
+}
+
+/** Formats an ISO timestamp as a month/year label, e.g. "Sep 2026". */
+export function formatDate(iso: string, options?: Intl.DateTimeFormatOptions): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return '—';
+  return new Intl.DateTimeFormat('en-US', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    ...options,
+  }).format(date);
+}
+
+/** Countdown label for a voting window, e.g. "4d 12h left" or "closed". */
+export function formatCountdown(endsAt: string | null, now: Date = new Date()): string {
+  if (!endsAt) return 'closed';
+
+  const remainingMs = new Date(endsAt).getTime() - now.getTime();
+  if (Number.isNaN(remainingMs) || remainingMs <= 0) return 'closed';
+
+  const totalMinutes = Math.floor(remainingMs / 60_000);
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const minutes = totalMinutes % 60;
+
+  if (days > 0) return `${days}d ${hours}h left`;
+  if (hours > 0) return `${hours}h ${minutes}m left`;
+  return `${minutes}m left`;
+}
+
+/** Percentage of a pool, guarding against a zero denominator. */
+export function percentOf(part: bigint, whole: bigint): number {
+  if (whole === 0n) return 0;
+  return Number((part * 10_000n) / whole) / 100;
+}
+
+/**
+ * Formats a wei amount as gwei, for gas costs.
+ *
+ * Gas per transaction is on the order of 1e10 wei (tens of gwei). Rendering
+ * that as ETH with 6 decimals rounds every row to "0", which is technically true
+ * and completely useless - so gas is shown in gwei instead.
+ */
+export function weiToGwei(wei: bigint | string, decimals = 2): string {
+  const value = typeof wei === 'string' ? BigInt(wei || '0') : wei;
+  const gwei = Number(value) / 1e9;
+  return gwei.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+}
+
+/**
+ * Formats a wei amount as a non-fixed but readable ETH figure.
+ *
+ * Used for order-book notionals, where forcing trailing zeros on a value like
+ * 1.08 makes the column noisy. Trailing zeros are trimmed instead.
+ */
+export function weiToEthTrimmed(wei: bigint | string, maxDecimals = 4): string {
+  const value = typeof wei === 'string' ? BigInt(wei || '0') : wei;
+  const whole = value / WEI_PER_ETHER;
+  const fraction = value % WEI_PER_ETHER;
+  if (fraction === 0n) return whole.toString();
+  const fractionStr = fraction.toString().padStart(18, '0').slice(0, maxDecimals).replace(/0+$/, '');
+  return fractionStr.length > 0 ? `${whole}.${fractionStr}` : whole.toString();
+}
+
+/**
+ * Formats a wei amount as a plain ETH figure with fixed decimals.
+ *
+ * Lives here rather than beside the milestone components because it is called
+ * from server components during prerendering, and a `'use client'` module cannot
+ * export functions to the server.
+ */
+export function weiToEth(wei: bigint | string, decimals = 2): string {
+  const value = typeof wei === 'string' ? BigInt(wei || '0') : wei;
+  const whole = value / WEI_PER_ETHER;
+  const fraction = value % WEI_PER_ETHER;
+  const fractionStr = fraction.toString().padStart(18, '0').slice(0, decimals);
+  return decimals > 0 ? `${whole}.${fractionStr}` : whole.toString();
+}

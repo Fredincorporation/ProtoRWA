@@ -1,0 +1,1584 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#dee2ee",
+              "surface-dim": "#0f141c",
+              "on-tertiary-fixed": "#2a1700",
+              "error-container": "#93000a",
+              "on-secondary": "#003640",
+              "on-primary-fixed-variant": "#005236",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-surface": "#dee2ee",
+              "primary-container": "#10b981",
+              "secondary-fixed-dim": "#4cd7f6",
+              error: "#ffb4ab",
+              "on-surface-variant": "#bbcabf",
+              "primary-fixed-dim": "#4edea3",
+              "on-secondary-container": "#00424e",
+              "on-secondary-fixed": "#001f26",
+              "primary-fixed": "#6ffbbe",
+              background: "#0f141c",
+              "surface-container-high": "#252a33",
+              "on-tertiary": "#472a00",
+              "inverse-primary": "#006c49",
+              "secondary-fixed": "#acedff",
+              primary: "#4edea3",
+              "secondary-container": "#03b5d3",
+              "surface-variant": "#30353e",
+              "on-primary-fixed": "#002113",
+              "inverse-on-surface": "#2c3139",
+              "outline-variant": "#3c4a42",
+              "on-secondary-fixed-variant": "#004e5c",
+              "inverse-surface": "#dee2ee",
+              "surface-bright": "#343942",
+              surface: "#0f141c",
+              secondary: "#4cd7f6",
+              "tertiary-fixed": "#ffddb8",
+              "surface-tint": "#4edea3",
+              "surface-container": "#1b2028",
+              tertiary: "#ffb95f",
+              "tertiary-container": "#e29100",
+              outline: "#86948a",
+              "on-error": "#690005",
+              "on-primary-container": "#00422b",
+              "surface-container-low": "#171c24",
+              "on-tertiary-fixed-variant": "#653e00",
+              "surface-container-lowest": "#090e16",
+              "on-error-container": "#ffdad6",
+              "on-primary": "#003824",
+              "surface-container-highest": "#30353e",
+              "on-tertiary-container": "#523200",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "space-xl": "2.5rem",
+              "space-xs": "0.25rem",
+              "space-md": "1rem",
+              "space-sm": "0.5rem",
+              "space-lg": "1.5rem",
+              gutter: "1.5rem",
+              margin: "2.5rem",
+              "margin-mobile": "1rem",
+              "gutter-mobile": "1rem",
+            },
+            fontFamily: {
+              "body-sm": ["Inter"],
+              "display-lg": ["Space Grotesk"],
+              "body-md": ["Inter"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "label-md": ["JetBrains Mono"],
+              "headline-lg": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "headline-sm": ["Space Grotesk"],
+              "headline-md": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+              "body-lg": ["Inter"],
+              "headline-lg-mobile": ["Space Grotesk"],
+            },
+            fontSize: {
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface antialiased">
+    <header
+      class="fixed top-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"
+    >
+      <div class="h-16 w-full px-gutter flex items-center justify-between">
+        <div class="flex items-center gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <div
+              class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center"
+            >
+              <span
+                class="font-label-lg text-label-lg font-bold text-on-primary"
+                >P</span
+              >
+            </div>
+            <span
+              class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold"
+              >ProtoRWA</span
+            ><span
+              class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase"
+              >RWA • ROBINHOOD CHAIN</span
+            >
+          </div>
+          <nav
+            class="hidden xl:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-primary font-label-md text-label-md rounded-lg"
+          >
+            <a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="explore-projects"
+              href="#"
+              >Explore Projects</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="project-detail"
+              href="#"
+              >Project Detail & Terminal</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="secondary-claims-market"
+              href="#"
+              >Secondary Claims Market</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="investor-dashboard-governance"
+              href="#"
+              >Investor Dashboard & Governance</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="support-documentation"
+              href="#"
+              >Support / Documentation</a
+            ><a
+              class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors"
+              data-path="legal-compliance"
+              href="#"
+              >Legal Compliance</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-sm">
+          <div
+            class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low"
+          >
+            <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <span class="font-label-sm text-label-sm text-on-surface uppercase"
+              >Robinhood Subnet #14</span
+            >
+          </div>
+          <div
+            class="flex items-center rounded-lg bg-surface-container-high p-0.5"
+          >
+            <div
+              class="px-space-sm py-1 font-label-md text-label-md text-primary font-semibold"
+            >
+              42,500 USDC
+            </div>
+            <div
+              class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium"
+            >
+              0x71C...4f9b
+            </div>
+          </div>
+          <a
+            class="relative p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors inline-flex items-center justify-center"
+            data-path="notifications"
+            href="#"
+            title="Notifications"
+            ><span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary"
+            ></span></a
+          ><a
+            class="inline-block rounded-full ring-1 ring-outline-variant hover:ring-primary transition-all"
+            data-path="account"
+            href="#"
+            title="Account Profile"
+            ><img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+          /></a>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-16 bg-surface min-h-screen">
+      <div class="flex flex-col w-full">
+        <section
+          class="relative w-full overflow-hidden bg-surface-container-lowest pb-space-lg px-gutter"
+        >
+          <div
+            class="absolute -top-32 -left-20 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"
+          ></div>
+          <div
+            class="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-secondary/5 blur-3xl pointer-events-none"
+          ></div>
+          <div
+            class="relative w-full max-w-7xl mx-auto flex flex-col pt-space-lg gap-space-lg"
+          >
+            <div
+              class="flex flex-wrap items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+            >
+              <div class="flex items-center gap-space-xs">
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"
+                ></span>
+                <span>SEC-REGULATED INSTITUTIONAL VAULT</span>
+                <span class="text-outline">/</span>
+                <span>ACCT-UUID: 0x904F-SEC-2025</span>
+              </div>
+              <div
+                class="flex items-center gap-space-xs text-on-surface-variant bg-surface-container-low px-space-sm py-1 rounded-lg"
+              >
+                <span class="material-symbols-outlined text-[14px] text-primary"
+                  >verified_user</span
+                >
+                <span>CRYPTOGRAPHIC STATE: ZERO-KNOWLEDGE PROVED</span>
+              </div>
+            </div>
+            <div
+              class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-lg bg-surface-container-low p-space-lg rounded-xl shadow-xl"
+            >
+              <div
+                class="flex flex-col sm:flex-row items-start sm:items-center gap-space-lg"
+              >
+                <div class="relative group">
+                  <div
+                    class="w-20 h-20 rounded-xl overflow-hidden bg-surface-container-high shadow-lg"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="Close up architectural macro shot of high precision brushed carbon fiber server chassis module with emerald LED indicator nodes and engraved serial designation in a pristine data center setting, industrial dark graphite aesthetic with vivid emerald teal lighting"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9zUUfT3skjoc7G_CRCOjaOyKzbLkdmygv_oJyJDtmTTHsMtg1Y3QDfmBskwJu9cbY2_1NXyIJa_bkn5BKzR_cp-kXT4r6s_MmhAanE8vyXFzPaXbRC_Pf9xCKHu0pj6dfOtcp60kBeKJFctI-5ieyjvjFkfEe7UnmqLewZXwO-Trs-APaL24N1YZ5PX-K0fkgUnePKHKYvTjNsmZ-Fbym9sSpEeM-sfzoX83BXgBVPZV8G8xkBlCu"
+                    />
+                  </div>
+                  <div
+                    class="absolute -bottom-1.5 -right-1.5 bg-primary-container text-on-primary rounded-md p-1 shadow-md flex items-center justify-center"
+                    title="Institutional KYB Verified"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >domain_verification</span
+                    >
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div class="flex flex-wrap items-center gap-space-sm">
+                    <h1
+                      class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight"
+                    >
+                      citadel-underwriting.rwa.eth
+                    </h1>
+                    <span
+                      class="px-space-xs py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm tracking-wide uppercase font-semibold"
+                      >Tier 3 Institutional</span
+                    >
+                    <span
+                      class="px-space-xs py-0.5 rounded bg-secondary/10 text-secondary font-label-sm text-label-sm tracking-wide uppercase"
+                      >KYB Verified</span
+                    >
+                  </div>
+                  <div
+                    class="flex flex-wrap items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"
+                  >
+                    <div
+                      class="flex items-center gap-1.5 bg-surface-container-high/60 px-2 py-0.5 rounded"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[16px] text-primary"
+                        >account_balance_wallet</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface"
+                        id="wallet-hash"
+                        >0x71C83a45ED01...4f9b</span
+                      >
+                      <button
+                        class="text-on-surface-variant hover:text-primary transition-colors inline-flex items-center"
+                        id="copy-btn"
+                        onclick="
+                          navigator.clipboard.writeText(
+                            '0x71C83a45ED010a3045f2Ea7b45Faa899bC124f9b',
+                          );
+                          const t = document.getElementById('copied-tag');
+                          t.classList.remove('hidden');
+                          setTimeout(() => t.classList.add('hidden'), 2000);
+                        "
+                        title="Copy Raw Address"
+                      >
+                        <span class="material-symbols-outlined text-[15px]"
+                          >content_copy</span
+                        >
+                      </button>
+                      <span
+                        class="hidden text-primary font-label-sm text-label-sm"
+                        id="copied-tag"
+                        >Copied!</span
+                      >
+                    </div>
+                    <span class="text-outline">•</span>
+                    <span
+                      class="text-on-surface-variant font-body-sm text-body-sm"
+                      >Robinhood Subnet #14</span
+                    >
+                    <span class="text-outline">•</span>
+                    <span
+                      class="text-on-surface-variant font-body-sm text-body-sm"
+                      >Created Oct 2024</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex flex-wrap items-center gap-space-sm w-full lg:w-auto"
+              >
+                <div
+                  class="flex flex-col bg-surface-container px-space-md py-space-sm rounded-lg min-w-[130px] flex-1 lg:flex-none"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >Total Claims Held</span
+                  >
+                  <span
+                    class="font-label-lg text-label-lg text-primary font-bold"
+                    >$184,200 USDC</span
+                  >
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-0.5 mt-0.5"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[13px] text-primary"
+                      >trending_up</span
+                    >
+                    +8.4% APY
+                  </span>
+                </div>
+                <div
+                  class="flex flex-col bg-surface-container px-space-md py-space-sm rounded-lg min-w-[130px] flex-1 lg:flex-none"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >Voting Weight</span
+                  >
+                  <span
+                    class="font-label-lg text-label-lg text-secondary font-bold"
+                    >4.85% Quorum</span
+                  >
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-0.5"
+                    >Tier Alpha Rank</span
+                  >
+                </div>
+                <div
+                  class="flex flex-col bg-surface-container px-space-md py-space-sm rounded-lg min-w-[130px] flex-1 lg:flex-none"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >Custody State</span
+                  >
+                  <span
+                    class="font-label-lg text-label-lg text-on-surface font-bold flex items-center gap-1"
+                  >
+                    <span class="w-2 h-2 rounded-full bg-primary"></span> 2/3
+                    Armed
+                  </span>
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-0.5"
+                    >Hardware Enclave</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-space-xs overflow-x-auto pb-1 -mb-space-sm no-scrollbar"
+            >
+              <button
+                class="px-space-md py-2.5 rounded-lg bg-surface-container-high text-primary font-label-md text-label-md whitespace-nowrap flex items-center gap-2 shadow-sm"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >verified</span
+                >
+                <span>Identity & KYB Compliance</span>
+              </button>
+              <button
+                class="px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md whitespace-nowrap flex items-center gap-2 transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]">key</span>
+                <span>Security & Multisig Keys</span>
+              </button>
+              <button
+                class="px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md whitespace-nowrap flex items-center gap-2 transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]">hub</span>
+                <span>Connected Wallets & Subnets</span>
+              </button>
+              <button
+                class="px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md whitespace-nowrap flex items-center gap-2 transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >webhook</span
+                >
+                <span>API & Webhooks</span>
+              </button>
+              <button
+                class="px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md whitespace-nowrap flex items-center gap-2 transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >article</span
+                >
+                <span>Tax Residency (W-8BEN/W-9)</span>
+              </button>
+            </div>
+          </div>
+        </section>
+        <div
+          class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex flex-col gap-space-xl"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+            <div class="lg:col-span-8 flex flex-col gap-space-lg">
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-lg shadow-md relative overflow-hidden"
+              >
+                <div
+                  class="flex flex-wrap items-center justify-between gap-space-sm"
+                >
+                  <div class="flex items-center gap-space-sm">
+                    <div
+                      class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >policy</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <h2
+                        class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                      >
+                        Identity & Institutional Accreditation
+                      </h2>
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Regulatory framework compliance & legal identity
+                        attestation</span
+                      >
+                    </div>
+                  </div>
+                  <span
+                    class="px-space-sm py-1 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-[14px]"
+                      >check_circle</span
+                    >
+                    COMPLIANT (RULE 506(C))
+                  </span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                  <div
+                    class="bg-surface-container p-space-md rounded-lg flex flex-col gap-2"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                        >Accredited Status Verification</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >verified</span
+                      >
+                    </div>
+                    <span
+                      class="font-body-lg text-body-lg text-on-surface font-medium"
+                      >Parallel Markets Verified</span
+                    >
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Qualified Institutional Buyer (QIB) & Accredited Investor
+                      under SEC Rule 506(c). Valid through
+                      <strong class="text-on-surface font-label-md"
+                        >Nov 28, 2025</strong
+                      >.
+                    </p>
+                    <div
+                      class="mt-2 pt-2 flex items-center justify-between bg-surface-container-highest/40 px-2 py-1 rounded"
+                    >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Attestation Hash</span
+                      >
+                      <span class="font-label-sm text-label-sm text-primary"
+                        >0x4a9e...f91c</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="bg-surface-container p-space-md rounded-lg flex flex-col gap-2"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                        >Registered Entity Record</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-secondary text-[18px]"
+                        >corporate_fare</span
+                      >
+                    </div>
+                    <span
+                      class="font-body-lg text-body-lg text-on-surface font-medium"
+                      >Citadel Advanced Hardware SPV LLC</span
+                    >
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Delaware Division of Corporations Registration File
+                      #4992019. Good Standing Verified via LexisNexis Oracle.
+                    </p>
+                    <div
+                      class="mt-2 pt-2 flex items-center justify-between bg-surface-container-highest/40 px-2 py-1 rounded"
+                    >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Jurisdiction</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface font-semibold"
+                        >State of Delaware, US</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col gap-space-sm bg-surface-container p-space-md rounded-lg"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >Masked Corporate Identifiers</span
+                  >
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+                    <div
+                      class="bg-surface-container-high p-space-sm rounded flex items-center justify-between"
+                    >
+                      <div class="flex flex-col">
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >Federal EIN</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface font-bold"
+                          >XX-XXX8941</span
+                        >
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                    </div>
+                    <div
+                      class="bg-surface-container-high p-space-sm rounded flex items-center justify-between"
+                    >
+                      <div class="flex flex-col">
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >DUNS Number</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface font-bold"
+                          >08-XXX-4921</span
+                        >
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                    </div>
+                    <div
+                      class="bg-surface-container-high p-space-sm rounded flex items-center justify-between"
+                    >
+                      <div class="flex flex-col">
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >LEI Standard</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface font-bold"
+                          >549300XXXXX08</span
+                        >
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs"
+                >
+                  <div
+                    class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >sync</span
+                    >
+                    <span
+                      >Automatic Annual Re-certification is scheduled with
+                      Parallel Markets Node.</span
+                    >
+                  </div>
+                  <button
+                    class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1.5"
+                  >
+                    <span>View Signed Passport</span>
+                    <span class="material-symbols-outlined text-[16px]"
+                      >open_in_new</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-lg shadow-md"
+              >
+                <div
+                  class="flex flex-wrap items-center justify-between gap-space-sm"
+                >
+                  <div class="flex items-center gap-space-sm">
+                    <div
+                      class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >security</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <h2
+                        class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                      >
+                        Multisig Delegation & Security Armed States
+                      </h2>
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Cryptographic safeguards for institutional claim
+                        underwriting</span
+                      >
+                    </div>
+                  </div>
+                  <span
+                    class="px-space-sm py-1 rounded bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-[14px]"
+                      >shield</span
+                    >
+                    2-OF-3 RECOVERY ARMED
+                  </span>
+                </div>
+                <div class="flex flex-col gap-space-sm">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >Authorized Hardware Signers (Smart Account Vault)</span
+                  >
+                  <div class="flex flex-col gap-2">
+                    <div
+                      class="flex flex-col sm:flex-row sm:items-center justify-between p-space-md bg-surface-container rounded-lg gap-space-sm"
+                    >
+                      <div class="flex items-center gap-space-sm">
+                        <div
+                          class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary"
+                        >
+                          <span class="material-symbols-outlined text-[22px]"
+                            >devices</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <div class="flex items-center gap-2">
+                            <span
+                              class="font-headline-sm text-headline-sm text-on-surface text-[16px] font-semibold"
+                              >Ledger Stax Vault</span
+                            >
+                            <span
+                              class="px-1.5 py-0.5 rounded bg-primary/20 text-primary font-label-sm text-label-sm uppercase"
+                              >Primary Signer</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >0x71C83a45ED010a3045f2Ea7b45Faa899bC124f9b • FIDO2
+                            Certified</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-space-sm self-end sm:self-auto"
+                      >
+                        <span class="w-2 h-2 rounded-full bg-primary"></span>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface font-medium"
+                          >Online (Subnet #14)</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="flex flex-col sm:flex-row sm:items-center justify-between p-space-md bg-surface-container rounded-lg gap-space-sm"
+                    >
+                      <div class="flex items-center gap-space-sm">
+                        <div
+                          class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary"
+                        >
+                          <span class="material-symbols-outlined text-[22px]"
+                            >qr_code_scanner</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <div class="flex items-center gap-2">
+                            <span
+                              class="font-headline-sm text-headline-sm text-on-surface text-[16px] font-semibold"
+                              >Keystone Pro Airgap</span
+                            >
+                            <span
+                              class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase"
+                              >Backup Signer</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >0x39Bc...09E1 • Offline Optical QR Transfer</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-space-sm self-end sm:self-auto"
+                      >
+                        <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface font-medium"
+                          >Standby Mode</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="flex flex-col sm:flex-row sm:items-center justify-between p-space-md bg-surface-container rounded-lg gap-space-sm"
+                    >
+                      <div class="flex items-center gap-space-sm">
+                        <div
+                          class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary"
+                        >
+                          <span class="material-symbols-outlined text-[22px]"
+                            >enhanced_encryption</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <div class="flex items-center gap-2">
+                            <span
+                              class="font-headline-sm text-headline-sm text-on-surface text-[16px] font-semibold"
+                              >Robinhood Secure Enclave</span
+                            >
+                            <span
+                              class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase"
+                              >Session Key (EIP-4337)</span
+                            >
+                          </div>
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant"
+                            >Valid until 23:59 UTC • Ephemeral Settlement
+                            Delegate</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-space-sm self-end sm:self-auto"
+                      >
+                        <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface font-medium"
+                          >Active Session</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs"
+                >
+                  <div
+                    class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between gap-3"
+                  >
+                    <div class="flex flex-col gap-1">
+                      <div class="flex items-center justify-between">
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                          >Gasless Paymaster Allowance</span
+                        >
+                        <span
+                          class="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm"
+                          >Relayer #4</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-bold"
+                        >Unlimited Underwriting Quota</span
+                      >
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        ProtoRWA Sponsored Account Abstraction: Zero gas tokens
+                        required for claim settlements or secondary orders.
+                      </p>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"
+                    >
+                      <div class="bg-primary h-full w-[28%]"></div>
+                    </div>
+                    <div
+                      class="flex justify-between font-label-sm text-label-sm text-on-surface-variant"
+                    >
+                      <span>Used: $34.20 USDC</span>
+                      <span>Limit: Subsidized</span>
+                    </div>
+                  </div>
+                  <div
+                    class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between gap-3"
+                  >
+                    <div class="flex flex-col gap-1">
+                      <div class="flex items-center justify-between">
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                          >Emergency Freeze Protocol</span
+                        >
+                        <span
+                          class="px-1.5 py-0.5 rounded bg-error-container text-error font-label-sm text-label-sm uppercase"
+                          >Active Guard</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-bold"
+                        >24-Hour Circuit Breaker</span
+                      >
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Immediate on-chain timelock freeze for secondary claims
+                        market exposure in case of suspicious relay activity.
+                      </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Key Armed Status:</span
+                      >
+                      <button
+                        class="px-space-sm py-1 rounded bg-error-container/80 text-on-error hover:bg-error-container font-label-sm text-label-sm transition-colors flex items-center gap-1"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >lock_reset</span
+                        >
+                        <span>Test Freeze Simulation</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-lg shadow-md"
+              >
+                <div
+                  class="flex flex-wrap items-center justify-between gap-space-sm"
+                >
+                  <div class="flex items-center gap-space-sm">
+                    <div
+                      class="w-8 h-8 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >terminal</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <h2
+                        class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                      >
+                        Developer API & Streaming Data Webhooks
+                      </h2>
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Subnet WebSocket relays, telemetry feeds, and
+                        programmatic settlement</span
+                      >
+                    </div>
+                  </div>
+                  <span
+                    class="px-space-sm py-1 rounded bg-tertiary/10 text-tertiary font-label-sm text-label-sm font-semibold flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-[14px]"
+                      >bolt</span
+                    >
+                    1,000 REQ / MIN RATE LIMIT
+                  </span>
+                </div>
+                <div class="flex flex-col gap-space-sm">
+                  <div class="flex items-center justify-between">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                      >Production API Key (Private Key Scoped)</label
+                    >
+                    <span class="font-label-sm text-label-sm text-primary"
+                      >Last used 4 mins ago</span
+                    >
+                  </div>
+                  <div
+                    class="flex flex-col sm:flex-row items-stretch gap-space-xs"
+                  >
+                    <div
+                      class="flex-1 bg-surface-container-highest/80 px-space-md py-2.5 rounded-lg font-label-md text-label-md text-on-surface flex items-center justify-between overflow-hidden"
+                    >
+                      <span class="truncate font-mono" id="api-key-display"
+                        >pk_live_rwa_984f8812c8a14902bca84f21</span
+                      >
+                      <span
+                        class="text-on-surface-variant font-label-sm text-label-sm ml-2"
+                        >READ/WRITE</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-space-xs">
+                      <button
+                        class="px-space-md py-2.5 bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md rounded-lg transition-colors flex items-center gap-1"
+                        onclick="
+                          navigator.clipboard.writeText(
+                            'pk_live_rwa_984f8812c8a14902bca84f21',
+                          );
+                          this.innerHTML =
+                            '<span class=\'material-symbols-outlined text-[16px]\'>check</span> Copied';
+                          setTimeout(() => {
+                            this.innerHTML =
+                              '<span class=\'material-symbols-outlined text-[16px]\'>content_copy</span> Copy';
+                          }, 2000);
+                        "
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >content_copy</span
+                        >
+                        <span>Copy</span>
+                      </button>
+                      <button
+                        class="px-space-md py-2.5 bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md rounded-lg transition-colors flex items-center gap-1"
+                        onclick="
+                          if (
+                            confirm(
+                              'Are you sure you want to roll this live API key? All active bots will disconnect.',
+                            )
+                          ) {
+                            document.getElementById(
+                              'api-key-display',
+                            ).innerText =
+                              'pk_live_rwa_' +
+                              Math.random().toString(36).substring(2, 15) +
+                              Math.random().toString(36).substring(2, 15);
+                          }
+                        "
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >refresh</span
+                        >
+                        <span>Regenerate Key</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-space-sm">
+                  <div class="flex items-center justify-between">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                      >Real-Time Webhook Endpoint</label
+                    >
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="w-2 h-2 rounded-full bg-primary animate-pulse"
+                      ></span>
+                      <span class="font-label-sm text-label-sm text-primary"
+                        >ENDPOINT HEALTHY (200 OK)</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm"
+                  >
+                    <div
+                      class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm"
+                    >
+                      <div class="flex items-center gap-2 overflow-hidden">
+                        <span
+                          class="px-2 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-semibold"
+                          >POST</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface truncate"
+                          >https://api.citadel-underwriting.com/v1/rwa-events</span
+                        >
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <button
+                          class="px- space-sm py-1 bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm rounded transition-colors px-2"
+                        >
+                          Send Test Ping
+                        </button>
+                        <button
+                          class="text-on-surface-variant hover:text-error transition-colors p-1"
+                          title="Delete Endpoint"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="flex flex-wrap items-center gap-space-sm pt-space-xs"
+                    >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                        >Subscribed Events:</span
+                      >
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm"
+                        >rwa.escrow.released</span
+                      >
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm"
+                        >rwa.yield.payout</span
+                      >
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm"
+                        >rwa.oracle.dispute</span
+                      >
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container-high text-tertiary font-label-sm text-label-sm"
+                        >rwa.orderbook.fill</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="p-space-md bg-surface-container rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md"
+                >
+                  <div class="flex items-center gap-space-sm">
+                    <span
+                      class="material-symbols-outlined text-secondary text-[24px]"
+                      >speed</span
+                    >
+                    <div class="flex flex-col">
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface text-[15px] font-semibold"
+                        >Underwriter Latency SLA</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Direct fiber cross-connect into Robinhood Subnet Node
+                        Cluster #3</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-baseline gap-1 self-end sm:self-auto font-label-md text-label-md"
+                  >
+                    <span class="text-secondary font-bold text-[18px]"
+                      >4.2ms</span
+                    >
+                    <span
+                      class="text-on-surface-variant font-label-sm text-label-sm"
+                      >p99 latency</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-4 flex flex-col gap-space-lg">
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-md"
+              >
+                <div class="flex items-center gap-space-sm">
+                  <span
+                    class="material-symbols-outlined text-primary text-[20px]"
+                    >assignment_turned_in</span
+                  >
+                  <h3
+                    class="font-headline-sm text-headline-sm text-on-surface text-[18px] font-bold"
+                  >
+                    Tax & Withholding Status
+                  </h3>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  IRS automated documentation verified on-chain via Sumsub RWA
+                  Oracle engine.
+                </p>
+                <div
+                  class="flex flex-col gap-space-sm bg-surface-container p-space-md rounded-lg"
+                >
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Current Form On File</span
+                    >
+                    <span
+                      class="px-2 py-0.5 rounded bg-primary/15 text-primary font-label-sm text-label-sm font-semibold"
+                      >VALIDATED</span
+                    >
+                  </div>
+                  <div class="flex items-center gap-space-sm">
+                    <span
+                      class="material-symbols-outlined text-on-surface text-[24px]"
+                      >description</span
+                    >
+                    <div class="flex flex-col">
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-bold"
+                        >Form W-9 (US Entity SPV)</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Submitted Oct 12, 2024</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="pt-2 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm"
+                  >
+                    <span>Withholding Rate:</span>
+                    <span class="text-primary font-bold"
+                      >0.0% (Exempt Payee)</span
+                    >
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-1">
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant"
+                    >Foreign Entity? Switch to W-8BEN-E</span
+                  >
+                  <button
+                    class="text-primary hover:underline font-label-sm text-label-sm flex items-center gap-0.5"
+                  >
+                    <span>Update</span>
+                    <span class="material-symbols-outlined text-[14px]"
+                      >arrow_forward</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-md"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <span
+                      class="material-symbols-outlined text-secondary text-[20px]"
+                      >account_tree</span
+                    >
+                    <h3
+                      class="font-headline-sm text-headline-sm text-on-surface text-[18px] font-bold"
+                    >
+                      Subnet Allocations
+                    </h3>
+                  </div>
+                  <span class="font-label-sm text-label-sm text-secondary"
+                    >3 ACTIVE</span
+                  >
+                </div>
+                <div class="flex flex-col gap-2">
+                  <div
+                    class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between"
+                  >
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-primary font-label-sm font-bold"
+                      >
+                        #14
+                      </div>
+                      <div class="flex flex-col">
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface font-semibold"
+                          >Robinhood Subnet #14</span
+                        >
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >Hardware Claims Anchor</span
+                        >
+                      </div>
+                    </div>
+                    <span
+                      class="font-label-md text-label-md text-primary font-bold"
+                      >78%</span
+                    >
+                  </div>
+                  <div
+                    class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between"
+                  >
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-secondary font-label-sm font-bold"
+                      >
+                        ARB
+                      </div>
+                      <div class="flex flex-col">
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface font-semibold"
+                          >Arbitrum One Gateway</span
+                        >
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >Secondary Liquidity Pool</span
+                        >
+                      </div>
+                    </div>
+                    <span
+                      class="font-label-md text-label-md text-secondary font-bold"
+                      >16%</span
+                    >
+                  </div>
+                  <div
+                    class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between"
+                  >
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-tertiary font-label-sm font-bold"
+                      >
+                        BASE
+                      </div>
+                      <div class="flex flex-col">
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface font-semibold"
+                          >Base Custody Bridge</span
+                        >
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >Cross-Chain Yield Vault</span
+                        >
+                      </div>
+                    </div>
+                    <span
+                      class="font-label-md text-label-md text-tertiary font-bold"
+                      >6%</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-md"
+              >
+                <div class="flex items-center gap-space-sm">
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                    >history_edu</span
+                  >
+                  <h3
+                    class="font-headline-sm text-headline-sm text-on-surface text-[18px] font-bold"
+                  >
+                    Security Audit Trail
+                  </h3>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Immutable logging of cryptographic key rotations and signer
+                  events.
+                </p>
+                <div class="flex flex-col gap-3 font-label-sm text-label-sm">
+                  <div class="flex items-start gap-2 text-on-surface-variant">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5"
+                    ></span>
+                    <div class="flex flex-col">
+                      <span class="text-on-surface"
+                        >Signer quorum signature verified</span
+                      >
+                      <span class="text-[11px] text-outline"
+                        >Today, 09:41:22 UTC • Ledger Stax</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 text-on-surface-variant">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5"
+                    ></span>
+                    <div class="flex flex-col">
+                      <span class="text-on-surface"
+                        >API Webhook endpoint modified</span
+                      >
+                      <span class="text-[11px] text-outline"
+                        >Oct 24, 18:20:11 UTC • User Session</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 text-on-surface-variant">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-outline mt-1.5"
+                    ></span>
+                    <div class="flex flex-col">
+                      <span class="text-on-surface"
+                        >Rule 506(c) accreditation renewal</span
+                      >
+                      <span class="text-[11px] text-outline"
+                        >Oct 12, 14:02:00 UTC • Parallel Oracle</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="w-full py-2 bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm rounded-lg transition-colors flex items-center justify-center gap-1.5 mt-2"
+                  onclick="
+                    alert(
+                      'Exporting cryptographically signed CSV audit report for Citadel SPV...',
+                    )
+                  "
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >download</span
+                  >
+                  <span>Download Full CSV Audit Log</span>
+                </button>
+              </div>
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm shadow-md"
+              >
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >Custodian Node Infrastructure</span
+                >
+                <div
+                  class="rounded-lg overflow-hidden h-32 relative bg-surface-container-high"
+                >
+                  <img
+                    class="w-full h-full object-cover"
+                    data-alt="High-tech server rack modules with emerald status lights and fiber optic connections in modern industrial financial hardware center, clean technological composition, high contrast moody dark lighting"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPlp-j6c0VQXzTzv1oVVQklmareKNxvjjsyfJI20XapGY1PShf0gT3lipgsHlEKsx4fjRg6dMsXGmG6h5cUTiIE8qV6Kr-VXm-Rs5KH9YAJH8SL0SR5lnkZ9iaMXektearahofh_WepHNdTZGJ4ejM_boM9T8Vl5zq1BM0t6pOuruq9nA30rPMuW28OpZS8Jdpl3d-ot2g7iRaYREBFott1phEeScT5qj7RWgnMlhlzPpypspuOPI9"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent flex items-end p-2.5"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-primary font-bold"
+                      >Node RH-SUB14-ORACLE-08 Active</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sticky bottom-4 z-40 bg-surface-container-lowest/90 backdrop-blur-xl p-space-md rounded-xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-space-md"
+          >
+            <div class="flex items-center gap-space-sm">
+              <div
+                class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"
+              ></div>
+              <div class="flex flex-col">
+                <span
+                  class="font-label-md text-label-md text-on-surface font-semibold"
+                  >Institutional Vault Settings Synchronized</span
+                >
+                <span class="font-body-sm text-body-sm text-on-surface-variant"
+                  >All modifications trigger on-chain 2/3 multisig
+                  attestations</span
+                >
+              </div>
+            </div>
+            <div
+              class="flex flex-wrap items-center gap-space-sm w-full sm:w-auto justify-end"
+            >
+              <button
+                class="px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-error-container hover:text-on-error-container text-on-surface-variant font-label-md text-label-md transition-colors flex items-center gap-1.5"
+                onclick="
+                  if (
+                    confirm(
+                      'Disconnect active session key from Robinhood Subnet #14?',
+                    )
+                  ) {
+                    alert('Session disconnected safely.');
+                  }
+                "
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >logout</span
+                >
+                <span>Disconnect Session</span>
+              </button>
+              <button
+                class="px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1.5"
+                onclick="
+                  alert(
+                    'Full cryptographically verifiable account ledger exported.',
+                  )
+                "
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >file_download</span
+                >
+                <span>Export Audit Log</span>
+              </button>
+              <button
+                class="px-space-lg py-2 rounded-lg bg-primary hover:bg-primary-fixed text-on-primary font-label-md text-label-md font-semibold transition-all shadow-[0_0_20px_-4px_rgba(16,185,129,0.3)] flex items-center gap-1.5"
+                onclick="
+                  this.innerText = 'Submitting 2/3 multisig request...';
+                  setTimeout(() => {
+                    this.innerText = 'Settings Committed ✓';
+                    setTimeout(() => {
+                      this.innerText = 'Save Profile Changes';
+                    }, 2500);
+                  }, 1200);
+                "
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >task_alt</span
+                >
+                <span>Save Profile Changes</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="w-full bg-surface-container-lowest py-space-xl">
+      <div
+        class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md"
+      >
+        <div class="flex flex-col gap-space-xs">
+          <div class="flex items-center gap-space-sm">
+            <span
+              class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+              >ProtoRWA Protocol</span
+            ><span
+              class="px-space-xs py-0.5 rounded-lg bg-primary/10 text-primary font-label-sm text-label-sm"
+              >AUDITED: OPENZEPPELIN & TRAIL OF BITS</span
+            >
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Institutional Hardware Verification & Decentralized Asset
+            Underwriting Infrastructure.
+          </p>
+        </div>
+        <div class="flex items-center gap-space-xl text-right">
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Total Value Locked</span
+            ><span class="font-label-lg text-label-lg text-on-surface font-bold"
+              >$184,920,400</span
+            >
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Active Custody Oracles</span
+            ><span class="font-label-lg text-label-lg text-primary font-bold"
+              >1,248 Nodes</span
+            >
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >Settlement Layer</span
+            ><span class="font-label-lg text-label-lg text-secondary font-bold"
+              >Robinhood Subnet #14</span
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

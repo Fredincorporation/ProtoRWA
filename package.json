@@ -1,0 +1,28 @@
+{
+  "name": "proto-rwa",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ProtoRWA - tokenized physical hardware RWAs with milestone escrow and a secondary claims market.",
+  "packageManager": "pnpm@11.1.3",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @protorwa/frontend dev",
+    "build": "pnpm --filter @protorwa/frontend build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "contracts:build": "pnpm --filter @protorwa/contracts build",
+    "contracts:test": "pnpm --filter @protorwa/contracts test",
+    "tokens:extract": "node design-source/extract-tokens.mjs",
+    "tokens:build": "node design-source/build-theme.mjs"
+  },
+  "devDependencies": {
+    "patchright": "^1.63.0",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "typescript": "^5.7.2"
+  }
+}

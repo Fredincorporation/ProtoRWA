@@ -1,0 +1,1722 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#30353e",
+              "on-tertiary": "#472a00",
+              "surface-container-lowest": "#090e16",
+              "tertiary-fixed": "#ffddb8",
+              "on-primary": "#003824",
+              "surface-container": "#1b2028",
+              "surface-tint": "#4edea3",
+              "secondary-fixed-dim": "#4cd7f6",
+              "surface-variant": "#30353e",
+              "on-secondary-container": "#00424e",
+              "on-tertiary-fixed": "#2a1700",
+              "tertiary-container": "#e29100",
+              primary: "#4edea3",
+              "on-tertiary-container": "#523200",
+              surface: "#0f141c",
+              "on-error": "#690005",
+              "on-secondary-fixed-variant": "#004e5c",
+              outline: "#86948a",
+              error: "#ffb4ab",
+              background: "#0f141c",
+              "secondary-container": "#03b5d3",
+              "on-surface-variant": "#bbcabf",
+              "tertiary-fixed-dim": "#ffb95f",
+              "surface-dim": "#0f141c",
+              "on-primary-fixed-variant": "#005236",
+              tertiary: "#ffb95f",
+              "on-primary-container": "#00422b",
+              "on-tertiary-fixed-variant": "#653e00",
+              "inverse-on-surface": "#2c3139",
+              "surface-bright": "#343942",
+              "error-container": "#93000a",
+              "inverse-primary": "#006c49",
+              "primary-container": "#10b981",
+              "on-surface": "#dee2ee",
+              "on-primary-fixed": "#002113",
+              "inverse-surface": "#dee2ee",
+              "secondary-fixed": "#acedff",
+              "on-secondary": "#003640",
+              "surface-container-high": "#252a33",
+              "primary-fixed": "#6ffbbe",
+              "outline-variant": "#3c4a42",
+              "on-background": "#dee2ee",
+              secondary: "#4cd7f6",
+              "surface-container-low": "#171c24",
+              "primary-fixed-dim": "#4edea3",
+              "on-error-container": "#ffdad6",
+              "on-secondary-fixed": "#001f26",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "space-sm": "0.5rem",
+              "space-xl": "2.5rem",
+              margin: "2.5rem",
+              "space-xs": "0.25rem",
+              "space-md": "1rem",
+              gutter: "1.5rem",
+              "space-lg": "1.5rem",
+              "gutter-mobile": "1rem",
+              "margin-mobile": "1rem",
+            },
+            fontFamily: {
+              "headline-sm": ["Space Grotesk"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "headline-lg": ["Space Grotesk"],
+              "headline-lg-mobile": ["Space Grotesk"],
+              "body-sm": ["Inter"],
+              "headline-md": ["Space Grotesk"],
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "label-md": ["JetBrains Mono"],
+              "display-lg": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+            },
+            fontSize: {
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen"
+  >
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"
+    >
+      <div
+        class="h-20 w-full px-space-lg lg:px-margin flex items-center justify-between gap-space-md"
+      >
+        <div class="flex items-center gap-space-lg">
+          <a
+            class="flex items-center gap-space-sm group"
+            data-path="explore-projects"
+            href="#"
+            ><img
+              alt="Brand logo. - Primary color: #10b981
+- Font: spaceGrotesk
+- Mode: dark
+- Roundness: rounded-sm
+"
+              class="h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+            />
+            <div class="flex flex-col">
+              <span
+                class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase leading-none"
+                >ProtoRWA</span
+              ><span
+                class="font-label-sm text-label-sm text-primary tracking-widest uppercase mt-0.5"
+                >Physical RWA Protocol</span
+              >
+            </div></a
+          >
+          <nav
+            class="hidden xl:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-primary border border-outline-variant"
+          >
+            <a
+              aria-current="page"
+              class="px-space-sm py-1.5 rounded transition-colors font-label-md bg-surface-container text-primary border border-outline-variant"
+              data-path="explore-projects"
+              href="#"
+              >Explore Projects</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="how-it-works"
+              href="#"
+              >How It Works</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="secondary-market"
+              href="#"
+              >Secondary Market</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="founder-studio"
+              href="#"
+              >Founder Studio</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="governance"
+              href="#"
+              >Governance</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <div
+            class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest border border-outline-variant/40"
+          >
+            <span
+              class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"
+            ></span
+            ><span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Robinhood Subnet #14</span
+            ><span
+              class="font-label-sm text-label-sm text-secondary bg-surface-container px-1 rounded"
+              >(Gasless Relayer Active)</span
+            >
+          </div>
+          <div
+            class="hidden md:flex items-center gap-space-sm px-space-sm py-1 rounded bg-surface-container-low border border-outline-variant/50 font-label-md text-label-md"
+          >
+            <span class="text-primary font-semibold">42,500 USDC</span
+            ><span class="text-outline-variant">|</span
+            ><span class="text-on-surface-variant">0x71C...4f9b</span>
+          </div>
+          <button
+            aria-label="Notifications"
+            class="relative p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary"
+            ></span>
+          </button>
+          <div
+            class="flex items-center pl-space-xs border-l border-outline-variant/30"
+          >
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1U6LgZ_qS9tlneMIYjmbgJBmFNyGYBYDwYd20a0sfK6S4kXqT9fTn9oJfLxmxua8WU0LKbDphIykMyY5v5iC2g5u-r_nBZnWcV7moEk-c80VLAZX1x5-lpT1qZxiVrEO2ZWt-zMmO0kCz218kFhHPARE42HbnH6MtpDLxU1xL-4vYB2kQ-Fwv2Crm2_DLDhntpGC1h3YUCEA54T9V-r7XCPoqJCIQ95u7BiqqVOIZRy2IAHKaVOj8-b9cI"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-20 bg-background min-h-screen">
+      <div class="flex flex-col w-full">
+        <!-- Top Hero & Industrial Telemetry Scrim -->
+        <section
+          class="relative w-full overflow-hidden bg-surface-container-lowest px-space-lg lg:px-margin pt-space-xl pb-space-xl"
+        >
+          <!-- Ambient Structural Grid Pattern & Glow Overlay -->
+          <div
+            class="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#4edea3_1px,transparent_1px)] [background-size:24px_24px]"
+          ></div>
+          <div
+            class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-primary/10 blur-[120px] pointer-events-none"
+          ></div>
+          <div
+            class="absolute top-1/2 -left-24 w-80 h-80 rounded-full bg-secondary/10 blur-[100px] pointer-events-none"
+          ></div>
+          <div class="relative z-10 max-w-7xl mx-auto">
+            <!-- Terminal Diagnostic Tag -->
+            <div class="flex items-center gap-space-sm mb-space-md">
+              <span
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-widest shadow-inner"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"
+                ></span>
+                Subnet Relayer Active • Block #22,491,802
+              </span>
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider hidden sm:inline-block"
+              >
+                ERC-4626 Escrow Core v2.4
+              </span>
+            </div>
+            <!-- Grid split: Headline & Hero Showcase Card -->
+            <div
+              class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center"
+            >
+              <!-- Left Column: Copy & CTAs -->
+              <div class="lg:col-span-7 flex flex-col space-y-space-md">
+                <h1
+                  class="font-headline-lg text-headline-lg lg:text-[44px] lg:leading-[52px] font-bold text-on-surface tracking-tight uppercase"
+                >
+                  Physical Product RWAs.<br />
+                  <span
+                    class="text-primary underline decoration-primary/40 underline-offset-8"
+                    >From Prototype</span
+                  >
+                  to On-Chain Yield.
+                </h1>
+                <p
+                  class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed"
+                >
+                  Tokenize individual physical hardware and manufactured goods
+                  into transparent, milestone-gated revenue-share claims. Zero
+                  equity dilution for founders. Verifiable factory milestone
+                  escrow and secondary liquidity for backers.
+                </p>
+                <!-- CTAs -->
+                <div
+                  class="flex flex-wrap items-center gap-space-sm pt-space-xs"
+                >
+                  <a
+                    class="inline-flex items-center gap-2 px-space-md py-3 rounded bg-primary text-on-primary font-headline-sm text-headline-sm hover:bg-primary-fixed transition-colors shadow-[0_0_24px_-4px_rgba(78,222,163,0.35)] cursor-pointer"
+                    data-path="explore-projects"
+                    href="#"
+                  >
+                    <span>Explore Live Hardware RWAs</span>
+                    <span class="material-symbols-outlined text-[20px]"
+                      >arrow_forward</span
+                    >
+                  </a>
+                  <a
+                    class="inline-flex items-center gap-2 px-space-md py-3 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg transition-colors cursor-pointer"
+                    data-path="founder-studio"
+                    href="#"
+                  >
+                    <span
+                      class="material-symbols-outlined text-secondary text-[20px]"
+                      >precision_manufacturing</span
+                    >
+                    <span>Launch a Product (Founder Studio)</span>
+                  </a>
+                  <a
+                    class="inline-flex items-center gap-1.5 px-space-sm py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors cursor-pointer"
+                    data-path="developer-docs"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >verified_user</span
+                    >
+                    <span>Read Protocol Whitepaper &amp; Audits</span>
+                  </a>
+                </div>
+                <!-- Micro Quick Metadata -->
+                <div
+                  class="flex flex-wrap gap-x-6 gap-y-2 pt-space-sm font-label-sm text-label-sm text-outline"
+                >
+                  <span class="flex items-center gap-1.5"
+                    ><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span
+                    >Zero Slippage Instant Liquidity</span
+                  >
+                  <span class="flex items-center gap-1.5"
+                    ><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span
+                    >SGS &amp; Intertek ISO Oracles</span
+                  >
+                  <span class="flex items-center gap-1.5"
+                    ><span class="w-1.5 h-1.5 rounded-full bg-primary"></span
+                    >Automated USDC Distribution</span
+                  >
+                </div>
+              </div>
+              <!-- Right Column: Interactive Hardware Prototype Showcase -->
+              <div class="lg:col-span-5 relative">
+                <div
+                  class="relative bg-surface-container rounded-lg p-space-md shadow-2xl overflow-hidden group"
+                >
+                  <!-- Structural schematic watermark -->
+                  <div
+                    class="absolute top-0 right-0 p-3 opacity-15 pointer-events-none"
+                  >
+                    <svg
+                      class="text-primary"
+                      fill="none"
+                      height="120"
+                      viewbox="0 0 100 100"
+                      width="120"
+                    >
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        stroke="currentColor"
+                        stroke-dasharray="4 2"
+                        stroke-width="1.5"
+                      ></circle>
+                      <line
+                        stroke="currentColor"
+                        stroke-width="1"
+                        x1="5"
+                        x2="95"
+                        y1="50"
+                        y2="50"
+                      ></line>
+                      <line
+                        stroke="currentColor"
+                        stroke-width="1"
+                        x1="50"
+                        x2="50"
+                        y1="5"
+                        y2="95"
+                      ></line>
+                    </svg>
+                  </div>
+                  <!-- Card Header -->
+                  <div
+                    class="flex items-start justify-between gap-space-sm mb-space-sm"
+                  >
+                    <div>
+                      <span
+                        class="px-2 py-0.5 rounded bg-surface-container-lowest font-label-sm text-label-sm text-secondary uppercase tracking-widest"
+                      >
+                        Batch #HF-204 • Arbitrum L2
+                      </span>
+                      <h3
+                        class="font-headline-sm text-headline-sm text-on-surface mt-1"
+                      >
+                        HelioFrost Pro
+                      </h3>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Off-Grid Solar Vaccine Refrigerator
+                      </p>
+                    </div>
+                    <div class="flex flex-col items-end">
+                      <span
+                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-semibold"
+                      >
+                        <span
+                          class="w-1.5 h-1.5 rounded-full bg-primary"
+                        ></span>
+                        LIVE ESCROW
+                      </span>
+                      <span
+                        class="font-label-sm text-label-sm text-outline mt-1 font-mono"
+                        >SKU: HFR-VAC-90</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Product Visual with Hardware Blueprint Overlays -->
+                  <div
+                    class="relative w-full h-52 rounded bg-surface-container-lowest overflow-hidden mb-space-sm"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="Industrial product photography of a modern military-grade solar powered vaccine cold-chain refrigerator unit, matte dark metal chassis with digital telemetry screen, soft cyan and emerald diagnostic LEDs, clean workshop bench setting with precision schematics"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd9V9aQN-89OtK6DL-k7S_TCeA2uFHS5dG_eliBa4Nge-oS9xhw8BKHPtAUyzyxsxP9b6V8tJlXdjDc3N3AUNXzaYacQpNXTeAaK1g7ML_MXyVQv7FqYOqMSTuVvVvd2lvufRFBU0mXszvGOMeqKF3bd7rh1iCyqCIoQDtg08qQPcigGYvlABPX4oPRvWvgNyvMSNpScZcq6DBySVYVzH-ic7ttbVLnBcCYmsg0P_8roV7AG2Bt-zh"
+                    />
+                    <div
+                      class="absolute bottom-2 left-2 right-2 bg-surface/90 backdrop-blur-md px-3 py-1.5 rounded flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span
+                        class="text-primary font-mono flex items-center gap-1"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >sensors</span
+                        >
+                        Telemetry: 3.8°C STABLE
+                      </span>
+                      <span class="text-secondary font-mono"
+                        >Factory: Foxconn Shenzhen Line 4</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Metric Telemetry Grid -->
+                  <div
+                    class="grid grid-cols-3 gap-2 p-2 rounded bg-surface-container-lowest mb-space-sm font-mono text-center"
+                  >
+                    <div>
+                      <div
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                      >
+                        Target Yield
+                      </div>
+                      <div
+                        class="font-headline-sm text-headline-sm text-primary font-semibold"
+                      >
+                        2.8x ARR
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                      >
+                        Funded Rate
+                      </div>
+                      <div
+                        class="font-headline-sm text-headline-sm text-on-surface font-semibold"
+                      >
+                        82%
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                      >
+                        Backers
+                      </div>
+                      <div
+                        class="font-headline-sm text-headline-sm text-secondary font-semibold"
+                      >
+                        318
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Escrow Progress Bar -->
+                  <div class="space-y-1 mb-space-sm">
+                    <div
+                      class="flex justify-between font-label-sm text-label-sm text-on-surface-variant font-mono"
+                    >
+                      <span>Raised: 410,000 USDC</span>
+                      <span>Target: 500,000 USDC</span>
+                    </div>
+                    <div
+                      class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-gradient-to-r from-primary to-secondary rounded"
+                        style="width: 82%"
+                      ></div>
+                    </div>
+                  </div>
+                  <!-- Milestone Tracker Mini -->
+                  <div
+                    class="flex items-center justify-between pt-2 text-on-surface font-label-sm text-label-sm"
+                  >
+                    <span class="flex items-center gap-1 text-primary">
+                      <span class="material-symbols-outlined text-[16px]"
+                        >check_circle</span
+                      >
+                      BOM Sourced
+                    </span>
+                    <span class="flex items-center gap-1 text-primary">
+                      <span class="material-symbols-outlined text-[16px]"
+                        >check_circle</span
+                      >
+                      Tooling Complete
+                    </span>
+                    <span
+                      class="flex items-center gap-1 text-tertiary animate-pulse"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"
+                        >hourglass_top</span
+                      >
+                      SGS Inspection
+                    </span>
+                  </div>
+                  <!-- Card Action Footer -->
+                  <div
+                    class="mt-space-sm pt-space-xs flex items-center justify-between"
+                  >
+                    <a
+                      class="w-full py-2.5 rounded bg-primary hover:bg-primary-fixed text-on-primary font-label-md text-label-md font-bold uppercase tracking-wider text-center transition-colors"
+                      data-path="explore-projects"
+                      href="#"
+                    >
+                      Back Hardware Escrow • Min 100 USDC
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Macro Live Ticker / Protocol Stats Bar -->
+        <section
+          class="w-full bg-surface-container-high py-space-sm px-space-lg lg:px-margin shadow-inner"
+        >
+          <div
+            class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-space-md items-center"
+          >
+            <div class="flex flex-col">
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >Total Value Locked (Escrow)</span
+              >
+              <span
+                class="font-headline-sm text-headline-sm text-primary font-mono font-bold"
+                >$18,420,000</span
+              >
+              <span class="font-label-sm text-label-sm text-outline"
+                >USDC Smart Vaults</span
+              >
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >Hardware Lines Funded</span
+              >
+              <span
+                class="font-headline-sm text-headline-sm text-on-surface font-mono font-bold"
+                >42 Active Batches</span
+              >
+              <span class="font-label-sm text-label-sm text-secondary"
+                >Zero Defaults</span
+              >
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >Yield Distributed</span
+              >
+              <span
+                class="font-headline-sm text-headline-sm text-primary font-mono font-bold"
+                >$3,210,000</span
+              >
+              <span class="font-label-sm text-label-sm text-outline"
+                >Automated On-Chain</span
+              >
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >Physical Attestation</span
+              >
+              <span
+                class="font-headline-sm text-headline-sm text-tertiary font-mono font-bold"
+                >100% SGS &amp; IoT</span
+              >
+              <span class="font-label-sm text-label-sm text-outline"
+                >Tamper-Proof Telemetry</span
+              >
+            </div>
+            <div class="flex flex-col col-span-2 md:col-span-1">
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >Settlement Architecture</span
+              >
+              <span
+                class="font-headline-sm text-headline-sm text-secondary font-mono font-bold"
+                >Robinhood &amp; Arb</span
+              >
+              <span class="font-label-sm text-label-sm text-outline"
+                >Subnet #14 Gasless</span
+              >
+            </div>
+          </div>
+        </section>
+        <!-- Problem vs Solution: 3-Column Contrast Matrix -->
+        <section class="w-full bg-surface px-space-lg lg:px-margin py-space-xl">
+          <div class="max-w-7xl mx-auto space-y-space-lg">
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-space-md"
+            >
+              <div class="max-w-xl">
+                <div
+                  class="font-label-md text-label-md text-primary uppercase tracking-widest mb-1"
+                >
+                  // Market Paradigm Shift
+                </div>
+                <h2
+                  class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight"
+                >
+                  The Manufacturing Capital Dilemma
+                </h2>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant mt-2"
+                >
+                  Hardware innovation is trapped between predatory venture
+                  capital dilution and broken, unaccountable consumer
+                  crowdfunding platforms.
+                </p>
+              </div>
+              <div class="font-label-sm text-label-sm text-outline font-mono">
+                REF: PROTO-THESIS-2025 // CAPITAL EFFICIENCY COMPARATIVE
+              </div>
+            </div>
+            <!-- Contrast Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+              <!-- Matrix 1: Traditional Hardware Equity -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col justify-between space-y-space-md"
+              >
+                <div class="space-y-space-sm">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="px-2.5 py-1 rounded bg-error-container/20 text-error font-label-sm text-label-sm font-mono uppercase"
+                    >
+                      Traditional VC Model
+                    </span>
+                    <span class="material-symbols-outlined text-error"
+                      >domain_disabled</span
+                    >
+                  </div>
+                  <h3 class="font-headline-md text-headline-md text-on-surface">
+                    Equity Dilution
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Founders surrender 20-35% equity per funding round simply to
+                    purchase tooling dies and raw inventory.
+                  </p>
+                  <ul
+                    class="space-y-2 pt-2 font-body-sm text-body-sm text-on-surface-variant"
+                  >
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-error text-[18px]"
+                        >close</span
+                      >
+                      <span
+                        ><strong>7-10 Year Capital Lockup:</strong> Illiquid
+                        returns tied to rare IPO or acquisition events.</span
+                      >
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-error text-[18px]"
+                        >close</span
+                      >
+                      <span
+                        ><strong>Forced Valuation Down-Rounds:</strong> Market
+                        shifts punish physical capital-intensive startups.</span
+                      >
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-error text-[18px]"
+                        >close</span
+                      >
+                      <span
+                        ><strong>Zero Asset-Level Trading:</strong> Investors
+                        cannot exit individual high-performing product
+                        lines.</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="p-space-sm rounded bg-surface-container-lowest font-mono text-label-sm text-outline"
+                >
+                  RESULT: Cap-table destruction &amp; slow production cycles.
+                </div>
+              </div>
+              <!-- Matrix 2: Crowdfunding / Kickstarter -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col justify-between space-y-space-md"
+              >
+                <div class="space-y-space-sm">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="px-2.5 py-1 rounded bg-tertiary/20 text-tertiary font-label-sm text-label-sm font-mono uppercase"
+                    >
+                      Kickstarter / Indiegogo
+                    </span>
+                    <span class="material-symbols-outlined text-tertiary"
+                      >warning</span
+                    >
+                  </div>
+                  <h3 class="font-headline-md text-headline-md text-on-surface">
+                    Reward Crowdfunding
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Consumer backers assume pure product execution risk without
+                    legal covenants or financial upside.
+                  </p>
+                  <ul
+                    class="space-y-2 pt-2 font-body-sm text-body-sm text-on-surface-variant"
+                  >
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-tertiary text-[18px]"
+                        >close</span
+                      >
+                      <span
+                        ><strong>Zero Financial Upside:</strong> Backers receive
+                        only plastic trinkets or late prototypes.</span
+                      >
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-tertiary text-[18px]"
+                        >close</span
+                      >
+                      <span
+                        ><strong>Unmonitored Cash Burn:</strong> Funds released
+                        upfront with zero escrow protections.</span
+                      >
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-tertiary text-[18px]"
+                        >close</span
+                      >
+                      <span
+                        ><strong>68% Delay / Abandonment:</strong> No
+                        independent physical verification of factory
+                        progress.</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="p-space-sm rounded bg-surface-container-lowest font-mono text-label-sm text-outline"
+                >
+                  RESULT: Backer fatigue &amp; rampant unhedged manufacturing
+                  fraud.
+                </div>
+              </div>
+              <!-- Matrix 3: ProtoRWA Physical Claims -->
+              <div
+                class="bg-surface-container-high rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-lg shadow-primary/5"
+              >
+                <div class="space-y-space-sm">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="px-2.5 py-1 rounded bg-primary/20 text-primary font-label-sm text-label-sm font-mono uppercase font-bold"
+                    >
+                      ProtoRWA Protocol
+                    </span>
+                    <span class="material-symbols-outlined text-primary"
+                      >verified</span
+                    >
+                  </div>
+                  <h3 class="font-headline-md text-headline-md text-on-surface">
+                    Milestone RWA Claims
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Hardware batches tokenized as smart contract
+                    debt/revenue-share instruments backstopped by multi-sig
+                    factory escrow.
+                  </p>
+                  <ul
+                    class="space-y-2 pt-2 font-body-sm text-body-sm text-on-surface"
+                  >
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      <span
+                        ><strong>Direct Revenue Share (2-3x):</strong>
+                        Programmatic yield streaming from off-chain commercial
+                        sales.</span
+                      >
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      <span
+                        ><strong>Milestone-Gated Escrow:</strong> Capital
+                        unlocks in tranches only upon verified QA oracles.</span
+                      >
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      <span
+                        ><strong>Instant Secondary Liquidity:</strong> Trade
+                        yield claims 24/7 on Robinhood Subnet AMMs.</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="p-space-sm rounded bg-surface-container-lowest font-mono text-label-sm text-primary flex items-center justify-between"
+                >
+                  <span
+                    >RESULT: Founder autonomy &amp; verified backer alpha.</span
+                  >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >north_east</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- How It Works in 4 Steps (Visual Flow) -->
+        <section
+          class="w-full bg-surface-container-lowest px-space-lg lg:px-margin py-space-xl"
+        >
+          <div class="max-w-7xl mx-auto space-y-space-lg">
+            <div class="space-y-1 text-center max-w-2xl mx-auto">
+              <span
+                class="font-label-md text-label-md text-secondary uppercase tracking-widest"
+                >// Industrial Execution Architecture</span
+              >
+              <h2
+                class="font-headline-lg text-headline-lg text-on-surface uppercase"
+              >
+                How ProtoRWA Operates in 4 Steps
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                A closed-loop protocol engineering trust between hardware
+                engineers, global audit networks, and decentralized capital.
+              </p>
+            </div>
+            <!-- 4-Step Diagrammatic Grid -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md relative"
+            >
+              <!-- Step 1 -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col space-y-space-sm relative"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-primary/30 font-mono font-bold"
+                    >01</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-primary text-[28px]"
+                    >receipt_long</span
+                  >
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                  BOM Tokenization
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Founders ingest complete Bill of Materials (BOM), tooling CAD
+                  files, and component schedules into our Underwriting Studio.
+                  The smart contract generates tranche thresholds.
+                </p>
+                <div
+                  class="pt-2 font-label-sm text-label-sm text-outline font-mono"
+                >
+                  Output: Tranche-Gated ERC-4626 Vault
+                </div>
+              </div>
+              <!-- Step 2 -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col space-y-space-sm relative"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-secondary/30 font-mono font-bold"
+                    >02</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-secondary text-[28px]"
+                    >lock</span
+                  >
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                  Milestone-Locked Escrow
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Backers deposit USDC into Robinhood Subnet multisig escrow
+                  contracts. Capital is strictly segmented: 30% Tooling, 40% Raw
+                  Assembly, 30% Final Logistics &amp; QA.
+                </p>
+                <div
+                  class="pt-2 font-label-sm text-label-sm text-outline font-mono"
+                >
+                  Security: OpenZeppelin Multi-Sig Core
+                </div>
+              </div>
+              <!-- Step 3 -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col space-y-space-sm relative"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-tertiary/30 font-mono font-bold"
+                    >03</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-tertiary text-[28px]"
+                    >sensors</span
+                  >
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                  Verifiable Oracles
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Factory inspectors (SGS, TÜV SÜD), 4K CNC logs, and warehouse
+                  IoT sensory payloads are cryptographically hashed and
+                  submitted onto IPFS via Chainlink Oracles.
+                </p>
+                <div
+                  class="pt-2 font-label-sm text-label-sm text-outline font-mono"
+                >
+                  Attestation: ISO 9001 Factory Feeds
+                </div>
+              </div>
+              <!-- Step 4 -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col space-y-space-sm relative"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-primary/30 font-mono font-bold"
+                    >04</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-primary text-[28px]"
+                    >currency_exchange</span
+                  >
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                  Automated Yield &amp; Trade
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Backers vote on attestation evidence to trigger release
+                  tranches. As hardware units sell commercially, off-chain
+                  Stripe/B2B revenues flow directly back to vault claimers in
+                  USDC.
+                </p>
+                <div
+                  class="pt-2 font-label-sm text-label-sm text-outline font-mono"
+                >
+                  Settlement: Sub-second Robinhood AMM
+                </div>
+              </div>
+            </div>
+            <!-- Live Pipeline Micro-Data Bar -->
+            <div
+              class="p-space-md rounded-lg bg-surface-container flex flex-col lg:flex-row items-center justify-between gap-space-sm"
+            >
+              <div class="flex items-center gap-space-sm">
+                <span class="material-symbols-outlined text-primary text-[24px]"
+                  >developer_board</span
+                >
+                <div>
+                  <div
+                    class="font-label-md text-label-md text-on-surface font-bold"
+                  >
+                    Smart Contract Factory: FactoryVaultV2.sol
+                  </div>
+                  <div
+                    class="font-body-sm text-body-sm text-on-surface-variant font-mono"
+                  >
+                    Verified Bytecode on Arbitrum One: 0x8849c7198e...399E20
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-space-sm">
+                <a
+                  class="px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md transition-colors"
+                  data-path="how-it-works"
+                  href="#"
+                >
+                  View Complete Technical Blueprint
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Featured Production Batches Mini-Grid -->
+        <section class="w-full bg-surface px-space-lg lg:px-margin py-space-xl">
+          <div class="max-w-7xl mx-auto space-y-space-lg">
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-space-md"
+            >
+              <div>
+                <span
+                  class="font-label-md text-label-md text-primary uppercase tracking-widest"
+                  >// Curated Underwriting</span
+                >
+                <h2
+                  class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight"
+                >
+                  Featured Production Batches
+                </h2>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant mt-1"
+                >
+                  Institutional physical infrastructure currently accepting USDC
+                  liquidity tranches.
+                </p>
+              </div>
+              <a
+                class="inline-flex items-center gap-1 text-primary hover:underline font-label-md text-label-md"
+                data-path="explore-projects"
+                href="#"
+              >
+                <span>View All 42 Live Production Batches</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+            <!-- 3 Featured Asset Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+              <!-- Asset 1: AeroPulse M2 Drone LiDAR -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col justify-between space-y-space-md group hover:bg-surface-container-high transition-colors"
+              >
+                <div class="space-y-space-sm">
+                  <div
+                    class="relative w-full h-44 rounded bg-surface-container-lowest overflow-hidden"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="High-precision autonomous aerial surveying drone with multi-spectral carbon fiber LiDAR gimbal mounted on lower chassis, industrial aerodynamic build, neon green and slate grey accents, clean laboratory testing rig"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJeY3aM0SrY-NSf1yoEbmDo_iEP4blgyCNPuS38uv2BE4eo_IH174t6-x248BGMMn3ilAuVeYwBpbWkELhvAM_7xtA1H1VMvBaIUfeP6-N-2luORDjGwEuJpmsfeU6tL8FUe-RNHDj5FLrHRo8QS5gKtgz5X_TVRfdPQ_joj4Dyz0KGnfpQygU51N2sb6-nJYfORCouPYvvMegT2gSLEZkTb2Of_MiT9OF6DQxoNvCv8rQII4VweI2"
+                    />
+                    <span
+                      class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface/90 text-primary font-mono font-label-sm text-label-sm"
+                    >
+                      BATCH #AP-09
+                    </span>
+                    <span
+                      class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-secondary font-mono font-label-sm text-label-sm"
+                    >
+                      Robinhood Subnet
+                    </span>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <h3
+                        class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                      >
+                        AeroPulse M2 LiDAR
+                      </h3>
+                      <span
+                        class="font-mono text-label-md font-bold text-primary"
+                        >2.4x APY Target</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                    >
+                      Autonomous forestry &amp; infrastructure inspection drone
+                      sensor payloads. Purchase order backed by 4 municipal
+                      contracts.
+                    </p>
+                  </div>
+                  <!-- Specs Grid -->
+                  <div
+                    class="grid grid-cols-2 gap-2 p-2 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm"
+                  >
+                    <div>
+                      <span class="text-outline">Escrow Cap:</span>
+                      <div class="text-on-surface font-semibold">
+                        $850,000 USDC
+                      </div>
+                    </div>
+                    <div>
+                      <span class="text-outline">Progress:</span>
+                      <div class="text-primary font-semibold">
+                        91% Allocated
+                      </div>
+                    </div>
+                    <div>
+                      <span class="text-outline">QA Verifier:</span>
+                      <div class="text-on-surface">TÜV Rheinland</div>
+                    </div>
+                    <div>
+                      <span class="text-outline">Disbursement:</span>
+                      <div class="text-secondary">Tranche 3 of 4</div>
+                    </div>
+                  </div>
+                  <!-- Mini Progress Indicator -->
+                  <div
+                    class="w-full h-1.5 rounded bg-surface-container-lowest overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-primary rounded"
+                      style="width: 91%"
+                    ></div>
+                  </div>
+                </div>
+                <a
+                  class="w-full py-2 rounded bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md uppercase tracking-wider text-center transition-colors"
+                  data-path="explore-projects"
+                  href="#"
+                >
+                  Inspect Hardware Vault
+                </a>
+              </div>
+              <!-- Asset 2: OmniHaptic X1 feedback glove -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col justify-between space-y-space-md group hover:bg-surface-container-high transition-colors"
+              >
+                <div class="space-y-space-sm">
+                  <div
+                    class="relative w-full h-44 rounded bg-surface-container-lowest overflow-hidden"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="Advanced medical tele-surgery and industrial VR haptic feedback exoskeleton glove with micro-pneumatic actuators, titanium skeletal joints, precision blue diagnostic optical sensors, futuristic laboratory cleanroom background"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVxxPHWdkjGC6v6bvZ5GDr7F02UUu8crlf5jY_FRQ7YlP1PnfIBQoNJj5XwCWb-hbmLimGkotTnFrUqGwhjohVoUoeLS2SMFDccy0MPk7YQhXSEIdmGwkSvRjScwZNRjZRLhFVfI1UwMYRK20vGfReCWD47wLsiAPOgmrh9F3xyydSNDaM-gTVMI6hANBLLZypNEdkQTWsoPjprTslBTjah-WeAwwDD4RcaU-3nhUuWDJjnZcnw7E2"
+                    />
+                    <span
+                      class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface/90 text-primary font-mono font-label-sm text-label-sm"
+                    >
+                      BATCH #OH-108
+                    </span>
+                    <span
+                      class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-secondary font-mono font-label-sm text-label-sm"
+                    >
+                      Arbitrum One
+                    </span>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <h3
+                        class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                      >
+                        OmniHaptic X1 Glove
+                      </h3>
+                      <span
+                        class="font-mono text-label-md font-bold text-primary"
+                        >3.1x Target</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                    >
+                      Precision micro-pneumatic tele-surgery haptic input
+                      gloves. Pre-orders placed by 12 European surgical research
+                      centers.
+                    </p>
+                  </div>
+                  <!-- Specs Grid -->
+                  <div
+                    class="grid grid-cols-2 gap-2 p-2 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm"
+                  >
+                    <div>
+                      <span class="text-outline">Escrow Cap:</span>
+                      <div class="text-on-surface font-semibold">
+                        $1,200,000 USDC
+                      </div>
+                    </div>
+                    <div>
+                      <span class="text-outline">Progress:</span>
+                      <div class="text-primary font-semibold">
+                        64% Allocated
+                      </div>
+                    </div>
+                    <div>
+                      <span class="text-outline">QA Verifier:</span>
+                      <div class="text-on-surface">Intertek Medical</div>
+                    </div>
+                    <div>
+                      <span class="text-outline">Disbursement:</span>
+                      <div class="text-secondary">Tranche 2 of 5</div>
+                    </div>
+                  </div>
+                  <!-- Mini Progress Indicator -->
+                  <div
+                    class="w-full h-1.5 rounded bg-surface-container-lowest overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-primary rounded"
+                      style="width: 64%"
+                    ></div>
+                  </div>
+                </div>
+                <a
+                  class="w-full py-2 rounded bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md uppercase tracking-wider text-center transition-colors"
+                  data-path="explore-projects"
+                  href="#"
+                >
+                  Inspect Hardware Vault
+                </a>
+              </div>
+              <!-- Asset 3: AquaPurify Desalination Unit -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md flex flex-col justify-between space-y-space-md group hover:bg-surface-container-high transition-colors"
+              >
+                <div class="space-y-space-sm">
+                  <div
+                    class="relative w-full h-44 rounded bg-surface-container-lowest overflow-hidden"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="Industrial containerized solar thermal desalination water purification facility on a coastal site, brushed steel reverse osmosis manifold, digital pressure telemetry gauges glowing soft green, crisp evening sky"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY3NEJYX8FTJxS9mcr1W0rRkT2UB2r9uxEJrhePZBgy-mjffdbehmbqbfMeXuhC-uP_Mk-Gfqqhxzh5JW99yPE0ZnaUYsZCs5r-3FDd2M9NwloSOAbrPpK9036RthigUytyjnJu7FN591ceQ--QpoIh1ecARJl1S2p16cWfAniRiUkOkRJgvD1n7PxCfko0iIeSGtcKc6JrMnVrwXUHtTnncpnuxU5tjqqUN2rqel8nI_n4dzuxC8n"
+                    />
+                    <span
+                      class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface/90 text-primary font-mono font-label-sm text-label-sm"
+                    >
+                      BATCH #AQ-44
+                    </span>
+                    <span
+                      class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-secondary font-mono font-label-sm text-label-sm"
+                    >
+                      Robinhood Subnet
+                    </span>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <h3
+                        class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors"
+                      >
+                        AquaPurify Pod 200
+                      </h3>
+                      <span
+                        class="font-mono text-label-md font-bold text-primary"
+                        >2.1x APY Target</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                    >
+                      Modular zero-grid solar thermal seawater desalination pods
+                      for island hospitality resorts and agricultural
+                      micro-grids.
+                    </p>
+                  </div>
+                  <!-- Specs Grid -->
+                  <div
+                    class="grid grid-cols-2 gap-2 p-2 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm"
+                  >
+                    <div>
+                      <span class="text-outline">Escrow Cap:</span>
+                      <div class="text-on-surface font-semibold">
+                        $680,000 USDC
+                      </div>
+                    </div>
+                    <div>
+                      <span class="text-outline">Progress:</span>
+                      <div class="text-primary font-semibold">
+                        100% (Locked)
+                      </div>
+                    </div>
+                    <div>
+                      <span class="text-outline">QA Verifier:</span>
+                      <div class="text-on-surface">SGS Environmental</div>
+                    </div>
+                    <div>
+                      <span class="text-outline">Disbursement:</span>
+                      <div class="text-tertiary">Yield Streaming</div>
+                    </div>
+                  </div>
+                  <!-- Mini Progress Indicator -->
+                  <div
+                    class="w-full h-1.5 rounded bg-surface-container-lowest overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-secondary rounded"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+                <a
+                  class="w-full py-2 rounded bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md uppercase tracking-wider text-center transition-colors"
+                  data-path="explore-projects"
+                  href="#"
+                >
+                  Inspect Hardware Vault
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Institutional Security & Tech Stack Trust Bar -->
+        <section
+          class="w-full bg-surface-container-lowest py-space-xl px-space-lg lg:px-margin"
+        >
+          <div class="max-w-7xl mx-auto space-y-space-md">
+            <div class="text-center">
+              <span
+                class="font-label-sm text-label-sm text-outline uppercase tracking-widest"
+                >Institutional Infrastructure &amp; Security Audits</span
+              >
+            </div>
+            <!-- Trust Badges Strip -->
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-space-sm items-center justify-center text-center"
+            >
+              <div
+                class="p-space-sm rounded bg-surface-container flex flex-col items-center justify-center space-y-1"
+              >
+                <span class="material-symbols-outlined text-primary text-[28px]"
+                  >verified</span
+                >
+                <span
+                  class="font-headline-sm text-label-md text-on-surface font-bold"
+                  >OpenZeppelin</span
+                >
+                <span class="font-label-sm text-label-sm text-outline"
+                  >Smart Contracts Audited</span
+                >
+              </div>
+              <div
+                class="p-space-sm rounded bg-surface-container flex flex-col items-center justify-center space-y-1"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px]"
+                  >security</span
+                >
+                <span
+                  class="font-headline-sm text-label-md text-on-surface font-bold"
+                  >Trail of Bits</span
+                >
+                <span class="font-label-sm text-label-sm text-outline"
+                  >Cryptographic Formal QA</span
+                >
+              </div>
+              <div
+                class="p-space-sm rounded bg-surface-container flex flex-col items-center justify-center space-y-1"
+              >
+                <span
+                  class="material-symbols-outlined text-tertiary text-[28px]"
+                  >hub</span
+                >
+                <span
+                  class="font-headline-sm text-label-md text-on-surface font-bold"
+                  >Chainlink Oracles</span
+                >
+                <span class="font-label-sm text-label-sm text-outline"
+                  >IoT Hardware Telemetry</span
+                >
+              </div>
+              <div
+                class="p-space-sm rounded bg-surface-container flex flex-col items-center justify-center space-y-1"
+              >
+                <span class="material-symbols-outlined text-primary text-[28px]"
+                  >cloud_done</span
+                >
+                <span
+                  class="font-headline-sm text-label-md text-on-surface font-bold"
+                  >IPFS / Filecoin</span
+                >
+                <span class="font-label-sm text-label-sm text-outline"
+                  >Factory Attestation Data</span
+                >
+              </div>
+              <div
+                class="p-space-sm rounded bg-surface-container flex flex-col items-center justify-center space-y-1"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px]"
+                  >bolt</span
+                >
+                <span
+                  class="font-headline-sm text-label-md text-on-surface font-bold"
+                  >Robinhood Subnet</span
+                >
+                <span class="font-label-sm text-label-sm text-outline"
+                  >Zero-Gas High Speed</span
+                >
+              </div>
+              <div
+                class="p-space-sm rounded bg-surface-container flex flex-col items-center justify-center space-y-1"
+              >
+                <span
+                  class="material-symbols-outlined text-on-surface text-[28px]"
+                  >layers</span
+                >
+                <span
+                  class="font-headline-sm text-label-md text-on-surface font-bold"
+                  >Arbitrum One</span
+                >
+                <span class="font-label-sm text-label-sm text-outline"
+                  >L2 Rollup Settlement</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- High-Impact Founder CTA Banner -->
+        <section
+          class="w-full bg-surface-container-high px-space-lg lg:px-margin py-space-xl relative overflow-hidden"
+        >
+          <div
+            class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none"
+          ></div>
+          <div
+            class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-space-lg relative z-10"
+          >
+            <div class="max-w-2xl space-y-space-xs">
+              <span
+                class="font-label-md text-label-md text-primary uppercase tracking-widest font-mono"
+                >// Hardware Founders Welcome</span
+              >
+              <h2
+                class="font-headline-lg text-headline-lg text-on-surface uppercase"
+              >
+                Ready to manufacture without cap-table dilution?
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Submit your product Bill of Materials (BOM), CAD schematics, and
+                factory quotes. Our underwriting committee structures your
+                tranche escrow in under 72 hours.
+              </p>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row items-center gap-space-sm w-full lg:w-auto"
+            >
+              <a
+                class="w-full sm:w-auto px-space-md py-3.5 rounded bg-primary hover:bg-primary-fixed text-on-primary font-headline-sm text-headline-sm uppercase tracking-wider text-center transition-colors shadow-[0_0_24px_-4px_rgba(78,222,163,0.3)]"
+                data-path="founder-studio"
+                href="#"
+              >
+                Submit Hardware Specs
+              </a>
+              <a
+                class="w-full sm:w-auto px-space-md py-3.5 rounded bg-surface-container-lowest hover:bg-surface-bright text-on-surface font-label-md text-label-md uppercase tracking-wider text-center transition-colors"
+                data-path="how-it-works"
+                href="#"
+              >
+                Protocol Underwriting Docs
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer
+      class="w-full bg-surface-container-lowest border-t border-outline-variant/30 text-on-surface-variant"
+    >
+      <div class="w-full px-space-lg lg:px-margin py-space-xl">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-lg pb-space-lg border-b border-outline-variant/20"
+        >
+          <div class="lg:col-span-2 space-y-space-md">
+            <div class="flex items-center gap-space-sm">
+              <img
+                alt="Brand logo. - Primary color: #10b981
+- Font: spaceGrotesk
+- Mode: dark
+- Roundness: rounded-sm
+"
+                class="h-6 w-auto object-contain"
+                src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+              /><span
+                class="font-headline-sm text-headline-sm text-on-surface uppercase leading-none"
+                >ProtoRWA</span
+              >
+            </div>
+            <p
+              class="font-body-sm text-body-sm text-on-surface-variant max-w-sm"
+            >
+              Decentralized hardware &amp; physical infrastructure underwriting
+              protocol. Institutional milestone-gated capital issuance and
+              custody tracking on Robinhood Subnet &amp; Arbitrum One.
+            </p>
+            <div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+              <span
+                class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >Arbitrum One Verified</span
+              ><span
+                class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >Robinhood Chain Engine</span
+              ><span
+                class="px-2 py-0.5 rounded bg-surface-container text-tertiary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >OpenZeppelin Audited</span
+              >
+            </div>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Protocol Infrastructure
+            </div>
+            <ul class="space-y-space-xs font-body-sm text-body-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="explore-projects"
+                  href="#"
+                  >Asset Directory</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="secondary-market"
+                  href="#"
+                  >Liquidity Pools</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="escrow-registry"
+                  href="#"
+                  >Custody Vaults</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="oracle-feeds"
+                  href="#"
+                  >Chainlink IoT Feeds</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Founders &amp; Issuers
+            </div>
+            <ul class="space-y-space-xs font-body-sm text-body-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="founder-studio"
+                  href="#"
+                  >Underwriting Studio</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="milestone-verification"
+                  href="#"
+                  >Hardware Attestation</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="how-it-works"
+                  href="#"
+                  >Deployment Pipeline</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="developer-docs"
+                  href="#"
+                  >Factory SDK</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Contract Registry
+            </div>
+            <div class="space-y-space-xs font-label-sm text-label-sm">
+              <div
+                class="p-2 rounded bg-surface-container-low border border-outline-variant/30"
+              >
+                <div class="text-on-surface-variant">VaultFactory.sol</div>
+                <div class="text-primary truncate font-mono">0x8849...9E20</div>
+              </div>
+              <div
+                class="p-2 rounded bg-surface-container-low border border-outline-variant/30"
+              >
+                <div class="text-on-surface-variant">OracleAttestor.sol</div>
+                <div class="text-secondary truncate font-mono">
+                  0x32A1...C81F
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-outline"
+        >
+          <p>
+            © 2025 ProtoRWA Protocol. Engineered for Autonomous Hardware
+            Capitalization.
+          </p>
+          <div class="flex items-center gap-space-md">
+            <span>Zero Slippage Gasless Execution</span
+            ><span>Block: 22,491,802</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

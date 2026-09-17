@@ -1,0 +1,1485 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#30353e",
+              "on-tertiary": "#472a00",
+              "surface-container-lowest": "#090e16",
+              "tertiary-fixed": "#ffddb8",
+              "on-primary": "#003824",
+              "surface-container": "#1b2028",
+              "surface-tint": "#4edea3",
+              "secondary-fixed-dim": "#4cd7f6",
+              "surface-variant": "#30353e",
+              "on-secondary-container": "#00424e",
+              "on-tertiary-fixed": "#2a1700",
+              "tertiary-container": "#e29100",
+              primary: "#4edea3",
+              "on-tertiary-container": "#523200",
+              surface: "#0f141c",
+              "on-error": "#690005",
+              "on-secondary-fixed-variant": "#004e5c",
+              outline: "#86948a",
+              error: "#ffb4ab",
+              background: "#0f141c",
+              "secondary-container": "#03b5d3",
+              "on-surface-variant": "#bbcabf",
+              "tertiary-fixed-dim": "#ffb95f",
+              "surface-dim": "#0f141c",
+              "on-primary-fixed-variant": "#005236",
+              tertiary: "#ffb95f",
+              "on-primary-container": "#00422b",
+              "on-tertiary-fixed-variant": "#653e00",
+              "inverse-on-surface": "#2c3139",
+              "surface-bright": "#343942",
+              "error-container": "#93000a",
+              "inverse-primary": "#006c49",
+              "primary-container": "#10b981",
+              "on-surface": "#dee2ee",
+              "on-primary-fixed": "#002113",
+              "inverse-surface": "#dee2ee",
+              "secondary-fixed": "#acedff",
+              "on-secondary": "#003640",
+              "surface-container-high": "#252a33",
+              "primary-fixed": "#6ffbbe",
+              "outline-variant": "#3c4a42",
+              "on-background": "#dee2ee",
+              secondary: "#4cd7f6",
+              "surface-container-low": "#171c24",
+              "primary-fixed-dim": "#4edea3",
+              "on-error-container": "#ffdad6",
+              "on-secondary-fixed": "#001f26",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "space-sm": "0.5rem",
+              "space-xl": "2.5rem",
+              margin: "2.5rem",
+              "space-xs": "0.25rem",
+              "space-md": "1rem",
+              gutter: "1.5rem",
+              "space-lg": "1.5rem",
+              "gutter-mobile": "1rem",
+              "margin-mobile": "1rem",
+            },
+            fontFamily: {
+              "headline-sm": ["Space Grotesk"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "headline-lg": ["Space Grotesk"],
+              "headline-lg-mobile": ["Space Grotesk"],
+              "body-sm": ["Inter"],
+              "headline-md": ["Space Grotesk"],
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "label-md": ["JetBrains Mono"],
+              "display-lg": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+            },
+            fontSize: {
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen"
+  >
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"
+    >
+      <div
+        class="h-20 w-full px-space-lg lg:px-margin flex items-center justify-between gap-space-md"
+      >
+        <div class="flex items-center gap-space-lg">
+          <a
+            class="flex items-center gap-space-sm group"
+            data-path="explore-projects"
+            href="#"
+            ><img
+              alt="Brand logo. - Primary color: #10b981
+- Font: spaceGrotesk
+- Mode: dark
+- Roundness: rounded-sm
+"
+              class="h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+            />
+            <div class="flex flex-col">
+              <span
+                class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase leading-none"
+                >ProtoRWA</span
+              ><span
+                class="font-label-sm text-label-sm text-primary tracking-widest uppercase mt-0.5"
+                >Physical RWA Protocol</span
+              >
+            </div></a
+          >
+          <nav
+            class="hidden xl:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-primary border border-outline-variant"
+          >
+            <a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="explore-projects"
+              href="#"
+              >Explore Projects</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="how-it-works"
+              href="#"
+              >How It Works</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="secondary-market"
+              href="#"
+              >Secondary Market</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="founder-studio"
+              href="#"
+              >Founder Studio</a
+            ><a
+              aria-current="page"
+              class="px-space-sm py-1.5 rounded transition-colors font-label-md bg-surface-container text-primary border border-outline-variant"
+              data-path="governance"
+              href="#"
+              >Governance</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <div
+            class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest border border-outline-variant/40"
+          >
+            <span
+              class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"
+            ></span
+            ><span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Robinhood Subnet #14</span
+            ><span
+              class="font-label-sm text-label-sm text-secondary bg-surface-container px-1 rounded"
+              >(Gasless Relayer Active)</span
+            >
+          </div>
+          <div
+            class="hidden md:flex items-center gap-space-sm px-space-sm py-1 rounded bg-surface-container-low border border-outline-variant/50 font-label-md text-label-md"
+          >
+            <span class="text-primary font-semibold">42,500 USDC</span
+            ><span class="text-outline-variant">|</span
+            ><span class="text-on-surface-variant">0x71C...4f9b</span>
+          </div>
+          <button
+            aria-label="Notifications"
+            class="relative p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary"
+            ></span>
+          </button>
+          <div
+            class="flex items-center pl-space-xs border-l border-outline-variant/30"
+          >
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1U6LgZ_qS9tlneMIYjmbgJBmFNyGYBYDwYd20a0sfK6S4kXqT9fTn9oJfLxmxua8WU0LKbDphIykMyY5v5iC2g5u-r_nBZnWcV7moEk-c80VLAZX1x5-lpT1qZxiVrEO2ZWt-zMmO0kCz218kFhHPARE42HbnH6MtpDLxU1xL-4vYB2kQ-Fwv2Crm2_DLDhntpGC1h3YUCEA54T9V-r7XCPoqJCIQ95u7BiqqVOIZRy2IAHKaVOj8-b9cI"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-20 bg-background min-h-screen">
+      <div class="flex flex-col w-full">
+        <!-- Interactive Ambient Glow Backdrop -->
+        <div
+          class="relative w-full overflow-hidden px-space-lg lg:px-margin py-space-lg"
+        >
+          <div
+            class="absolute top-12 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none -z-10"
+          ></div>
+          <div
+            class="absolute bottom-10 right-1/4 w-[500px] h-[500px] rounded-full bg-secondary/5 blur-3xl pointer-events-none -z-10"
+          ></div>
+          <!-- Navigation Breadcrumbs -->
+          <div
+            class="flex flex-wrap items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-space-lg"
+          >
+            <a
+              class="hover:text-primary transition-colors flex items-center gap-1"
+              href="#"
+            >
+              <span class="material-symbols-outlined text-[14px]"
+                >grid_view</span
+              >
+              Projects
+            </a>
+            <span class="text-outline">/</span>
+            <a class="hover:text-primary transition-colors" href="#"
+              >HelioFrost Pro</a
+            >
+            <span class="text-outline">/</span>
+            <span class="text-primary font-bold"
+              >Commit Capital &amp; Mint Claims</span
+            >
+          </div>
+          <!-- Main Terminal Grid: 8-col Investment Workflow / 4-col Real-time Ledger & Summary -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+            <!-- LEFT / PRIMARY WORKFLOW TERMINAL (8 cols) -->
+            <div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-space-lg">
+              <!-- Target Hardware Target Banner -->
+              <div
+                class="bg-surface-container rounded-xl p-space-md shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md"
+              >
+                <div class="flex items-center gap-space-md">
+                  <div
+                    class="relative w-16 h-16 rounded-lg overflow-hidden bg-surface-container-lowest shrink-0"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="An industrial off-grid solar-powered vaccine refrigerator with digital telemetry interface, matte graphite metal chassis, and dual emerald status LEDs in a precision cleanroom laboratory."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIp72Mw4Bd5gnNEZwMR4aAAvwEkKbF6oBLBW9zOQb99YTVoUfX8HTOr1vsMhskosn81S5HQKkku2SgazoeBy3Cqar9JOAoBEGVmpJ3ekFxnEufBIazN5HuQeXtc7wEPG94oGsJgJfN1hfnR495NqRS2ndBTQ18cE7KI2KzDxw7FcH0j6ineo54TlwLAD5FrTddGV6Ec8kFA8QCEW49UYQrMGP3LU1o5O3VotJ6zeFb1x7jGPIXyaXV"
+                    />
+                    <span
+                      class="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface-container"
+                    ></span>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex flex-wrap items-center gap-space-xs">
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface"
+                        >HelioFrost Pro</span
+                      >
+                      <span
+                        class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold tracking-wider"
+                        >SHLFROST</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1"
+                    >
+                      Direct-Drive Solar Thermal Refrigeration Unit &amp; WHO
+                      PQS E003 Attested Payload
+                    </p>
+                    <div
+                      class="flex items-center gap-space-sm pt-1 text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline">SKU: HFP-2025-X4</span>
+                      <span>•</span>
+                      <span class="text-primary flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[13px]"
+                          >verified</span
+                        >
+                        Subnet Contract 0x88f2...09bc
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="shrink-0 flex sm:flex-col items-end justify-between w-full sm:w-auto gap-1"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                    >Series Target</span
+                  >
+                  <span
+                    class="font-label-lg text-label-lg text-primary font-bold tracking-tight"
+                    >420,000 USDC</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-secondary bg-surface-container-low px-2 py-0.5 rounded"
+                    >Tranche 2 Open</span
+                  >
+                </div>
+              </div>
+              <!-- Interactive Deposit Module -->
+              <div
+                class="bg-surface-container rounded-xl p-space-lg shadow-xl flex flex-col gap-space-md"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-primary text-[20px]"
+                      >account_balance_wallet</span
+                    >
+                    <span
+                      class="font-label-md text-label-md uppercase text-on-surface font-semibold tracking-wider"
+                      >Deposit Capital Allocation</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm"
+                  >
+                    <span>Available Liquidity:</span>
+                    <span
+                      class="text-on-surface font-semibold font-label-md text-label-md"
+                      >42,500.00 USDC</span
+                    >
+                  </div>
+                </div>
+                <!-- Numeric Input Container -->
+                <div
+                  class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm"
+                >
+                  <div class="flex items-baseline gap-2 w-full sm:w-auto">
+                    <span class="font-label-lg text-label-lg text-outline"
+                      >$</span
+                    >
+                    <input
+                      class="bg-transparent font-display-lg text-display-lg text-on-surface focus:outline-none w-full max-w-[280px] font-headline-lg tracking-tight placeholder-outline"
+                      id="capitalInput"
+                      max="42500"
+                      min="100"
+                      placeholder="5,000"
+                      step="100"
+                      type="number"
+                      value="5000"
+                    />
+                  </div>
+                  <div
+                    class="flex items-center gap-space-xs self-end sm:self-center"
+                  >
+                    <div
+                      class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md"
+                    >
+                      <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                      <span>USDC</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Quick Increment Badges -->
+                <div class="grid grid-cols-5 gap-space-xs">
+                  <button
+                    class="preset-btn py-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-primary font-label-sm text-label-sm uppercase transition-all duration-150 active:scale-95"
+                    onclick="setAllocation(500)"
+                    type="button"
+                  >
+                    $500
+                  </button>
+                  <button
+                    class="preset-btn py-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-primary font-label-sm text-label-sm uppercase transition-all duration-150 active:scale-95"
+                    onclick="setAllocation(1000)"
+                    type="button"
+                  >
+                    $1,000
+                  </button>
+                  <button
+                    class="preset-btn py-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-primary font-label-sm text-label-sm uppercase transition-all duration-150 active:scale-95"
+                    onclick="setAllocation(2500)"
+                    type="button"
+                  >
+                    $2,500
+                  </button>
+                  <button
+                    class="preset-btn py-2 rounded-lg bg-surface-container-highest text-primary font-label-sm text-label-sm uppercase transition-all duration-150 active:scale-95 shadow-sm"
+                    onclick="setAllocation(5000)"
+                    type="button"
+                  >
+                    $5,000
+                  </button>
+                  <button
+                    class="preset-btn py-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-secondary hover:text-secondary font-label-sm text-label-sm uppercase transition-all duration-150 active:scale-95"
+                    onclick="setAllocation(42500)"
+                    type="button"
+                  >
+                    MAX
+                  </button>
+                </div>
+                <!-- Claims Minting Conversion Preview -->
+                <div
+                  class="bg-surface-container-low rounded-lg p-space-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >token</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Allocated Claim Entitlement</span
+                      >
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-semibold"
+                      >
+                        You will receive:
+                        <span class="text-primary font-bold" id="claimsOutput"
+                          >5,000</span
+                        >
+                        SHLFROST Claim Tokens
+                      </span>
+                    </div>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-outline uppercase tracking-wider bg-surface-container-lowest px-2.5 py-1 rounded"
+                    >Fixed Rate: 1 SHLFROST = 1.00 USDC</span
+                  >
+                </div>
+                <!-- Projected Physical Economics Breakdown -->
+                <div
+                  class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs pt-space-xs"
+                >
+                  <div
+                    class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-1"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Target Multiple</span
+                    >
+                    <span
+                      class="font-label-lg text-label-lg text-primary font-bold"
+                      >2.80x</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      id="payoutCapDisplay"
+                      >$14,000 Est. Cap</span
+                    >
+                  </div>
+                  <div
+                    class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-1"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Gross Rev Share</span
+                    >
+                    <span
+                      class="font-label-lg text-label-lg text-secondary font-bold"
+                      >15.0%</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Wholesale Receipts</span
+                    >
+                  </div>
+                  <div
+                    class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-1"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >First Distribution</span
+                    >
+                    <span
+                      class="font-label-lg text-label-lg text-on-surface font-bold"
+                      >Q4 2025</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Batch Delivery QA</span
+                    >
+                  </div>
+                  <div
+                    class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-1"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Consensus Power</span
+                    >
+                    <span
+                      class="font-label-lg text-label-lg text-tertiary font-bold"
+                      id="votingPowerDisplay"
+                      >5,000 Votes</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      id="poolShareDisplay"
+                      >1.19% Escrow Weight</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- Escrow Protection & Tranche Allocation Table -->
+              <div
+                class="bg-surface-container rounded-xl p-space-lg shadow-xl flex flex-col gap-space-md"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="material-symbols-outlined text-secondary text-[20px]"
+                        >shield</span
+                      >
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface"
+                        >Milestone-Gated Escrow Allocation</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Capital is segmented into segregated smart contract
+                      tranches, unlocked only via cryptographic proof of
+                      production.
+                    </p>
+                  </div>
+                  <span
+                    class="hidden sm:inline-flex px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-label-sm text-label-sm"
+                    >4 Protected Tranches</span
+                  >
+                </div>
+                <!-- Visual Segment Bar -->
+                <div
+                  class="w-full h-2 rounded bg-surface-container-lowest overflow-hidden flex"
+                >
+                  <div
+                    class="h-full bg-outline-variant"
+                    style="width: 20%"
+                    title="Tranche 1 (Settled - 20%)"
+                  ></div>
+                  <div
+                    class="h-full bg-primary animate-pulse"
+                    style="width: 33.32%"
+                    title="Tranche 2 (Active Escrow - 33.32%)"
+                  ></div>
+                  <div
+                    class="h-full bg-secondary/60"
+                    style="width: 26.68%"
+                    title="Tranche 3 (Locked - 26.68%)"
+                  ></div>
+                  <div
+                    class="h-full bg-tertiary/60"
+                    style="width: 20%"
+                    title="Tranche 4 (Locked - 20%)"
+                  ></div>
+                </div>
+                <!-- Tranche Rows -->
+                <div class="flex flex-col gap-space-xs">
+                  <!-- Tranche 1 -->
+                  <div
+                    class="bg-surface-container-low rounded-lg p-space-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="w-6 h-6 rounded-full bg-surface-container-highest text-outline flex items-center justify-center font-label-sm text-label-sm font-bold"
+                        >01</span
+                      >
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <span
+                            class="font-label-md text-label-md text-on-surface font-medium"
+                            >Tranche 1: Proof of Concept</span
+                          >
+                          <span
+                            class="px-2 py-0.2 rounded bg-surface-container-highest text-outline font-label-sm text-label-sm uppercase"
+                            >Settled</span
+                          >
+                        </div>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                          >Lab thermal validation under ambient 43°C heat
+                          index.</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="flex sm:flex-col items-end justify-between w-full sm:w-auto text-right"
+                    >
+                      <span
+                        class="font-label-md text-label-md text-outline"
+                        id="t1Amount"
+                        >$1,000.00 USDC</span
+                      >
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >20.00%</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Tranche 2 (Active) -->
+                  <div
+                    class="bg-surface-container-low rounded-lg p-space-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 ring-1 ring-primary/40 bg-gradient-to-r from-primary/5 via-transparent to-transparent"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-label-sm text-label-sm font-bold"
+                        >02</span
+                      >
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <span
+                            class="font-label-md text-label-md text-primary font-semibold"
+                            >Tranche 2: Tooling &amp; Injection Molds</span
+                          >
+                          <span
+                            class="px-2 py-0.2 rounded bg-primary/20 text-primary font-label-sm text-label-sm uppercase flex items-center gap-1"
+                          >
+                            <span
+                              class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"
+                            ></span>
+                            Active Escrow
+                          </span>
+                        </div>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                          >Direct commitment. Locked in Robinhood Subnet pending
+                          48h milestone vote.</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="flex sm:flex-col items-end justify-between w-full sm:w-auto text-right"
+                    >
+                      <span
+                        class="font-label-md text-label-md text-primary font-bold"
+                        id="t2Amount"
+                        >$1,666.00 USDC</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >33.32%</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Tranche 3 -->
+                  <div
+                    class="bg-surface-container-low rounded-lg p-space-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="w-6 h-6 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center font-label-sm text-label-sm font-bold"
+                        >03</span
+                      >
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <span
+                            class="font-label-md text-label-md text-on-surface font-medium"
+                            >Tranche 3: Pilot Batch 500u Fabrication</span
+                          >
+                          <span
+                            class="px-2 py-0.2 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm uppercase"
+                            >Future Vault</span
+                          >
+                        </div>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                          >BOM procurement and SMT surface-mount controller
+                          assembly.</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="flex sm:flex-col items-end justify-between w-full sm:w-auto text-right"
+                    >
+                      <span
+                        class="font-label-md text-label-md text-on-surface"
+                        id="t3Amount"
+                        >$1,334.00 USDC</span
+                      >
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >26.68%</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Tranche 4 -->
+                  <div
+                    class="bg-surface-container-low rounded-lg p-space-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="w-6 h-6 rounded-full bg-surface-container-highest text-tertiary flex items-center justify-center font-label-sm text-label-sm font-bold"
+                        >04</span
+                      >
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <span
+                            class="font-label-md text-label-md text-on-surface font-medium"
+                            >Tranche 4: WHO PQS Dispatch Verification</span
+                          >
+                          <span
+                            class="px-2 py-0.2 rounded bg-surface-container-highest text-tertiary font-label-sm text-label-sm uppercase"
+                            >Future Vault</span
+                          >
+                        </div>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant"
+                          >Independent accredited lab inspection &amp;
+                          cold-chain bill of lading attestation.</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="flex sm:flex-col items-end justify-between w-full sm:w-auto text-right"
+                    >
+                      <span
+                        class="font-label-md text-label-md text-on-surface"
+                        id="t4Amount"
+                        >$1,000.00 USDC</span
+                      >
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >20.00%</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Legal Acknowledgement Section -->
+              <div
+                class="bg-surface-container rounded-xl p-space-lg shadow-xl flex flex-col gap-space-sm"
+              >
+                <span
+                  class="font-label-md text-label-md uppercase text-on-surface font-semibold tracking-wider"
+                  >Mandatory Underwriting Assurances</span
+                >
+                <label
+                  class="flex items-start gap-3 cursor-pointer group select-none"
+                >
+                  <input
+                    checked=""
+                    class="mt-1 w-4 h-4 rounded bg-surface-container-lowest border-0 text-primary accent-primary focus:ring-0 cursor-pointer"
+                    id="ack1"
+                    type="checkbox"
+                  />
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors"
+                  >
+                    I acknowledge that capital allocations remain escrow-locked
+                    and releases are strictly gated by autonomous on-chain
+                    48-hour milestone consensus votes from verified hardware
+                    underwriters.
+                  </span>
+                </label>
+                <label
+                  class="flex items-start gap-3 cursor-pointer group select-none"
+                >
+                  <input
+                    checked=""
+                    class="mt-1 w-4 h-4 rounded bg-surface-container-lowest border-0 text-primary accent-primary focus:ring-0 cursor-pointer"
+                    id="ack2"
+                    type="checkbox"
+                  />
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors"
+                  >
+                    I accept the Tokenized Revenue Assignment SPV terms,
+                    automated WHO telemetry oracle conditions, and Robinhood
+                    Subnet smart contract execution parameters.
+                  </span>
+                </label>
+              </div>
+            </div>
+            <!-- RIGHT / ORDER EXECUTION SIDEBAR (5 cols on lg, 4 on xl) -->
+            <div
+              class="lg:col-span-5 xl:col-span-4 flex flex-col gap-space-lg sticky top-24"
+            >
+              <!-- Execution Panel Card -->
+              <div
+                class="bg-surface-container rounded-xl p-space-lg shadow-2xl flex flex-col gap-space-md"
+              >
+                <div
+                  class="flex items-center justify-between pb-space-sm border-b border-outline-variant/30"
+                >
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="w-2 h-2 rounded-full bg-primary animate-pulse"
+                    ></span>
+                    <span
+                      class="font-label-md text-label-md text-on-surface uppercase font-bold tracking-wider"
+                      >Execution Summary</span
+                    >
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-secondary bg-surface-container-lowest px-2 py-0.5 rounded"
+                    >Gasless Subnet</span
+                  >
+                </div>
+                <!-- Balance Matrix -->
+                <div class="space-y-space-xs font-label-md text-label-md">
+                  <div
+                    class="flex justify-between items-center text-on-surface-variant"
+                  >
+                    <span>Principal Deposit</span>
+                    <span
+                      class="text-on-surface font-semibold"
+                      id="sidebarPrincipal"
+                      >5,000.00 USDC</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center text-on-surface-variant"
+                  >
+                    <span>Claims to Mint</span>
+                    <span class="text-primary font-semibold" id="sidebarClaims"
+                      >5,000 SHLFROST</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center text-on-surface-variant"
+                  >
+                    <span>Protocol Underwriting Fee</span>
+                    <span
+                      class="text-secondary flex items-center gap-1 font-semibold"
+                    >
+                      <span class="line-through text-outline">25.00</span> 0.00
+                      USDC
+                    </span>
+                  </div>
+                  <div
+                    class="flex justify-between items-center text-on-surface-variant"
+                  >
+                    <span>Relayer Gas Overhead</span>
+                    <span class="text-primary font-semibold"
+                      >0.0000 ETH (Sponsored)</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center text-on-surface-variant"
+                  >
+                    <span>Routing Destination</span>
+                    <span
+                      class="text-on-surface truncate max-w-[150px] font-mono text-[11px]"
+                      >Vault_Subnet#14</span
+                    >
+                  </div>
+                </div>
+                <!-- Total Settlement -->
+                <div
+                  class="p-space-md bg-surface-container-lowest rounded-lg flex items-center justify-between"
+                >
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase tracking-wider"
+                      >Settlement Total</span
+                    >
+                    <span
+                      class="font-headline-md text-headline-md text-primary font-bold"
+                      id="sidebarTotal"
+                      >5,000.00 USDC</span
+                    >
+                  </div>
+                  <div class="text-right">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Net Yield Target</span
+                    >
+                    <div
+                      class="font-label-md text-label-md text-secondary font-bold"
+                    >
+                      14,000.00 USDC
+                    </div>
+                  </div>
+                </div>
+                <!-- Subnet Hardware Relayer Engine Box -->
+                <div
+                  class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-sm text-on-surface-variant font-label-sm text-label-sm"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5"
+                    >bolt</span
+                  >
+                  <div class="flex flex-col">
+                    <span class="text-on-surface font-semibold"
+                      >Robinhood Chain Account Abstraction</span
+                    >
+                    <span
+                      >Zero native gas required. Signature bundle relayed via
+                      ERC-4337 Paymaster contract.</span
+                    >
+                  </div>
+                </div>
+                <!-- Main CTA Button -->
+                <button
+                  class="w-full py-4 rounded-lg bg-primary hover:bg-primary-fixed text-on-primary font-headline-sm text-headline-sm tracking-wide uppercase transition-all duration-200 transform hover:scale-[1.01] active:scale-[0.99] shadow-[0_0_24px_-4px_rgba(78,222,163,0.35)] flex items-center justify-center gap-2 cursor-pointer font-bold"
+                  id="commitBtn"
+                  onclick="executeInvestment()"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >lock</span
+                  >
+                  <span id="btnText">Confirm &amp; Authorize 5,000 USDC</span>
+                </button>
+                <!-- Security Footnote -->
+                <div
+                  class="flex items-center justify-center gap-2 text-center text-outline font-label-sm text-label-sm pt-1"
+                >
+                  <span class="material-symbols-outlined text-[14px]"
+                    >lock_clock</span
+                  >
+                  <span
+                    >Non-custodial. Funds revocable if Tranche 2 consensus
+                    fails.</span
+                  >
+                </div>
+              </div>
+              <!-- Hardware Oracle Telemetry Capsule -->
+              <div
+                class="bg-surface-container rounded-xl p-space-md shadow-lg flex flex-col gap-space-xs"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm uppercase text-outline tracking-wider"
+                    >IoT Oracle Stream</span
+                  >
+                  <span
+                    class="flex items-center gap-1 font-label-sm text-label-sm text-primary"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Live Sync
+                  </span>
+                </div>
+                <div
+                  class="flex items-center justify-between text-on-surface font-label-md text-label-md pt-1"
+                >
+                  <span class="text-on-surface-variant"
+                    >Proto-Lab Ambient:</span
+                  >
+                  <span class="font-mono">42.8°C / 78% RH</span>
+                </div>
+                <div
+                  class="flex items-center justify-between text-on-surface font-label-md text-label-md"
+                >
+                  <span class="text-on-surface-variant"
+                    >Internal Cold Chamber:</span
+                  >
+                  <span class="font-mono text-secondary">+3.8°C (Stable)</span>
+                </div>
+                <div
+                  class="flex items-center justify-between text-on-surface font-label-md text-label-md"
+                >
+                  <span class="text-on-surface-variant">Solar Direct Bus:</span>
+                  <span class="font-mono">24.2 VDC @ 8.4A</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ON-CHAIN TRANSACTION CONFIRMATION DRAWER / MODAL OVERLAY -->
+        <div
+          class="fixed inset-0 z-50 flex items-center justify-center p-space-md bg-surface-container-lowest/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300"
+          id="confirmationModal"
+        >
+          <div
+            class="bg-surface-container rounded-xl max-w-lg w-full p-space-lg shadow-2xl flex flex-col gap-space-md transform scale-95 transition-all duration-300 relative overflow-hidden"
+            id="modalCard"
+          >
+            <!-- Decorative Mint Ambient Edge -->
+            <div
+              class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"
+            ></div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >check_circle</span
+                  >
+                </div>
+                <span class="font-headline-sm text-headline-sm text-on-surface"
+                  >Escrow Deposit Confirmed</span
+                >
+              </div>
+              <button
+                class="text-on-surface-variant hover:text-on-surface p-1"
+                onclick="closeConfirmation()"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[20px]">close</span>
+              </button>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Your capital has been securely routed into the Robinhood Subnet
+              #14 Escrow Pool.
+              <strong
+                class="text-on-surface font-semibold"
+                id="mintedTokensSummary"
+                >5,000 SHLFROST</strong
+              >
+              claim tokens have been minted directly to your smart wallet.
+            </p>
+            <!-- Ledger Confirmation Data List -->
+            <div
+              class="bg-surface-container-lowest rounded-lg p-space-md space-y-space-xs font-label-md text-label-md"
+            >
+              <div
+                class="flex justify-between items-center text-on-surface-variant"
+              >
+                <span>Transaction Hash</span>
+                <a
+                  class="text-primary hover:underline font-mono text-[11px] flex items-center gap-1"
+                  href="#"
+                >
+                  <span>0x9c41...8bf7</span>
+                  <span class="material-symbols-outlined text-[13px]"
+                    >open_in_new</span
+                  >
+                </a>
+              </div>
+              <div
+                class="flex justify-between items-center text-on-surface-variant"
+              >
+                <span>Subnet Block Number</span>
+                <span class="text-on-surface font-mono"
+                  >#22,491,803 (Confirmed)</span
+                >
+              </div>
+              <div
+                class="flex justify-between items-center text-on-surface-variant"
+              >
+                <span>Escrow Smart Vault</span>
+                <span class="text-secondary font-mono text-[11px]"
+                  >0x88f2...09bc</span
+                >
+              </div>
+              <div
+                class="flex justify-between items-center text-on-surface-variant"
+              >
+                <span>Execution Gas Spent</span>
+                <span class="text-primary font-mono"
+                  >0.000000 ETH ($0.00 Gasless)</span
+                >
+              </div>
+              <div
+                class="flex justify-between items-center text-on-surface-variant"
+              >
+                <span>Next Milestone Window</span>
+                <span class="text-on-surface"
+                  >48 Hours Consensus (Vote #04)</span
+                >
+              </div>
+            </div>
+            <!-- Quick Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-space-sm pt-space-xs">
+              <a
+                class="flex-1 py-3 rounded bg-primary hover:bg-primary-fixed text-on-primary font-label-md text-label-md uppercase font-semibold text-center transition-colors flex items-center justify-center gap-1"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >pie_chart</span
+                >
+                View Claims in Portfolio
+              </a>
+              <button
+                class="px-4 py-3 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md uppercase transition-colors"
+                onclick="closeConfirmation()"
+                type="button"
+              >
+                Dismiss Terminal
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Client-Side Terminal Logic -->
+        <script>
+          function formatCurrency(val) {
+            return new Intl.NumberFormat("en-US", {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            }).format(val);
+          }
+
+          function formatPrecise(val) {
+            return new Intl.NumberFormat("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }).format(val);
+          }
+
+          function setAllocation(amount) {
+            const input = document.getElementById("capitalInput");
+            input.value = amount;
+            recalculateFlow(amount);
+
+            // Visual state for preset buttons
+            const buttons = document.querySelectorAll(".preset-btn");
+            buttons.forEach((btn) => {
+              if (
+                btn.innerText.replace(/[$,]/g, "") == amount ||
+                (amount === 42500 && btn.innerText === "MAX")
+              ) {
+                btn.classList.add(
+                  "bg-surface-container-highest",
+                  "text-primary",
+                );
+                btn.classList.remove(
+                  "bg-surface-container-low",
+                  "text-on-surface-variant",
+                );
+              } else {
+                btn.classList.remove(
+                  "bg-surface-container-highest",
+                  "text-primary",
+                );
+                btn.classList.add(
+                  "bg-surface-container-low",
+                  "text-on-surface-variant",
+                );
+              }
+            });
+          }
+
+          function recalculateFlow(val) {
+            const amount = parseFloat(val) || 0;
+
+            // Update Minted Tokens
+            const claimsOutput = document.getElementById("claimsOutput");
+            claimsOutput.textContent = formatCurrency(amount);
+
+            // Payout Cap (2.80x multiple)
+            const payoutCapDisplay =
+              document.getElementById("payoutCapDisplay");
+            payoutCapDisplay.textContent =
+              "$" + formatCurrency(amount * 2.8) + " Est. Cap";
+
+            // Voting Power (1 vote per USDC)
+            const votingPowerDisplay =
+              document.getElementById("votingPowerDisplay");
+            votingPowerDisplay.textContent = formatCurrency(amount) + " Votes";
+
+            // Pool share calculation against 420,000 target
+            const poolShare = ((amount / 420000) * 100).toFixed(2);
+            document.getElementById("poolShareDisplay").textContent =
+              poolShare + "% Escrow Weight";
+
+            // Tranche allocations (Fixed ratios)
+            // T1: 20%, T2: 33.32%, T3: 26.68%, T4: 20%
+            document.getElementById("t1Amount").textContent =
+              "$" + formatPrecise(amount * 0.2) + " USDC";
+            document.getElementById("t2Amount").textContent =
+              "$" + formatPrecise(amount * 0.3332) + " USDC";
+            document.getElementById("t3Amount").textContent =
+              "$" + formatPrecise(amount * 0.2668) + " USDC";
+            document.getElementById("t4Amount").textContent =
+              "$" + formatPrecise(amount * 0.2) + " USDC";
+
+            // Sidebar totals
+            document.getElementById("sidebarPrincipal").textContent =
+              formatPrecise(amount) + " USDC";
+            document.getElementById("sidebarClaims").textContent =
+              formatCurrency(amount) + " SHLFROST";
+            document.getElementById("sidebarTotal").textContent =
+              formatPrecise(amount) + " USDC";
+            document.getElementById("btnText").textContent =
+              "Confirm & Authorize " + formatCurrency(amount) + " USDC";
+          }
+
+          document
+            .getElementById("capitalInput")
+            .addEventListener("input", function (e) {
+              recalculateFlow(this.value);
+            });
+
+          function executeInvestment() {
+            const ack1 = document.getElementById("ack1").checked;
+            const ack2 = document.getElementById("ack2").checked;
+
+            if (!ack1 || !ack2) {
+              alert(
+                "Please accept both regulatory and milestone underwriting conditions to proceed with on-chain authorization.",
+              );
+              return;
+            }
+
+            const inputVal = document.getElementById("capitalInput").value;
+            document.getElementById("mintedTokensSummary").textContent =
+              formatCurrency(inputVal) + " SHLFROST";
+
+            // Show Confirmation Modal
+            const modal = document.getElementById("confirmationModal");
+            const card = document.getElementById("modalCard");
+
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modal.classList.add("opacity-100", "pointer-events-auto");
+            card.classList.remove("scale-95");
+            card.classList.add("scale-100");
+          }
+
+          function closeConfirmation() {
+            const modal = document.getElementById("confirmationModal");
+            const card = document.getElementById("modalCard");
+
+            modal.classList.add("opacity-0", "pointer-events-none");
+            modal.classList.remove("opacity-100", "pointer-events-auto");
+            card.classList.add("scale-95");
+            card.classList.remove("scale-100");
+          }
+        </script>
+      </div>
+    </main>
+    <footer
+      class="w-full bg-surface-container-lowest border-t border-outline-variant/30 text-on-surface-variant"
+    >
+      <div class="w-full px-space-lg lg:px-margin py-space-xl">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-lg pb-space-lg border-b border-outline-variant/20"
+        >
+          <div class="lg:col-span-2 space-y-space-md">
+            <div class="flex items-center gap-space-sm">
+              <img
+                alt="Brand logo. - Primary color: #10b981
+- Font: spaceGrotesk
+- Mode: dark
+- Roundness: rounded-sm
+"
+                class="h-6 w-auto object-contain"
+                src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+              /><span
+                class="font-headline-sm text-headline-sm text-on-surface uppercase leading-none"
+                >ProtoRWA</span
+              >
+            </div>
+            <p
+              class="font-body-sm text-body-sm text-on-surface-variant max-w-sm"
+            >
+              Decentralized hardware &amp; physical infrastructure underwriting
+              protocol. Institutional milestone-gated capital issuance and
+              custody tracking on Robinhood Subnet &amp; Arbitrum One.
+            </p>
+            <div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+              <span
+                class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >Arbitrum One Verified</span
+              ><span
+                class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >Robinhood Chain Engine</span
+              ><span
+                class="px-2 py-0.5 rounded bg-surface-container text-tertiary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >OpenZeppelin Audited</span
+              >
+            </div>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Protocol Infrastructure
+            </div>
+            <ul class="space-y-space-xs font-body-sm text-body-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="explore-projects"
+                  href="#"
+                  >Asset Directory</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="secondary-market"
+                  href="#"
+                  >Liquidity Pools</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="escrow-registry"
+                  href="#"
+                  >Custody Vaults</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="oracle-feeds"
+                  href="#"
+                  >Chainlink IoT Feeds</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Founders &amp; Issuers
+            </div>
+            <ul class="space-y-space-xs font-body-sm text-body-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="founder-studio"
+                  href="#"
+                  >Underwriting Studio</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="milestone-verification"
+                  href="#"
+                  >Hardware Attestation</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="how-it-works"
+                  href="#"
+                  >Deployment Pipeline</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="developer-docs"
+                  href="#"
+                  >Factory SDK</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Contract Registry
+            </div>
+            <div class="space-y-space-xs font-label-sm text-label-sm">
+              <div
+                class="p-2 rounded bg-surface-container-low border border-outline-variant/30"
+              >
+                <div class="text-on-surface-variant">VaultFactory.sol</div>
+                <div class="text-primary truncate font-mono">0x8849...9E20</div>
+              </div>
+              <div
+                class="p-2 rounded bg-surface-container-low border border-outline-variant/30"
+              >
+                <div class="text-on-surface-variant">OracleAttestor.sol</div>
+                <div class="text-secondary truncate font-mono">
+                  0x32A1...C81F
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-outline"
+        >
+          <p>
+            © 2025 ProtoRWA Protocol. Engineered for Autonomous Hardware
+            Capitalization.
+          </p>
+          <div class="flex items-center gap-space-md">
+            <span>Zero Slippage Gasless Execution</span
+            ><span>Block: 22,491,802</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

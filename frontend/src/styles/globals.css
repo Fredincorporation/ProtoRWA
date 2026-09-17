@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * ProtoRWA global styles.
+ *
+ * Tailwind token values are GENERATED (see design-source/build-theme.mjs) from
+ * the Stitch project, so the class names below resolve to the exact palette and
+ * type scale the designs were authored with.
+ *
+ * The app is dark-first: the designs were authored in dark mode.
+ */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    @apply bg-background font-sans text-on-surface antialiased;
+    /* Stitch hid the scrollbar for a terminal feel; keep that but stay usable. */
+    overscroll-behavior-y: none;
+  }
+
+  /* Design tokens carry their own line-height/weight, so headings inherit. */
+  h1 {
+    @apply font-display text-headline-lg;
+  }
+
+  h2 {
+    @apply font-display text-headline-md;
+  }
+
+  h3 {
+    @apply font-display text-headline-sm;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-on-surface;
+  }
+
+  /* Focus rings must be visible against the dark surface. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary/70 ring-offset-2 ring-offset-background;
+  }
+
+  /* Thin, low-contrast scrollbars that match the surface scale. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--outline-variant) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--outline-variant);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--outline);
+  }
+}
+
+@layer components {
+  /* Surface panel used by nearly every card in the designs. */
+  .panel {
+    @apply rounded-lg border-outline-variant/60 bg-panel;
+  }
+
+  /* Monospace status pill, e.g. "AWAITING LAUNCH" on the landing hero. */
+  .status-pill {
+    @apply inline-flex items-center gap-2 rounded-full border-primary/40 bg-primary/10
+      px-3 py-1 font-mono text-label-sm uppercase tracking-wider text-primary;
+  }
+
+  /* Subtle 1px grid used behind hero and stat sections. */
+  .grid-backdrop {
+    @apply bg-grid-fade bg-grid;
+  }
+
+  /* Hairline divider matching the outline token. */
+  .hairline {
+    @apply border-outline-variant/50;
+  }
+}
+
+@layer utilities {
+  /* Numbers in tables and metrics should align. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /*
+   * Safety net: a `grid-cols-*` utility is inert without `display: grid`, and it
+   * is easy to write one and forget the other. These rules make the column
+   * utilities self-activating, so a missing `grid` class can never silently
+   * collapse a layout again. `flex` layouts still win because Tailwind's own
+   * `flex` utility sets display and is not overridden here.
+   */
+  [class*='grid-cols-']:not([class*='flex']) {
+    display: grid;
+  }
+
+  /*
+   * NOTE: there is deliberately no equivalent safety net for `flex-col` / `flex-row`.
+   * An earlier version forced `display: flex` for any element with those class
+   * substrings, which silently overrode `grid` layouts that also carried a
+   * `flex-col` helper (the voting panel columns), crushing them into a single
+   * narrow stack. Flex containers must declare `display: flex` explicitly.
+
+  /* Fades long lists into the background. */
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+}

@@ -1,0 +1,1260 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#bbcabf",
+              "on-secondary-fixed-variant": "#004e5c",
+              "primary-fixed": "#6ffbbe",
+              "on-error": "#690005",
+              outline: "#86948a",
+              "on-background": "#dee2ee",
+              "tertiary-container": "#e29100",
+              "surface-container-highest": "#30353e",
+              "secondary-container": "#03b5d3",
+              secondary: "#4cd7f6",
+              "on-primary-fixed-variant": "#005236",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#4edea3",
+              "secondary-fixed-dim": "#4cd7f6",
+              "secondary-fixed": "#acedff",
+              "on-tertiary-fixed": "#2a1700",
+              primary: "#4edea3",
+              "inverse-surface": "#dee2ee",
+              "tertiary-fixed": "#ffddb8",
+              "surface-dim": "#0f141c",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-secondary-container": "#00424e",
+              tertiary: "#ffb95f",
+              "surface-variant": "#30353e",
+              "on-primary-container": "#00422b",
+              "on-primary-fixed": "#002113",
+              "outline-variant": "#3c4a42",
+              error: "#ffb4ab",
+              "surface-container-high": "#252a33",
+              "on-secondary-fixed": "#001f26",
+              "surface-bright": "#343942",
+              "surface-container-lowest": "#090e16",
+              "primary-container": "#10b981",
+              "primary-fixed-dim": "#4edea3",
+              "on-surface": "#dee2ee",
+              background: "#0f141c",
+              surface: "#0f141c",
+              "on-tertiary-fixed-variant": "#653e00",
+              "inverse-primary": "#006c49",
+              "on-tertiary-container": "#523200",
+              "on-primary": "#003824",
+              "on-secondary": "#003640",
+              "error-container": "#93000a",
+              "surface-container-low": "#171c24",
+              "on-tertiary": "#472a00",
+              "inverse-on-surface": "#2c3139",
+              "surface-container": "#1b2028",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              gutter: "1.5rem",
+              "space-xl": "2.5rem",
+              "margin-mobile": "1rem",
+              "space-sm": "0.5rem",
+              margin: "2.5rem",
+              "space-md": "1rem",
+              "space-xs": "0.25rem",
+              "space-lg": "1.5rem",
+              "gutter-mobile": "1rem",
+            },
+            fontFamily: {
+              "headline-lg-mobile": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "body-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-lg": ["Space Grotesk"],
+              "headline-md": ["Space Grotesk"],
+              "headline-sm": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "display-lg": ["Space Grotesk"],
+              "label-md": ["JetBrains Mono"],
+              "body-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface antialiased">
+    <aside
+      class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md"
+    >
+      <div class="flex flex-col gap-space-md">
+        <div class="px-space-md flex items-center gap-space-sm">
+          <div
+            class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center"
+          >
+            <span class="font-label-lg text-label-lg font-bold text-on-primary"
+              >P</span
+            >
+          </div>
+          <div>
+            <div
+              class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight"
+            >
+              ProtoRWA
+            </div>
+            <div
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+            >
+              Terminal Engine
+            </div>
+          </div>
+        </div>
+        <nav
+          class="flex flex-col gap-space-xs px-space-sm"
+          data-active-classes="bg-surface-container-high text-primary font-label-md text-label-md rounded-lg"
+        >
+          <a
+            aria-current="page"
+            class="px-space-sm py-2 transition-colors bg-surface-container-high text-primary font-label-md text-label-md rounded-lg"
+            data-path="founder-studio"
+            href="#"
+            >Founder Studio</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="investor-portfolio"
+            href="#"
+            >Investor Portfolio</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="project-terminal"
+            href="#"
+            >Project Terminal</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="secondary-claims-market"
+            href="#"
+            >Secondary Claims Market</a
+          ><a
+            class="px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors"
+            data-path="explore-projects"
+            href="#"
+            >Explore Projects</a
+          >
+        </nav>
+      </div>
+      <div class="px-space-md flex flex-col gap-space-xs">
+        <div class="p-space-sm rounded-lg bg-surface-container-low">
+          <div
+            class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+          >
+            Active Network
+          </div>
+          <div class="font-label-md text-label-md text-primary font-bold">
+            Robinhood Subnet #14
+          </div>
+          <div class="font-label-sm text-label-sm text-outline">
+            Gas: 0.001 Gwei
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="pl-64">
+      <header
+        class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 flex items-center justify-between px-gutter"
+      >
+        <div class="flex items-center gap-space-sm">
+          <div
+            class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low"
+          >
+            <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <span class="font-label-sm text-label-sm text-on-surface uppercase"
+              >Robinhood Chain</span
+            >
+          </div>
+          <span
+            class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase"
+            >RWA SUB-PROTOCOL</span
+          >
+        </div>
+        <div class="flex items-center gap-space-sm">
+          <div
+            class="flex items-center rounded-lg bg-surface-container-high p-0.5"
+          >
+            <div
+              class="px-space-sm py-1 font-label-md text-label-md text-primary font-semibold"
+            >
+              42,500 USDC
+            </div>
+            <div
+              class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium"
+            >
+              0x71C...4f9b
+            </div>
+          </div>
+          <button
+            class="relative p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary"
+            ></span></button
+          ><img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+          />
+        </div>
+      </header>
+      <main class="relative pt-16 bg-surface min-h-screen px-gutter">
+        <div class="flex flex-col w-full pb-space-xl">
+          <!-- Stepper Bar -->
+          <div
+            class="w-full bg-surface-container-lowest py-space-md px-gutter shadow-sm rounded-xl mb-space-lg"
+          >
+            <div
+              class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md"
+            >
+              <!-- Step 1 (Done) -->
+              <div class="flex items-center gap-space-sm group cursor-pointer">
+                <div
+                  class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+                >
+                  <span
+                    class="material-symbols-outlined text-headline-sm"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                </div>
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-sm text-label-sm text-primary uppercase"
+                    >Stage 01</span
+                  >
+                  <span
+                    class="font-headline-sm text-label-md text-on-surface font-semibold"
+                    >Specs & Architecture</span
+                  >
+                </div>
+              </div>
+              <div
+                class="hidden md:block flex-1 h-[2px] bg-primary/30 mx-space-sm"
+              ></div>
+              <!-- Step 2 (Active) -->
+              <div class="flex items-center gap-space-sm group cursor-pointer">
+                <div
+                  class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-[0_0_16px_rgba(16,185,129,0.35)]"
+                >
+                  <span class="font-label-md text-label-md font-bold">02</span>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="font-label-sm text-label-sm text-primary uppercase"
+                      >Current Step</span
+                    >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"
+                    ></span>
+                  </div>
+                  <span
+                    class="font-headline-sm text-label-md text-on-surface font-bold"
+                    >Pitch & Visual Assets</span
+                  >
+                </div>
+              </div>
+              <div
+                class="hidden md:block flex-1 h-[2px] bg-surface-container-highest mx-space-sm"
+              ></div>
+              <!-- Step 3 (Upcoming) -->
+              <div class="flex items-center gap-space-sm opacity-60">
+                <div
+                  class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant"
+                >
+                  <span class="font-label-md text-label-md font-bold">03</span>
+                </div>
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                    >Stage 03</span
+                  >
+                  <span
+                    class="font-headline-sm text-label-md text-on-surface-variant"
+                    >Milestones & Escrow</span
+                  >
+                </div>
+              </div>
+              <div
+                class="hidden md:block flex-1 h-[2px] bg-surface-container-highest mx-space-sm"
+              ></div>
+              <!-- Step 4 (Upcoming) -->
+              <div class="flex items-center gap-space-sm opacity-40">
+                <div
+                  class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant"
+                >
+                  <span class="font-label-md text-label-md font-bold">04</span>
+                </div>
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                    >Stage 04</span
+                  >
+                  <span
+                    class="font-headline-sm text-label-md text-on-surface-variant"
+                    >Tokenomics & Launch</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Main Split Architecture -->
+          <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start"
+          >
+            <!-- Left Column: Form & Specifications (65%) -->
+            <div class="lg:col-span-8 flex flex-col gap-space-lg">
+              <!-- Header Banner Card -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg shadow-sm relative overflow-hidden"
+              >
+                <div
+                  class="absolute -right-8 -bottom-8 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"
+                ></div>
+                <div class="flex items-start justify-between">
+                  <div>
+                    <div class="flex items-center gap-space-xs mb-space-xs">
+                      <span
+                        class="px-space-xs py-0.5 rounded-lg bg-primary/10 text-primary font-label-sm text-label-sm uppercase tracking-wider"
+                        >Robinhood Subnet Ready</span
+                      >
+                      <span
+                        class="px-space-xs py-0.5 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm"
+                        >ERC-3643 PERMISSIONED</span
+                      >
+                    </div>
+                    <h1
+                      class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight"
+                    >
+                      Tokenize Physical Hardware Product
+                    </h1>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl"
+                    >
+                      Raise production capital backed by device purchase orders
+                      and direct hardware revenues without cap-table dilution.
+                      Funds guarded by milestone-gated smart contracts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Section 1: Product Identity & Registration -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <span
+                      class="material-symbols-outlined text-primary text-headline-md"
+                      >memory</span
+                    >
+                    <h2
+                      class="font-headline-md text-headline-md text-on-surface"
+                    >
+                      Product Identity & Legal Basis
+                    </h2>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant"
+                    >SKU REGISTRY #01</span
+                  >
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                  <!-- Product Name -->
+                  <div class="flex flex-col gap-space-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                      >Device Model / Name</label
+                    >
+                    <div class="relative">
+                      <input
+                        class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary shadow-inner"
+                        type="text"
+                        value="AeroPulse M2 Autonomous Drone LiDAR"
+                      />
+                      <span
+                        class="material-symbols-outlined absolute right-3 top-2.5 text-primary text-[18px]"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Token Ticker -->
+                  <div class="flex flex-col gap-space-xs">
+                    <div class="flex justify-between items-center">
+                      <label
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                        >Revenue-Share Ticker</label
+                      >
+                      <span class="font-label-sm text-label-sm text-primary"
+                        >ERC-3643 Standard</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center bg-surface-container-lowest rounded-lg px-space-md py-1.5 shadow-inner"
+                    >
+                      <span
+                        class="font-label-md text-label-md text-on-surface-variant mr-1"
+                        >$</span
+                      >
+                      <input
+                        class="w-full bg-transparent text-primary font-label-md text-label-md font-bold uppercase focus:outline-none"
+                        type="text"
+                        value="SAPULSE"
+                      />
+                      <span
+                        class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase"
+                        >Claim Token</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Hardware Category Dropdown -->
+                  <div class="flex flex-col gap-space-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                      >Hardware Category</label
+                    >
+                    <div class="relative">
+                      <select
+                        class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-inner"
+                      >
+                        <option selected="">
+                          Robotics & Aerial Sensor Hardware
+                        </option>
+                        <option>Advanced Compute & DePIN Nodes</option>
+                        <option>Biomedical & Telehealth Wearables</option>
+                        <option>Smart Grid Energy Converters</option>
+                      </select>
+                      <span
+                        class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none"
+                        >expand_more</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Legal Entity Status -->
+                  <div class="flex flex-col gap-space-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                      >Entity Verification Entity</label
+                    >
+                    <div
+                      class="flex items-center justify-between bg-surface-container-lowest px-space-md py-2.5 rounded-lg shadow-inner"
+                    >
+                      <div class="flex items-center gap-space-xs truncate">
+                        <span
+                          class="material-symbols-outlined text-primary text-[18px]"
+                          >gavel</span
+                        >
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface truncate"
+                          >AeroPulse Dynamics LLC • DE Corp</span
+                        >
+                      </div>
+                      <span
+                        class="px-space-xs py-0.5 rounded-lg bg-primary/20 text-primary font-label-sm text-label-sm shrink-0"
+                        >KYB Verified #8820-DR</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Section 2: Bill of Materials & Technical Specs -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <span
+                      class="material-symbols-outlined text-secondary text-headline-md"
+                      >precision_manufacturing</span
+                    >
+                    <div>
+                      <h2
+                        class="font-headline-md text-headline-md text-on-surface"
+                      >
+                        Bill of Materials (BOM) & Financials
+                      </h2>
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Audited manufacturing inputs for on-chain yield
+                        calculation</span
+                      >
+                    </div>
+                  </div>
+                  <button
+                    class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-space-xs transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >tune</span
+                    >
+                    Custom Presets
+                  </button>
+                </div>
+                <!-- BOM Metric Visual Split -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+                  <div
+                    class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col justify-between"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Target Unit BOM Cost</span
+                    >
+                    <div class="flex items-baseline gap-1 my-1">
+                      <span
+                        class="font-label-lg text-headline-md font-bold text-on-surface"
+                        >$340.00</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >USDC</span
+                      >
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-secondary h-full" style="width: 26%"></div>
+                    </div>
+                    <span class="font-label-sm text-label-sm text-outline mt-2"
+                      >Verified Supplier Invoices</span
+                    >
+                  </div>
+                  <div
+                    class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col justify-between"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Target Retail / MSRP</span
+                    >
+                    <div class="flex items-baseline gap-1 my-1">
+                      <span
+                        class="font-label-lg text-headline-md font-bold text-primary"
+                        >$1,290.00</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >USDC</span
+                      >
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-primary h-full" style="width: 100%"></div>
+                    </div>
+                    <span class="font-label-sm text-label-sm text-primary mt-2"
+                      >3.79x Gross Multiple</span
+                    >
+                  </div>
+                  <div
+                    class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col justify-between"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Est. Escrow Protocol APY</span
+                    >
+                    <div class="flex items-baseline gap-1 my-1">
+                      <span
+                        class="font-label-lg text-headline-md font-bold text-tertiary"
+                        >18.4%</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >RevShare</span
+                      >
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-tertiary h-full" style="width: 74%"></div>
+                    </div>
+                    <span class="font-label-sm text-label-sm text-outline mt-2"
+                      >Smart Contract Distributed</span
+                    >
+                  </div>
+                </div>
+                <!-- Verified Components Chips -->
+                <div class="flex flex-col gap-space-xs mt-space-xs">
+                  <label
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >Key Certified Sub-Assemblies</label
+                  >
+                  <div class="flex flex-wrap gap-space-xs">
+                    <div
+                      class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        >sensors</span
+                      >
+                      <span class="font-label-md text-label-md"
+                        >Sony IMX990 SWIR Sensor</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-outline text-[14px] cursor-pointer hover:text-error"
+                        >close</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        >grid_4x4</span
+                      >
+                      <span class="font-label-md text-label-md"
+                        >Custom 7075-T6 CNC Airframe</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-outline text-[14px] cursor-pointer hover:text-error"
+                        >close</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        >developer_board</span
+                      >
+                      <span class="font-label-md text-label-md"
+                        >STM32H7 Dual-Core ARM MCU</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-outline text-[14px] cursor-pointer hover:text-error"
+                        >close</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        >router</span
+                      >
+                      <span class="font-label-md text-label-md"
+                        >Qualcomm RB5 Compute Unit</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-outline text-[14px] cursor-pointer hover:text-error"
+                        >close</span
+                      >
+                    </div>
+                    <button
+                      class="px-space-sm py-1.5 rounded-lg bg-surface-container-highest hover:bg-surface-bright text-primary font-label-sm text-label-sm flex items-center gap-1 transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"
+                        >add</span
+                      >
+                      Add Component
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Section 3: Pitch Media, IPFS & Engineering Schematics -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <span
+                      class="material-symbols-outlined text-primary text-headline-md"
+                      >movie</span
+                    >
+                    <div>
+                      <h2
+                        class="font-headline-md text-headline-md text-on-surface"
+                      >
+                        Pitch Video & Technical Proofs
+                      </h2>
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Decentralized IPFS pinned assets for institutional
+                        review</span
+                      >
+                    </div>
+                  </div>
+                  <span
+                    class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm"
+                    >PINNED VIA FILECOIN</span
+                  >
+                </div>
+                <!-- Video Player / IPFS Card -->
+                <div
+                  class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-inner"
+                >
+                  <div class="relative w-full h-72 bg-surface-container">
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="Futuristic autonomous industrial drone chassis illuminated under high contrast laboratory LED lighting, with carbon fiber textures, mounted LiDAR sensor optics, and sleek titanium brackets in deep graphite and emerald highlights."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQZFCaL_EZPc4LuXvtaSJZ39Lv5v7pkAGT30T1pf7IIdL74W-Pa4YTG0nROnPswUut9Ce5zBXOJkIgdhV5TQ3iS4-te_zVjVQDJxr55BVoCUEg-mulY1uj5jVRQnoQNcCfcD5WOfqEK0450e9c7bbV7-h15CRI_fsaYq8qkuiE16ixzDkII6zq8W-CT--CGxqlliqS0X9l184e7Zd-TnkfEsS0k1-yW2FOGQ9M-W5ZEwg7pqLUZJG6"
+                    />
+                    <!-- Video Overlay Gradient -->
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/40 flex flex-col justify-between p-space-md"
+                    >
+                      <div class="flex justify-between items-center">
+                        <span
+                          class="px-space-sm py-1 rounded-lg bg-surface-container-lowest/80 backdrop-blur-md text-primary font-label-sm text-label-sm flex items-center gap-1"
+                        >
+                          <span
+                            class="w-2 h-2 rounded-full bg-primary animate-ping"
+                          ></span>
+                          1080p 60fps • Master Render
+                        </span>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface bg-surface-container-lowest/80 backdrop-blur-md px-space-sm py-1 rounded-lg"
+                          >04:18 DURATION</span
+                        >
+                      </div>
+                      <!-- Playback UI Controller -->
+                      <div class="flex flex-col gap-space-xs">
+                        <div class="flex items-center justify-between">
+                          <button
+                            class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-105 transition-transform shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+                          >
+                            <span class="material-symbols-outlined text-[24px]"
+                              >play_arrow</span
+                            >
+                          </button>
+                          <div class="flex items-center gap-space-sm">
+                            <span
+                              class="material-symbols-outlined text-on-surface cursor-pointer text-[20px]"
+                              >volume_up</span
+                            >
+                            <span
+                              class="material-symbols-outlined text-on-surface cursor-pointer text-[20px]"
+                              >fullscreen</span
+                            >
+                          </div>
+                        </div>
+                        <!-- Playback Track -->
+                        <div
+                          class="w-full bg-surface-container-highest h-1 rounded-full cursor-pointer relative overflow-hidden"
+                        >
+                          <div
+                            class="bg-primary h-full"
+                            style="width: 32%"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Video Metadata & IPFS Hash -->
+                  <div
+                    class="p-space-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm"
+                  >
+                    <div class="flex items-center gap-space-sm">
+                      <div
+                        class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >cloud_done</span
+                        >
+                      </div>
+                      <div>
+                        <div
+                          class="font-label-md text-label-md text-on-surface font-semibold"
+                        >
+                          Video_Pitch_AeroPulse_v2.mp4
+                        </div>
+                        <div
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                        >
+                          48.2 MB • IPFS:
+                          <span
+                            class="text-secondary cursor-pointer hover:underline"
+                            >ipfs://Qm7X89eZ...k892a</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-space-xs">
+                      <button
+                        class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors"
+                      >
+                        Replace
+                      </button>
+                      <button
+                        class="px-space-sm py-1 rounded-lg bg-surface-container-high hover:bg-surface-bright text-primary font-label-sm text-label-sm flex items-center gap-1 transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >content_copy</span
+                        >
+                        Copy CID
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- CAD & Engineering Schematics Upload Area -->
+                <div class="flex flex-col gap-space-xs">
+                  <label
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >CAD Blueprints & Thermal Testing Docs</label
+                  >
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+                    <!-- File Card 1 -->
+                    <div
+                      class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between"
+                    >
+                      <div class="flex items-center gap-space-xs min-w-0">
+                        <span
+                          class="material-symbols-outlined text-secondary text-[20px] shrink-0"
+                          >view_in_ar</span
+                        >
+                        <div class="min-w-0">
+                          <div
+                            class="font-label-sm text-label-sm text-on-surface font-semibold truncate"
+                          >
+                            Chassis_Exploded.step
+                          </div>
+                          <div class="font-label-sm text-label-sm text-outline">
+                            12.4 MB
+                          </div>
+                        </div>
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >verified</span
+                      >
+                    </div>
+                    <!-- File Card 2 -->
+                    <div
+                      class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between"
+                    >
+                      <div class="flex items-center gap-space-xs min-w-0">
+                        <span
+                          class="material-symbols-outlined text-secondary text-[20px] shrink-0"
+                          >developer_board</span
+                        >
+                        <div class="min-w-0">
+                          <div
+                            class="font-label-sm text-label-sm text-on-surface font-semibold truncate"
+                          >
+                            PCB_Gerbers_v3.zip
+                          </div>
+                          <div class="font-label-sm text-label-sm text-outline">
+                            8.1 MB
+                          </div>
+                        </div>
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >verified</span
+                      >
+                    </div>
+                    <!-- File Card 3 -->
+                    <div
+                      class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between"
+                    >
+                      <div class="flex items-center gap-space-xs min-w-0">
+                        <span
+                          class="material-symbols-outlined text-secondary text-[20px] shrink-0"
+                          >thermostat</span
+                        >
+                        <div class="min-w-0">
+                          <div
+                            class="font-label-sm text-label-sm text-on-surface font-semibold truncate"
+                          >
+                            Thermal_Stress_Lab.pdf
+                          </div>
+                          <div class="font-label-sm text-label-sm text-outline">
+                            3.8 MB
+                          </div>
+                        </div>
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Upload Dropzone -->
+                  <div
+                    class="mt-space-xs border-2 border-dashed border-surface-container-highest rounded-xl p-space-md bg-surface-container-lowest/50 hover:bg-surface-container-lowest flex flex-col items-center justify-center text-center cursor-pointer transition-colors group"
+                  >
+                    <span
+                      class="material-symbols-outlined text-headline-lg text-outline group-hover:text-primary transition-colors"
+                      >upload_file</span
+                    >
+                    <div
+                      class="font-label-md text-label-md text-on-surface mt-1 font-semibold"
+                    >
+                      Drop STEP, STL, Gerber or PDF Test Reports
+                    </div>
+                    <div
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Automated hashing with SHA-256 for cryptographic hardware
+                      escrow proof
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Bottom Action Footer -->
+              <div class="flex items-center justify-between pt-space-sm">
+                <button
+                  class="px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >save</span
+                  >
+                  Save Draft
+                </button>
+                <div class="flex items-center gap-space-sm">
+                  <button
+                    class="px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors"
+                  >
+                    Back: Step 1
+                  </button>
+                  <button
+                    class="px-space-lg py-2.5 rounded-lg bg-primary hover:bg-primary-fixed text-on-primary font-label-md text-label-md font-bold flex items-center gap-space-xs shadow-[0_0_24px_-4px_rgba(16,185,129,0.35)] transition-all"
+                  >
+                    <span>Continue to Milestones & Escrow</span>
+                    <span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Right Column: AI Assistant & Structuring Guidelines (35%) -->
+            <div class="lg:col-span-4 flex flex-col gap-space-lg">
+              <!-- AI Hardware Structuring Agent Card -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md shadow-sm relative overflow-hidden"
+              >
+                <div class="flex items-center justify-between pb-space-sm">
+                  <div class="flex items-center gap-space-xs">
+                    <div
+                      class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"
+                    ></div>
+                    <span
+                      class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider"
+                      >AI Structuring Oracle</span
+                    >
+                  </div>
+                  <span
+                    class="px-space-xs py-0.5 rounded-lg bg-primary/10 text-primary font-label-sm text-label-sm font-bold"
+                    >94/100 SCORE</span
+                  >
+                </div>
+                <!-- Metric Radial Visual -->
+                <div
+                  class="bg-surface-container-lowest rounded-lg p-space-md flex items-center gap-space-md my-space-xs"
+                >
+                  <div
+                    class="relative w-16 h-16 shrink-0 flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-full h-full transform -rotate-90"
+                      viewbox="0 0 36 36"
+                    >
+                      <path
+                        class="text-surface-container-high"
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3.5"
+                      ></path>
+                      <path
+                        class="text-primary"
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-dasharray="94, 100"
+                        stroke-linecap="round"
+                        stroke-width="3.5"
+                      ></path>
+                    </svg>
+                    <span
+                      class="absolute font-label-md text-label-md font-bold text-on-surface"
+                      >94%</span
+                    >
+                  </div>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-headline-sm text-label-md text-on-surface font-semibold"
+                      >Institutional Viability</span
+                    >
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                      >Optimal margin ratio & verified tier-1 supply-chain
+                      partners.</span
+                    >
+                  </div>
+                </div>
+                <!-- AI Recommendations Stream -->
+                <div class="flex flex-col gap-space-sm mt-space-sm">
+                  <div
+                    class="p-space-sm rounded-lg bg-surface-container-lowest"
+                  >
+                    <div
+                      class="flex items-center gap-1 text-primary font-label-sm text-label-sm font-semibold mb-1"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"
+                        >lightbulb</span
+                      >
+                      ESCROW RECOMMENDATION
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface">
+                      Your
+                      <span
+                        class="font-label-sm text-label-sm text-primary font-bold"
+                        >$340 BOM</span
+                      >
+                      yields a healthy
+                      <span
+                        class="font-label-sm text-label-sm text-primary font-bold"
+                        >3.79x multiple</span
+                      >. We suggest structuring 4 release milestones with
+                      <span class="text-secondary">Sony IMX990</span> serial
+                      tracking for instant tranche unlocks.
+                    </p>
+                  </div>
+                  <div
+                    class="p-space-sm rounded-lg bg-surface-container-lowest"
+                  >
+                    <div
+                      class="flex items-center gap-1 text-secondary font-label-sm text-label-sm font-semibold mb-1"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"
+                        >auto_fix_high</span
+                      >
+                      ONE-CLICK TEMPLATE
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mb-space-xs"
+                    >
+                      Apply standard avionics delivery milestones: Sourcing →
+                      Tooling → Assembly → QA Oracle.
+                    </p>
+                    <button
+                      class="w-full py-1.5 rounded-lg bg-secondary/15 hover:bg-secondary/25 text-secondary font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"
+                        >bolt</span
+                      >
+                      Apply Recommended Milestones
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Escrow Security Guarantee Card -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm"
+              >
+                <div class="flex items-center gap-space-xs text-on-surface">
+                  <span
+                    class="material-symbols-outlined text-primary text-headline-sm"
+                    >shield_lock</span
+                  >
+                  <h3 class="font-headline-sm text-label-lg font-bold">
+                    Multisig Smart Escrow
+                  </h3>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Investor funds are routed to Robinhood Chain multisig
+                  contracts. Tranches release automatically only after
+                  independent oracle verification of bill of lading (BOL) and
+                  serial factory scan.
+                </p>
+                <!-- Graphic / Timeline Micro Flow -->
+                <div
+                  class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-space-xs"
+                >
+                  <div
+                    class="flex items-center justify-between text-label-sm font-label-sm"
+                  >
+                    <span class="text-on-surface">Capital Locked</span>
+                    <span class="text-primary font-bold">100% In Vault</span>
+                  </div>
+                  <div
+                    class="flex items-center justify-between text-label-sm font-label-sm"
+                  >
+                    <span class="text-on-surface">Release Method</span>
+                    <span class="text-secondary font-bold"
+                      >Oracle Triggered</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center justify-between text-label-sm font-label-sm"
+                  >
+                    <span class="text-on-surface">Dispute Arbiter</span>
+                    <span class="text-tertiary font-bold"
+                      >Robinhood Consensus</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="flex items-center gap-space-xs text-outline font-label-sm text-label-sm pt-space-xs"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >info</span
+                  >
+                  <span>Verified under Robinhood Sub-Protocol #14</span>
+                </div>
+              </div>
+              <!-- Factory Inspection Hardware Partner Card -->
+              <div
+                class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                    >Hardware Oracle Node</span
+                  >
+                  <span class="w-2 h-2 rounded-full bg-primary"></span>
+                </div>
+                <div class="flex items-center gap-space-sm">
+                  <img
+                    class="w-12 h-12 rounded-lg object-cover"
+                    data-alt="High tech hardware manufacturing automated facility showing clean room industrial robotic arms assembling electronic components under cool blue ambient lighting."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7juLZMWaFehdYdrAmKNRcZyGwshkCgTSxEVXuS_eQcHBmaCyZ0wMol3paMZl0ha_IwIHC5zgzUB5ik9adQF-ufaT_uFBsMNautZz6ZhxphZ5Eo_5dL6sAQtHohR7zCEzOC28AXWfD_9sA1pJkLXCRYq2YhsIddzBWFAYo5p6a7XZgwFz46h9T8eaec-ApPUOlr2HsYN-m_FrdC7-vQ757Ob-oiyg3oMDyUjvLy62mghgLf8bva2Yc"
+                  />
+                  <div>
+                    <div
+                      class="font-headline-sm text-label-md font-bold text-on-surface"
+                    >
+                      Foxconn Industrial IoT
+                    </div>
+                    <div class="font-label-sm text-label-sm text-outline">
+                      Certified Hardware Oracle Node
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="p-space-xs rounded-lg bg-surface-container-lowest text-center"
+                >
+                  <span class="font-label-sm text-label-sm text-primary"
+                    >Automated ERP integration active via API</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

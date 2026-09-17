@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-background":"#dee2ee","surface-dim":"#0f141c","on-tertiary-fixed":"#2a1700","error-container":"#93000a","on-secondary":"#003640","on-primary-fixed-variant":"#005236","tertiary-fixed-dim":"#ffb95f","on-surface":"#dee2ee","primary-container":"#10b981","secondary-fixed-dim":"#4cd7f6","error":"#ffb4ab","on-surface-variant":"#bbcabf","primary-fixed-dim":"#4edea3","on-secondary-container":"#00424e","on-secondary-fixed":"#001f26","primary-fixed":"#6ffbbe","background":"#0f141c","surface-container-high":"#252a33","on-tertiary":"#472a00","inverse-primary":"#006c49","secondary-fixed":"#acedff","primary":"#4edea3","secondary-container":"#03b5d3","surface-variant":"#30353e","on-primary-fixed":"#002113","inverse-on-surface":"#2c3139","outline-variant":"#3c4a42","on-secondary-fixed-variant":"#004e5c","inverse-surface":"#dee2ee","surface-bright":"#343942","surface":"#0f141c","secondary":"#4cd7f6","tertiary-fixed":"#ffddb8","surface-tint":"#4edea3","surface-container":"#1b2028","tertiary":"#ffb95f","tertiary-container":"#e29100","outline":"#86948a","on-error":"#690005","on-primary-container":"#00422b","surface-container-low":"#171c24","on-tertiary-fixed-variant":"#653e00","surface-container-lowest":"#090e16","on-error-container":"#ffdad6","on-primary":"#003824","surface-container-highest":"#30353e","on-tertiary-container":"#523200"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","space-xs":"0.25rem","space-md":"1rem","space-sm":"0.5rem","space-lg":"1.5rem","gutter":"1.5rem","margin":"2.5rem","margin-mobile":"1rem","gutter-mobile":"1rem"},"fontFamily":{"body-sm":["Inter"],"display-lg":["Space Grotesk"],"body-md":["Inter"],"display-lg-mobile":["Space Grotesk"],"label-md":["JetBrains Mono"],"headline-lg":["Space Grotesk"],"label-sm":["JetBrains Mono"],"headline-sm":["Space Grotesk"],"headline-md":["Space Grotesk"],"label-lg":["JetBrains Mono"],"body-lg":["Inter"],"headline-lg-mobile":["Space Grotesk"]},"fontSize":{"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="h-16 w-full px-gutter flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center"><span class="font-label-lg text-label-lg font-bold text-on-primary">P</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold">ProtoRWA</span><span class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">RWA • ROBINHOOD CHAIN</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-primary font-label-md text-label-md rounded-lg"><a class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="explore-projects" href="#">Explore Projects</a><a class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="project-detail" href="#">Project Detail & Terminal</a><a class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="secondary-claims-market" href="#">Secondary Claims Market</a><a class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="investor-dashboard-governance" href="#">Investor Dashboard & Governance</a><a class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="support-documentation" href="#">Support / Documentation</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors bg-surface-container text-primary font-label-md text-label-md rounded-lg" data-path="legal-compliance" href="#">Legal Compliance</a></nav></div><div class="flex items-center gap-space-sm"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low"><div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div><span class="font-label-sm text-label-sm text-on-surface uppercase">Robinhood Subnet #14</span></div><div class="flex items-center rounded-lg bg-surface-container-high p-0.5"><div class="px-space-sm py-1 font-label-md text-label-md text-primary font-semibold">42,500 USDC</div><div class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-medium">0x71C...4f9b</div></div><a class="relative p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors inline-flex items-center justify-center" data-path="notifications" href="#" title="Notifications"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary"></span></a><a class="inline-block rounded-full ring-1 ring-outline-variant hover:ring-primary transition-all" data-path="account" href="#" title="Account Profile"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"/></a></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Document Intelligence Strip -->
+<section class="w-full bg-surface-container-lowest py-space-md px-gutter">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          ACTIVE JURISDICTION
+        </span>
+<span class="text-on-surface font-mono">DELAWARE SERIES LLC // ROBINHOOD SUBNET #14</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-on-surface-variant">ARWEAVE IMMUTABLE TX:</span>
+<a class="text-secondary hover:text-primary transition-colors font-mono underline underline-offset-4" href="#hash-box">0x94bf3a...e8339e</a>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface">LEGAL GRADE AA+</span>
+</div>
+</div>
+</section>
+<!-- Legal Header Masthead -->
+<section class="w-full bg-surface-container-low py-space-xl px-gutter">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-4xl">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase">Statutory Protocol Charter</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface font-bold tracking-tight">
+          ProtoRWA Legal Terms of Service & Regulatory Framework
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Version 3.4 // Enforceable as of March 2025 // SEC Reg D 506(c) & Reg S Compliant Dual Settlement Structure
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm self-start lg:self-end">
+<button class="px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-2 transition-all" id="printBtn">
+<span class="material-symbols-outlined text-[18px]">print</span>
+          Print Hardcopy
+        </button>
+<button class="px-space-md py-2 rounded bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-2 hover:bg-primary-fixed-dim transition-all shadow-md" id="copyHashBtn">
+<span class="material-symbols-outlined text-[18px]">key</span>
+          Verify On-Chain
+        </button>
+</div>
+</div>
+</section>
+<!-- Main Legal Workspace with Sticky Left TOC -->
+<section class="w-full px-gutter py-space-xl">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Sticky Navigation Bar (Left 4 cols) -->
+<aside class="lg:col-span-4 lg:sticky lg:top-24 flex flex-col gap-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Document Outline</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm font-bold">8 Clauses</span>
+</div>
+<nav class="flex flex-col gap-1 font-label-md text-label-md" id="toc-nav">
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-1">
+<span class="text-primary font-mono text-label-sm">01</span>
+<span>Scope & Subnet Architecture</span>
+</a>
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-2">
+<span class="text-primary font-mono text-label-sm">02</span>
+<span>Nature of Tokenized Product Claims</span>
+</a>
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-3">
+<span class="text-primary font-mono text-label-sm">03</span>
+<span>Milestone Escrow & Multisig Rules</span>
+</a>
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-4">
+<span class="text-primary font-mono text-label-sm">04</span>
+<span>Metrology & Oracle Disclaimers</span>
+</a>
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-5">
+<span class="text-primary font-mono text-label-sm">05</span>
+<span>Secondary Market & Gasless Relayers</span>
+</a>
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-6">
+<span class="text-primary font-mono text-label-sm">06</span>
+<span>Physical Manufacturing Risk Factors</span>
+</a>
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-7">
+<span class="text-primary font-mono text-label-sm">07</span>
+<span>Tax Obligations & Form 1099-DA</span>
+</a>
+<a class="toc-link p-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all flex items-start gap-2" href="#clause-8">
+<span class="text-primary font-mono text-label-sm">08</span>
+<span>Dispute Arbitration & UMA Fallback</span>
+</a>
+</nav>
+</div>
+<!-- Real-Time Signature Status Indicator -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">E-Sign State</span>
+<span class="inline-flex items-center gap-1 text-tertiary font-label-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> AWAITING ACKNOWLEDGMENT
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Execution through wallet keypair constitutes an irrevocable signature under the Electronic Signatures in Global and National Commerce Act (E-SIGN).
+          </p>
+<div class="flex items-center justify-between pt-space-xs font-mono text-label-sm text-on-surface-variant">
+<span>HASH TYPE:</span>
+<span class="text-on-surface">SHA-256 EIP-712</span>
+</div>
+</div>
+<!-- Audit Summary Micro-Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Security Certifications</span>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="font-label-md text-label-md text-on-surface">OpenZeppelin</span>
+</div>
+<span class="font-mono text-label-sm text-primary">DEC 2024 (PASS)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">shield</span>
+<span class="font-label-md text-label-md text-on-surface">Trail of Bits</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">JAN 2025 (PASS)</span>
+</div>
+</div>
+</aside>
+<!-- Document Content Body (Right 8 cols) -->
+<main class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Executive Summary Banner -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center gap-space-sm text-primary mb-space-xs">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-headline-sm text-headline-sm font-semibold">Statutory Covenant Preamble</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+            By connecting an authorized cryptographic account to ProtoRWA or committing stablecoin deposits (USDC/EURC) to the smart contract escrow modules, you enter into a legally binding contract with ProtoRWA Master Series LLC, a Delaware series limited liability company, and its tokenized project subsidiaries.
+          </p>
+</div>
+<!-- Clause 1 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 1.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Architecture</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Scope of Agreement & Robinhood Subnet Architecture
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              1.1 This Master Agreement governs all interactions with ProtoRWA smart contract factories deployed across the Robinhood Subnet #14 infrastructure. Settlement occurs purely through EVM-compatible consensus states validated by decentralized validator clusters.
+            </p>
+<p>
+              1.2 Users acknowledge that transactions submitted via gasless meta-transaction relayers (ERC-2771) operate asynchronously and are non-revertible once finalized by two-thirds validator quorum on the primary execution chain.
+            </p>
+</div>
+<!-- Highlight Box -->
+<div class="bg-surface-container rounded-lg p-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">hub</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Subnet Node Enforcement</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                All tokenized orderbooks and liquidity routers are executed through deterministic state machines hosted on Robinhood Subnet nodes. No single administrator retains unilateral transaction censorship keys.
+              </p>
+</div>
+</div>
+</article>
+<!-- Clause 2 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 2.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Token Categorization</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Nature of Tokenized Product Claims (Non-Equity, Revenue Rights)
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              2.1 Digital tokens minted by ProtoRWA hardware syndication contracts represent contractual claims on gross unit delivery receipts or revenue share royalties generated strictly by the specific hardware batch.
+            </p>
+</div>
+<!-- Critical Investor Protection Highlight -->
+<div class="bg-surface-container-highest rounded-lg p-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[24px]">warning</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-tertiary font-bold uppercase tracking-wider">Crucial Classification Notice</span>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-normal">
+                Product Claims do not represent equity, voting shares in the corporate parent, or ownership of intellectual property (IP) unless explicitly tokenized in an SPV tranche. Allocators hold an exclusively synthetic revenue claim secured against dedicated off-chain accounts.
+              </p>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            2.2 Holders are not entitled to liquidate general company assets in bankruptcy proceedings outside the specific segregated Delaware Series LLC container allocated to their SKU serial tranche.
+          </p>
+</article>
+<!-- Clause 3 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 3.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Escrow Protocol</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Milestone Escrow & Multisig Governance Rules
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              3.1 Raised capital is held in programmatic Timelock Escrow Vaults. Capital disbursements require verified production attestations signed by the designated Hardware Syndicate lead and verified oracle clusters.
+            </p>
+</div>
+<!-- Milestone Dispute Callout -->
+<div class="bg-surface-container rounded-lg p-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">balance</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Milestone Dispute Clause</span>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-normal">
+                If a milestone evidence submission fails to achieve 60% quorum within 48 hours, capital remains locked. After 7 days, an optimistic UMA arbitration period triggers, allowing token holders to slash dishonest attestations.
+              </p>
+</div>
+</div>
+<!-- Interactive Milestone Workflow Diagram -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Automated Escrow Progression Logic</span>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-2 text-center font-label-sm text-label-sm">
+<div class="p-2 rounded bg-surface-container-high text-on-surface flex flex-col items-center justify-center">
+<span class="text-primary font-bold">STAGE 1</span>
+<span>Component Bill</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high text-on-surface flex flex-col items-center justify-center">
+<span class="text-primary font-bold">STAGE 2</span>
+<span>Assembly QA</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high text-on-surface flex flex-col items-center justify-center">
+<span class="text-secondary font-bold">STAGE 3</span>
+<span>60% Quorum Vote</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high text-on-surface flex flex-col items-center justify-center">
+<span class="text-tertiary font-bold">STAGE 4</span>
+<span>Disbursement</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Clause 4 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-4">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 4.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Quality Verification</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Independent Metrology & Oracle Disclaimers
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              4.1 Factory gate inspections rely on standardized test matrices executed by registered external verification entities. Attestation logs are pushed on-chain via signed cryptographic proofs.
+            </p>
+</div>
+<!-- Metrology Disclaimer Callout -->
+<div class="bg-surface-container rounded-lg p-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">precision_manufacturing</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Metrology Disclaimer</span>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-normal">
+                SGS and TÜV SÜD oracles submit cryptographically signed sensor logs. ProtoRWA does not guarantee manufacturing zero-defect rates. Yield calculations are modeled after nominal run yields and do not account for latent micro-component failure.
+              </p>
+</div>
+</div>
+</article>
+<!-- Clause 5 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 5.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Liquidity Infrastructure</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Secondary Marketplace Order Execution & Gasless Relayers
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              5.1 Secondary transfers of tokenized product claims operate through peer-to-peer RFQ and automated constant-product algorithmic pools.
+            </p>
+<p>
+              5.2 ProtoRWA deploys gasless ERC-4337 meta-transaction bundles. Users retain full responsibility for evaluating slippage tolerance, gas oracle volatility, and potential front-running protection via MEV-boost relays.
+            </p>
+</div>
+</article>
+<!-- Clause 6 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-6">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 6.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Physical Risk Metrics</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Risk Disclosures on Physical Hardware Manufacturing
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              Hardware investments carry intrinsic physical vulnerabilities not present in purely software protocols. These include:
+            </p>
+<ul class="list-disc list-inside space-y-2 text-on-surface-variant pl-space-xs font-body-md text-body-md">
+<li>Global semiconductor supply chain disruptions and wafer fabrication halts.</li>
+<li>Maritime customs impoundments, tariffs, and geopolitical export controls.</li>
+<li>Tooling recalibration delays extending lead times by up to 180 calendar days.</li>
+<li>Loss of physical collateral in transit prior to arrival at bonded warehouse facilities.</li>
+</ul>
+</div>
+</article>
+<!-- Clause 7 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-7">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 7.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Statutory Reporting</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Tax Obligations & Automated Form 1099-DA
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              7.1 In compliance with United States Treasury Department regulations and IRS Section 6045, ProtoRWA automatically issues Digital Asset Form 1099-DA to verified US persons realizing cumulative gross proceeds exceeding statutory thresholds.
+            </p>
+<p>
+              7.2 Non-US participants certify compliance with their native fiscal regimes under Section 894 and agree to provide valid W-8BEN cryptographic declarations upon claim redemption.
+            </p>
+</div>
+</article>
+<!-- Clause 8 -->
+<article class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md scroll-mt-24 shadow-sm" id="clause-8">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono font-bold">SECTION 8.0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Settlement Mechanism</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Dispute Arbitration & UMA Protocol Fallback
+          </h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+<p>
+              8.1 Any unresolvable conflict between smart contract execution states and off-chain physical delivery receipts shall be referred first to the UMA Optimistic Oracle for decentralized programmatic resolution.
+            </p>
+<p>
+              8.2 In the event that on-chain consensus fails to conclude or is compromised by an emergency halt event, all formal disputes shall be finally settled under the Rules of Arbitration of the American Arbitration Association (AAA) by a single arbitrator sitting in Wilmington, Delaware.
+            </p>
+</div>
+</article>
+<!-- Compliance & Verification Box -->
+<section class="bg-surface-container rounded-xl p-space-lg flex flex-col gap-space-md shadow-md" id="hash-box">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary">verified</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Statutory Hash Verification Registry</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm uppercase">Arweave L1 Confirmed</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">DELAWARE SERIES LLC MASTER SPV AGREEMENT HASH</span>
+<div class="flex items-center justify-between mt-1">
+<span class="font-mono text-label-md text-primary font-bold">0x94bf...339e</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="navigator.clipboard.writeText('0x94bf14930129480129384918239018239339e'); alert('Master Hash Copied!');">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant mt-1">Block Height: 18,941,029 // RH-14</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">SMART CONTRACT AUDIT REPOSITORIES</span>
+<div class="flex items-center justify-between mt-1">
+<span class="font-mono text-label-md text-secondary font-bold">OpenZeppelin & Trail of Bits</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">task_alt</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant mt-1">Dual Signature Digest: Validated Jan 2025</span>
+</div>
+</div>
+</section>
+<!-- Footer Confirmation Desk -->
+<section class="bg-surface-container-high rounded-xl p-space-lg flex flex-col gap-space-lg shadow-xl">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold">Execution & Acceptance Desk</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              Formal Acknowledgment of Protocol Covenants
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Checking the box below binds your active custody wallet address to all rights, obligations, and risk factors outlined in Version 3.4 of the ProtoRWA Legal Framework.
+            </p>
+</div>
+<!-- Styled Checkbox Element -->
+<label class="flex items-start gap-space-sm p-space-md rounded-lg bg-surface-container-lowest cursor-pointer select-none">
+<input class="mt-1 w-5 h-5 rounded bg-surface-variant accent-primary focus:ring-0 cursor-pointer" id="legalCheckbox" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">
+                I have read and agree to the ProtoRWA Master Platform Agreement and Hardware Escrow By-Laws.
+              </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                I confirm I am an accredited investor (Reg D 506(c)) or non-US qualified person (Reg S) eligible for RWA exposure.
+              </span>
+</div>
+</label>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-2.5 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-2 transition-all" id="downloadPdfBtn">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                Download Legal PDF (48 pages)
+              </button>
+</div>
+<button class="px-space-lg py-2.5 rounded bg-primary-container text-on-primary font-label-md text-label-md font-semibold flex items-center gap-2 opacity-50 cursor-not-allowed hover:bg-primary-fixed-dim transition-all shadow-md" disabled="" id="exportSigBtn">
+<span class="material-symbols-outlined text-[20px]">draw</span>
+              Export Cryptographic Signature Proof
+            </button>
+</div>
+</section>
+</main>
+</div>
+</section>
+<!-- Interactive Client-side Script -->
+<script>
+    (function() {
+      const checkbox = document.getElementById('legalCheckbox');
+      const exportBtn = document.getElementById('exportSigBtn');
+      const printBtn = document.getElementById('printBtn');
+      const copyHashBtn = document.getElementById('copyHashBtn');
+      const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+      const tocLinks = document.querySelectorAll('.toc-link');
+
+      // Enable/disable execution button based on legal checkbox
+      if (checkbox && exportBtn) {
+        checkbox.addEventListener('change', function() {
+          if (this.checked) {
+            exportBtn.disabled = false;
+            exportBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            exportBtn.classList.add('cursor-pointer');
+          } else {
+            exportBtn.disabled = true;
+            exportBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            exportBtn.classList.remove('cursor-pointer');
+          }
+        });
+      }
+
+      // Hardcopy trigger
+      if (printBtn) {
+        printBtn.addEventListener('click', function() {
+          window.print();
+        });
+      }
+
+      // Verify on chain notification
+      if (copyHashBtn) {
+        copyHashBtn.addEventListener('click', function() {
+          alert('Arweave Master SPV Transaction Hash: 0x94bf14930129480129384918239018239339e confirmed via Robinhood Subnet #14 Oracles.');
+        });
+      }
+
+      // Download PDF stub
+      if (downloadPdfBtn) {
+        downloadPdfBtn.addEventListener('click', function() {
+          alert('Preparing bundled cryptographic PDF archive (Version 3.4, 48 pages). Download beginning in background...');
+        });
+      }
+
+      // Export Cryptographic Signature
+      if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+          if (!exportBtn.disabled) {
+            alert('EIP-712 Signature Proof Generated!\n\nSigner: 0x71C...4f9b\nHash: 0x82f9...21a0\nTimestamp: ' + new Date().toISOString() + '\nStatus: Recorded on Robinhood Chain');
+          }
+        });
+      }
+
+      // Smooth scroll spy for active TOC link
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            tocLinks.forEach(link => {
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('bg-surface-container', 'text-primary');
+                link.classList.remove('text-on-surface-variant');
+              } else {
+                link.classList.remove('bg-surface-container', 'text-primary');
+                link.classList.add('text-on-surface-variant');
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      document.querySelectorAll('article[id]').forEach(section => {
+        observer.observe(section);
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest py-space-xl"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex flex-col gap-space-xs"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold">ProtoRWA Protocol</span><span class="px-space-xs py-0.5 rounded-lg bg-primary/10 text-primary font-label-sm text-label-sm">AUDITED: OPENZEPPELIN & TRAIL OF BITS</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Institutional Hardware Verification & Decentralized Asset Underwriting Infrastructure.</p></div><div class="flex items-center gap-space-xl text-right"><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Value Locked</span><span class="font-label-lg text-label-lg text-on-surface font-bold">$184,920,400</span></div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Active Custody Oracles</span><span class="font-label-lg text-label-lg text-primary font-bold">1,248 Nodes</span></div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Settlement Layer</span><span class="font-label-lg text-label-lg text-secondary font-bold">Robinhood Subnet #14</span></div></div></div></footer></body></html>

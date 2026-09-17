@@ -1,0 +1,1904 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#30353e",
+              "on-tertiary": "#472a00",
+              "surface-container-lowest": "#090e16",
+              "tertiary-fixed": "#ffddb8",
+              "on-primary": "#003824",
+              "surface-container": "#1b2028",
+              "surface-tint": "#4edea3",
+              "secondary-fixed-dim": "#4cd7f6",
+              "surface-variant": "#30353e",
+              "on-secondary-container": "#00424e",
+              "on-tertiary-fixed": "#2a1700",
+              "tertiary-container": "#e29100",
+              primary: "#4edea3",
+              "on-tertiary-container": "#523200",
+              surface: "#0f141c",
+              "on-error": "#690005",
+              "on-secondary-fixed-variant": "#004e5c",
+              outline: "#86948a",
+              error: "#ffb4ab",
+              background: "#0f141c",
+              "secondary-container": "#03b5d3",
+              "on-surface-variant": "#bbcabf",
+              "tertiary-fixed-dim": "#ffb95f",
+              "surface-dim": "#0f141c",
+              "on-primary-fixed-variant": "#005236",
+              tertiary: "#ffb95f",
+              "on-primary-container": "#00422b",
+              "on-tertiary-fixed-variant": "#653e00",
+              "inverse-on-surface": "#2c3139",
+              "surface-bright": "#343942",
+              "error-container": "#93000a",
+              "inverse-primary": "#006c49",
+              "primary-container": "#10b981",
+              "on-surface": "#dee2ee",
+              "on-primary-fixed": "#002113",
+              "inverse-surface": "#dee2ee",
+              "secondary-fixed": "#acedff",
+              "on-secondary": "#003640",
+              "surface-container-high": "#252a33",
+              "primary-fixed": "#6ffbbe",
+              "outline-variant": "#3c4a42",
+              "on-background": "#dee2ee",
+              secondary: "#4cd7f6",
+              "surface-container-low": "#171c24",
+              "primary-fixed-dim": "#4edea3",
+              "on-error-container": "#ffdad6",
+              "on-secondary-fixed": "#001f26",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "space-sm": "0.5rem",
+              "space-xl": "2.5rem",
+              margin: "2.5rem",
+              "space-xs": "0.25rem",
+              "space-md": "1rem",
+              gutter: "1.5rem",
+              "space-lg": "1.5rem",
+              "gutter-mobile": "1rem",
+              "margin-mobile": "1rem",
+            },
+            fontFamily: {
+              "headline-sm": ["Space Grotesk"],
+              "display-lg-mobile": ["Space Grotesk"],
+              "label-sm": ["JetBrains Mono"],
+              "headline-lg": ["Space Grotesk"],
+              "headline-lg-mobile": ["Space Grotesk"],
+              "body-sm": ["Inter"],
+              "headline-md": ["Space Grotesk"],
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "label-md": ["JetBrains Mono"],
+              "display-lg": ["Space Grotesk"],
+              "label-lg": ["JetBrains Mono"],
+            },
+            fontSize: {
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "34px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen"
+  >
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"
+    >
+      <div
+        class="h-20 w-full px-space-lg lg:px-margin flex items-center justify-between gap-space-md"
+      >
+        <div class="flex items-center gap-space-lg">
+          <a
+            class="flex items-center gap-space-sm group"
+            data-path="explore-projects"
+            href="#"
+            ><img
+              alt="Brand logo. - Primary color: #10b981
+- Font: spaceGrotesk
+- Mode: dark
+- Roundness: rounded-sm
+"
+              class="h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+            />
+            <div class="flex flex-col">
+              <span
+                class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase leading-none"
+                >ProtoRWA</span
+              ><span
+                class="font-label-sm text-label-sm text-primary tracking-widest uppercase mt-0.5"
+                >Physical RWA Protocol</span
+              >
+            </div></a
+          >
+          <nav
+            class="hidden xl:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-primary border border-outline-variant"
+          >
+            <a
+              aria-current="page"
+              class="px-space-sm py-1.5 rounded transition-colors font-label-md bg-surface-container text-primary border border-outline-variant"
+              data-path="explore-projects"
+              href="#"
+              >Explore Projects</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="how-it-works"
+              href="#"
+              >How It Works</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="secondary-market"
+              href="#"
+              >Secondary Market</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="founder-studio"
+              href="#"
+              >Founder Studio</a
+            ><a
+              class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md"
+              data-path="governance"
+              href="#"
+              >Governance</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <div
+            class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest border border-outline-variant/40"
+          >
+            <span
+              class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"
+            ></span
+            ><span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Robinhood Subnet #14</span
+            ><span
+              class="font-label-sm text-label-sm text-secondary bg-surface-container px-1 rounded"
+              >(Gasless Relayer Active)</span
+            >
+          </div>
+          <div
+            class="hidden md:flex items-center gap-space-sm px-space-sm py-1 rounded bg-surface-container-low border border-outline-variant/50 font-label-md text-label-md"
+          >
+            <span class="text-primary font-semibold">42,500 USDC</span
+            ><span class="text-outline-variant">|</span
+            ><span class="text-on-surface-variant">0x71C...4f9b</span>
+          </div>
+          <button
+            aria-label="Notifications"
+            class="relative p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >notifications</span
+            ><span
+              class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary"
+            ></span>
+          </button>
+          <div
+            class="flex items-center pl-space-xs border-l border-outline-variant/30"
+          >
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1U6LgZ_qS9tlneMIYjmbgJBmFNyGYBYDwYd20a0sfK6S4kXqT9fTn9oJfLxmxua8WU0LKbDphIykMyY5v5iC2g5u-r_nBZnWcV7moEk-c80VLAZX1x5-lpT1qZxiVrEO2ZWt-zMmO0kCz218kFhHPARE42HbnH6MtpDLxU1xL-4vYB2kQ-Fwv2Crm2_DLDhntpGC1h3YUCEA54T9V-r7XCPoqJCIQ95u7BiqqVOIZRy2IAHKaVOj8-b9cI"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-20 bg-background min-h-screen">
+      <div class="flex flex-col w-full">
+        <!-- Interactive Background Mesh / Subtle Glow Canvas -->
+        <div
+          class="relative w-full overflow-hidden px-space-lg lg:px-margin pt-space-lg pb-space-xl"
+        >
+          <!-- Ambient backdrops -->
+          <div
+            class="absolute top-12 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10"
+          ></div>
+          <div
+            class="absolute top-48 right-12 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none -z-10"
+          ></div>
+          <!-- Header Block -->
+          <div class="max-w-5xl mx-auto flex flex-col gap-space-md mb-space-xl">
+            <div class="flex flex-wrap items-center gap-space-sm">
+              <span
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-widest shadow-sm"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"
+                ></span>
+                KNOWLEDGE BASE &amp; GOVERNANCE DOCS
+              </span>
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant/60 font-mono"
+                >SPEC_VER: 2.8.4 // RELAYER: ACTIVE</span
+              >
+            </div>
+            <div class="flex flex-col gap-space-xs">
+              <h1
+                class="font-headline-lg text-headline-lg tracking-tight text-on-surface uppercase"
+              >
+                Frequently Asked Questions &amp; Risk Disclosures
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed"
+              >
+                Everything you need to know about physical product revenue-share
+                claims, on-chain milestone escrow, factory oracle verification,
+                and institutional legal framework.
+              </p>
+            </div>
+            <!-- Live Search & Interactive Filter Bar -->
+            <div class="flex flex-col gap-space-sm mt-space-sm">
+              <div class="relative w-full">
+                <span
+                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-[22px] pointer-events-none"
+                  >search</span
+                >
+                <input
+                  class="w-full bg-surface-container-lowest text-on-surface pl-12 pr-28 py-3.5 rounded-lg text-body-md font-body-md focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-on-surface-variant/50 shadow-inner"
+                  id="faq-search"
+                  placeholder="Search questions, smart contract logic, legal terms, or inspection protocols..."
+                  type="text"
+                />
+                <div
+                  class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant/60 bg-surface-container px-2 py-1 rounded pointer-events-none"
+                >
+                  <span class="text-[10px]">CTRL</span> +
+                  <span class="text-[10px]">K</span>
+                </div>
+              </div>
+              <!-- Filter category tags -->
+              <div
+                class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none"
+                id="category-filters"
+              >
+                <button
+                  class="category-btn active-filter px-3.5 py-1.5 rounded bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-semibold shadow transition-all whitespace-nowrap"
+                  data-category="all"
+                  type="button"
+                >
+                  All Topics
+                </button>
+                <button
+                  class="category-btn px-3.5 py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md uppercase tracking-wider font-medium transition-all whitespace-nowrap"
+                  data-category="claims"
+                  type="button"
+                >
+                  Revenue Claims &amp; Tokenomics
+                </button>
+                <button
+                  class="category-btn px-3.5 py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md uppercase tracking-wider font-medium transition-all whitespace-nowrap"
+                  data-category="escrow"
+                  type="button"
+                >
+                  Milestone Escrow &amp; Voting
+                </button>
+                <button
+                  class="category-btn px-3.5 py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md uppercase tracking-wider font-medium transition-all whitespace-nowrap"
+                  data-category="secondary"
+                  type="button"
+                >
+                  Secondary Marketplace
+                </button>
+                <button
+                  class="category-btn px-3.5 py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md uppercase tracking-wider font-medium transition-all whitespace-nowrap"
+                  data-category="legal"
+                  type="button"
+                >
+                  Legal &amp; Compliance
+                </button>
+                <button
+                  class="category-btn px-3.5 py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md uppercase tracking-wider font-medium transition-all whitespace-nowrap"
+                  data-category="founder"
+                  type="button"
+                >
+                  Founder Requirements
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Main Content Dual-Column (FAQ Content + Visual Blueprint Telemetry) -->
+          <div
+            class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start"
+          >
+            <!-- Left Column: Accordion Knowledge Base (8 cols) -->
+            <div
+              class="lg:col-span-8 flex flex-col gap-space-lg"
+              id="faq-container"
+            >
+              <!-- SECTION 1: Product-Level Claims -->
+              <section
+                class="faq-group flex flex-col gap-space-sm"
+                data-group="claims"
+              >
+                <div class="flex items-center justify-between pb-2">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="text-primary font-label-sm text-label-sm font-mono"
+                      >[MODULE_01]</span
+                    >
+                    <h2
+                      class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight"
+                    >
+                      Understanding Product-Level Claims
+                    </h2>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded"
+                    >2 Articles</span
+                  >
+                </div>
+                <!-- FAQ Item 1.1 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="equity founder cap table dilution claim revenue target multiple 2.5x voting corporate shares"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0"
+                        >account_tree</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        How does a physical product claim differ from equity in
+                        the founder's company?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        A ProtoRWA claim token confers
+                        <strong class="text-on-surface font-medium"
+                          >direct programmatic cash-flow rights</strong
+                        >
+                        to the gross revenue generated by specific hardware
+                        production batches (e.g., Industrial IoT Transceivers
+                        Batch 004), rather than shares in the corporate entity.
+                      </p>
+                      <div
+                        class="grid grid-cols-1 sm:grid-cols-2 gap-space-xs my-1 bg-surface-container-high p-3 rounded text-on-surface font-body-sm text-body-sm"
+                      >
+                        <div class="flex flex-col gap-1">
+                          <span
+                            class="font-label-sm text-label-sm text-primary uppercase font-mono tracking-wider"
+                            >Product Claim Model</span
+                          >
+                          <span
+                            >Direct priority disbursement capped at target
+                            return (typically 1.8x – 2.5x principal). Zero
+                            equity dilution, immediate cash velocity.</span
+                          >
+                        </div>
+                        <div class="flex flex-col gap-1">
+                          <span
+                            class="font-label-sm text-label-sm text-tertiary uppercase font-mono tracking-wider"
+                            >Traditional Equity</span
+                          >
+                          <span
+                            >Dilutive cap-table rights, dependent on multi-year
+                            liquidation events (M&amp;A/IPO), board politics,
+                            and residual liquidation preference.</span
+                          >
+                        </div>
+                      </div>
+                      <p>
+                        Claim holders have strictly defined voting powers over
+                        hardware milestone disbursements and supplier
+                        attestations, without operational overhead or general
+                        liability for corporate activities.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- FAQ Item 1.2 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="revenue share distribution usdc automated routing commercial invoice retail robinhood chain payment yield"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0"
+                        >currency_exchange</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        How are revenue-share distributions calculated and paid?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Revenues generated from authenticated wholesale purchase
+                        orders and Shopify/ERP integrations are deposited into
+                        institutional treasury clearing vaults. The smart
+                        contract router automatically converts fiat or native
+                        stablecoins into
+                        <strong class="text-on-surface font-medium">USDC</strong
+                        >.
+                      </p>
+                      <div
+                        class="p-3 bg-surface-container-high rounded font-label-sm text-label-sm font-mono text-on-surface flex flex-col gap-1.5"
+                      >
+                        <div
+                          class="flex justify-between text-on-surface-variant"
+                        >
+                          <span>ALLOCATION FORMULA:</span>
+                          <span class="text-secondary"
+                            >ProrataDistribution(TokenBalance)</span
+                          >
+                        </div>
+                        <div class="text-primary truncate">
+                          User_Payout = (GrossBatchRevenue * RevenueSharePct) *
+                          (ClaimTokensHeld / TotalClaimSupply)
+                        </div>
+                      </div>
+                      <p>
+                        Funds land directly in connected wallets on the
+                        Robinhood Subnet with zero gas fees incurred by
+                        recipient underwriters. Claim distributions happen
+                        bi-weekly or instantaneously upon certified wholesale
+                        clearinghouse receipt.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 2: Milestone-Gated Escrow & Governance -->
+              <section
+                class="faq-group flex flex-col gap-space-sm"
+                data-group="escrow"
+              >
+                <div class="flex items-center justify-between pb-2 pt-space-xs">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="text-primary font-label-sm text-label-sm font-mono"
+                      >[MODULE_02]</span
+                    >
+                    <h2
+                      class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight"
+                    >
+                      Milestone-Gated Escrow &amp; Governance
+                    </h2>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded"
+                    >3 Articles</span
+                  >
+                </div>
+                <!-- FAQ Item 2.1 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="milestone fail inspection rejected voters multisig escrow 30-day clawback robinhood subnet consensus refund"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-secondary text-[20px] mt-0.5 shrink-0"
+                        >gavel</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        What happens if a milestone fails inspection or is
+                        rejected by voters?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Capital is never issued in lump sums. It is segregated
+                        into multi-tier tranches controlled by the ProtoRWA
+                        Smart Escrow Engine. If an inspection fails (e.g.,
+                        surface mount assembly failure rate exceeds tolerance
+                        bounds) or token holders reject the release package:
+                      </p>
+                      <ol
+                        class="list-decimal list-inside space-y-1.5 pl-1 text-on-surface"
+                      >
+                        <li>
+                          <strong class="font-medium"
+                            >Remediation Grace (30 Calendar Days):</strong
+                          >
+                          The manufacturer has 30 days to rectify physical
+                          defects and submit newly verified metrology telemetry.
+                        </li>
+                        <li>
+                          <strong class="font-medium"
+                            >Secondary Audit Trigger:</strong
+                          >
+                          An independent ISO-accredited inspection is
+                          commissioned automatically at founder expense.
+                        </li>
+                        <li>
+                          <strong class="font-medium"
+                            >Automated Clawback Execution:</strong
+                          >
+                          If the re-vote fails to clear the quorum, the
+                          remaining unspent tranche balances in escrow execute a
+                          self-settling clawback, reimbursing token holders
+                          pro-rata in USDC.
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+                <!-- FAQ Item 2.2 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="weighted voting quorum 60% snapshot 48-hour window token vote governance proposal"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-secondary text-[20px] mt-0.5 shrink-0"
+                        >how_to_vote</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        How does weighted voting work for tranche disbursement?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Governance enforces mathematical equity:
+                        <span class="text-on-surface font-mono font-medium"
+                          >1 Claim Token = 1 Vote</span
+                        >. Milestone approval requires a strict threshold to
+                        prevent founder coercion and speculative obstruction:
+                      </p>
+                      <div
+                        class="flex flex-col gap-2 bg-surface-container-high p-3 rounded"
+                      >
+                        <div
+                          class="flex items-center justify-between text-body-sm font-body-sm"
+                        >
+                          <span class="text-on-surface"
+                            >Required Affirmative Quorum</span
+                          >
+                          <span class="text-primary font-mono font-semibold"
+                            >60.00%</span
+                          >
+                        </div>
+                        <div
+                          class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden"
+                        >
+                          <div
+                            class="bg-primary h-full rounded-full"
+                            style="width: 60%"
+                          ></div>
+                        </div>
+                        <div
+                          class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant"
+                        >
+                          <span>Snapshot Time-Lock: 48 Hours</span>
+                          <span>Flash-loan resistant block height</span>
+                        </div>
+                      </div>
+                      <p>
+                        Token snapshots are recorded at the exact moment the
+                        verification proof is indexed on-chain. Claim tokens
+                        bought after the proof publication cannot participate in
+                        that specific tranche's governance vote.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- FAQ Item 2.3 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="physical evidence inspection proof sgs tuv metrology reports 4k machining iot sensor feeds factory oracle"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-secondary text-[20px] mt-0.5 shrink-0"
+                        >fact_check</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        What physical evidence is required for milestone
+                        release?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        To prevent fraudulent attestations, milestone
+                        submissions must bundle three cryptographically pinned
+                        data structures to IPFS / Arweave before triggering a
+                        validator vote:
+                      </p>
+                      <div
+                        class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-body-sm"
+                      >
+                        <div
+                          class="bg-surface-container-high p-3 rounded flex flex-col items-center"
+                        >
+                          <span
+                            class="material-symbols-outlined text-primary mb-1"
+                            >verified</span
+                          >
+                          <span
+                            class="font-semibold text-on-surface text-label-md font-label-md"
+                            >SGS / TÜV Reports</span
+                          >
+                          <span class="text-on-surface-variant text-[11px] mt-1"
+                            >Certified quality assurance testing &amp;
+                            metallurgical logs</span
+                          >
+                        </div>
+                        <div
+                          class="bg-surface-container-high p-3 rounded flex flex-col items-center"
+                        >
+                          <span
+                            class="material-symbols-outlined text-secondary mb-1"
+                            >videocam</span
+                          >
+                          <span
+                            class="font-semibold text-on-surface text-label-md font-label-md"
+                            >4K Machine Telemetry</span
+                          >
+                          <span class="text-on-surface-variant text-[11px] mt-1"
+                            >Timestamped CNC, SMT pick-and-place optic
+                            feeds</span
+                          >
+                        </div>
+                        <div
+                          class="bg-surface-container-high p-3 rounded flex flex-col items-center"
+                        >
+                          <span
+                            class="material-symbols-outlined text-tertiary mb-1"
+                            >sensors</span
+                          >
+                          <span
+                            class="font-semibold text-on-surface text-label-md font-label-md"
+                            >Chainlink IoT Feeds</span
+                          >
+                          <span class="text-on-surface-variant text-[11px] mt-1"
+                            >Warehouse RFID dock scans &amp; bill of lading
+                            signatures</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 3: Secondary Market & Liquidity -->
+              <section
+                class="faq-group flex flex-col gap-space-sm"
+                data-group="secondary"
+              >
+                <div class="flex items-center justify-between pb-2 pt-space-xs">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="text-primary font-label-sm text-label-sm font-mono"
+                      >[MODULE_03]</span
+                    >
+                    <h2
+                      class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight"
+                    >
+                      Secondary Market &amp; Liquidity
+                    </h2>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded"
+                    >2 Articles</span
+                  >
+                </div>
+                <!-- FAQ Item 3.1 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="secondary trade liquidity order book 24/7 instant usdc market settlement exit"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-tertiary text-[20px] mt-0.5 shrink-0"
+                        >candlestick_chart</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        When can I trade my claim tokens on the secondary
+                        marketplace?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Claims become tradable
+                        <strong class="text-on-surface font-medium"
+                          >immediately following primary offering close</strong
+                        >
+                        and formal on-chain capital sealing. Token holders do
+                        not need to wait for manufacturing completion or retail
+                        distribution to exit positions.
+                      </p>
+                      <p>
+                        The ProtoRWA matching engine combines an institutional
+                        central limit order book (CLOB) with automated AMM
+                        pools, providing 24/7 price discovery and deep liquidity
+                        settled atomic in USDC.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- FAQ Item 3.2 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="trading fees gas costs 0.15% fee subsidized robinhood subnet relayer gasless execution"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-tertiary text-[20px] mt-0.5 shrink-0"
+                        >local_gas_station</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        What are the trading fees and gas costs?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Trading on the ProtoRWA native exchange charges a
+                        minimal flat fee structure:
+                      </p>
+                      <div class="flex flex-col sm:flex-row gap-3 my-1">
+                        <div
+                          class="flex-1 bg-surface-container-high p-3 rounded"
+                        >
+                          <span
+                            class="font-label-sm text-label-sm text-primary uppercase font-mono"
+                            >Taker / Maker Fee</span
+                          >
+                          <div
+                            class="text-headline-sm font-headline-sm text-on-surface mt-1"
+                          >
+                            0.15%
+                          </div>
+                          <p
+                            class="font-body-sm text-body-sm text-on-surface-variant mt-0.5"
+                          >
+                            Split between the protocol safety reserve and
+                            liquidity providers.
+                          </p>
+                        </div>
+                        <div
+                          class="flex-1 bg-surface-container-high p-3 rounded"
+                        >
+                          <span
+                            class="font-label-sm text-label-sm text-secondary uppercase font-mono"
+                            >Gas / Network Fees</span
+                          >
+                          <div
+                            class="text-headline-sm font-headline-sm text-on-surface mt-1"
+                          >
+                            $0.00 (Gasless)
+                          </div>
+                          <p
+                            class="font-body-sm text-body-sm text-on-surface-variant mt-0.5"
+                          >
+                            Fully sponsored by the Robinhood Subnet ERC-4337
+                            Account Abstraction Paymaster.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 4: Legal, Security & Regulatory Compliance -->
+              <section
+                class="faq-group flex flex-col gap-space-sm"
+                data-group="legal"
+              >
+                <div class="flex items-center justify-between pb-2 pt-space-xs">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="text-primary font-label-sm text-label-sm font-mono"
+                      >[MODULE_04]</span
+                    >
+                    <h2
+                      class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight"
+                    >
+                      Legal, Security &amp; Regulatory Compliance
+                    </h2>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded"
+                    >2 Articles</span
+                  >
+                </div>
+                <!-- FAQ Item 4.1 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="legal entity spv delaware commercial revenue assignment agreements compliant ucc bankruptcy remote"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0"
+                        >policy</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        What legal entity structure protects claim holders?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Every hardware batch tokenized on ProtoRWA is legally
+                        housed in a
+                        <strong class="text-on-surface font-medium"
+                          >bankruptcy-remote Delaware Series LLC (SPV)</strong
+                        >.
+                      </p>
+                      <p>
+                        The founder signs a strictly binding
+                        <em class="text-on-surface"
+                          >Commercial Revenue Assignment Agreement</em
+                        >
+                        under UCC Article 9. If the operating enterprise
+                        experiences corporate insolvency, the product inventory,
+                        component IP, and incoming accounts receivable remain
+                        ring-fenced inside the SPV exclusively for claim token
+                        redemption.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- FAQ Item 4.2 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="smart contract audits openzeppelin trail of bits security zero vulnerabilities code formal verification"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0"
+                        >security</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        Have smart contracts been formally verified and audited?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Yes. The complete architecture—including
+                        <code
+                          class="text-primary font-mono text-xs bg-surface-container-high px-1 py-0.5 rounded"
+                          >TrancheVault.sol</code
+                        >,
+                        <code
+                          class="text-secondary font-mono text-xs bg-surface-container-high px-1 py-0.5 rounded"
+                          >OracleRelay.sol</code
+                        >, and
+                        <code
+                          class="text-on-surface font-mono text-xs bg-surface-container-high px-1 py-0.5 rounded"
+                          >RevenueSplitter.sol</code
+                        >—has undergone dual independent security assessments by
+                        <strong class="text-on-surface">OpenZeppelin</strong>
+                        and
+                        <strong class="text-on-surface">Trail of Bits</strong>.
+                      </p>
+                      <div
+                        class="flex flex-wrap gap-2 text-label-sm font-label-sm"
+                      >
+                        <span
+                          class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-mono"
+                          >0 Critical Findings</span
+                        >
+                        <span
+                          class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-mono"
+                          >0 High Findings</span
+                        >
+                        <span
+                          class="px-2.5 py-1 rounded bg-surface-container-high text-primary font-mono"
+                          >Formal Verification: PASSED</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 5: Founder Requirements (Dynamic Search Fallback / Section) -->
+              <section
+                class="faq-group flex flex-col gap-space-sm"
+                data-group="founder"
+              >
+                <div class="flex items-center justify-between pb-2 pt-space-xs">
+                  <div class="flex items-center gap-space-xs">
+                    <span
+                      class="text-primary font-label-sm text-label-sm font-mono"
+                      >[MODULE_05]</span
+                    >
+                    <h2
+                      class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight"
+                    >
+                      Founder Requirements
+                    </h2>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded"
+                    >1 Article</span
+                  >
+                </div>
+                <!-- FAQ Item 5.1 -->
+                <div
+                  class="faq-item bg-surface-container rounded-lg shadow-sm overflow-hidden transition-all duration-200"
+                  data-keywords="founder requirement qualification hardware underwriting factory tier 1 duns bill of materials"
+                >
+                  <button
+                    class="faq-toggle w-full p-space-md text-left flex items-start justify-between gap-space-md cursor-pointer select-none"
+                    type="button"
+                  >
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="material-symbols-outlined text-on-surface text-[20px] mt-0.5 shrink-0"
+                        >engineering</span
+                      >
+                      <span
+                        class="font-headline-sm text-[16px] text-on-surface font-semibold leading-snug"
+                      >
+                        What are the eligibility criteria for founders to issue
+                        claims on ProtoRWA?
+                      </span>
+                    </div>
+                    <span
+                      class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon shrink-0"
+                      >expand_more</span
+                    >
+                  </button>
+                  <div
+                    class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-surface-container-lowest/60"
+                  >
+                    <div
+                      class="p-space-md pt-0 text-on-surface-variant font-body-md text-body-md flex flex-col gap-space-sm"
+                    >
+                      <p>
+                        Founders must complete a rigorous mechanical due
+                        diligence pipeline before listing:
+                      </p>
+                      <ul
+                        class="list-disc list-inside space-y-1 text-on-surface font-body-sm text-body-sm"
+                      >
+                        <li>
+                          Verified D-U-N-S registration and min 2 years
+                          operating history or tier-1 accelerator backing.
+                        </li>
+                        <li>
+                          Executed contract manufacturing agreement with an ISO
+                          9001/14001 compliant fab partner.
+                        </li>
+                        <li>
+                          Complete Bill of Materials (BOM) audit validating
+                          supply chain redundancy for lead-time critical
+                          silicon.
+                        </li>
+                        <li>
+                          Minimum 15% co-investment or founder bond locked in
+                          escrow until Batch final clearance.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- No Results Empty State -->
+              <div
+                class="hidden p-space-xl text-center bg-surface-container rounded-lg flex flex-col items-center gap-space-sm"
+                id="no-results"
+              >
+                <span class="material-symbols-outlined text-outline text-5xl"
+                  >manage_search</span
+                >
+                <div class="font-headline-sm text-headline-sm text-on-surface">
+                  No documentation matches found
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant max-w-md"
+                >
+                  Try adjusting your search criteria or switch to "All Topics".
+                  Our engineering support team is also available 24/7 on
+                  Discord.
+                </p>
+                <button
+                  class="mt-2 px-4 py-2 rounded bg-surface-container-high text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-highest transition-colors"
+                  id="reset-search"
+                  type="button"
+                >
+                  Clear Filters
+                </button>
+              </div>
+            </div>
+            <!-- Right Column: Interactive Hardware Telemetry, Protocol Stats, & Help Desk (4 cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-space-lg sticky top-24">
+              <!-- Live Protocol Architecture Card -->
+              <div
+                class="bg-surface-container rounded-lg p-space-md shadow-md flex flex-col gap-space-sm"
+              >
+                <div class="flex items-center justify-between pb-space-xs">
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="w-2 h-2 rounded-full bg-primary animate-ping"
+                    ></span>
+                    <span
+                      class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-mono"
+                      >ON-CHAIN ESCROW PROOF</span
+                    >
+                  </div>
+                  <span class="text-on-surface-variant text-[11px] font-mono"
+                    >ARB-ONE // RHO</span
+                  >
+                </div>
+                <!-- Metrology Visual Mockup / Schematic Asset -->
+                <div
+                  class="relative w-full h-44 rounded overflow-hidden bg-surface-container-lowest flex items-center justify-center"
+                >
+                  <img
+                    class="w-full h-full object-cover opacity-60"
+                    data-alt="A precision automated optical inspection machine scanning high-density industrial printed circuit board with laser measurement grid. Moody high-tech industrial dark aesthetic with neon mint green and electric cyan laser lines reflecting on matte graphite surfaces."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiB4j7_bIzkF10mZ-nvwrASUzo5MpH1Y79eGmPD_igDMu655hzzTzCjNGZ9es_agCkyXzjd6R6o-kF1OxVRsrR3jbeH2Rqk8XJv65XoPS1yzUGCzhf76hkO631rGrwcNMCADEAiRVgu1n6zCzrhiLWBEZlVjaHvddyiRXL1eQgGp6RBji2LGsG6wimOXpD2WVzr0CGPhT7R4G6XlqiU_X2Pis23Fq5Ftesj3xJoFqDTjRmLxZ-_m_J"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent"
+                  ></div>
+                  <!-- Realtime Telemetry HUD overlay -->
+                  <div
+                    class="absolute bottom-3 left-3 right-3 flex justify-between items-end"
+                  >
+                    <div>
+                      <div
+                        class="text-[10px] text-on-surface-variant font-mono uppercase"
+                      >
+                        Batch QA Verifier
+                      </div>
+                      <div
+                        class="font-headline-sm text-[13px] text-on-surface font-mono"
+                      >
+                        TÜV-SÜD #99482-B
+                      </div>
+                    </div>
+                    <span
+                      class="px-2 py-0.5 rounded bg-primary/20 text-primary font-label-sm text-[10px] font-mono"
+                      >VERIFIED</span
+                    >
+                  </div>
+                </div>
+                <!-- Escrow Metrics Compact Stack -->
+                <div class="grid grid-cols-2 gap-space-xs pt-1">
+                  <div
+                    class="p-2.5 bg-surface-container-high rounded flex flex-col"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono"
+                      >Active Escrows</span
+                    >
+                    <span
+                      class="font-headline-sm text-[18px] text-on-surface font-semibold mt-0.5"
+                      >$38.4M</span
+                    >
+                  </div>
+                  <div
+                    class="p-2.5 bg-surface-container-high rounded flex flex-col"
+                  >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono"
+                      >Yield Distributed</span
+                    >
+                    <span
+                      class="font-headline-sm text-[18px] text-primary font-semibold mt-0.5"
+                      >$6.12M</span
+                    >
+                  </div>
+                </div>
+                <!-- Milestone Pipeline Visualizer -->
+                <div class="flex flex-col gap-1.5 pt-2">
+                  <div
+                    class="flex justify-between items-center text-label-sm font-label-sm"
+                  >
+                    <span class="text-on-surface-variant uppercase font-mono"
+                      >Standard Verification Cadence</span
+                    >
+                    <span class="text-secondary font-mono">Stage 3 of 5</span>
+                  </div>
+                  <div class="flex items-center gap-1 w-full">
+                    <div class="h-1.5 flex-1 rounded-sm bg-primary"></div>
+                    <div class="h-1.5 flex-1 rounded-sm bg-primary"></div>
+                    <div
+                      class="h-1.5 flex-1 rounded-sm bg-primary animate-pulse"
+                    ></div>
+                    <div
+                      class="h-1.5 flex-1 rounded-sm bg-surface-container-highest"
+                    ></div>
+                    <div
+                      class="h-1.5 flex-1 rounded-sm bg-surface-container-highest"
+                    ></div>
+                  </div>
+                  <div
+                    class="flex justify-between text-[10px] text-outline font-mono pt-0.5"
+                  >
+                    <span>BOM Sourcing</span>
+                    <span>Assembly</span>
+                    <span>QA Metrology</span>
+                    <span>Vault Delivery</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Help Desk Support Card -->
+              <div
+                class="bg-surface-container-high rounded-lg p-space-md shadow-md flex flex-col gap-space-sm relative overflow-hidden"
+              >
+                <div
+                  class="absolute -right-6 -bottom-6 w-28 h-28 bg-primary/10 rounded-full blur-xl pointer-events-none"
+                ></div>
+                <div class="flex items-center gap-2">
+                  <span
+                    class="material-symbols-outlined text-primary text-[24px]"
+                    >support_agent</span
+                  >
+                  <span
+                    class="font-headline-sm text-[16px] text-on-surface font-semibold uppercase"
+                    >Hardware Structuring Desk</span
+                  >
+                </div>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed"
+                >
+                  Need tailored institutional allocations, custom hardware debt
+                  structuring, or manufacturer validation assistance?
+                </p>
+                <div class="flex flex-col gap-2 pt-space-xs">
+                  <a
+                    class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary/90 transition-all shadow"
+                    href="mailto:underwriting@protorwa.io"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >chat</span
+                    >
+                    Schedule Structuring Consultation
+                  </a>
+                  <a
+                    class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-md text-label-md font-medium transition-all"
+                    href="https://discord.gg"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >forum</span
+                    >
+                    Join Discord Underwriter Terminal
+                  </a>
+                </div>
+                <div
+                  class="flex items-center justify-center gap-4 text-label-sm font-label-sm text-on-surface-variant/70 pt-1 font-mono"
+                >
+                  <span class="flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    SLA: &lt;15 Mins
+                  </span>
+                  <span>PGP: 0x82C4...AF19</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Regulatory Risk Disclosure Box (Prominent High-Contrast Industrial Shield) -->
+          <div class="max-w-5xl mx-auto mt-space-xl">
+            <div
+              class="bg-surface-container-lowest rounded-lg p-space-md lg:p-space-lg shadow-xl relative overflow-hidden"
+            >
+              <div
+                class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-md border-b border-surface-container-highest/60"
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="p-2.5 rounded bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0"
+                  >
+                    <span class="material-symbols-outlined text-[26px]"
+                      >warning</span
+                    >
+                  </div>
+                  <div>
+                    <div
+                      class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight"
+                    >
+                      Mandatory Regulatory &amp; Physical Asset Risk Disclosure
+                    </div>
+                    <div
+                      class="font-label-sm text-label-sm text-tertiary font-mono uppercase tracking-wider mt-0.5"
+                    >
+                      CFTC / SEC &amp; GLOBAL COMMERCIAL CODE PROTOCOL NOTICE •
+                      SEC. 4(A)(6) COMPLIANCE
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant font-mono bg-surface-container px-2.5 py-1 rounded shrink-0 self-start md:self-auto"
+                >
+                  DOC_REF: RISK-P-2025-V2
+                </span>
+              </div>
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-md text-body-sm font-body-sm text-on-surface-variant"
+              >
+                <div class="space-y-space-xs">
+                  <div
+                    class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2"
+                  >
+                    <span
+                      class="material-symbols-outlined text-tertiary text-[18px]"
+                      >precision_manufacturing</span
+                    >
+                    Physical Manufacturing &amp; Yield Degradation Risks
+                  </div>
+                  <p class="leading-relaxed text-on-surface-variant">
+                    Unlike purely digital synthetic assets, product-level claims
+                    depend upon tangible engineering workflows. Unforeseen
+                    microchip fabricator halts, foundry defects, raw material
+                    tariff fluctuations, and tooling failures can delay batch
+                    completion schedules. While multi-sig milestone escrow
+                    shields unreleased tranches, historical yield projections do
+                    not guarantee future retail sell-through velocities.
+                  </p>
+                </div>
+                <div class="space-y-space-xs">
+                  <div
+                    class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2"
+                  >
+                    <span
+                      class="material-symbols-outlined text-tertiary text-[18px]"
+                      >hub</span
+                    >
+                    Oracle &amp; Cross-Jurisdictional Enforcement Limits
+                  </div>
+                  <p class="leading-relaxed text-on-surface-variant">
+                    ProtoRWA bridges automated smart escrow to off-chain
+                    logistics via factory sensor inputs and accredited
+                    inspection signatures (SGS, TÜV). In the catastrophic event
+                    of manufacturer bankruptcy, claims are governed by Delaware
+                    Series LLC statutory liquidation terms. Physical asset
+                    repossession or secondary inventory auction involves
+                    jurisdiction-specific legal delays.
+                  </p>
+                </div>
+                <div class="space-y-space-xs">
+                  <div
+                    class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2"
+                  >
+                    <span
+                      class="material-symbols-outlined text-tertiary text-[18px]"
+                      >badge</span
+                    >
+                    Accreditation &amp; Jurisdictional Restrictions
+                  </div>
+                  <p class="leading-relaxed text-on-surface-variant">
+                    Claim issuance may be restricted to Accredited Investors
+                    under Regulation D Rule 506(c) or international underwriters
+                    under Regulation S depending on the asset series. It is the
+                    sole duty of each participant to ensure secondary trading
+                    conforms to municipal, state, and national laws in their
+                    home tax jurisdiction.
+                  </p>
+                </div>
+                <div class="space-y-space-xs">
+                  <div
+                    class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2"
+                  >
+                    <span
+                      class="material-symbols-outlined text-tertiary text-[18px]"
+                      >network_ping</span
+                    >
+                    Smart Contract Execution &amp; Subnet Dependency
+                  </div>
+                  <p class="leading-relaxed text-on-surface-variant">
+                    Transactions execute via the Robinhood Subnet with
+                    cross-chain message passing verified by Arbitrum One. While
+                    contracts are dual-audited by OpenZeppelin and Trail of
+                    Bits, cryptographic protocol risks and relayer connectivity
+                    disruptions remain inherent to decentralized execution
+                    primitives.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="mt-space-md pt-space-sm border-t border-surface-container-highest/40 flex flex-col sm:flex-row items-center justify-between gap-space-xs font-label-sm text-label-sm text-outline"
+              >
+                <div>
+                  Consensus Confirmation: SHA256[0x49f2b87a91102ec3b7...]
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                  <span
+                    >All disclosures reviewed quarterly by Legal DAO
+                    Counsel</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Interactive Search & Accordion Controller Script -->
+        <script>
+          (function initProtoFaq() {
+            const searchInput = document.getElementById("faq-search");
+            const categoryButtons = document.querySelectorAll(".category-btn");
+            const faqItems = document.querySelectorAll(".faq-item");
+            const faqGroups = document.querySelectorAll(".faq-group");
+            const noResultsBox = document.getElementById("no-results");
+            const resetSearchBtn = document.getElementById("reset-search");
+
+            let currentCategory = "all";
+            let currentQuery = "";
+
+            // Accordion Toggle Handling
+            faqItems.forEach((item) => {
+              const toggle = item.querySelector(".faq-toggle");
+              const content = item.querySelector(".faq-content");
+              const icon = item.querySelector(".faq-icon");
+
+              toggle.addEventListener("click", () => {
+                const isOpen =
+                  content.style.maxHeight && content.style.maxHeight !== "0px";
+
+                // Close other opened accordions in same group for slick terminal feel
+                const parentGroup = item.closest(".faq-group");
+                if (parentGroup) {
+                  parentGroup
+                    .querySelectorAll(".faq-item")
+                    .forEach((sibling) => {
+                      if (sibling !== item) {
+                        const siblingContent =
+                          sibling.querySelector(".faq-content");
+                        const siblingIcon = sibling.querySelector(".faq-icon");
+                        if (siblingContent)
+                          siblingContent.style.maxHeight = "0px";
+                        if (siblingIcon)
+                          siblingIcon.style.transform = "rotate(0deg)";
+                        sibling.classList.remove("bg-surface-container-high");
+                        sibling.classList.add("bg-surface-container");
+                      }
+                    });
+                }
+
+                if (isOpen) {
+                  content.style.maxHeight = "0px";
+                  icon.style.transform = "rotate(0deg)";
+                  item.classList.remove("bg-surface-container-high");
+                  item.classList.add("bg-surface-container");
+                } else {
+                  content.style.maxHeight = content.scrollHeight + 40 + "px";
+                  icon.style.transform = "rotate(180deg)";
+                  item.classList.add("bg-surface-container-high");
+                  item.classList.remove("bg-surface-container");
+                }
+              });
+            });
+
+            // Filter and Search Evaluation
+            function filterQuestions() {
+              let visibleCount = 0;
+
+              faqGroups.forEach((group) => {
+                const groupCategory = group.getAttribute("data-group");
+                const matchesCategory =
+                  currentCategory === "all" ||
+                  currentCategory === groupCategory;
+                let groupVisibleItems = 0;
+
+                const items = group.querySelectorAll(".faq-item");
+                items.forEach((item) => {
+                  const keywords = (
+                    item.getAttribute("data-keywords") || ""
+                  ).toLowerCase();
+                  const textContent = item.textContent.toLowerCase();
+                  const matchesQuery =
+                    currentQuery === "" ||
+                    keywords.includes(currentQuery) ||
+                    textContent.includes(currentQuery);
+
+                  if (matchesCategory && matchesQuery) {
+                    item.style.display = "block";
+                    groupVisibleItems++;
+                    visibleCount++;
+                  } else {
+                    item.style.display = "none";
+                  }
+                });
+
+                if (groupVisibleItems > 0) {
+                  group.style.display = "flex";
+                } else {
+                  group.style.display = "none";
+                }
+              });
+
+              if (visibleCount === 0) {
+                noResultsBox.classList.remove("hidden");
+              } else {
+                noResultsBox.classList.add("hidden");
+              }
+            }
+
+            // Live search input listener
+            if (searchInput) {
+              searchInput.addEventListener("input", (e) => {
+                currentQuery = e.target.value.trim().toLowerCase();
+                filterQuestions();
+              });
+
+              // Quick Keyboard Shortcut (CTRL+K or CMD+K)
+              window.addEventListener("keydown", (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+                  e.preventDefault();
+                  searchInput.focus();
+                }
+              });
+            }
+
+            // Category Button Clicks
+            categoryButtons.forEach((btn) => {
+              btn.addEventListener("click", () => {
+                categoryButtons.forEach((b) => {
+                  b.classList.remove(
+                    "active-filter",
+                    "bg-primary",
+                    "text-on-primary",
+                    "shadow",
+                  );
+                  b.classList.add(
+                    "bg-surface-container",
+                    "text-on-surface-variant",
+                  );
+                });
+                btn.classList.add(
+                  "active-filter",
+                  "bg-primary",
+                  "text-on-primary",
+                  "shadow",
+                );
+                btn.classList.remove(
+                  "bg-surface-container",
+                  "text-on-surface-variant",
+                );
+
+                currentCategory = btn.getAttribute("data-category") || "all";
+                filterQuestions();
+              });
+            });
+
+            // Reset Button in No Results Box
+            if (resetSearchBtn) {
+              resetSearchBtn.addEventListener("click", () => {
+                if (searchInput) searchInput.value = "";
+                currentQuery = "";
+                const allBtn = document.querySelector(
+                  '.category-btn[data-category="all"]',
+                );
+                if (allBtn) allBtn.click();
+              });
+            }
+
+            // Open first accordion by default for immediate preview
+            const firstAccordion = document.querySelector(".faq-item");
+            if (firstAccordion) {
+              const toggle = firstAccordion.querySelector(".faq-toggle");
+              if (toggle) toggle.click();
+            }
+          })();
+        </script>
+      </div>
+    </main>
+    <footer
+      class="w-full bg-surface-container-lowest border-t border-outline-variant/30 text-on-surface-variant"
+    >
+      <div class="w-full px-space-lg lg:px-margin py-space-xl">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-lg pb-space-lg border-b border-outline-variant/20"
+        >
+          <div class="lg:col-span-2 space-y-space-md">
+            <div class="flex items-center gap-space-sm">
+              <img
+                alt="Brand logo. - Primary color: #10b981
+- Font: spaceGrotesk
+- Mode: dark
+- Roundness: rounded-sm
+"
+                class="h-6 w-auto object-contain"
+                src="https://lh3.googleusercontent.com/aida/AEtjO1WT9EXXYUmMkndjkkBwYCf8eh_mBA11bGrvFjzl56uknd1Ce0sezZ4aax6ZIxaJJxo2ToeRhLTFgaxnOLauHwO1eQCXO-PSjwl9DKjldIAl7OS7v78icZHXfbAtJvQNm56VR2VXyJQ4l_KaBGWmPNGWaLl6mFfzims_IdkJ_fyT8wFjRtxx-71KkTginf3mLHm10nhyROHTChtXmNLajXD-vwTFpDV8qGyMi2GfYwQ7QRxQ-SU8fP2RbEc"
+              /><span
+                class="font-headline-sm text-headline-sm text-on-surface uppercase leading-none"
+                >ProtoRWA</span
+              >
+            </div>
+            <p
+              class="font-body-sm text-body-sm text-on-surface-variant max-w-sm"
+            >
+              Decentralized hardware &amp; physical infrastructure underwriting
+              protocol. Institutional milestone-gated capital issuance and
+              custody tracking on Robinhood Subnet &amp; Arbitrum One.
+            </p>
+            <div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+              <span
+                class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >Arbitrum One Verified</span
+              ><span
+                class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >Robinhood Chain Engine</span
+              ><span
+                class="px-2 py-0.5 rounded bg-surface-container text-tertiary font-label-sm text-label-sm uppercase tracking-wider border border-outline-variant/40"
+                >OpenZeppelin Audited</span
+              >
+            </div>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Protocol Infrastructure
+            </div>
+            <ul class="space-y-space-xs font-body-sm text-body-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="explore-projects"
+                  href="#"
+                  >Asset Directory</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="secondary-market"
+                  href="#"
+                  >Liquidity Pools</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="escrow-registry"
+                  href="#"
+                  >Custody Vaults</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="oracle-feeds"
+                  href="#"
+                  >Chainlink IoT Feeds</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Founders &amp; Issuers
+            </div>
+            <ul class="space-y-space-xs font-body-sm text-body-sm">
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="founder-studio"
+                  href="#"
+                  >Underwriting Studio</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="milestone-verification"
+                  href="#"
+                  >Hardware Attestation</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="how-it-works"
+                  href="#"
+                  >Deployment Pipeline</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  data-path="developer-docs"
+                  href="#"
+                  >Factory SDK</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-space-sm">
+            <div
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+            >
+              Contract Registry
+            </div>
+            <div class="space-y-space-xs font-label-sm text-label-sm">
+              <div
+                class="p-2 rounded bg-surface-container-low border border-outline-variant/30"
+              >
+                <div class="text-on-surface-variant">VaultFactory.sol</div>
+                <div class="text-primary truncate font-mono">0x8849...9E20</div>
+              </div>
+              <div
+                class="p-2 rounded bg-surface-container-low border border-outline-variant/30"
+              >
+                <div class="text-on-surface-variant">OracleAttestor.sol</div>
+                <div class="text-secondary truncate font-mono">
+                  0x32A1...C81F
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-outline"
+        >
+          <p>
+            © 2025 ProtoRWA Protocol. Engineered for Autonomous Hardware
+            Capitalization.
+          </p>
+          <div class="flex items-center gap-space-md">
+            <span>Zero Slippage Gasless Execution</span
+            ><span>Block: 22,491,802</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
