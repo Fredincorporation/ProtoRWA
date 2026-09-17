@@ -353,6 +353,60 @@ function RecentFills() {
     </div>
   );
 }
+/** Hardware Claim Lifecycle Schematic Explainer Card (Screen 09) */
+function LifecycleExplainer() {
+  return (
+    <div className="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md border border-outline-variant/30">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-space-xs">
+          <Icon name="verified_user" size={18} className="text-secondary" />
+          <h3 className="font-display text-headline-sm text-on-surface font-semibold">
+            Physical RWA Milestones &amp; Secondary Liquidity
+          </h3>
+        </div>
+        <span className="font-mono text-label-sm text-primary font-bold">SMART ESCROW GUARANTEED</span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-space-sm font-mono text-label-sm">
+        <div className="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1">
+          <div className="flex items-center justify-between">
+            <span className="text-primary font-bold">01. PROTOTYPE</span>
+            <Icon name="check_circle" size={14} className="text-primary" />
+          </div>
+          <p className="text-body-sm text-on-surface-variant font-sans">CAD, BOM &amp; initial proof verified by nodes.</p>
+          <div className="h-1 w-full bg-primary rounded-full mt-1" />
+        </div>
+
+        <div className="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1">
+          <div className="flex items-center justify-between">
+            <span className="text-secondary font-bold">02. TOOLING</span>
+            <span className="text-secondary font-semibold text-[10px]">CURRENT</span>
+          </div>
+          <p className="text-body-sm text-on-surface-variant font-sans">Molds fabricated; on-site oracle photo check.</p>
+          <div className="h-1 w-full bg-secondary rounded-full mt-1" />
+        </div>
+
+        <div className="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1 opacity-70">
+          <div className="flex items-center justify-between">
+            <span className="text-outline font-bold">03. ASSEMBLY</span>
+            <Icon name="lock" size={14} className="text-outline" />
+          </div>
+          <p className="text-body-sm text-on-surface-variant font-sans">Pilot batch assembled &amp; tested.</p>
+          <div className="h-1 w-full bg-surface-container-highest rounded-full mt-1" />
+        </div>
+
+        <div className="bg-surface-container rounded-lg p-space-sm flex flex-col gap-1 opacity-70">
+          <div className="flex items-center justify-between">
+            <span className="text-outline font-bold">04. PAYOUT</span>
+            <Icon name="lock" size={14} className="text-outline" />
+          </div>
+          <p className="text-body-sm text-on-surface-variant font-sans">Distributor revenue flows back to holders.</p>
+          <div className="h-1 w-full bg-surface-container-highest rounded-full mt-1" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function MarketPage() {
   const [selectedId, setSelectedId] = React.useState(mockListings[0]?.id ?? '1');
@@ -400,6 +454,7 @@ export default function MarketPage() {
         <div className="grid grid-cols-1 gap-space-lg xl:grid-cols-12">
           <div className="flex flex-col gap-space-lg xl:col-span-7">
             <ListingTable selectedId={selectedId} onSelect={setSelectedId} />
+            <LifecycleExplainer />
             <RecentFills />
           </div>
 
@@ -499,6 +554,46 @@ export default function MarketPage() {
                       <Icon name="candlestick_chart" size={18} />
                       Open Full Trading Terminal (Screen 23)
                     </Link>
+                  </div>
+                </div>
+
+                {/* SVG Depth Chart Visualizer (Screen 09) */}
+                <div className="rounded-xl border border-outline-variant/40 bg-surface-container-low p-space-md shadow-md overflow-hidden flex flex-col gap-space-sm">
+                  <div className="flex items-center justify-between font-mono text-label-sm uppercase text-outline">
+                    <span className="flex items-center gap-1">
+                      <Icon name="waterfall_chart" size={16} className="text-secondary" />
+                      Order Book Depth Chart
+                    </span>
+                    <span className="text-on-surface-variant font-bold">{selected.ticker} / ETH</span>
+                  </div>
+
+                  <div className="w-full h-16 relative flex items-center bg-surface-container-lowest rounded-lg overflow-hidden border border-outline-variant/30">
+                    <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 320 40">
+                      {/* Bids Gradient Area */}
+                      <path className="text-primary/25" d="M 0 38 L 40 32 L 80 28 L 120 22 L 155 18 L 155 40 L 0 40 Z" fill="currentColor" />
+                      <path className="text-primary" d="M 0 38 L 40 32 L 80 28 L 120 22 L 155 18" fill="none" stroke="currentColor" strokeWidth="2" />
+                      {/* Midpoint Dotted Guideline */}
+                      <line x1="160" y1="5" x2="160" y2="40" stroke="currentColor" strokeDasharray="2 2" className="text-outline-variant" />
+                      {/* Asks Gradient Area */}
+                      <path className="text-error/25" d="M 165 19 L 200 24 L 240 30 L 280 34 L 320 38 L 320 40 L 165 40 Z" fill="currentColor" />
+                      <path className="text-error" d="M 165 19 L 200 24 L 240 30 L 280 34 L 320 38" fill="none" stroke="currentColor" strokeWidth="2" />
+                    </svg>
+
+                    <div className="absolute inset-0 flex items-center justify-between px-space-sm font-mono text-[10px] pointer-events-none">
+                      <span className="text-primary font-bold">BIDS (0.010 - 0.011 ETH)</span>
+                      <span className="text-error font-bold">ASKS (0.012 - 0.014 ETH)</span>
+                    </div>
+                  </div>
+
+                  {/* Compact Bid/Ask Quick Spread Ribbon */}
+                  <div className="py-1 px-2 rounded bg-surface-container-high flex items-center justify-between font-mono text-[10px]">
+                    <span className="text-primary font-bold flex items-center gap-1">
+                      <Icon name="arrow_upward" size={12} />
+                      Best Ask: {formatEthNumber(selected.listing.pricePerUnit, 4)} ETH
+                    </span>
+                    <span className="text-outline uppercase tracking-wider">
+                      Spread: {selected.spreadBps ? (selected.spreadBps / 100).toFixed(2) + '%' : '0.45%'}
+                    </span>
                   </div>
                 </div>
 

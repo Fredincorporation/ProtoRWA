@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
+import { CandlestickChart } from '@/components/market/candlestick-chart';
 import { OrderBookView } from '@/components/market/order-book';
 import { Badge, StatusDot } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -163,8 +164,15 @@ export default function ClaimTradingTerminalPage() {
       <div className="mx-auto max-w-7xl px-space-lg py-space-xl lg:px-margin">
         <div className="grid gap-space-lg lg:grid-cols-[1fr_360px]">
 
-          {/* ── LEFT: Orderbook + recent fills ───────────────────── */}
+          {/* ── LEFT: Chart + Orderbook + recent fills ───────────── */}
           <div className="flex flex-col gap-space-lg">
+            {/* Interactive Candlestick Financial Chart (Screen 23) */}
+            <CandlestickChart
+              ticker={displayTicker}
+              projectTitle={project.title}
+              currentPrice={askPrice}
+            />
+
             {/* Orderbook */}
             <section>
               <h2 className="mb-space-sm font-mono text-label-md uppercase tracking-wider text-on-surface-variant">
