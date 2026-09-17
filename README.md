@@ -60,6 +60,16 @@ All protocol contracts have been deployed on Arbitrum Sepolia with wired and ver
 | **SecondaryMarket** | `0x2Ad4fCb52E9B41eBd11b49Ac9c6838ad27B20086` | [View on Arbiscan](https://sepolia.arbiscan.io/address/0x2Ad4fCb52E9B41eBd11b49Ac9c6838ad27B20086) |
 | **HardwareVerifier (Stylus WASM)** | `0x510f4d65e9f7778b09ad52a4ec19c590a934f913` | [View on Arbiscan](https://sepolia.arbiscan.io/address/0x510f4d65e9f7778b09ad52a4ec19c590a934f913) |
 
+### 🟢 Live Seeded Hardware Project (Project #1)
+The primary showcase project **HelioFrost Pro** is registered and active on Arbitrum Sepolia:
+- **Project ID**: `1`
+- **Status**: `FUNDING`
+- **Target**: `0.05 ETH` (1,000 claim units @ 0.00005 ETH)
+- **On-chain Milestone Count**: `4 tranches`
+- **Creation Tx**: [`0xf811da25...`](https://sepolia.arbiscan.io/tx/0xf811da25e79f0569c17373fe6e057596058212b0f14a861668dfb005bf42c8ff)
+- **Milestones Schedule Tx**: [`0xf0cc0aed...`](https://sepolia.arbiscan.io/tx/0xf0cc0aedc25c85bfe59234b8ea15478b01a47b0a168094cb8cb46493e1cf515b)
+- **Funding Opened Tx**: [`0xff23db08...`](https://sepolia.arbiscan.io/tx/0xff23db08fdb46777b95c17ffe1bf494fede7ec14aef399a844a055fb969747e5)
+
 ---
 
 ## 🚀 Key User Journeys & Screen Implementations

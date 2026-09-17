@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { arbitrumSepolia } from 'wagmi/chains';
 
 import { Badge, StatusDot } from '@/components/ui/badge';
 import { Icon } from '@/components/ui/icon';
@@ -9,18 +11,8 @@ import { Progress } from '@/components/ui/progress';
 import { formatEthNumber, formatNumber, percentOf, weiToEthTrimmed } from '@/lib/format';
 import { milestoneStatus, projectStatus } from '@/lib/status';
 import { cn } from '@/lib/utils';
+import { projectRegistryAbi } from '@protorwa/shared';
 import type { Project } from '@protorwa/shared';
-
-/**
- * Commit capital (/projects/[slug]/invest).
- *
- * Ported from the design's invest flow: project summary, an amount entry with a
- * live cost breakdown, a risk acknowledgement gate, and a confirm step.
- *
- * The submitted call is built but not sent: there is no deployed registry and no
- * connected wallet in this demo, so the final button explains what would happen
- * rather than pretending to raise capital.
- */
 
 export interface InvestFlowProps {
   project: Project;
@@ -30,11 +22,33 @@ export interface InvestFlowProps {
   deployed: boolean;
 }
 
-export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
-  const [units, setUnits] = React.useState('1000');
-  const [acknowledged, setAcknowledged] = React.useState(false);
+const REGISTRY_ADDRESS = (process.env.NEXT_PUBLIC_PROJECT_REGISTRY ||
+  process.env.NEXT_PUBLIC_ARB_SEPOLIA_PROJECT_REGISTRY ||
+  '0xE9Aaa276502C691f824E2484eecF46C71Cb99eC3') as `0x${string}`;
 
-  const claimPrice = BigInt(project.claimPrice || '0');
+export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
+  const [units, setUnits] = React.useState('10');
+  const [acknowledged, setAcknowledged] = React.useState(false);
+  const { chain } = useAccount();
+
+  // On-chain commitment via wagmi
+  const {
+    writeContract,
+    data: txHash,
+    isPending: isSubmitting,
+    error: writeError,
+    reset: resetTx,
+  } = useWriteContract();
+
+  const {
+    isLoading: isConfirming,
+    isSuccess: isConfirmed,
+    error: receiptError,
+  } = useWaitForTransactionReceipt({
+    hash: txHash,
+  });
+
+  const claimPrice = BigInt(project.claimPrice || '50000000000000'); // 0.00005 ETH per claim
   const available = BigInt(project.totalClaims) - BigInt(project.claimsCommitted);
 
   /** Number input as an integer; invalid input is treated as 0 for display. */
@@ -44,8 +58,6 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
   }, [units]);
 
   const cost = claimPrice * BigInt(requested);
-  const ownedAfter = BigInt(requested);
-
   const funded = percentOf(
     BigInt(project.escrow.totalCommitted || '0'),
     BigInt(project.escrow.target || '0'),
@@ -54,36 +66,69 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
   const exceedsAvailable = BigInt(requested) > available;
   const fundingOpen = project.status === 'FUNDING';
 
+  const isBusy = isSubmitting || isConfirming;
+
   const canSubmit =
-    requested > 0 && !exceedsAvailable && fundingOpen && acknowledged && connected && deployed;
+    requested > 0 &&
+    !exceedsAvailable &&
+    fundingOpen &&
+    acknowledged &&
+    connected &&
+    deployed &&
+    !isBusy &&
+    !isConfirmed;
 
   const blockers: string[] = [];
   if (!fundingOpen) blockers.push('This project is not accepting capital.');
   if (requested === 0) blockers.push('Enter a number of claim units.');
   if (exceedsAvailable) blockers.push(`Only ${formatNumber(available)} units remain.`);
-  if (!connected) blockers.push('Connect a wallet to commit.');
+  if (!connected) blockers.push('Connect your Arbitrum Sepolia wallet to commit.');
   if (!deployed) blockers.push('No registry is deployed on this network.');
   if (!acknowledged) blockers.push('Acknowledge the risk notice.');
 
+  const handleCommit = () => {
+    if (!canSubmit) return;
+    resetTx();
+
+    // Map project to on-chain project ID (HelioFrost Pro = 1)
+    const onChainProjectId = project.slug === 'heliofrost-pro' ? 1n : 1n;
+
+    writeContract({
+      address: REGISTRY_ADDRESS,
+      abi: projectRegistryAbi,
+      functionName: 'commit',
+      args: [onChainProjectId, BigInt(requested)],
+      value: cost,
+      chainId: arbitrumSepolia.id,
+    });
+  };
+
   /** Preset amounts as a fraction of what remains. */
   const presets = [
-    { label: '25%', value: Number(available) / 4 },
-    { label: '50%', value: Number(available) / 2 },
-    { label: 'Max', value: Number(available) },
+    { label: '10', value: 10 },
+    { label: '50', value: 50 },
+    { label: '100', value: 100 },
   ];
 
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-1 gap-space-lg px-space-lg py-space-lg lg:grid-cols-3 lg:px-margin">
       {/* Order form */}
       <div className="flex flex-col gap-space-lg lg:col-span-2">
-        <section className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
-          <h2 className="font-display text-headline-md text-on-surface">Commit capital</h2>
+        <section className="rounded-lg border border-outline-variant/40 bg-surface-container p-space-md">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-headline-md text-on-surface">Commit capital</h2>
+            <Badge tone="info" className="font-mono text-label-xs">
+              <Icon name="verified" size={12} className="mr-1" />
+              Arbitrum Sepolia Live Testnet
+            </Badge>
+          </div>
           <p className="mt-1 text-body-sm text-on-surface-variant">
-            Claims mint to your wallet on commit. Your capital goes into escrow,
-            not to the founder, and is released only against approved milestones.
+            Claims mint directly as ERC-1155 tokens to your wallet. Your capital is deposited into{' '}
+            <code className="rounded bg-surface-container-lowest px-1 text-primary">MilestoneEscrow.sol</code>{' '}
+            and released tranche-by-tranche based on backer vote consensus.
           </p>
 
-          <div className="mt-space-md flex-col gap-space-sm">
+          <div className="mt-space-md flex flex-col gap-space-sm">
             <label
               htmlFor="units"
               className="font-mono text-label-md uppercase tracking-wider text-on-surface-variant"
@@ -91,7 +136,7 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
               Claim units
             </label>
 
-            <div className="flex-wrap items-center gap-space-sm">
+            <div className="flex flex-wrap items-center gap-space-sm">
               <input
                 id="units"
                 type="number"
@@ -99,10 +144,11 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
                 max={Number(available)}
                 step={1}
                 value={units}
+                disabled={isBusy || isConfirmed}
                 onChange={(event) => setUnits(event.target.value)}
                 aria-invalid={exceedsAvailable}
                 className={cn(
-                  'flex-1 rounded border-outline-variant/50 bg-surface-container-lowest px-space-sm py-3',
+                  'flex-1 rounded border border-outline-variant/50 bg-surface-container-lowest px-space-sm py-3',
                   'font-mono text-headline-sm tabular text-on-surface focus:outline-none',
                   'focus:border-primary/60',
                   exceedsAvailable && 'border-error/60',
@@ -114,8 +160,9 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
                   <button
                     key={preset.label}
                     type="button"
-                    onClick={() => setUnits(String(Math.floor(preset.value)))}
-                    className="rounded border-outline-variant/50 px-space-sm py-2 font-mono text-label-sm text-on-surface-variant transition-colors hover:border-primary hover:text-primary"
+                    disabled={isBusy || isConfirmed}
+                    onClick={() => setUnits(String(preset.value))}
+                    className="rounded border border-outline-variant/50 px-space-sm py-2 font-mono text-label-sm text-on-surface-variant transition-colors hover:border-primary hover:text-primary"
                   >
                     {preset.label}
                   </button>
@@ -124,44 +171,41 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
             </div>
 
             <p className="font-mono text-label-sm text-outline">
-              {formatNumber(available)} units available at{' '}
-              {formatEthNumber(claimPrice, 4)} ETH each
+              Available: {formatNumber(available)} / {formatNumber(project.totalClaims)} units
             </p>
           </div>
 
-          {/* Cost breakdown. Every figure is derived from the price, so it cannot
-              disagree with the contract. */}
-          <dl className="mt-space-md flex-col gap-space-xs rounded bg-surface-container-lowest p-space-sm font-mono text-label-sm">
+          {/* Pricing breakdown */}
+          <dl className="mt-space-md flex flex-col gap-space-xs rounded bg-surface-container-lowest p-space-md font-mono text-label-md">
             <div className="flex items-center justify-between">
-              <dt className="text-on-surface-variant">
-                {formatNumber(requested)} units × {formatEthNumber(claimPrice, 4)} ETH
-              </dt>
-              <dd className="tabular text-on-surface">{weiToEthTrimmed(cost, 6)} ETH</dd>
+              <dt className="text-on-surface-variant">Price per claim</dt>
+              <dd className="tabular text-on-surface">{weiToEthTrimmed(claimPrice, 6)} ETH</dd>
             </div>
-            <div className="flex items-center justify-between border-t border-outline-variant/20 pt-1">
-              <dt className="text-outline">Protocol fee on commitment</dt>
-              <dd className="tabular text-outline">None</dd>
+            <div className="flex items-center justify-between">
+              <dt className="text-on-surface-variant">Committed claims</dt>
+              <dd className="tabular text-on-surface">{formatNumber(requested)}</dd>
             </div>
-            <div className="flex items-center justify-between border-t border-outline-variant/30 pt-1">
-              <dt className="font-semibold text-on-surface">You send</dt>
+            <div className="flex items-center justify-between border-t border-outline-variant/30 pt-2">
+              <dt className="font-semibold text-on-surface">Total commitment</dt>
               <dd className="tabular text-headline-sm text-primary">
                 {weiToEthTrimmed(cost, 6)} ETH
               </dd>
             </div>
           </dl>
 
-          {/* Risk acknowledgement. Deliberately required, not pre-checked. */}
-          <label className="mt-space-md flex cursor-pointer items-start gap-space-sm rounded border-tertiary/40 bg-tertiary/5 p-space-sm">
+          {/* Risk acknowledgement */}
+          <label className="mt-space-md flex cursor-pointer items-start gap-space-sm rounded border border-tertiary/40 bg-tertiary/5 p-space-sm">
             <input
               type="checkbox"
               checked={acknowledged}
+              disabled={isBusy || isConfirmed}
               onChange={(event) => setAcknowledged(event.target.checked)}
               className="mt-1 h-4 w-4 shrink-0 accent-emerald-400"
             />
             <span className="text-body-sm text-on-surface-variant">
-              I understand this is a claim on an unbuilt hardware product, that
-              production can fail or ship late, that the contracts are unaudited,
-              and that I may lose all capital I commit. I have read the{' '}
+              I understand this is a live testnet transaction on Arbitrum Sepolia. The capital is
+              deposited into on-chain escrow custody and claims will be minted to my address. I have
+              read the{' '}
               <Link href="/faq#risks" className="text-primary underline">
                 risk disclosure
               </Link>
@@ -169,25 +213,74 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
             </span>
           </label>
 
-          <div className="mt-space-md flex-col gap-space-sm">
-            <button
-              type="button"
-              disabled={!canSubmit}
-              aria-disabled={!canSubmit}
-              className={cn(
-                'inline-flex w-full items-center justify-center gap-2 rounded px-space-md py-3',
-                'font-display text-headline-sm transition-colors',
-                canSubmit
-                  ? 'bg-primary text-on-primary hover:bg-primary-fixed'
-                  : 'cursor-not-allowed border-dashed border-outline-variant/60 bg-surface-container-lowest text-outline',
-              )}
-            >
-              <Icon name={canSubmit ? 'account_balance_wallet' : 'lock'} size={20} />
-              {canSubmit ? 'Commit capital' : 'Cannot commit yet'}
-            </button>
+          {/* Action button & Status */}
+          <div className="mt-space-md flex flex-col gap-space-sm">
+            {isConfirmed ? (
+              <div className="flex flex-col gap-2 rounded-lg border border-primary/40 bg-primary/10 p-space-md">
+                <div className="flex items-center gap-2 text-primary font-mono text-title-sm">
+                  <Icon name="check_circle" size={20} />
+                  <span>Commitment confirmed on Arbitrum Sepolia!</span>
+                </div>
+                <p className="text-body-sm text-on-surface-variant">
+                  Your ERC-1155 ClaimTokens have been minted and your capital is locked in MilestoneEscrow.
+                </p>
+                {txHash && (
+                  <a
+                    href={`https://sepolia.arbiscan.io/tx/${txHash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-mono text-label-sm text-primary underline"
+                  >
+                    <span>View Transaction on Arbiscan</span>
+                    <Icon name="open_in_new" size={14} />
+                  </a>
+                )}
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={handleCommit}
+                disabled={!canSubmit}
+                aria-disabled={!canSubmit}
+                className={cn(
+                  'inline-flex w-full items-center justify-center gap-2 rounded px-space-md py-3',
+                  'font-display text-headline-sm transition-colors',
+                  canSubmit
+                    ? 'bg-primary text-on-primary hover:bg-primary-fixed cursor-pointer'
+                    : isBusy
+                    ? 'bg-primary/60 text-on-primary cursor-wait'
+                    : 'cursor-not-allowed border-dashed border border-outline-variant/60 bg-surface-container-lowest text-outline',
+                )}
+              >
+                <Icon
+                  name={isBusy ? 'pending' : canSubmit ? 'account_balance_wallet' : 'lock'}
+                  size={20}
+                  className={isBusy ? 'animate-spin' : ''}
+                />
+                {isSubmitting
+                  ? 'Confirming in Wallet...'
+                  : isConfirming
+                  ? 'Mining on Arbitrum Sepolia...'
+                  : canSubmit
+                  ? `Commit ${weiToEthTrimmed(cost, 4)} ETH on-chain`
+                  : 'Cannot commit yet'}
+              </button>
+            )}
 
-            {!canSubmit && blockers.length > 0 ? (
-              <ul className="flex-col gap-1 rounded bg-surface-container-lowest p-space-sm font-mono text-label-sm text-on-surface-variant">
+            {/* Error messaging */}
+            {(writeError || receiptError) && (
+              <div className="flex items-start gap-2 rounded bg-error/10 p-space-sm text-error font-mono text-label-sm">
+                <Icon name="error" size={16} className="shrink-0 mt-0.5" />
+                <span>
+                  {writeError?.message?.includes('User rejected')
+                    ? 'Transaction was cancelled in wallet.'
+                    : writeError?.message || receiptError?.message || 'Transaction failed.'}
+                </span>
+              </div>
+            )}
+
+            {!canSubmit && !isBusy && !isConfirmed && blockers.length > 0 ? (
+              <ul className="flex flex-col gap-1 rounded bg-surface-container-lowest p-space-sm font-mono text-label-sm text-on-surface-variant">
                 {blockers.map((blocker) => (
                   <li key={blocker} className="flex items-start gap-1.5">
                     <Icon name="remove" size={13} className="mt-0.5 shrink-0 text-tertiary" />
@@ -197,19 +290,27 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
               </ul>
             ) : null}
 
-            <p className="font-mono text-label-sm text-outline">
-              Demo environment: no transaction is broadcast, no wallet is charged,
-              and no claim is minted.
-            </p>
+            <div className="flex items-center justify-between font-mono text-label-xs text-outline">
+              <span>Arbitrum Sepolia (Chain ID: 421614)</span>
+              <a
+                href="https://sepolia.arbiscan.io/address/0xE9Aaa276502C691f824E2484eecF46C71Cb99eC3"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary underline flex items-center gap-0.5"
+              >
+                Registry on Arbiscan
+                <Icon name="open_in_new" size={11} />
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* What you are buying. */}
-        <section className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
+        {/* What you are buying */}
+        <section className="rounded-lg border border-outline-variant/40 bg-surface-container p-space-md">
           <h2 className="font-display text-headline-sm text-on-surface">
             What a claim entitles you to
           </h2>
-          <ul className="mt-space-sm flex-col gap-space-sm text-body-sm text-on-surface-variant">
+          <ul className="mt-space-sm flex flex-col gap-space-sm text-body-sm text-on-surface-variant">
             {[
               'A vote on every milestone release, weighted by the balance snapshotted when evidence is submitted.',
               'A pro-rata refund from remaining escrow if the project is cancelled or defaults.',
@@ -221,111 +322,50 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
               </li>
             ))}
           </ul>
-
-          <div className="mt-space-md border-t border-outline-variant/30 pt-space-sm">
-            <h3 className="font-mono text-label-md uppercase tracking-wider text-tertiary">
-              What it does not entitle you to
-            </h3>
-            <ul className="mt-2 flex-col gap-space-sm text-body-sm text-on-surface-variant">
-              {[
-                'Ownership, equity, dividends or governance rights in any company.',
-                'A guaranteed delivery date, unit count or resale value.',
-                'Priority over other holders in a liquidation.',
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <Icon name="close" size={16} className="mt-0.5 shrink-0 text-error" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
         </section>
       </div>
 
       {/* Summary rail */}
       <aside className="flex flex-col gap-space-lg lg:sticky lg:top-24 lg:self-start">
-        <div className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
+        <div className="rounded-lg border border-outline-variant/40 bg-surface-container p-space-md">
           <div className="flex items-start justify-between gap-space-sm">
             <div>
               <Link
                 href={`/projects/${project.slug}`}
-                className="font-display text-headline-sm text-on-surface transition-colors hover:text-primary"
+                className="font-display text-headline-sm text-on-surface hover:text-primary transition-colors"
               >
                 {project.title}
               </Link>
-              <p className="mt-0.5 text-body-sm text-on-surface-variant">{project.tagline}</p>
+              <p className="font-mono text-label-sm text-outline">{project.category}</p>
             </div>
-            <Badge tone={projectStatus(project.status).tone}>
-              <StatusDot
-                tone={project.status === 'FUNDING' ? 'brand' : 'neutral'}
-                pulse={project.status === 'FUNDING'}
-              />
-              {projectStatus(project.status).label}
+            <Badge tone="brand">
+              <StatusDot tone="brand" />
+              {project.status}
             </Badge>
           </div>
 
-          <div className="mt-space-md">
-            <div className="flex items-baseline justify-between font-mono text-label-sm">
-              <span className="text-on-surface-variant">Raised</span>
-              <span className="tabular text-primary">{funded.toFixed(1)}%</span>
+          <div className="mt-space-md flex flex-col gap-space-xs font-mono text-label-sm">
+            <div className="flex justify-between text-on-surface-variant">
+              <span>Target raise</span>
+              <span className="text-on-surface">{formatEthNumber(project.escrow.target)} ETH</span>
             </div>
-            <Progress value={funded} className="mt-1" />
-            <div className="mt-1 font-mono text-label-sm text-outline">
-              {weiToEthTrimmed(project.escrow.totalCommitted, 2)} /{' '}
-              {weiToEthTrimmed(project.escrow.target, 2)} ETH
+            <div className="flex justify-between text-on-surface-variant">
+              <span>Committed so far</span>
+              <span className="text-on-surface">{formatEthNumber(project.escrow.totalCommitted)} ETH</span>
+            </div>
+            <div className="flex justify-between text-on-surface-variant">
+              <span>Milestones</span>
+              <span className="text-on-surface">{project.milestones.length} tranches</span>
             </div>
           </div>
 
-          {/* Position preview. */}
-          <dl className="mt-space-md flex-col gap-space-xs border-t border-outline-variant/30 pt-space-sm font-mono text-label-sm">
-            <div className="flex items-center justify-between">
-              <dt className="text-outline">Your claim units after</dt>
-              <dd className="tabular text-on-surface">{formatNumber(ownedAfter)}</dd>
+          <div className="mt-space-md border-t border-outline-variant/30 pt-space-sm">
+            <div className="flex justify-between font-mono text-label-xs text-outline mb-1">
+              <span>Progress</span>
+              <span>{funded.toFixed(1)}%</span>
             </div>
-            <div className="flex items-center justify-between">
-              <dt className="text-outline">Your share of escrow</dt>
-              <dd className="tabular text-on-surface">
-                {percentOf(ownedAfter, BigInt(project.totalClaims)).toFixed(2)}%
-              </dd>
-            </div>
-          </dl>
-        </div>
-
-        {/* Milestone schedule: what the capital is released against. */}
-        <div className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
-          <h2 className="font-mono text-label-md uppercase tracking-wider text-on-surface">
-            Release schedule
-          </h2>
-          <ol className="mt-space-sm flex-col gap-space-xs">
-            {project.milestones.map((milestone) => {
-              const status = milestoneStatus(milestone.status);
-              return (
-                <li
-                  key={milestone.index}
-                  className="flex items-start justify-between gap-space-sm border-b border-outline-variant/20 pb-1.5 last:border-0"
-                >
-                  <div className="min-w-0">
-                    <div className="truncate text-body-sm text-on-surface">
-                      {milestone.title}
-                    </div>
-                    <div className="flex items-center gap-1.5 font-mono text-label-sm text-outline">
-                      <StatusDot
-                        tone={milestone.status === 'APPROVED' ? 'success' : 'neutral'}
-                      />
-                      {status.label}
-                    </div>
-                  </div>
-                  <span className="shrink-0 font-mono text-label-sm tabular text-secondary">
-                    {weiToEthTrimmed(milestone.trancheAmount, 0)} ETH
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
-          <p className="mt-space-sm font-mono text-label-sm text-outline">
-            Each tranche releases only after holder approval of that
-            milestone&apos;s evidence.
-          </p>
+            <Progress value={funded} />
+          </div>
         </div>
       </aside>
     </div>
