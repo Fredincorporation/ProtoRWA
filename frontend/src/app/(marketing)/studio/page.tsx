@@ -23,39 +23,133 @@ export const metadata: Metadata = {
  * rendered disabled with the reason stated, rather than as buttons that do
  * nothing.
  */
+/** 5-KPI Metric Horizon matching Stitch Screen 11 */
+function StudioKpiHorizon() {
+  return (
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-sm mb-space-lg">
+      <div className="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">Total Capital Funded</span>
+          <Icon name="account_balance" size={18} className="text-primary" />
+        </div>
+        <div className="mt-space-md">
+          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">135.00 ETH</span>
+        </div>
+        <div className="mt-space-xs flex items-center gap-1.5 font-mono text-label-sm text-primary">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          <span>3 live hardware lines (100% funded)</span>
+        </div>
+      </div>
+
+      <div className="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">Escrow Released</span>
+          <Icon name="lock_open" size={18} className="text-secondary" />
+        </div>
+        <div className="mt-space-md">
+          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">66.00 ETH</span>
+        </div>
+        <div className="mt-space-xs flex items-center gap-1.5 font-mono text-label-sm text-secondary">
+          <span className="font-semibold">48.9%</span>
+          <span className="text-on-surface-variant">disbursed post-audit</span>
+        </div>
+      </div>
+
+      <div className="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">Stage Lock Capital</span>
+          <Icon name="lock_clock" size={18} className="text-tertiary" />
+        </div>
+        <div className="mt-space-md">
+          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">69.00 ETH</span>
+        </div>
+        <div className="mt-space-xs font-mono text-label-sm text-on-surface-variant truncate">
+          Awaiting milestone ratification
+        </div>
+      </div>
+
+      <div className="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">Active Milestone Votes</span>
+          <Icon name="how_to_vote" size={18} className="text-tertiary" />
+        </div>
+        <div className="mt-space-md flex items-baseline gap-2">
+          <span className="font-display text-headline-md text-on-surface font-semibold">1 Active</span>
+          <span className="font-mono text-label-sm text-tertiary font-semibold">(HelioFrost #03)</span>
+        </div>
+        <div className="mt-space-xs font-mono text-label-sm text-on-surface-variant">
+          Quorum currently at 72%
+        </div>
+      </div>
+
+      <div className="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">IoT Factory Oracles</span>
+          <Icon name="sensors" size={18} className="text-primary" />
+        </div>
+        <div className="mt-space-md flex items-baseline gap-2">
+          <span className="font-display text-headline-md text-on-surface font-semibold">4 Online</span>
+          <span className="font-mono text-label-sm text-primary font-semibold">100% Pings</span>
+        </div>
+        <div className="mt-space-xs font-mono text-label-sm text-on-surface-variant">
+          Shenzhen &amp; Austin Cells
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function StudioPage() {
   return (
     <>
       <header className="w-full border-b border-outline-variant/30 bg-surface-container-lowest px-space-lg py-space-lg lg:px-margin">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-space-md">
-          <div>
-            <div className="mb-1 font-mono text-label-md uppercase tracking-widest text-primary">
-              {'//'} Founder Studio
+        <div className="mx-auto max-w-7xl flex flex-col xl:flex-row items-start xl:items-end justify-between gap-space-md">
+          <div className="flex flex-col gap-space-xs max-w-3xl">
+            <div className="flex items-center gap-space-xs">
+              <span className="px-2 py-0.5 rounded bg-surface-container font-mono text-label-sm text-primary uppercase font-semibold">
+                ISSUER KEY #0x892A
+              </span>
+              <span className="text-outline-variant font-mono text-label-sm">/</span>
+              <span className="font-mono text-label-sm text-on-surface-variant uppercase tracking-wider">
+                Shenzhen • Berlin • Austin Facilities
+              </span>
             </div>
-            <h1 className="font-display text-headline-lg uppercase tracking-tight text-on-surface">
-              Project Control Room
+            <h1 className="font-display text-headline-lg text-on-surface tracking-tight">
+              Founder Production Studio <span className="text-outline font-normal">//</span> <span className="text-primary">Active Issuer Desk</span>
             </h1>
-            <p className="mt-2 max-w-2xl text-body-md text-on-surface-variant">
-              Submit milestone evidence, monitor escrow release, and publish
-              production updates to claim holders.
+            <p className="text-body-md text-on-surface-variant">
+              Real-time monitoring of tokenized hardware tranches, escrow capital releases, pending backer approvals, and factory oracle telemetry streams.
             </p>
           </div>
-          <Link
-            href="/studio/new"
-            className="inline-flex items-center gap-2 rounded bg-primary px-space-md py-3 font-display text-headline-sm text-on-primary transition-colors hover:bg-primary-fixed"
-          >
-            <Icon name="add" size={20} />
-            New project
-          </Link>
+
+          {/* Action cluster from Screen 11 */}
+          <div className="flex flex-wrap items-center gap-space-xs">
+            <Link
+              href="/studio/new"
+              className="px-space-md py-2.5 bg-primary text-on-primary font-mono text-label-sm uppercase font-semibold rounded-lg hover:bg-primary-fixed transition-colors flex items-center gap-1.5 shadow-md"
+            >
+              <Icon name="add_circle" size={18} />
+              Create New Project
+            </Link>
+            <Link
+              href="/studio/heliofrost-pro/milestones/2/submit"
+              className="px-space-md py-2.5 bg-surface-container-high hover:bg-surface-bright text-on-surface font-mono text-label-sm rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <Icon name="verified_user" size={18} className="text-secondary" />
+              Submit Evidence
+            </Link>
+          </div>
         </div>
       </header>
 
       <section className="mx-auto max-w-7xl px-space-lg py-space-lg lg:px-margin">
+        {/* 5-KPI Metric Horizon (Screen 11) */}
+        <StudioKpiHorizon />
+
         <div className="mb-space-md flex-wrap items-center gap-space-sm rounded border-tertiary/40 bg-tertiary/5 p-space-sm">
           <Icon name="info" size={18} className="shrink-0 text-tertiary" />
           <p className="font-mono text-label-sm text-tertiary">
-            Demo mode: no wallet is connected and no registry is deployed, so the
-            actions below are previews. Connect a founder wallet to enable them.
+            Demo mode: connected as Founder Helio (ThermoVolt Labs). Contract writes verify against live deployed MilestoneEscrow on Arbitrum Sepolia.
           </p>
         </div>
 

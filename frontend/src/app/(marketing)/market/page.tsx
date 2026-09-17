@@ -145,7 +145,7 @@ function MetricsRibbon() {
   );
 }
 
-/** The tradable list. Selecting a row swaps the order book on the right. */
+/** The tradable list with category filter and search bar from Stitch Screen 09. */
 function ListingTable({
   selectedId,
   onSelect,
@@ -153,100 +153,163 @@ function ListingTable({
   selectedId: string;
   onSelect: (id: string) => void;
 }) {
+  const [category, setCategory] = React.useState<string>('all');
+  const [search, setSearch] = React.useState<string>('');
   const rows = useMarketRows();
 
+  const filteredRows = React.useMemo(() => {
+    return rows.filter((row) => {
+      const matchesCategory =
+        category === 'all' ||
+        (category === 'cleantech' && row.project?.category === 'CLEANTECH') ||
+        (category === 'robotics' && row.project?.category === 'ROBOTICS') ||
+        (category === 'iot' && row.project?.category === 'IOT_HARDWARE');
+
+      const matchesSearch =
+        search === '' ||
+        (row.project?.title ?? '').toLowerCase().includes(search.toLowerCase()) ||
+        row.ticker.toLowerCase().includes(search.toLowerCase());
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [rows, category, search]);
+
   return (
-    <div className="overflow-hidden rounded-lg border-outline-variant/40 bg-surface-container">
-      <div className="flex items-center justify-between border-b border-outline-variant/40 px-space-md py-space-sm">
-        <h2 className="font-display text-headline-sm text-on-surface">Tradable Claims</h2>
-        <span className="font-mono text-label-sm text-outline">
-          {rows.length} projects
-        </span>
+    <div className="flex flex-col gap-space-sm">
+      {/* Category and search control bar (Screen 09) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm rounded-xl bg-surface-container-low p-space-sm">
+        <div className="flex flex-wrap items-center gap-1">
+          {[
+            { id: 'all', label: 'All Hardware' },
+            { id: 'cleantech', label: 'CleanTech' },
+            { id: 'robotics', label: 'Robotics' },
+            { id: 'iot', label: 'IoT & Sensors' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setCategory(tab.id)}
+              className={cn(
+                'px-space-sm py-1 rounded font-mono text-label-sm uppercase transition-colors',
+                category === tab.id
+                  ? 'bg-primary text-on-primary font-semibold'
+                  : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
+              )}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="relative">
+          <Icon name="search" size={16} className="absolute left-2.5 top-2 text-outline" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Filter ticker or SKU..."
+            className="w-full sm:w-48 rounded bg-surface-container-lowest py-1 pl-8 pr-3 font-mono text-label-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary"
+          />
+        </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-body-sm">
-          <caption className="sr-only">
-            Claim listings available on the secondary market, with ask price,
-            size, spread to best bid and project status.
-          </caption>
-          <thead>
-            <tr className="bg-surface-container-low font-mono text-label-sm uppercase tracking-wider text-outline">
-              <th scope="col" className="px-space-md py-2">Project</th>
-              <th scope="col" className="px-space-md py-2 text-right">Best ask</th>
-              <th scope="col" className="px-space-md py-2 text-right">Size</th>
-              <th scope="col" className="px-space-md py-2 text-right">vs best bid</th>
-              <th scope="col" className="px-space-md py-2">Seller</th>
-              <th scope="col" className="px-space-md py-2">Trend</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row) => {
-              const status = listingStatus(row.listing.status);
-              const selected = row.listing.id === selectedId;
-              const project = row.project;
+      {/* Main Table */}
+      <div className="overflow-hidden rounded-lg border-outline-variant/40 bg-surface-container">
+        <div className="flex items-center justify-between border-b border-outline-variant/40 px-space-md py-space-sm">
+          <div className="flex items-center gap-2">
+            <Icon name="table_chart" size={18} className="text-primary" />
+            <h2 className="font-display text-headline-sm text-on-surface">Live Product Claims</h2>
+          </div>
+          <span className="font-mono text-label-sm text-outline">
+            {filteredRows.length} projects
+          </span>
+        </div>
 
-              return (
-                <tr
-                  key={row.listing.id}
-                  onClick={() => onSelect(row.listing.id)}
-                  className={cn(
-                    'cursor-pointer border-t border-outline-variant/20 transition-colors',
-                    selected ? 'bg-primary/10' : 'hover:bg-surface-container-high',
-                  )}
-                >
-                  <th scope="row" className="px-space-md py-3 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded border-outline-variant/50 bg-surface-container-lowest px-1.5 py-0.5 font-mono text-label-sm text-secondary">
-                        {row.ticker}
-                      </span>
-                      <div className="min-w-0">
-                        <div className="truncate font-medium text-on-surface">
-                          {project?.title ?? 'Unknown project'}
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <StatusDot
-                            tone={project?.status === 'IN_PRODUCTION' ? 'accent' : 'brand'}
-                          />
-                          <span className="font-mono text-label-sm text-outline">
-                            {status.label}
-                          </span>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-body-sm">
+            <caption className="sr-only">
+              Claim listings available on the secondary market, with ask price,
+              size, spread to best bid and project status.
+            </caption>
+            <thead>
+              <tr className="bg-surface-container-low font-mono text-label-sm uppercase tracking-wider text-outline">
+                <th scope="col" className="px-space-md py-2">Project</th>
+                <th scope="col" className="px-space-md py-2 text-right">Best ask</th>
+                <th scope="col" className="px-space-md py-2 text-right">Size</th>
+                <th scope="col" className="px-space-md py-2 text-right">vs best bid</th>
+                <th scope="col" className="px-space-md py-2">Seller</th>
+                <th scope="col" className="px-space-md py-2 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredRows.map((row) => {
+                const status = listingStatus(row.listing.status);
+                const selected = row.listing.id === selectedId;
+                const project = row.project;
+
+                return (
+                  <tr
+                    key={row.listing.id}
+                    onClick={() => onSelect(row.listing.id)}
+                    className={cn(
+                      'cursor-pointer border-t border-outline-variant/20 transition-colors',
+                      selected ? 'bg-primary/10' : 'hover:bg-surface-container-high',
+                    )}
+                  >
+                    <th scope="row" className="px-space-md py-3 text-left">
+                      <div className="flex items-center gap-2">
+                        <span className="rounded border-outline-variant/50 bg-surface-container-lowest px-1.5 py-0.5 font-mono text-label-sm text-secondary">
+                          {row.ticker}
+                        </span>
+                        <div className="min-w-0">
+                          <div className="truncate font-medium text-on-surface">
+                            {project?.title ?? 'Unknown project'}
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <StatusDot
+                              tone={project?.status === 'IN_PRODUCTION' ? 'accent' : 'brand'}
+                            />
+                            <span className="font-mono text-label-sm text-outline">
+                              {status.label}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </th>
-                  <td className="px-space-md py-3 text-right font-mono tabular text-on-surface">
-                    {formatEthNumber(row.listing.pricePerUnit, 4)}
-                  </td>
-                  <td className="px-space-md py-3 text-right font-mono tabular text-on-surface-variant">
-                    {formatNumber(row.listing.amount)}
-                  </td>
-                  <td className="px-space-md py-3 text-right font-mono tabular">
-                    {row.spreadBps === null ? (
-                      <span className="text-outline">no bids</span>
-                    ) : (
-                      <span className={row.spreadBps > 0 ? 'text-error' : 'text-primary'}>
-                        {row.spreadBps > 0 ? '+' : ''}
-                        {(row.spreadBps / 100).toFixed(2)}%
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-space-md py-3 font-mono text-label-sm text-on-surface-variant">
-                    {shortenAddress(row.listing.seller)}
-                  </td>
-                  <td className="px-space-md py-3">
-                    <PriceSparkline
-                      prices={row.book.bids
-                        .map((level) => Number(level.pricePerUnit))
-                        .reverse()
-                        .concat(row.book.asks.map((level) => Number(level.pricePerUnit)))}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    </th>
+                    <td className="px-space-md py-3 text-right font-mono tabular text-on-surface">
+                      {formatEthNumber(row.listing.pricePerUnit, 4)}
+                    </td>
+                    <td className="px-space-md py-3 text-right font-mono tabular text-on-surface-variant">
+                      {formatNumber(row.listing.amount)}
+                    </td>
+                    <td className="px-space-md py-3 text-right font-mono tabular">
+                      {row.spreadBps === null ? (
+                        <span className="text-outline">no bids</span>
+                      ) : (
+                        <span className={row.spreadBps > 0 ? 'text-error' : 'text-primary'}>
+                          {row.spreadBps > 0 ? '+' : ''}
+                          {(row.spreadBps / 100).toFixed(2)}%
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-space-md py-3 font-mono text-label-sm text-on-surface-variant">
+                      {shortenAddress(row.listing.seller)}
+                    </td>
+                    <td className="px-space-md py-3 text-right">
+                      <Link
+                        href={`/market/${row.ticker.toLowerCase()}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 rounded bg-surface-container-highest px-2 py-1 font-mono text-label-sm text-primary hover:bg-primary hover:text-on-primary transition-colors"
+                      >
+                        Terminal
+                        <Icon name="arrow_forward" size={12} />
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

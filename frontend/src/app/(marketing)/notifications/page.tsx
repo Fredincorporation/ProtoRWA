@@ -1,4 +1,6 @@
-import type { Metadata } from 'next';
+'use client';
+
+import * as React from 'react';
 import Link from 'next/link';
 
 import { Badge, StatusDot } from '@/components/ui/badge';
@@ -6,39 +8,42 @@ import { Icon } from '@/components/ui/icon';
 import { mockNotifications, mockProjects } from '@/lib/data/mock';
 import { formatRelativeTime } from '@/lib/format';
 import { notificationTone, severityTone } from '@/lib/status';
+import { cn } from '@/lib/utils';
 
-export const metadata: Metadata = {
-  title: 'Notifications',
-  description: 'Protocol alerts, voting windows and escrow events for your projects.',
-};
-
-/**
- * Notifications centre (/notifications).
- *
- * Ported from the design's "Notifications Center & Protocol Alert Stream": a
- * severity-coded list with per-project context and deep links.
- *
- * The design presented a live stream. This is the demo set, and an unread count
- * derived from it rather than a hardcoded number, so the badge cannot disagree
- * with the list below it.
- */
 export default function NotificationsPage() {
+  const [filter, setFilter] = React.useState<string>('all');
   const unread = mockNotifications.filter((notification) => notification.readAt === null);
+
+  const filtered = React.useMemo(() => {
+    return mockNotifications.filter((notification) => {
+      if (filter === 'all') return true;
+      if (filter === 'urgent') return notification.kind === 'VOTING_OPEN';
+      if (filter === 'votes') return notification.kind === 'VOTING_OPEN';
+      if (filter === 'payouts') return notification.kind === 'TRANCHE_RELEASED';
+      if (filter === 'updates') return notification.kind === 'FOUNDER_UPDATE';
+      return true;
+    });
+  }, [filter]);
 
   return (
     <>
       <header className="w-full border-b border-outline-variant/30 bg-surface-container-lowest px-space-lg py-space-lg lg:px-margin">
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-space-md">
           <div>
-            <div className="mb-1 font-mono text-label-md uppercase tracking-widest text-primary">
-              {'//'} Alert Stream
+            <div className="mb-1 flex items-center gap-space-sm">
+              <span className="font-mono text-label-sm uppercase tracking-widest text-primary font-semibold px-2 py-0.5 rounded bg-surface-container-high">
+                Live Ingest Daemon
+              </span>
+              <span className="inline-flex items-center gap-1 font-mono text-label-sm text-on-surface-variant">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
+                Arbitrum Sepolia WebSocket: syncd (#14,892,104)
+              </span>
             </div>
             <h1 className="font-display text-headline-lg uppercase tracking-tight text-on-surface">
-              Notifications
+              Notifications &amp; On-Chain Alert Stream
             </h1>
-            <p className="mt-2 max-w-2xl text-body-md text-on-surface-variant">
-              Voting windows, tranche releases, secondary fills and protocol
-              alerts across the projects you hold claims in.
+            <p className="mt-1 max-w-2xl text-body-md text-on-surface-variant">
+              Real-time alerts for milestone votes, escrow payouts, oracle metrology events, and secondary trade fills across registered physical RWA asset contracts.
             </p>
           </div>
 
@@ -56,7 +61,84 @@ export default function NotificationsPage() {
         </div>
       </header>
 
-      <section className="mx-auto max-w-7xl px-space-lg py-space-lg lg:px-margin">
+      <section className="mx-auto max-w-7xl px-space-lg py-space-lg lg:px-margin flex flex-col gap-space-md">
+        {/* Filter Matrix Bar from Screen 02 */}
+        <div className="w-full bg-surface-container-low rounded-xl p-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+          <div className="flex flex-wrap items-center gap-1">
+            {[
+              { id: 'all', label: 'All Alerts', count: mockNotifications.length },
+              { id: 'urgent', label: 'Action Required', count: 1, dot: true },
+              { id: 'votes', label: 'Milestone Votes', count: 1 },
+              { id: 'payouts', label: 'Payouts & Yield', count: 1 },
+              { id: 'updates', label: 'Founder Updates', count: 1 },
+            ].map((pill) => (
+              <button
+                key={pill.id}
+                onClick={() => setFilter(pill.id)}
+                className={cn(
+                  'px-space-md py-1.5 rounded-lg font-mono text-label-sm font-semibold transition-colors flex items-center gap-2',
+                  filter === pill.id
+                    ? 'bg-primary text-on-primary'
+                    : 'bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface'
+                )}
+              >
+                {pill.dot && <span className="w-1.5 h-1.5 rounded-full bg-tertiary" />}
+                <span>{pill.label}</span>
+                <span className={cn('px-1.5 py-0.2 rounded text-[10px]', filter === pill.id ? 'bg-surface-dim/40' : 'bg-surface-container-highest')}>
+                  {pill.count}
+                </span>
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-1 font-mono text-label-sm text-outline">
+            <Icon name="rss_feed" size={16} className="text-primary" />
+            <span>Relayer Policy: Subsidized</span>
+          </div>
+        </div>
+
+        {/* Urgent Action Required Banner (Screen 02) */}
+        <div className="relative w-full rounded-xl bg-gradient-to-r from-surface-container-highest via-surface-container-high to-surface-container p-space-md lg:p-space-lg shadow-xl overflow-hidden border-l-4 border-tertiary">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+            <div className="flex items-start gap-space-md">
+              <div className="w-12 h-12 rounded-xl bg-tertiary/20 flex items-center justify-center shrink-0 text-tertiary">
+                <Icon name="how_to_vote" size={28} />
+              </div>
+              <div className="flex flex-col gap-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-space-xs font-mono text-label-sm">
+                  <span className="px-1.5 py-0.5 rounded bg-tertiary/20 text-tertiary font-bold tracking-wider uppercase">
+                    Action Mandate
+                  </span>
+                  <span className="text-on-surface-variant">ESCROW CONTRACT #0x19f2...bD16</span>
+                  <span className="text-tertiary flex items-center gap-1 font-semibold">
+                    <Icon name="timer" size={14} />
+                    Closes in 18h 42m
+                  </span>
+                </div>
+                <h2 className="font-display text-headline-sm text-on-surface font-bold truncate">
+                  Milestone 03 Voting Ending Soon: HelioFrost Pro Cold-Storage System
+                </h2>
+                <p className="font-body-md text-on-surface-variant max-w-2xl">
+                  Tranche 03 disbursement (30 ETH) requires backer consensus quorum. SGS Metrology key #0x4f delivered certified dimensional laser inspection pass.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-space-sm shrink-0">
+              <Link
+                href="/projects/heliofrost-pro"
+                className="px-space-md py-2 rounded-lg bg-surface-bright hover:bg-surface-variant text-on-surface font-mono text-label-sm transition-colors"
+              >
+                Inspect Proofs
+              </Link>
+              <Link
+                href="/projects/heliofrost-pro/milestones/2/vote"
+                className="px-space-md py-2 rounded-lg bg-tertiary hover:opacity-90 text-on-tertiary font-mono text-label-sm font-bold uppercase transition-all shadow-md inline-flex items-center gap-1.5"
+              >
+                <Icon name="verified" size={16} />
+                Cast Vote
+              </Link>
+            </div>
+          </div>
+        </div>
         {mockNotifications.length === 0 ? (
           <div className="rounded-lg border-dashed border-outline-variant/50 bg-surface-container p-space-xl text-center">
             <Icon name="notifications_off" size={32} className="mx-auto text-outline" />

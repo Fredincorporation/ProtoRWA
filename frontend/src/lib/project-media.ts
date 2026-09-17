@@ -103,3 +103,4 @@ export function getProjectMedia(slug: string): ProjectMediaAssets {
     }
   );
 }
+

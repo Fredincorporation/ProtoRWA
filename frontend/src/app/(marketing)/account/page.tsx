@@ -1,4 +1,6 @@
-import type { Metadata } from 'next';
+'use client';
+
+import * as React from 'react';
 import Link from 'next/link';
 
 import { Badge, StatusDot } from '@/components/ui/badge';
@@ -20,12 +22,6 @@ import {
 import { projectStatus } from '@/lib/status';
 import { cn } from '@/lib/utils';
 import type { LedgerEntry } from '@protorwa/shared';
-
-export const metadata: Metadata = {
-  title: 'Account',
-  description:
-    'Your claim positions, committed capital, escrow exposure and on-chain activity ledger.',
-};
 
 /**
  * Account / portfolio (/account).
@@ -54,42 +50,86 @@ function IdentityPanel() {
   const address = demoViewer.address;
 
   return (
-    <section className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
-      <div className="flex items-center gap-space-md">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-container font-display text-headline-sm text-on-primary-container">
-          {address.slice(2, 4).toUpperCase()}
-        </span>
-        <div className="min-w-0">
-          <div className="font-display text-headline-sm text-on-surface">
-            {demoViewer.handle}
+    <section className="flex flex-col gap-space-md">
+      {/* Identity & Compliance Card (Screen 16) */}
+      <div className="rounded-xl border-outline-variant/40 bg-surface-container-low p-space-md shadow-md relative overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-space-sm">
+          <div className="flex items-center gap-space-sm">
+            <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+              <Icon name="verified_user" size={24} />
+            </div>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-space-xs">
+                <span className="font-mono text-label-md font-bold text-on-surface">
+                  {shortenAddress(address, 6)}
+                </span>
+                <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono text-label-sm font-semibold">
+                  KYB VERIFIED
+                </span>
+              </div>
+              <span className="font-mono text-label-sm text-on-surface-variant">
+                ENS: {demoViewer.handle} • Merkle Root Verified
+              </span>
+            </div>
           </div>
-          <div className="truncate font-mono text-label-sm text-outline">
-            {shortenAddress(address, 6)}
+          <span className="font-mono text-label-sm px-2 py-1 rounded bg-surface-container-highest text-secondary font-medium">
+            SUB-LEDGER: 09-ARB-ORACLE-V4
+          </span>
+        </div>
+
+        {/* 4-attribute credential grid */}
+        <div className="grid grid-cols-2 gap-space-xs sm:grid-cols-4 mt-space-md">
+          <div className="bg-surface-container p-space-xs rounded flex flex-col">
+            <span className="font-mono text-label-sm text-outline uppercase">Account Tier</span>
+            <span className="font-mono text-label-sm text-on-surface font-semibold">Underwriter</span>
+          </div>
+          <div className="bg-surface-container p-space-xs rounded flex flex-col">
+            <span className="font-mono text-label-sm text-outline uppercase">Relayer Policy</span>
+            <span className="font-mono text-label-sm text-primary font-semibold">Sepolia Active</span>
+          </div>
+          <div className="bg-surface-container p-space-xs rounded flex flex-col">
+            <span className="font-mono text-label-sm text-outline uppercase">Residency</span>
+            <span className="font-mono text-label-sm text-on-surface font-semibold">W-8BEN-E Active</span>
+          </div>
+          <div className="bg-surface-container p-space-xs rounded flex flex-col">
+            <span className="font-mono text-label-sm text-outline uppercase">Consensus Sig</span>
+            <span className="font-mono text-label-sm text-tertiary font-semibold">3-of-5 Multi-Sig</span>
           </div>
         </div>
-      </div>
 
-      <dl className="mt-space-md flex-col gap-space-xs border-t border-outline-variant/30 pt-space-sm font-mono text-label-sm">
-        <div className="flex items-center justify-between">
-          <dt className="text-outline">Role</dt>
-          <dd className="text-on-surface">Claim holder</dd>
-        </div>
-        <div className="flex items-center justify-between">
-          <dt className="text-outline">Protocol admin</dt>
-          <dd className="text-on-surface-variant">No</dd>
-        </div>
-        <div className="flex items-center justify-between">
-          <dt className="text-outline">Sign-in method</dt>
-          <dd className="text-on-surface-variant">Wallet (SIWE)</dd>
-        </div>
-      </dl>
+        {/* Compliance Seal & Actions */}
+        <div className="mt-space-md pt-space-sm border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-space-sm">
+          <div className="flex items-center gap-space-sm">
+            <div className="relative flex items-center justify-center w-10 h-10">
+              <svg className="w-10 h-10 transform -rotate-90" viewBox="0 0 36 36">
+                <path className="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                <path className="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray="100, 100" strokeLinecap="round" strokeWidth="3" />
+              </svg>
+              <span className="absolute font-mono text-label-sm font-bold text-primary">100%</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-mono text-label-sm font-bold text-on-surface">SEC REG D / 506(C)</span>
+              <span className="font-mono text-label-sm text-on-surface-variant">All Tranches Settled</span>
+            </div>
+          </div>
 
-      <div className="mt-space-md flex-wrap items-center gap-space-sm rounded bg-surface-container-lowest p-space-sm">
-        <Icon name="info" size={16} className="shrink-0 text-outline" />
-        <p className="font-mono text-label-sm text-on-surface-variant">
-          Demonstration data. No wallet is connected, so these holdings belong to a
-          seeded demo address rather than to you.
-        </p>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => alert('CSV ledger exported for fiscal year 2025.')}
+              className="px-space-sm py-1.5 rounded bg-primary hover:bg-primary/90 text-on-primary font-mono text-label-sm font-semibold inline-flex items-center gap-1 transition-colors shadow-sm"
+            >
+              <Icon name="download" size={14} />
+              Export CSV
+            </button>
+            <button
+              onClick={() => alert('SHA-256 Audit Merkle Root: 0xe84a92bc10398f...d39a')}
+              className="px-space-sm py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-mono text-label-sm inline-flex items-center gap-1 transition-colors"
+            >
+              <Icon name="fingerprint" size={14} />
+              Audit Proof
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

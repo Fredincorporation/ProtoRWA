@@ -377,44 +377,183 @@ function EscrowOverview() {
   );
 }
 
+/** Bento Portfolio Summary Strip matching Screen 14 */
+function PortfolioBento() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-sm mb-space-lg">
+      <div className="relative overflow-hidden rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-md">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase text-on-surface-variant tracking-wider">Portfolio Total Value</span>
+          <Icon name="account_balance_wallet" size={20} className="text-primary" />
+        </div>
+        <div className="my-space-sm">
+          <div className="font-display text-headline-lg font-bold text-on-surface tracking-tight">42.50 ETH</div>
+          <div className="flex items-center gap-1 font-mono text-label-sm text-primary font-semibold mt-0.5">
+            <Icon name="trending_up" size={14} />
+            +18.4% Net Return
+          </div>
+        </div>
+        <div className="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+          <div className="bg-primary h-full rounded-full" style={{ width: '78%' }} />
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-md">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase text-on-surface-variant tracking-wider">Milestone Escrow</span>
+          <Icon name="lock_clock" size={20} className="text-secondary" />
+        </div>
+        <div className="my-space-sm">
+          <div className="font-display text-headline-lg font-bold text-on-surface tracking-tight">28.00 ETH</div>
+          <div className="font-mono text-label-sm text-on-surface-variant mt-0.5">Held in Stage Contracts</div>
+        </div>
+        <div className="flex items-center gap-1 font-mono text-label-sm text-secondary">
+          <Icon name="verified_user" size={14} />
+          65.8% Capital Protected
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-md">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase text-on-surface-variant tracking-wider">Claim Tokens Held</span>
+          <Icon name="token" size={20} className="text-tertiary" />
+        </div>
+        <div className="my-space-sm">
+          <div className="font-display text-headline-lg font-bold text-on-surface tracking-tight">3 Projects</div>
+          <div className="font-mono text-label-sm text-on-surface-variant mt-0.5">14,200 Total Claims</div>
+        </div>
+        <div className="flex items-center gap-1 font-mono text-label-sm text-tertiary">
+          <Icon name="memory" size={14} />
+          Cleantech & Robotics
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-md">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase text-on-surface-variant tracking-wider">Revenue Distributed</span>
+          <Icon name="payments" size={20} className="text-primary" />
+        </div>
+        <div className="my-space-sm">
+          <div className="font-display text-headline-lg font-bold text-primary tracking-tight">3.65 ETH</div>
+          <div className="font-mono text-label-sm text-on-surface-variant mt-0.5">Automated Disbursements</div>
+        </div>
+        <div className="flex items-center gap-1 font-mono text-label-sm text-primary">
+          <Icon name="check_circle" size={14} />
+          Arbitrum Sepolia Verified
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-xl bg-surface-container-high p-space-md flex flex-col justify-between shadow-md">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-label-sm uppercase text-tertiary font-bold tracking-wider">Action Needed</span>
+          <Icon name="how_to_vote" size={20} className="text-tertiary animate-pulse" />
+        </div>
+        <div className="my-space-sm">
+          <div className="font-display text-headline-lg font-bold text-tertiary tracking-tight">1 Milestone</div>
+          <div className="font-mono text-label-sm text-on-surface-variant mt-0.5">18h remaining to cast vote</div>
+        </div>
+        <Link
+          href="/projects/heliofrost-pro/milestones/2/vote"
+          className="w-full py-1.5 rounded bg-tertiary text-on-tertiary font-mono text-label-sm font-bold uppercase tracking-wider text-center hover:opacity-90 transition-opacity"
+        >
+          Vote Now
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+/** Urgent Governance Action Required Banner (Screen 14) */
+function UrgentVoteBanner() {
+  return (
+    <div className="relative overflow-hidden rounded-xl bg-surface-container-high p-space-md lg:p-space-lg shadow-xl mb-space-lg">
+      <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-tertiary/10 blur-3xl pointer-events-none" />
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md relative z-10">
+        <div className="flex flex-col gap-space-xs max-w-3xl">
+          <div className="flex flex-wrap items-center gap-space-xs">
+            <span className="px-2 py-0.5 rounded bg-tertiary/20 text-tertiary font-mono text-label-sm font-bold uppercase tracking-wider flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping" />
+              Urgent Governance Action Required
+            </span>
+            <span className="font-mono text-label-sm text-outline">•</span>
+            <span className="font-mono text-label-sm text-on-surface-variant">Arbitrum Sepolia Chain ID 421614</span>
+          </div>
+          <h2 className="font-display text-headline-md text-on-surface font-bold">
+            HelioFrost Pro: Milestone 03 Production Run QA Voting Open
+          </h2>
+          <p className="font-body-md text-on-surface-variant">
+            Founder ThermoVolt Labs submitted environmental chamber thermal telemetry and factory ISO 9001 test reports. 30 ETH escrow tranche release pending backer quorum.
+          </p>
+        </div>
+        <div className="flex items-center gap-space-sm self-start lg:self-auto">
+          <Link
+            href="/projects/heliofrost-pro/milestones/2/vote"
+            className="px-space-md py-2.5 rounded-lg bg-tertiary hover:opacity-90 text-on-tertiary font-mono text-label-sm font-bold uppercase tracking-wider transition-all shadow-md inline-flex items-center gap-2"
+          >
+            <Icon name="how_to_vote" size={16} />
+            Review Evidence &amp; Vote
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function GovernancePage() {
   return (
     <>
       <header className="w-full border-b border-outline-variant/30 bg-surface-container-lowest px-space-lg py-space-lg lg:px-margin">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-1 flex-wrap items-center gap-space-sm">
-            <span className="rounded bg-tertiary/10 px-2 py-0.5 font-mono text-label-sm uppercase tracking-wider text-tertiary">
-              Protocol Oversight
-            </span>
-            <span className="flex items-center gap-1 font-mono text-label-sm text-on-surface-variant">
-              <StatusDot tone="warn" />
-              Privileged surface
-            </span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+            <div>
+              <div className="mb-1 flex items-center gap-space-sm">
+                <span className="rounded bg-primary/10 px-2 py-0.5 font-mono text-label-sm uppercase tracking-wider text-primary">
+                  Multi-Sig Protocol Engine
+                </span>
+                <span className="flex items-center gap-1 font-mono text-label-sm text-on-surface-variant">
+                  <StatusDot tone="brand" pulse />
+                  Arbitrum Sepolia Active
+                </span>
+              </div>
+              <h1 className="font-display text-headline-lg tracking-tight text-on-surface">
+                Investor Governance &amp; Portfolio Hub
+              </h1>
+              <p className="mt-1 max-w-3xl text-body-md text-on-surface-variant">
+                Tokenized escrow positions, verified hardware telemetry oracles, and milestone consensus voting terminals.
+              </p>
+            </div>
+            <div className="flex items-center gap-space-sm">
+              <Link
+                href="/market"
+                className="px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-secondary font-mono text-label-sm transition-all shadow-sm inline-flex items-center gap-1.5"
+              >
+                <Icon name="candlestick_chart" size={16} />
+                Terminal Order Book
+              </Link>
+            </div>
           </div>
-
-          <h1 className="font-display text-headline-lg tracking-tight text-on-surface">
-            Governance &amp; Oracle Oversight
-          </h1>
-          <p className="mt-2 max-w-3xl text-body-md text-on-surface-variant">
-            Administering milestone disputes, transfer freezes and role assignment.
-            Everything on this page is a capability held by a specific role in the
-            contracts — it is centralised authority, not decentralised consensus,
-            and it is documented here rather than obscured.
-          </p>
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-space-lg px-space-lg py-space-lg lg:grid-cols-3 lg:px-margin">
-        <div className="flex flex-col gap-space-lg lg:col-span-2">
-          <OversightQueue />
-          <PrivilegedSurface />
-        </div>
+      <main className="mx-auto max-w-7xl px-space-lg py-space-lg lg:px-margin">
+        {/* Bento Portfolio Strip from Screen 14 */}
+        <PortfolioBento />
 
-        <div className="flex flex-col gap-space-lg">
-          <EscrowOverview />
-          <DeploymentPanel />
+        {/* Urgent Governance Action Callout from Screen 14 */}
+        <UrgentVoteBanner />
+
+        <div className="grid grid-cols-1 gap-space-lg lg:grid-cols-3">
+          <div className="flex flex-col gap-space-lg lg:col-span-2">
+            <OversightQueue />
+            <PrivilegedSurface />
+          </div>
+
+          <div className="flex flex-col gap-space-lg">
+            <EscrowOverview />
+            <DeploymentPanel />
+          </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

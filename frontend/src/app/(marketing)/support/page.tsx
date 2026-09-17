@@ -178,29 +178,78 @@ const sections: DocSection[] = [
 
 export default function SupportPage() {
   return (
-    <DocPage
-      kicker="// Help Center"
-      title="Support"
-      intro="Troubleshooting for the things that actually go wrong: wallet state, reverted commitments, voting eligibility, listing approvals and refunds."
-      sections={sections}
-      footer={
-        <div className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
-          <h2 className="font-display text-headline-sm text-on-surface">
-            Understand the rules first
-          </h2>
-          <p className="mt-1 text-body-sm text-on-surface-variant">
-            Most failures above are the contract enforcing a rule on purpose. The
-            rules are written out in the FAQ.
+    <>
+      {/* Stitch Screen 01 Hero & Command Search */}
+      <section className="relative w-full px-gutter py-space-lg bg-surface-container-lowest border-b border-outline-variant/30 overflow-hidden">
+        <div className="relative max-w-5xl mx-auto flex flex-col items-center text-center gap-space-sm">
+          <div className="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container text-on-surface-variant font-mono text-label-sm">
+            <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
+            <span className="text-primary font-bold">KNOWLEDGE BASE v3.4.1</span>
+            <span>•</span>
+            <span>HARDWARE VERIFICATION ENGINE ACTIVE</span>
+          </div>
+
+          <h1 className="font-display text-headline-lg text-on-surface tracking-tight">
+            ProtoRWA Support &amp; Technical Documentation
+          </h1>
+          <p className="text-body-md text-on-surface-variant max-w-2xl">
+            Institutional documentation portal for hardware innovators, verified claim underwriters, and certified metrology laboratory nodes.
           </p>
-          <Link
-            href="/faq"
-            className="mt-4 inline-flex items-center gap-2 rounded bg-surface-container-high px-space-md py-2 font-mono text-label-md text-on-surface transition-colors hover:bg-surface-bright"
-          >
-            <Icon name="help" size={16} />
-            FAQ & risk disclosure
-          </Link>
+
+          {/* Search Command Bar (Screen 01) */}
+          <div className="w-full max-w-2xl mt-space-sm">
+            <div className="relative flex items-center w-full bg-surface-container-low rounded-xl p-space-xs shadow-md border border-outline-variant/40 focus-within:border-primary">
+              <div className="pl-space-md text-on-surface-variant flex items-center">
+                <Icon name="search" size={22} />
+              </div>
+              <input
+                type="text"
+                placeholder="Query oracle specs, BOM contracts, voting rules, or error codes..."
+                className="w-full bg-transparent py-space-sm px-space-md text-on-surface font-mono text-label-sm placeholder:text-outline focus:outline-none"
+              />
+              <div className="pr-space-sm flex items-center">
+                <kbd className="inline-flex items-center gap-1 px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-mono text-label-sm shadow-sm">
+                  <span>Ctrl</span><span>K</span>
+                </kbd>
+              </div>
+            </div>
+          </div>
+
+          {/* Rapid Tags */}
+          <div className="flex flex-wrap items-center justify-center gap-space-xs mt-space-xs text-on-surface-variant font-mono text-label-sm">
+            <span className="uppercase tracking-widest text-outline text-[11px]">Fast Lookup:</span>
+            <span className="px-2 py-0.5 rounded bg-surface-container text-primary cursor-pointer hover:bg-surface-container-high">ERC-1155 Claims</span>
+            <span className="px-2 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high">Stylus WASM PoR</span>
+            <span className="px-2 py-0.5 rounded bg-surface-container text-tertiary cursor-pointer hover:bg-surface-container-high">Milestone Escrow</span>
+            <span className="px-2 py-0.5 rounded bg-surface-container text-outline cursor-pointer hover:bg-surface-container-high">Dispute Resolution</span>
+          </div>
         </div>
-      }
-    />
+      </section>
+
+      <DocPage
+        kicker="// Troubleshooting Guide"
+        title="Diagnostic Procedures"
+        intro="Troubleshooting for the things that actually go wrong: wallet state, reverted commitments, voting eligibility, listing approvals and refunds."
+        sections={sections}
+        footer={
+          <div className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
+            <h2 className="font-display text-headline-sm text-on-surface">
+              Understand the rules first
+            </h2>
+            <p className="mt-1 text-body-sm text-on-surface-variant">
+              Most failures above are the contract enforcing a rule on purpose. The
+              rules are written out in the FAQ.
+            </p>
+            <Link
+              href="/faq"
+              className="mt-4 inline-flex items-center gap-2 rounded bg-surface-container-high px-space-md py-2 font-mono text-label-md text-on-surface transition-colors hover:bg-surface-bright"
+            >
+              <Icon name="help" size={16} />
+              FAQ &amp; risk disclosure
+            </Link>
+          </div>
+        }
+      />
+    </>
   );
 }

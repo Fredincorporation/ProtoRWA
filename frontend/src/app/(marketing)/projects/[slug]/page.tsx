@@ -322,6 +322,38 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <>
+      {/* Precision Technical Ribbon from Stitch Screen 04 */}
+      <div className="w-full border-b border-outline-variant/30 bg-surface-container-lowest px-space-lg py-2 lg:px-margin">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-mono text-label-sm">
+          <div className="flex items-center gap-space-md">
+            <div className="flex items-center gap-1.5">
+              <span className="text-outline">DISCOVERY</span>
+              <Icon name="chevron_right" size={12} className="text-outline" />
+              <span className="text-outline">{category.label.toUpperCase()}</span>
+              <Icon name="chevron_right" size={12} className="text-outline" />
+              <span className="text-primary font-semibold">
+                {project.title.split(/\s+/).map(w => w[0]).join('').slice(0, 5).toUpperCase()}-042
+              </span>
+            </div>
+            <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-high text-on-surface">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span>ESCROW STATE: ACTIVE ON ARBITRUM SEPOLIA</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              href={`https://sepolia.arbiscan.io/address/${project.escrow.escrowAddress ?? '0x19f2190C1c50B2E4403ff4bd78c05598aBabbD16'}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors"
+            >
+              <Icon name="open_in_new" size={12} />
+              <span>EXPLORER (0x19f2...bD16)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <header className="w-full border-b border-outline-variant/30 bg-surface-container-lowest px-space-lg py-space-lg lg:px-margin">
         <div className="mx-auto max-w-7xl">
           <nav
