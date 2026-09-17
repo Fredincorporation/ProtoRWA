@@ -1,8 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Icon } from '@/components/ui/icon';
 import { projectStatus } from '@/lib/status';
 import { formatEthNumber, formatNumber } from '@/lib/format';
+import { getProjectMedia } from '@/lib/project-media';
 import type { Project } from '@protorwa/shared';
 
 /**
@@ -30,6 +32,8 @@ interface BatchCardProps {
     tagline: string;
     batchLabel: string | null;
     status: string;
+    /** Real cover image URL (from projectMedia catalogue). */
+    coverUrl: string;
     /** Coverage in basis points (0-10000). */
     fundedBps: number;
     targetWei: string;
@@ -53,13 +57,24 @@ function BatchCard({ project }: BatchCardProps) {
     >
       <div className="space-y-space-sm">
         <div className="relative h-44 w-full overflow-hidden rounded bg-surface-container-lowest">
-          {/* Media placeholder until real project imagery is on IPFS. */}
-          <div className="absolute inset-0 grid place-items-center">
-            <div className="flex flex-col items-center gap-1 text-outline">
-              <Icon name="deployed_code" size={32} />
-              <span className="font-mono text-label-sm uppercase">No media</span>
+          {/* Real cover image from the project media catalogue. */}
+          {project.coverUrl ? (
+            <Image
+              src={project.coverUrl}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              unoptimized
+            />
+          ) : (
+            <div className="absolute inset-0 grid place-items-center">
+              <div className="flex flex-col items-center gap-1 text-outline">
+                <Icon name="deployed_code" size={32} />
+                <span className="font-mono text-label-sm uppercase">No media</span>
+              </div>
             </div>
-          </div>
+          )}
           {project.batchLabel ? (
             <span className="absolute left-2 top-2 rounded bg-surface/90 px-2 py-0.5 font-mono text-label-sm text-primary">
               {project.batchLabel}
@@ -140,6 +155,7 @@ export function toBatchCard(project: Project): BatchCardProps['project'] {
   const target = BigInt(project.escrow.target || '0');
   const committed = BigInt(project.escrow.totalCommitted || '0');
   const fundedBps = target === 0n ? 0 : Number((committed * 10_000n) / target);
+  const { cover } = getProjectMedia(project.slug);
 
   return {
     id: project.id,
@@ -148,6 +164,7 @@ export function toBatchCard(project: Project): BatchCardProps['project'] {
     tagline: project.tagline,
     batchLabel: null,
     status: project.status,
+    coverUrl: cover,
     fundedBps,
     targetWei: project.escrow.target,
     committedWei: project.escrow.totalCommitted,

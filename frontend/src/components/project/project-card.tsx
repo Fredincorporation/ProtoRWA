@@ -1,8 +1,10 @@
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { categoryMap } from '@/lib/status';
 import { projectStatus } from '@/lib/status';
 import { formatEthNumber, formatNumber, percentOf } from '@/lib/format';
 import { Icon } from '@/components/ui/icon';
+import { getProjectMedia } from '@/lib/project-media';
 import type { IndustryCategory, Project, ProjectStatus } from '@protorwa/shared';
 
 /**
@@ -32,6 +34,7 @@ function daysLeft(deadlineIso: string): number | null {
 export function ProjectCard({ project, className }: ProjectCardProps) {
   const status = projectStatus(project.status);
   const category = categoryMap[project.category as IndustryCategory];
+  const media = getProjectMedia(project.slug);
   const funded = percentOf(
     BigInt(project.escrow.totalCommitted || '0'),
     BigInt(project.escrow.target || '0'),
@@ -66,14 +69,25 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
     >
       {/* Media / preview */}
       <div className="relative h-44 w-full overflow-hidden bg-surface-container-lowest">
-        <div className="absolute inset-0 grid place-items-center">
-          <div className="flex flex-col items-center gap-1 text-outline">
-            <Icon name="deployed_code" size={32} />
-            <span className="font-mono text-label-sm uppercase">
-              {project.coverCid ? 'Media on IPFS' : 'No media'}
-            </span>
+        {media.cover ? (
+          <Image
+            src={media.cover}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            unoptimized
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center">
+            <div className="flex flex-col items-center gap-1 text-outline">
+              <Icon name="deployed_code" size={32} />
+              <span className="font-mono text-label-sm uppercase">
+                {project.coverCid ? 'Media on IPFS' : 'No media'}
+              </span>
+            </div>
           </div>
-        </div>
+        )}
 
         <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded bg-surface/90 px-2 py-0.5 font-mono text-label-sm text-primary">
           <Icon name={category.icon} size={13} />

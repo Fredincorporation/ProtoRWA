@@ -7,10 +7,12 @@ import {
   QuorumMeter,
   VotingDesk,
 } from '@/components/project/milestone-vote-panel';
+import { ProjectMediaShowcase } from '@/components/project/project-media-showcase';
 import { Badge, StatusDot } from '@/components/ui/badge';
 import { Icon } from '@/components/ui/icon';
 import { Progress } from '@/components/ui/progress';
 import { mockProjects, getProjectBySlug, mockUpdates } from '@/lib/data/mock';
+import { getProjectMedia } from '@/lib/project-media';
 import { formatDate, formatEthNumber, formatNumber, percentOf, weiToEth } from '@/lib/format';
 import { categoryMap, milestoneStatus, projectStatus } from '@/lib/status';
 import { cn } from '@/lib/utils';
@@ -316,6 +318,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
   const status = projectStatus(project.status);
   const category = categoryMap[project.category as IndustryCategory];
+  const media = getProjectMedia(slug);
 
   return (
     <>
@@ -362,13 +365,56 @@ export default async function ProjectPage({ params }: PageProps) {
                 <span>Registered {formatDate(project.createdAt)}</span>
               </div>
             </div>
+
+            {/* Quick-action links */}
+            <div className="flex flex-wrap items-center gap-space-sm">
+              <Link
+                href={`/market/${project.title.split(/\s+/).map(w => w[0]).join('').slice(0,6).toLowerCase()}`}
+                className="inline-flex items-center gap-1.5 rounded border border-secondary/40 bg-secondary/10 px-space-sm py-1.5 font-mono text-label-sm text-secondary transition-colors hover:bg-secondary/20"
+              >
+                <Icon name="candlestick_chart" size={15} />
+                Trade Claims
+              </Link>
+              {project.status === 'IN_PRODUCTION' && (
+                <Link
+                  href={`/studio/${project.slug}/milestones/2/submit`}
+                  className="inline-flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-container px-space-sm py-1.5 font-mono text-label-sm text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                >
+                  <Icon name="upload" size={15} />
+                  Submit Evidence
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-space-lg px-space-lg py-space-lg lg:grid-cols-3 lg:px-margin">
         <div className="flex flex-col gap-space-lg lg:col-span-2">
-          <section className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
+          {/* ── Video / Media Showcase ──────────────────────────────── */}
+          <ProjectMediaShowcase title={project.title} tagline={project.tagline} media={media} />
+
+          {/* ── Tab nav (anchor-based, no JS) ───────────────────────── */}
+          <div className="flex gap-1 overflow-x-auto border-b border-outline-variant/30 pb-0 font-mono text-label-sm">
+            {[
+              { label: 'About', href: '#about' },
+              { label: 'Milestones & Escrow', href: '#milestones' },
+              { label: 'Tokenomics', href: '#tokenomics' },
+              { label: 'Technical Specs', href: '#specs' },
+              { label: 'Founder Updates', href: '#updates' },
+            ].map((tab) => (
+              <a
+                key={tab.href}
+                href={tab.href}
+                className="shrink-0 rounded-t border-b-2 border-transparent px-space-sm py-2 uppercase tracking-wider text-on-surface-variant transition-colors hover:border-primary hover:text-primary"
+              >
+                {tab.label}
+              </a>
+            ))}
+          </div>
+
+          {/* ── About ─────────────────────────────────────────────── */}
+          <section id="about" className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
             <h2 className="mb-space-xs font-mono text-label-md uppercase tracking-wider text-on-surface">
               About this build
             </h2>
@@ -379,7 +425,95 @@ export default async function ProjectPage({ params }: PageProps) {
             ))}
           </section>
 
+          {/* ── Milestones & Escrow ───────────────────────────────── */}
           <MilestoneTimeline project={project} />
+
+          {/* ── Tokenomics ────────────────────────────────────────── */}
+          <section id="tokenomics" className="flex flex-col gap-space-md">
+            <h2 className="font-display text-headline-md uppercase tracking-tight text-on-surface">
+              Tokenomics & Revenue Share
+            </h2>
+            <div className="grid grid-cols-1 gap-space-md sm:grid-cols-3">
+              {[
+                { label: 'Claim price', value: `${formatEthNumber(project.claimPrice, 4)} ETH`, icon: 'sell' },
+                { label: 'Total supply', value: formatNumber(project.totalClaims), icon: 'token' },
+                { label: 'Committed', value: `${formatNumber(project.claimsCommitted)} / ${formatNumber(project.totalClaims)}`, icon: 'how_to_vote' },
+              ].map(({ label, value, icon }) => (
+                <div key={label} className="flex flex-col gap-1 rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
+                  <Icon name={icon} size={20} className="text-secondary" />
+                  <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">{label}</span>
+                  <span className="font-display text-headline-sm tabular text-on-surface">{value}</span>
+                </div>
+              ))}
+            </div>
+            <div className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md font-mono text-label-sm">
+              <div className="mb-space-sm uppercase tracking-wider text-on-surface-variant">Revenue waterfall</div>
+              <div className="space-y-2 text-on-surface-variant">
+                <div className="flex items-center justify-between border-b border-outline-variant/20 pb-2">
+                  <span>Protocol fee (on secondary sales)</span>
+                  <span className="tabular text-secondary">1.0%</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-outline-variant/20 pb-2">
+                  <span>Founder (escrow release on approval)</span>
+                  <span className="tabular text-primary">per milestone</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>Claim holders (physical delivery)</span>
+                  <span className="tabular text-on-surface">1 unit per claim</span>
+                </div>
+              </div>
+              <p className="mt-space-sm text-outline">
+                Capital held in MilestoneEscrow.sol on Arbitrum Sepolia. Released tranche-by-tranche against approved production evidence.
+              </p>
+            </div>
+          </section>
+
+          {/* ── Technical Specs ──────────────────────────────────── */}
+          <section id="specs" className="flex flex-col gap-space-md">
+            <h2 className="font-display text-headline-md uppercase tracking-tight text-on-surface">
+              Technical Specs & BOM
+            </h2>
+            {media.specs.length > 0 ? (
+              <div className="rounded-lg border-outline-variant/40 bg-surface-container p-space-md">
+                <dl className="grid grid-cols-1 gap-space-sm font-mono text-label-sm sm:grid-cols-2">
+                  {media.specs.map((spec) => (
+                    <div key={spec.label} className="flex items-center gap-space-sm border-b border-outline-variant/20 pb-2">
+                      <Icon name={spec.icon} size={16} className="shrink-0 text-secondary" />
+                      <dt className="text-on-surface-variant">{spec.label}</dt>
+                      <dd className="ml-auto tabular text-on-surface">{spec.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="mt-space-sm font-mono text-label-sm text-outline">
+                  Full Bill of Materials available via IPFS after milestone 1 approval.
+                </p>
+              </div>
+            ) : (
+              <p className="rounded-lg border-dashed border-outline-variant/40 bg-surface-container p-space-md text-center font-mono text-label-sm text-outline">
+                Technical specifications will be published at milestone 1.
+              </p>
+            )}
+
+            {/* Live telemetry HUD */}
+            {media.telemetry.length > 0 && (
+              <div className="rounded-lg border-outline-variant/40 bg-surface-container-lowest p-space-md">
+                <div className="mb-space-sm flex items-center gap-2 font-mono text-label-sm uppercase tracking-wider text-primary">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                  Live Prototype Telemetry
+                </div>
+                <div className="grid grid-cols-2 gap-space-sm sm:grid-cols-4">
+                  {media.telemetry.map((row) => (
+                    <div key={row.label} className="rounded border border-outline-variant/30 p-2 font-mono text-label-sm">
+                      <div className="text-on-surface-variant">{row.label}</div>
+                      <div className="tabular text-primary">{row.value} <span className="text-outline">{row.unit}</span></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+
+          {/* ── Founder Updates ──────────────────────────────────── */}
           <UpdatesFeed projectId={project.id} />
         </div>
 

@@ -96,17 +96,14 @@ function ShowcaseCard() {
         </div>
       </div>
 
-      {/* Product visual placeholder. The design uses a hosted photograph; this
-          stands in until real project media is uploaded to IPFS. */}
+      {/* Product photograph from the Stitch design screens. */}
       <div className="relative mb-space-sm h-52 w-full overflow-hidden rounded bg-surface-container-lowest">
-        <div className="absolute inset-0 grid place-items-center">
-          <div className="flex flex-col items-center gap-2 text-outline">
-            <Icon name="precision_manufacturing" size={40} />
-            <span className="font-mono text-label-sm uppercase tracking-wider">
-              Project media pending
-            </span>
-          </div>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt3oGRLiP8fH_I-GBaWkIy2EqJEQNgSzv4Li_JVQG8UHoEE1qpF6bnBkviwjSf_-HfFqIRAg-dP8Op2Bk3FYagfA90Gsap2C_3WJW1EV5fGy1YXDDJNA9JOyx5HPyjW2EpZQwDVdMewgWZKMObd9njfqj17oioJbeFc_l11nNC62PFr-6xaiuP2Rwej-UH97Znq1FepkQk7tSIhIIohuPLbFhspKAr0MGND2u8OIAXTpqDB7PPRThS"
+          alt="HelioFrost Pro — solar vaccine cold-chain unit"
+          className="h-full w-full object-cover"
+        />
         <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded bg-surface/90 px-3 py-1.5 font-mono text-label-sm backdrop-blur-md">
           <span className="flex items-center gap-1 text-primary">
             <Icon name="sensors" size={14} />
