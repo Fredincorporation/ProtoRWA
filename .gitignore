@@ -26,10 +26,9 @@ contracts/stylus/*/target/
 .env.*
 !.env.example
 
-# Design source: keep the token/manifest source (JSON, .mjs, design.md) but drop
-# the large generated screenshots (both the old screens/ dir and render-*.png).
-design-source/screens/*.png
-design-source/render-*.png
+# Design source (Stitch mockups, token dumps, generator scripts) is a local
+# design reference, not part of the shipped app — keep it out of version control.
+design-source/
 
 # Vendored Foundry toolchain binaries — installed via foundryup, never committed.
 .tools/
