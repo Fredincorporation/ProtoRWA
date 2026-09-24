@@ -26,8 +26,19 @@ contracts/stylus/*/target/
 .env.*
 !.env.example
 
-# Design source screenshots are large; keep the HTML + manifest, ignore shots
+# Design source: keep the token/manifest source (JSON, .mjs, design.md) but drop
+# the large generated screenshots (both the old screens/ dir and render-*.png).
 design-source/screens/*.png
+design-source/render-*.png
+
+# Vendored Foundry toolchain binaries — installed via foundryup, never committed.
+.tools/
+
+# AI-agent session state (Kilo Code task history).
+.kilocode/
+
+# Runtime logs anywhere in the tree.
+*.log
 
 # Editor / OS
 .DS_Store
