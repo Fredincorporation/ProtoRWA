@@ -2,7 +2,7 @@
 
 [![Live on Robinhood Chain Testnet](https://img.shields.io/badge/Live-Robinhood%20Chain%20Testnet%20(46630)-emerald?style=for-the-badge)](https://explorer.testnet.chain.robinhood.com)
 [![Settled in USDG](https://img.shields.io/badge/Settlement-USDG%20(USD%2C%206%20dp)-blue?style=for-the-badge)](https://explorer.testnet.chain.robinhood.com/address/0x7E955252E15c84f5768B83c41a71F9eba181802F)
-[![Arbitrum Stylus](https://img.shields.io/badge/Stylus-WASM%20Verifier-cyan?style=for-the-badge&logo=rust)](https://docs.arbitrum.io/stylus)
+[![Stylus Verifier](https://img.shields.io/badge/Stylus-WASM%20Verifier-cyan?style=for-the-badge&logo=rust)](https://docs.arbitrum.io/stylus)
 
 > **ProtoRWA** transforms physical hardware manufacturing into transparent, tokenized on-chain assets. Capital is held in cryptographic escrow and released tranche-by-tranche based on backer quorum and native WASM Merkle verification of sensor telemetry.
 
@@ -23,10 +23,14 @@ ProtoRWA combines **Solidity protocol contracts**, high-performance **Stylus (Ru
 ```
 ┌────────────────────────────────────────────────────────┐
 │              ProtoRWA Frontend (Next.js 15)           │
-│  - Milestone Voting Terminal (Screen 06)               │
-│  - Founder Evidence Submission Studio (Screen 27)      │
-│  - Asset Claim Secondary Trading Terminal (Screen 23)  │
-│  - Demo Mode Switcher (Backer / Founder / Trade)       │
+│  - Per-role mission-control dashboards (Investor /     │
+│    Founder / Admin), 3-column social layout            │
+│  - Founder network: profiles, update composer, follow  │
+│    feed (FounderActivity + IPFS)                       │
+│  - Milestone Voting Terminal                            │
+│  - Founder Evidence Submission Studio                  │
+│  - Asset Claim Secondary Trading Terminal              │
+│  - Notifications engine (derived from live escrow)     │
 └──────────────────────────┬─────────────────────────────┘
                            │
                  EVM RPC / Wagmi / Viem
@@ -39,7 +43,8 @@ ProtoRWA combines **Solidity protocol contracts**, high-performance **Stylus (Ru
 │  - ClaimToken.sol (ERC1155) │   │   - Merkle proof validation │
 │  - MilestoneEscrow.sol      │   │   - Telemetry attestation   │
 │  - SecondaryMarket.sol      │   │   - Token-weighted quorum   │
-│  (all settled in USDG)      │   │                             │
+│  - FounderActivity.sol      │   │                             │
+│  (money settled in USDG)    │   │                             │
 └─────────────────────────────┘   └─────────────────────────────┘
 ```
 
@@ -55,22 +60,24 @@ All protocol contracts are deployed on Robinhood Chain testnet with wired and ve
 
 | Contract | Address | Explorer |
 | :--- | :--- | :--- |
-| **ProjectRegistry** | `0xb1432dCD392eD0296E2d72c000850Fb3b2f68DFF` | [View](https://explorer.testnet.chain.robinhood.com/address/0xb1432dCD392eD0296E2d72c000850Fb3b2f68DFF) |
-| **ClaimToken (ERC-1155)** | `0x691f490F01cf808987540F34724253eA54B221D8` | [View](https://explorer.testnet.chain.robinhood.com/address/0x691f490F01cf808987540F34724253eA54B221D8) |
-| **MilestoneEscrow** | `0x2d57cc0e20e742E9E451aC4d340A0013b3b3Cd00` | [View](https://explorer.testnet.chain.robinhood.com/address/0x2d57cc0e20e742E9E451aC4d340A0013b3b3Cd00) |
-| **SecondaryMarket** | `0x232FBC0085cd182Afe7838864C26824a48F3B504` | [View](https://explorer.testnet.chain.robinhood.com/address/0x232FBC0085cd182Afe7838864C26824a48F3B504) |
+| **ProjectRegistry** | `0x5ceFdd224435BCd5D15C168a8d49d1640bC2FA2d` | [View](https://explorer.testnet.chain.robinhood.com/address/0x5ceFdd224435BCd5D15C168a8d49d1640bC2FA2d) |
+| **ClaimToken (ERC-1155)** | `0xDf349ff9E061A5A97a2CB1A35ba76A687f3648f3` | [View](https://explorer.testnet.chain.robinhood.com/address/0xDf349ff9E061A5A97a2CB1A35ba76A687f3648f3) |
+| **MilestoneEscrow** | `0x7e433fd9fD65B6dD3Fd085361EC39BAb8ce37E70` | [View](https://explorer.testnet.chain.robinhood.com/address/0x7e433fd9fD65B6dD3Fd085361EC39BAb8ce37E70) |
+| **SecondaryMarket** | `0x762D4A7d5dfa6287a729FC2B64C75b754A980705` | [View](https://explorer.testnet.chain.robinhood.com/address/0x762D4A7d5dfa6287a729FC2B64C75b754A980705) |
 | **HardwareVerifier (Stylus WASM)** | `0x774a47d68c0148ffa14a154beb740154f0e4c129` | [View](https://explorer.testnet.chain.robinhood.com/address/0x774a47d68c0148ffa14a154beb740154f0e4c129) |
+| **FounderActivity (social)** | `0x540AA4B3225bC2f6d038Bd84c18Ff1bb1Cd6DE31` | [View](https://explorer.testnet.chain.robinhood.com/address/0x540AA4B3225bC2f6d038Bd84c18Ff1bb1Cd6DE31) |
 | **USDG (settlement token)** | `0x7E955252E15c84f5768B83c41a71F9eba181802F` | [View](https://explorer.testnet.chain.robinhood.com/address/0x7E955252E15c84f5768B83c41a71F9eba181802F) |
 
-Role wiring, USDG settlement, the market fee skim, bid/list escrow round-trips and holder refunds are exercised against this deployment by the shell E2Es in `contracts/` (`e2e-robinhood.sh`, `e2e-market-refund.sh`), which read their target addresses from `frontend/.env.local`.
+These are the addresses the frontend resolves via `NEXT_PUBLIC_ROBINHOOD_TESTNET_*` in `frontend/.env.local` and `shared/src/contracts/addresses.ts` (chain `46630`). Role wiring, USDG settlement, the market fee skim, bid/list escrow round-trips and holder refunds are exercised against this deployment by the shell E2Es in `contracts/` (`e2e-robinhood.sh`, `e2e-market-refund.sh`). `FounderActivity` is a standalone social contract (register / profile / post / follow) deployed against the same live registry — the money contracts are untouched by it, and its write path (`registerFounder` → `setProfile` → `postUpdate`) is verified live on `46630`.
 
-### 🟢 Live Seeded Hardware Project — HelioFrost Pro (Project #1)
-The showcase project is created on the live registry above:
+### 🟢 Seeded Showcase Hardware Project — HelioFrost Pro (Project #1)
+The flagship project is created on the live registry above (founder = the deployer wallet) and is
+presented in the product as a **showcase / demo** build — its secondary-market surface is labelled
+`demo`, not real liquidity, so the honest demo/live distinction stays visible:
 - **Project ID**: `1`
-- **Status**: `FUNDING`
-- **Target**: `5,000 USDG` (1,000 claim units @ 5 USDG each)
+- **Claims**: 1,000 claim units @ 5 USDG each
 - **On-chain Milestone Count**: `4 tranches`
-- Seeded via `contracts/script/SeedLiveProject.sol`.
+- Seeded via `contracts/script/SeedLiveProject.sol`; founder social activity (register / profile / a posted update) is live on `FounderActivity` for this project.
 
 ---
 
@@ -85,11 +92,17 @@ The showcase project is created on the live registry above:
 3. **Claim Trading Terminal (Screen 23)**:
    - Route: `/market/p/[id]`
    - Live two-column orderbook ladder with bid/ask depth, recent fills ledger, order slip with 1% protocol fee calculation, and physical unit redemption card.
-4. **Demo Mode Switcher**:
-   - Header pill component allowing reviewers to immediately jump between:
-     - 🗳️ **Backer Vote**
-     - 🏭 **Founder Submit**
-     - 📈 **Trade Claim**
+4. **Per-role Mission Control Dashboards**:
+   - Route: `/dashboard/[role]` — `investor` · `founder` · `admin`
+   - A persona-aware, 3-column shell: identity + persona switcher + social rails on the left, the social feed and actionable queues in the center, network/escrow activity on the right. Tabs embed the same self-contained action components the standalone routes mount (invest / vote / trade / refund / evidence / oversight), and only the active tab is mounted so chain reads stay scoped. The admin persona is gated on the connected wallet holding `ORACLE_ROLE` on-chain.
+5. **Founder Network & Social Layer** (FounderActivity + IPFS):
+   - Routes: `/founders` (directory), `/founders/[handle]` (profile), `/studio/updates` (composer)
+   - Founders register against a project they own, pin a profile doc + update docs to IPFS, and post build updates; investors follow registered founders and get those updates in a personalized feed. Only addresses that own a project are followable.
+6. **Notifications Engine**:
+   - Route: `/notifications`
+   - Derived from real escrow/vote/funding state (not authored copy) — a server-side pass over the merged live + showcase project catalogue.
+
+> Every social surface carries an explicit `demo` vs `live` provenance label: until a wallet connects (or where data is curated showcase content), the UI honestly says so rather than presenting fixtures as on-chain state.
 
 ---
 

@@ -78,7 +78,7 @@ export function ExploreView({ projects }: { projects: Project[] }) {
             >
               {results.map((project) => (
                 <ProjectCard
-                  key={project.id}
+                  key={project.slug}
                   project={project}
                   // In list view the card becomes a wide row rather than a tile.
                   className={filters.view === 'list' ? 'md:flex-row md:flex' : undefined}

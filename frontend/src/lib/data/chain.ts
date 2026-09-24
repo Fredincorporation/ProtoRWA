@@ -409,7 +409,11 @@ async function readProjects(registry: Address, escrow: Address): Promise<Project
         typeof refundedRows[index] === 'bigint' ? bi(refundedRows[index] as bigint) : '0';
 
       const project: Project = {
-        id: idStr,
+        // `id` is only a React/catalogue key; the authoritative handles are
+        // `slug` (routing) and `onChainProjectId` (chain ops). Namespacing it
+        // keeps a live project's key from colliding with a curated demo row
+        // that reuses the same small display index (mock ids are '1'|'2'|'3').
+        id: `live-${idStr}`,
         slug: slugify(title, idStr),
         title,
         tagline: String(p.tagline ?? ''),

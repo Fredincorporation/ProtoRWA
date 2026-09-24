@@ -275,7 +275,7 @@ export function InvestorPositionsPanel({
 
               return (
                 <li
-                  key={row.project.id}
+                  key={row.project.slug}
                   className="flex flex-col gap-space-sm rounded-lg border border-outline-variant/40 bg-surface-container-lowest p-space-md"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-space-sm">

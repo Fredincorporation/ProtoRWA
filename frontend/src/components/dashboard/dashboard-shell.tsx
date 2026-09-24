@@ -15,6 +15,13 @@ import { ClaimRefundPanel } from '@/components/project/claim-refund-panel';
 import { ClaimTradingTerminal } from '@/components/market/claim-trading-terminal';
 import { MilestoneEvidenceSubmit } from '@/components/studio/evidence-submit';
 import { FounderWizard } from '@/components/studio/founder-wizard';
+import { InvestorFollowFeed } from '@/components/founders/investor-follow-feed';
+import { FounderFeedPanel } from '@/components/dashboard/founder-feed-panel';
+import {
+  FollowingRail,
+  FounderSummaryCard,
+  IdentityCard,
+} from '@/components/dashboard/social-rails';
 import {
   OracleMilestoneActions,
   ProjectLifecycleControl,
@@ -34,6 +41,8 @@ import { formatUsdg, formatUsdgNumber, formatNumber, percentOf } from '@/lib/for
 import { isRefundableStatus, projectStatus } from '@/lib/status';
 import {
   buildQueue,
+  dashboardPathFor,
+  DASHBOARD_ROLES,
   participatedProjectIds,
   roleMeta,
   type DashboardRole,
@@ -103,70 +112,158 @@ export function DashboardShell({
     [role, projects, heldIds, holdings.byProjectId],
   );
 
+  // The center-column feed is the social anchor for investor and founder. Admin
+  // has no follow graph, so its center leads straight into the oversight tabs.
+  const feed =
+    role === 'investor' ? (
+      <InvestorFollowFeed projects={projects} />
+    ) : role === 'founder' ? (
+      <FounderFeedPanel projects={projects} />
+    ) : null;
+
   return (
-    <div className="mx-auto w-full max-w-[1400px] px-space-lg py-space-xl lg:px-margin">
+    <div className="w-full px-space-lg py-space-lg lg:px-margin">
       <Hero role={role} isConnected={isConnected} liveCount={liveCount} projectCount={projects.length} />
 
       <div className="mt-space-lg">
         <StatTiles tiles={tiles} />
       </div>
 
-      <div className="mt-space-lg grid grid-cols-1 gap-space-lg xl:grid-cols-12">
-        {/* Main column: tabs + active surface */}
-        <div className="flex flex-col gap-space-md xl:col-span-8">
-          <div
-            role="tablist"
-            aria-label={`${meta.label} sections`}
-            className="flex flex-wrap gap-1 border-b border-outline-variant/40"
-          >
-            {tabs.map((tab) => {
-              const selected = tab.id === active?.id;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={selected}
-                  onClick={() => setActiveId(tab.id)}
-                  className={cn(
-                    'flex items-center gap-2 rounded-t border-b-2 px-space-md py-2 font-label-md transition-colors',
-                    selected
-                      ? 'border-primary text-primary'
-                      : 'border-transparent text-on-surface-variant hover:text-on-surface',
-                  )}
-                >
-                  <Icon name={tab.icon} size={16} />
-                  {tab.label}
-                  {tab.kind === 'queue' ? (
-                    <span
-                      className={cn(
-                        'rounded-full px-1.5 font-mono text-label-sm',
-                        selected ? 'bg-primary/15 text-primary' : 'bg-surface-container-high text-outline',
-                      )}
-                    >
-                      {tab.count}
-                    </span>
-                  ) : null}
-                </button>
-              );
-            })}
-          </div>
+      <div className="mt-space-lg grid grid-cols-1 gap-space-lg lg:grid-cols-12">
+        {/* Left rail: identity, persona switch, social graph, jumps */}
+        <aside className="flex flex-col gap-space-md lg:col-span-3">
+          <IdentityCard role={role} />
+          <PersonaNav active={role} />
+          {role === 'investor' ? <FollowingRail projects={projects} /> : null}
+          {role === 'founder' && address ? <FounderSummaryCard address={address} /> : null}
+          <QuickLinks role={role} />
+        </aside>
 
-          {active ? (
-            <div role="tabpanel" aria-label={active.label} className="flex flex-col gap-space-lg">
-              {active.render()}
-            </div>
+        {/* Center rail: the social feed, then the actionable panels */}
+        <div className="flex flex-col gap-space-lg lg:col-span-6 lg:min-w-0">
+          {feed ? (
+            <section aria-label={`${meta.label} feed`} className="rounded-2xl border border-outline-variant/40 bg-surface-container-low p-space-md">
+              {feed}
+            </section>
           ) : null}
+
+          <div className="flex flex-col gap-space-md">
+            <div
+              role="tablist"
+              aria-label={`${meta.label} sections`}
+              className="flex flex-wrap gap-1 border-b border-outline-variant/40"
+            >
+              {tabs.map((tab) => {
+                const selected = tab.id === active?.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    onClick={() => setActiveId(tab.id)}
+                    className={cn(
+                      'flex items-center gap-2 rounded-t border-b-2 px-space-md py-2 font-label-md transition-colors',
+                      selected
+                        ? 'border-primary text-primary'
+                        : 'border-transparent text-on-surface-variant hover:text-on-surface',
+                    )}
+                  >
+                    <Icon name={tab.icon} size={16} />
+                    {tab.label}
+                    {tab.kind === 'queue' ? (
+                      <span
+                        className={cn(
+                          'rounded-full px-1.5 font-mono text-label-sm',
+                          selected ? 'bg-primary/15 text-primary' : 'bg-surface-container-high text-outline',
+                        )}
+                      >
+                        {tab.count}
+                      </span>
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
+
+            {active ? (
+              <div role="tabpanel" aria-label={active.label} className="flex flex-col gap-space-lg">
+                {active.render()}
+              </div>
+            ) : null}
+          </div>
         </div>
 
-        {/* Side rail: activity + quick links */}
-        <aside className="flex flex-col gap-space-lg xl:col-span-4">
+        {/* Right rail: network state + escrow activity */}
+        <aside className="flex flex-col gap-space-md lg:col-span-3">
+          <NetworkCard liveCount={liveCount} projectCount={projects.length} />
           <ActivityFeed projects={projects} />
-          <QuickLinks role={role} />
         </aside>
       </div>
 
       <ProjectRoster projects={projects} />
+    </div>
+  );
+}
+
+/** Switch the active persona. Links to the sibling role dashboards. */
+function PersonaNav({ active }: { active: DashboardRole }) {
+  return (
+    <nav
+      aria-label="Switch dashboard persona"
+      className="flex flex-col gap-1 rounded-xl border border-outline-variant/40 bg-surface-container p-2"
+    >
+      <span className="px-2 py-1 font-mono text-label-sm uppercase tracking-wider text-outline">
+        Persona
+      </span>
+      {DASHBOARD_ROLES.map((role) => {
+        const selected = role === active;
+        const meta = roleMeta[role];
+        return (
+          <Link
+            key={role}
+            href={dashboardPathFor(role)}
+            aria-current={selected ? 'page' : undefined}
+            className={cn(
+              'flex items-center gap-2 rounded-lg px-2 py-2 font-label-md transition-colors',
+              selected
+                ? 'bg-primary/15 text-primary'
+                : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface',
+            )}
+          >
+            <Icon name={meta.icon} size={18} />
+            {meta.label}
+            {selected ? <Icon name="check" size={16} className="ml-auto" /> : null}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
+
+/** Compact chain + provenance summary for the right rail. */
+function NetworkCard({ liveCount, projectCount }: { liveCount: number; projectCount: number }) {
+  return (
+    <div className="flex flex-col gap-2 rounded-xl border border-outline-variant/40 bg-surface-container p-space-md">
+      <div className="flex items-center gap-2">
+        <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary/10 text-primary">
+          <Icon name="settings_ethernet" size={18} />
+        </span>
+        <div>
+          <div className="font-display text-headline-sm text-on-surface">{defaultChain.name}</div>
+          <div className="font-mono text-label-sm text-outline">chain {defaultChain.id}</div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2 font-mono text-label-sm">
+        <span className="rounded-lg bg-surface-container-lowest p-2">
+          <span className="block uppercase tracking-wider text-outline">Live</span>
+          <span className="tabular text-primary">{liveCount}</span>
+        </span>
+        <span className="rounded-lg bg-surface-container-lowest p-2">
+          <span className="block uppercase tracking-wider text-outline">Showcase</span>
+          <span className="tabular text-on-surface-variant">{projectCount - liveCount}</span>
+        </span>
+      </div>
     </div>
   );
 }
