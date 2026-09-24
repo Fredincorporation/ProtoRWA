@@ -11,14 +11,15 @@
     "./design": "./src/design/tokens.ts",
     "./types": "./src/types/index.ts",
     "./chains": "./src/chains.ts",
-    "./contracts": "./src/contracts/index.ts"
+    "./contracts": "./src/contracts/index.ts",
+    "./settlement": "./src/settlement.ts"
   },
   "scripts": {
-    "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
-    "test": "echo \"@protorwa/shared: no tests\" && exit 0"
+    "test": "vitest run"
   },
   "devDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   }
 }

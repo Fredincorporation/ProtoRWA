@@ -7,26 +7,18 @@ import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/ui/icon';
 
 /**
- * Arbitrum Sepolia Testnet HUD & Persona Navigation.
+ * Demo network HUD & persona navigation.
  *
  * Directs judges and users to:
- *  - Testnet Network Indicator (Arbiscan & Faucet links)
  *  - Backer / Investor view (voting on live escrow, trading claims)
  *  - Hardware Founder view (submitting factory evidence)
- *  - Arbitrum Stylus showcase (WASM HardwareVerifier telemetry)
+ *  - Stylus showcase (WASM HardwareVerifier telemetry)
  */
 export function DemoModeSwitcher() {
   const pathname = usePathname();
 
   return (
-    <div className="hidden items-center gap-1.5 rounded-full border border-primary/30 bg-surface-container-lowest py-0.5 pl-2.5 pr-1 font-mono text-label-sm lg:flex">
-      <div className="flex items-center gap-1.5 pr-1 text-primary">
-        <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-        <span className="font-semibold tracking-wider uppercase text-label-xs">Arb Sepolia</span>
-      </div>
-
-      <span className="text-outline">|</span>
-
+    <div className="hidden items-center gap-1.5 rounded-full border border-outline-variant/40 bg-surface-container-lowest p-1 font-mono text-label-sm lg:flex">
       <Link
         href="/projects/heliofrost-pro/invest"
         className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 transition-colors ${
@@ -37,7 +29,7 @@ export function DemoModeSwitcher() {
         title="Live On-Chain Commit & Claim Token Minting"
       >
         <Icon name="account_balance_wallet" size={13} />
-        Commit ETH
+        Commit USDG
       </Link>
 
       <Link
@@ -47,7 +39,7 @@ export function DemoModeSwitcher() {
             ? 'bg-primary text-on-primary font-bold'
             : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
         }`}
-        title="Judge: Milestone Escrow Voting Terminal (Screen 06)"
+        title="Judge: Milestone Escrow Voting Terminal"
       >
         <Icon name="how_to_vote" size={13} />
         Backer Vote
@@ -60,20 +52,20 @@ export function DemoModeSwitcher() {
             ? 'bg-primary text-on-primary font-bold'
             : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
         }`}
-        title="Judge: Founder Milestone Evidence Studio with Stylus Proofs (Screen 27)"
+        title="Judge: Founder Milestone Evidence Studio with Stylus Proofs"
       >
         <Icon name="factory" size={13} />
         Founder Submit
       </Link>
 
       <Link
-        href="/market/hp"
+        href="/market/p/heliofrost-pro"
         className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 transition-colors ${
           pathname?.startsWith('/market/')
             ? 'bg-primary text-on-primary font-bold'
             : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
         }`}
-        title="Judge: Asset Claim Trading Terminal (Screen 23)"
+        title="Judge: Asset Claim Trading Terminal"
       >
         <Icon name="candlestick_chart" size={13} />
         Trade Claim

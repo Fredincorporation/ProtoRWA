@@ -7,6 +7,7 @@ import { WagmiProvider } from 'wagmi';
 import { Toaster } from 'sonner';
 
 import { wagmiConfig } from '@/lib/wagmi';
+import { OnboardingProvider } from '@/components/onboarding/onboarding-dialog';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
@@ -54,7 +55,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
             overlayBlur: 'small',
           })}
         >
-          {children}
+          <OnboardingProvider>
+            {children}
+          </OnboardingProvider>
           <Toaster
             theme="dark"
             position="bottom-right"

@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import { Icon } from '@/components/ui/icon';
-import { formatEthNumber, formatNumber, weiToEth } from '@/lib/format';
+import { formatUsdgNumber, formatNumber } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import type { OrderBook, OrderBookLevel } from '@protorwa/shared';
 
@@ -71,7 +71,7 @@ function LadderRow({
           side === 'bid' ? 'text-primary' : 'text-error',
         )}
       >
-        {formatEthNumber(level.pricePerUnit, 4)}
+        {formatUsdgNumber(level.pricePerUnit, 4)}
       </span>
       <span className="relative tabular text-right text-on-surface">
         {formatNumber(amount)}
@@ -131,16 +131,16 @@ export function OrderBookView({ book, onSelectLevel, className }: OrderBookProps
       {/* Spread marker */}
       <div className="flex items-center justify-between rounded bg-surface-container-lowest px-2 py-1.5 font-mono text-label-sm">
         <span className="text-on-surface-variant">
-          Best bid <span className="tabular text-primary">{bestBid ? formatEthNumber(bestBid.pricePerUnit, 4) : '—'}</span>
+          Best bid <span className="tabular text-primary">{bestBid ? formatUsdgNumber(bestBid.pricePerUnit, 4) : '—'}</span>
         </span>
         <span className="text-outline">
           Spread{' '}
           <span className="tabular text-on-surface">
-            {spread !== null && bestAsk ? `${formatEthNumber(String(spread), 4)} ETH` : '—'}
+            {spread !== null && bestAsk ? `${formatUsdgNumber(String(spread), 4)} USDG` : '—'}
           </span>
         </span>
         <span className="text-on-surface-variant">
-          Best ask <span className="tabular text-error">{bestAsk ? formatEthNumber(bestAsk.pricePerUnit, 4) : '—'}</span>
+          Best ask <span className="tabular text-error">{bestAsk ? formatUsdgNumber(bestAsk.pricePerUnit, 4) : '—'}</span>
         </span>
       </div>
 
@@ -237,14 +237,14 @@ export function PriceSparkline({
   );
 }
 
-/** Total notional resting in a book, for the metrics ribbon. */
+/** Total notional resting in a book, in USDG, for the metrics ribbon. */
 export function bookNotional(book: OrderBook): string {
   const sum = [...book.bids, ...book.asks].reduce((acc, level) => {
     const price = BigInt(level.pricePerUnit);
     const amount = BigInt(level.amount);
     return acc + price * amount;
   }, 0n);
-  return weiToEth(sum, 2);
+  return formatUsdgNumber(sum, 2);
 }
 
 export { Icon };

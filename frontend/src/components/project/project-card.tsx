@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { categoryMap } from '@/lib/status';
 import { projectStatus } from '@/lib/status';
-import { formatEthNumber, formatNumber, percentOf } from '@/lib/format';
+import { formatUsdgNumber, formatNumber, percentOf } from '@/lib/format';
 import { Icon } from '@/components/ui/icon';
 import { getProjectMedia } from '@/lib/project-media';
 import type { IndustryCategory, Project, ProjectStatus } from '@protorwa/shared';
@@ -34,7 +34,10 @@ function daysLeft(deadlineIso: string): number | null {
 export function ProjectCard({ project, className }: ProjectCardProps) {
   const status = projectStatus(project.status);
   const category = categoryMap[project.category as IndustryCategory];
-  const media = getProjectMedia(project.slug);
+  const media = getProjectMedia(project.slug, {
+    coverCid: project.coverCid,
+    galleryCids: project.galleryCids,
+  });
   const funded = percentOf(
     BigInt(project.escrow.totalCommitted || '0'),
     BigInt(project.escrow.target || '0'),
@@ -135,8 +138,8 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         <div className="space-y-1">
           <div className="flex items-baseline justify-between font-mono text-label-sm">
             <span className="tabular text-on-surface">
-              {formatEthNumber(project.escrow.totalCommitted, 2)} /{' '}
-              {formatEthNumber(project.escrow.target, 2)} ETH
+              {formatUsdgNumber(project.escrow.totalCommitted, 2)} /{' '}
+              {formatUsdgNumber(project.escrow.target, 2)} USDG
             </span>
             <span className="tabular text-primary">{funded.toFixed(1)}%</span>
           </div>
@@ -184,7 +187,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           <div>
             <span className="text-outline">Claim price</span>
             <div className="tabular font-semibold text-on-surface">
-              {formatEthNumber(project.claimPrice, 4)} ETH
+              {formatUsdgNumber(project.claimPrice, 4)} USDG
             </div>
           </div>
           <div>

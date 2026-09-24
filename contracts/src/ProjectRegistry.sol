@@ -355,7 +355,6 @@ contract ProjectRegistry is AccessControl, ReentrancyGuard {
         } else {
             if (msg.value != 0) revert ZeroAmount();
             paymentToken.safeTransferFrom(msg.sender, address(this), cost);
-            paymentToken.safeTransfer(escrow, cost);
         }
 
         project.claimsCommitted += claimAmount;
@@ -364,10 +363,31 @@ contract ProjectRegistry is AccessControl, ReentrancyGuard {
 
         claimToken.mint(msg.sender, projectId, claimAmount);
 
-        // Forward native value into escrow custody. The escrow's receive() is
-        // deliberately closed, so funding must go through deposit().
+        /*
+         * Forward the commitment into escrow custody.
+         *
+         * Both branches must credit the escrow's per-project balance, not just
+         * move the asset. Previously the ERC-20 branch transferred the tokens
+         * with `safeTransfer` but never called `deposit()`, so
+         * `escrowBalance[projectId]` stayed at zero while the tokens sat in the
+         * contract. That stranded the funds: `_release()` reverts with
+         * InsufficientEscrow, and `claimRefund()` computes a payout of zero
+         * against an empty pool. Native ETH was unaffected because it took the
+         * `deposit{value:}` path.
+         */
         if (address(paymentToken) == address(0)) {
+            // The escrow's receive() is deliberately closed, so native value must
+            // arrive through the payable deposit().
             MilestoneEscrow(payable(escrow)).deposit{ value: cost }(projectId);
+        } else {
+            // Tokens are pushed to the escrow, then accounted for. The transfer
+            // happens first so the escrow's own balance check cannot fail on an
+            // under-funded registry.
+            paymentToken.safeTransfer(escrow, cost);
+            // `escrow` is a plain `address`, and MilestoneEscrow declares a
+            // payable receive(), so the cast must be payable-qualified even
+            // though depositToken itself is non-payable.
+            MilestoneEscrow(payable(escrow)).depositToken(projectId, cost);
         }
 
         emit Committed(projectId, msg.sender, claimAmount, cost);

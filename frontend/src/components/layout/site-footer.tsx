@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { defaultChain, getContracts, protocolAddressUrl, type Address } from '@protorwa/shared';
+
 import { BrandMark } from '@/components/ui/brand';
 
 /**
@@ -17,7 +19,7 @@ import { BrandMark } from '@/components/ui/brand';
 
 const attestations: Array<{ label: string; tone: 'primary' | 'secondary' | 'tertiary' }> = [
   // Add only claims you can substantiate, e.g.:
-  // { label: 'Contracts Verified on Arbiscan', tone: 'primary' },
+  // { label: 'Contracts Verified on the block explorer', tone: 'primary' },
 ];
 
 const footerColumns: Array<{ heading: string; links: Array<{ label: string; href: string }> }> = [
@@ -59,14 +61,27 @@ const footerColumns: Array<{ heading: string; links: Array<{ label: string; href
   },
 ];
 
-/** Registry chips. Addresses come from env so they cannot drift from deploys. */
-function ContractRegistry() {
-  const contracts = [
-    { name: 'ProjectRegistry.sol', address: process.env.NEXT_PUBLIC_PROJECT_REGISTRY },
-    { name: 'MilestoneEscrow.sol', address: process.env.NEXT_PUBLIC_MILESTONE_ESCROW },
-  ].filter((entry): entry is { name: string; address: string } => Boolean(entry.address));
+/** Shortens `0x1234…abcd` so the full address stays available via the explorer link. */
+function shortAddress(address: string): string {
+  return `${address.slice(0, 6)}…${address.slice(-4)}`;
+}
 
-  if (contracts.length === 0) {
+/**
+ * Registry chips.
+ *
+ * Addresses come from the env-driven per-chain registry (`getContracts`) rather
+ * than a raw `NEXT_PUBLIC_PROJECT_REGISTRY` literal, so the footer always names
+ * the network the protocol is actually deployed on (Robinhood Chain testnet) and
+ * never drifts to a stale legacy deployment. Each address links to the explorer.
+ */
+function ContractRegistry() {
+  const contracts = getContracts(defaultChain.id);
+  const entries = [
+    { name: 'ProjectRegistry.sol', address: contracts.projectRegistry },
+    { name: 'MilestoneEscrow.sol', address: contracts.milestoneEscrow },
+  ].filter((entry): entry is { name: string; address: Address } => Boolean(entry.address));
+
+  if (entries.length === 0) {
     return (
       <p className="font-mono text-label-sm text-outline">
         Not deployed yet. Addresses appear here once contracts are deployed.
@@ -76,15 +91,33 @@ function ContractRegistry() {
 
   return (
     <div className="space-y-space-xs">
-      {contracts.map((contract) => (
-        <div
-          key={contract.name}
-          className="rounded border-outline-variant/30 bg-surface-container-low p-2"
-        >
-          <div className="text-on-surface-variant">{contract.name}</div>
-          <div className="truncate font-mono text-primary">{contract.address}</div>
-        </div>
-      ))}
+      <div className="font-mono text-label-sm uppercase tracking-wider text-outline">
+        {defaultChain.name} · {defaultChain.id}
+      </div>
+      {entries.map((contract) => {
+        const url = protocolAddressUrl(contract.address);
+        const chip = (
+          <div className="rounded border border-outline-variant/30 bg-surface-container-low p-2 transition-colors hover:border-primary/50">
+            <div className="text-on-surface-variant">{contract.name}</div>
+            <div className="truncate font-mono text-primary">{shortAddress(contract.address)}</div>
+          </div>
+        );
+        return url ? (
+          <a
+            key={contract.name}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={contract.address}
+          >
+            {chip}
+          </a>
+        ) : (
+          <div key={contract.name} title={contract.address}>
+            {chip}
+          </div>
+        );
+      })}
     </div>
   );
 }

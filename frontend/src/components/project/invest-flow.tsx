@@ -2,16 +2,25 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { arbitrumSepolia } from 'wagmi/chains';
+import { erc20Abi } from 'viem';
+import { useAccount, useReadContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { protocolChain } from '@/lib/wagmi';
 
 import { Badge, StatusDot } from '@/components/ui/badge';
 import { Icon } from '@/components/ui/icon';
 import { Progress } from '@/components/ui/progress';
-import { formatEthNumber, formatNumber, percentOf, weiToEthTrimmed } from '@/lib/format';
-import { milestoneStatus, projectStatus } from '@/lib/status';
+import { formatNumber, percentOf } from '@/lib/format';
 import { cn } from '@/lib/utils';
-import { projectRegistryAbi } from '@protorwa/shared';
+import {
+  SETTLEMENT_CURRENCIES,
+  formatSettlementNumber,
+  getChain,
+  getContracts,
+  protocolAddressUrl,
+  protocolTxUrl,
+  projectRegistryAbi,
+  type SettlementCurrencyId,
+} from '@protorwa/shared';
 import type { Project } from '@protorwa/shared';
 
 export interface InvestFlowProps {
@@ -22,14 +31,49 @@ export interface InvestFlowProps {
   deployed: boolean;
 }
 
-const REGISTRY_ADDRESS = (process.env.NEXT_PUBLIC_PROJECT_REGISTRY ||
-  process.env.NEXT_PUBLIC_ARB_SEPOLIA_PROJECT_REGISTRY ||
-  '0xE9Aaa276502C691f824E2484eecF46C71Cb99eC3') as `0x${string}`;
+/**
+ * Registry address for the chain the protocol is deployed on.
+ *
+ * Resolved from the same chain registry the rest of the app uses, so a
+ * commitment is always addressed to the contract on the chain the wallet is
+ * connected to rather than a stale hardcoded address.
+ */
+const REGISTRY_ADDRESS = (getContracts(protocolChain.id).projectRegistry ??
+  '0x0000000000000000000000000000000000000000') as `0x${string}`;
+
+/**
+ * Resolve the numeric on-chain project id from the project record.
+ *
+ * The slug -> id mapping now lives in the data layer (each live project carries
+ * `onChainProjectId`), so the app has a single source of truth shared with the
+ * market terminal. An unmapped project is refused rather than guessed, because
+ * guessing sends capital to an arbitrary project's escrow.
+ */
+function resolveOnChainProjectId(project: Project): bigint | undefined {
+  if (!project.onChainProjectId) {
+    console.error(
+      `[invest] project "${project.slug}" has no onChainProjectId set; refusing to commit. ` +
+        'Seed it on the deployment and add its id to the data layer.',
+    );
+    return undefined;
+  }
+  try {
+    return BigInt(project.onChainProjectId);
+  } catch {
+    console.error(`[invest] invalid onChainProjectId "${project.onChainProjectId}".`);
+    return undefined;
+  }
+}
 
 export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
   const [units, setUnits] = React.useState('10');
   const [acknowledged, setAcknowledged] = React.useState(false);
-  const { chain } = useAccount();
+  /**
+   * Settlement asset. The deployed escrow is USDG-denominated, so this defaults
+   * to USDG rather than ETH - quoting in ETH against a USDG escrow would show a
+   * price 10^12 times too large.
+   */
+  const [currency] = React.useState<SettlementCurrencyId>('USDG');
 
   // On-chain commitment via wagmi
   const {
@@ -48,8 +92,43 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
     hash: txHash,
   });
 
-  const claimPrice = BigInt(project.claimPrice || '50000000000000'); // 0.00005 ETH per claim
+  const { address } = useAccount();
+
+  /**
+   * USDG token for the protocol chain. `commit` is an ERC-20 pull
+   * (`paymentToken.safeTransferFrom`), so the registry needs an allowance before
+   * it can move the backer's capital - there is no native value to send.
+   */
+  const usdgAddress = getChain(protocolChain.id)?.usdg as `0x${string}` | undefined;
+  const [commitStep, setCommitStep] = React.useState<'idle' | 'approving' | 'committing'>('idle');
+
+  const allowance = useReadContract({
+    address: usdgAddress,
+    abi: erc20Abi,
+    functionName: 'allowance',
+    args: address ? [address, REGISTRY_ADDRESS] : undefined,
+    chainId: protocolChain.id,
+    query: { enabled: Boolean(address && usdgAddress) },
+  });
+
+  /** True once the *commitment* (not the approval) has been mined. */
+  const commitDone = commitStep === 'committing' && isConfirmed;
+
+  /*
+   * Fallback claim price, in USDG base units (6 decimals).
+   *
+   * The previous fallback was 50000000000000 wei - an 18-decimal ETH figure. The
+   * deployed escrow is USDG-denominated, where 1 USDG is 1000000 base units, so
+   * that fallback was off by a factor of 10^12 and would have quoted a price
+   * roughly a million times the intended amount.
+   *
+   * 1000000n = 1.00 USDG per claim.
+   */
+  const claimPrice = BigInt(project.claimPrice || '1000000');
   const available = BigInt(project.totalClaims) - BigInt(project.claimsCommitted);
+
+  /** The settlement asset, read from the chain rather than assumed. */
+  const activeCurrency = SETTLEMENT_CURRENCIES[currency];
 
   /** Number input as an integer; invalid input is treated as 0 for display. */
   const requested = React.useMemo(() => {
@@ -66,7 +145,7 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
   const exceedsAvailable = BigInt(requested) > available;
   const fundingOpen = project.status === 'FUNDING';
 
-  const isBusy = isSubmitting || isConfirming;
+  const isBusy = isSubmitting || isConfirming || commitStep !== 'idle';
 
   const canSubmit =
     requested > 0 &&
@@ -76,32 +155,72 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
     connected &&
     deployed &&
     !isBusy &&
-    !isConfirmed;
+    !commitDone;
 
   const blockers: string[] = [];
   if (!fundingOpen) blockers.push('This project is not accepting capital.');
   if (requested === 0) blockers.push('Enter a number of claim units.');
   if (exceedsAvailable) blockers.push(`Only ${formatNumber(available)} units remain.`);
-  if (!connected) blockers.push('Connect your Arbitrum Sepolia wallet to commit.');
+  if (!connected) blockers.push(`Connect your ${protocolChain.name} wallet to commit.`);
   if (!deployed) blockers.push('No registry is deployed on this network.');
   if (!acknowledged) blockers.push('Acknowledge the risk notice.');
 
-  const handleCommit = () => {
-    if (!canSubmit) return;
-    resetTx();
-
-    // Map project to on-chain project ID (HelioFrost Pro = 1)
-    const onChainProjectId = project.slug === 'heliofrost-pro' ? 1n : 1n;
-
+  /** Sends the on-chain `commit`, pulling `cost` USDG via the registry allowance. */
+  const doCommit = (onChainProjectId: bigint) => {
+    setCommitStep('committing');
     writeContract({
       address: REGISTRY_ADDRESS,
       abi: projectRegistryAbi,
       functionName: 'commit',
       args: [onChainProjectId, BigInt(requested)],
-      value: cost,
-      chainId: arbitrumSepolia.id,
+      /*
+       * USDG settlement means no native value is sent. The escrow is
+       * ERC-20-denominated, so the registry pulls the token via an allowance and
+       * `commit` rejects any `msg.value != 0` outright.
+       */
+      value: 0n,
+      chainId: protocolChain.id,
     });
   };
+
+  const handleCommit = () => {
+    if (!canSubmit || !usdgAddress) return;
+    resetTx();
+
+    const onChainProjectId = resolveOnChainProjectId(project);
+    if (onChainProjectId === undefined) {
+      // The resolver already logged why; do not send capital to an arbitrary project.
+      return;
+    }
+
+    // `commit` is an ERC-20 pull: top up the registry's allowance first when it
+    // is short, then chain the commit once the approval confirms.
+    const approved = allowance.data ?? 0n;
+    if (approved < cost) {
+      setCommitStep('approving');
+      writeContract({
+        address: usdgAddress,
+        abi: erc20Abi,
+        functionName: 'approve',
+        args: [REGISTRY_ADDRESS, cost],
+        chainId: protocolChain.id,
+      });
+    } else {
+      doCommit(onChainProjectId);
+    }
+  };
+
+  /* After the approval lands, fire the commit; after the commit lands, settle. */
+  React.useEffect(() => {
+    if (!isConfirmed) return;
+    if (commitStep === 'approving') {
+      const pid = resolveOnChainProjectId(project);
+      allowance.refetch();
+      if (pid !== undefined) doCommit(pid);
+    } else if (commitStep === 'committing') {
+      // Leave commitStep 'committing' so commitDone renders the success card.
+    }
+  }, [isConfirmed]);
 
   /** Preset amounts as a fraction of what remains. */
   const presets = [
@@ -119,7 +238,7 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
             <h2 className="font-display text-headline-md text-on-surface">Commit capital</h2>
             <Badge tone="info" className="font-mono text-label-xs">
               <Icon name="verified" size={12} className="mr-1" />
-              Arbitrum Sepolia Live Testnet
+              {activeCurrency.symbol} on {protocolChain.name}
             </Badge>
           </div>
           <p className="mt-1 text-body-sm text-on-surface-variant">
@@ -179,7 +298,9 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
           <dl className="mt-space-md flex flex-col gap-space-xs rounded bg-surface-container-lowest p-space-md font-mono text-label-md">
             <div className="flex items-center justify-between">
               <dt className="text-on-surface-variant">Price per claim</dt>
-              <dd className="tabular text-on-surface">{weiToEthTrimmed(claimPrice, 6)} ETH</dd>
+              <dd className="tabular text-on-surface">
+                {formatSettlementNumber(claimPrice, currency, 2)} {activeCurrency.symbol}
+              </dd>
             </div>
             <div className="flex items-center justify-between">
               <dt className="text-on-surface-variant">Committed claims</dt>
@@ -188,7 +309,7 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
             <div className="flex items-center justify-between border-t border-outline-variant/30 pt-2">
               <dt className="font-semibold text-on-surface">Total commitment</dt>
               <dd className="tabular text-headline-sm text-primary">
-                {weiToEthTrimmed(cost, 6)} ETH
+                {formatSettlementNumber(cost, currency, 2)} {activeCurrency.symbol}
               </dd>
             </div>
           </dl>
@@ -203,7 +324,7 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
               className="mt-1 h-4 w-4 shrink-0 accent-emerald-400"
             />
             <span className="text-body-sm text-on-surface-variant">
-              I understand this is a live testnet transaction on Arbitrum Sepolia. The capital is
+              I understand this is a live testnet transaction on {protocolChain.name}. The capital is
               deposited into on-chain escrow custody and claims will be minted to my address. I have
               read the{' '}
               <Link href="/faq#risks" className="text-primary underline">
@@ -215,23 +336,23 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
 
           {/* Action button & Status */}
           <div className="mt-space-md flex flex-col gap-space-sm">
-            {isConfirmed ? (
+            {commitDone ? (
               <div className="flex flex-col gap-2 rounded-lg border border-primary/40 bg-primary/10 p-space-md">
                 <div className="flex items-center gap-2 text-primary font-mono text-title-sm">
                   <Icon name="check_circle" size={20} />
-                  <span>Commitment confirmed on Arbitrum Sepolia!</span>
+                  <span>Commitment confirmed on {protocolChain.name}!</span>
                 </div>
                 <p className="text-body-sm text-on-surface-variant">
                   Your ERC-1155 ClaimTokens have been minted and your capital is locked in MilestoneEscrow.
                 </p>
                 {txHash && (
                   <a
-                    href={`https://sepolia.arbiscan.io/tx/${txHash}`}
+                    href={protocolTxUrl(txHash) ?? '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 font-mono text-label-sm text-primary underline"
                   >
-                    <span>View Transaction on Arbiscan</span>
+                    <span>View Transaction on Explorer</span>
                     <Icon name="open_in_new" size={14} />
                   </a>
                 )}
@@ -258,11 +379,15 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
                   className={isBusy ? 'animate-spin' : ''}
                 />
                 {isSubmitting
-                  ? 'Confirming in Wallet...'
+                  ? commitStep === 'approving'
+                    ? 'Approving USDG in wallet…'
+                    : 'Confirming in wallet…'
                   : isConfirming
-                  ? 'Mining on Arbitrum Sepolia...'
+                  ? commitStep === 'approving'
+                    ? 'Mining USDG approval…'
+                    : `Mining on ${protocolChain.name}…`
                   : canSubmit
-                  ? `Commit ${weiToEthTrimmed(cost, 4)} ETH on-chain`
+                  ? `Commit ${formatSettlementNumber(cost, currency, 2)} ${activeCurrency.symbol} on-chain`
                   : 'Cannot commit yet'}
               </button>
             )}
@@ -279,7 +404,7 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
               </div>
             )}
 
-            {!canSubmit && !isBusy && !isConfirmed && blockers.length > 0 ? (
+            {!canSubmit && !isBusy && !commitDone && blockers.length > 0 ? (
               <ul className="flex flex-col gap-1 rounded bg-surface-container-lowest p-space-sm font-mono text-label-sm text-on-surface-variant">
                 {blockers.map((blocker) => (
                   <li key={blocker} className="flex items-start gap-1.5">
@@ -291,14 +416,16 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
             ) : null}
 
             <div className="flex items-center justify-between font-mono text-label-xs text-outline">
-              <span>Arbitrum Sepolia (Chain ID: 421614)</span>
+              <span>
+                {protocolChain.name} (Chain ID: {protocolChain.id})
+              </span>
               <a
-                href="https://sepolia.arbiscan.io/address/0xE9Aaa276502C691f824E2484eecF46C71Cb99eC3"
+                href={protocolAddressUrl(REGISTRY_ADDRESS) ?? '#'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary underline flex items-center gap-0.5"
               >
-                Registry on Arbiscan
+                Registry on Explorer
                 <Icon name="open_in_new" size={11} />
               </a>
             </div>
@@ -347,11 +474,16 @@ export function InvestFlow({ project, connected, deployed }: InvestFlowProps) {
           <div className="mt-space-md flex flex-col gap-space-xs font-mono text-label-sm">
             <div className="flex justify-between text-on-surface-variant">
               <span>Target raise</span>
-              <span className="text-on-surface">{formatEthNumber(project.escrow.target)} ETH</span>
+              <span className="text-on-surface">
+                {formatSettlementNumber(project.escrow.target, currency, 2)} {activeCurrency.symbol}
+              </span>
             </div>
             <div className="flex justify-between text-on-surface-variant">
               <span>Committed so far</span>
-              <span className="text-on-surface">{formatEthNumber(project.escrow.totalCommitted)} ETH</span>
+              <span className="text-on-surface">
+                {formatSettlementNumber(project.escrow.totalCommitted, currency, 2)}{' '}
+                {activeCurrency.symbol}
+              </span>
             </div>
             <div className="flex justify-between text-on-surface-variant">
               <span>Milestones</span>

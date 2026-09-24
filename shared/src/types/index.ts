@@ -179,6 +179,23 @@ export interface Project {
   updatedAt: string;
   /** Unverified off-chain metrics surfaced in the UI. */
   metrics?: ProjectMetrics;
+  /**
+   * Where the secondary-market book for this project comes from.
+   *
+   * - `real`  - the project exists on the target deployment; the order book,
+   *   listings, bids and fills are read live from `SecondaryMarket`.
+   * - `demo`  - a showcase fixture with no live book; a deterministic synthetic
+   *   book is generated so the UI can be exercised offline.
+   *
+   * Defaults to `real`; the seeded demo projects explicitly opt into `demo`.
+   */
+  liquidityMode?: 'demo' | 'real';
+  /**
+   * The project's numeric id on the live deployment, when `liquidityMode` is
+   * `real` and the project is wired to it. Keyed separately from `id` because
+   * the mock catalogue's `id` is a display index, not the on-chain id.
+   */
+  onChainProjectId?: string;
 }
 
 /** Presentation metrics - some are indexed, some computed client-side. */

@@ -16,7 +16,7 @@ import {
   formatNumber,
   percentOf,
   shortenAddress,
-  weiToEthTrimmed,
+  formatUsdgNumber,
   weiToGwei,
 } from '@/lib/format';
 import { projectStatus } from '@/lib/status';
@@ -85,7 +85,7 @@ function IdentityPanel() {
           </div>
           <div className="bg-surface-container p-space-xs rounded flex flex-col">
             <span className="font-mono text-label-sm text-outline uppercase">Relayer Policy</span>
-            <span className="font-mono text-label-sm text-primary font-semibold">Sepolia Active</span>
+            <span className="font-mono text-label-sm text-primary font-semibold">Robinhood Active</span>
           </div>
           <div className="bg-surface-container p-space-xs rounded flex flex-col">
             <span className="font-mono text-label-sm text-outline uppercase">Residency</span>
@@ -150,9 +150,9 @@ function ExposureSummary() {
   const stillAtRisk = totals.committed - totals.released - totals.refunded;
 
   const tiles = [
-    { label: 'Committed', value: `${weiToEthTrimmed(totals.committed, 2)} ETH`, tone: 'text-on-surface' },
-    { label: 'Still in escrow', value: `${weiToEthTrimmed(stillAtRisk, 2)} ETH`, tone: 'text-primary' },
-    { label: 'Released to founders', value: `${weiToEthTrimmed(totals.released, 2)} ETH`, tone: 'text-secondary' },
+    { label: 'Committed', value: `${formatUsdgNumber(totals.committed, 2)} USDG`, tone: 'text-on-surface' },
+    { label: 'Still in escrow', value: `${formatUsdgNumber(stillAtRisk, 2)} USDG`, tone: 'text-primary' },
+    { label: 'Released to founders', value: `${formatUsdgNumber(totals.released, 2)} USDG`, tone: 'text-secondary' },
     { label: 'Claim units held', value: formatNumber(totals.units), tone: 'text-on-surface' },
   ];
 
@@ -226,14 +226,14 @@ function Positions() {
                   </div>
                   <div className="mt-1 font-mono text-label-sm text-outline">
                     {formatNumber(position.amount)} units · avg cost{' '}
-                    {weiToEthTrimmed(position.avgCost, 4)} ETH
+                    {formatUsdgNumber(position.avgCost, 4)} USDG
                   </div>
                 </div>
 
                 <div className="text-right">
                   <div className="font-mono text-label-sm text-outline">Committed</div>
                   <div className="font-mono tabular text-on-surface">
-                    {weiToEthTrimmed(committed, 2)} ETH
+                    {formatUsdgNumber(committed, 2)} USDG
                   </div>
                 </div>
               </div>
@@ -260,15 +260,15 @@ function Positions() {
                 <div className="flex-wrap gap-x-4 gap-y-1 font-mono text-label-sm">
                   <span className="inline-flex items-center gap-1.5 text-primary">
                     <span aria-hidden className="h-2 w-2 rounded-sm bg-primary/70" />
-                    In escrow {weiToEthTrimmed(atRisk, 2)} ETH
+                    In escrow {formatUsdgNumber(atRisk, 2)} USDG
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-secondary">
                     <span aria-hidden className="h-2 w-2 rounded-sm bg-secondary/70" />
-                    Released {weiToEthTrimmed(released, 2)} ETH
+                    Released {formatUsdgNumber(released, 2)} USDG
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-on-surface-variant">
                     <span aria-hidden className="h-2 w-2 rounded-sm bg-outline-variant" />
-                    Refunded {weiToEthTrimmed(refunded, 2)} ETH
+                    Refunded {formatUsdgNumber(refunded, 2)} USDG
                   </span>
                 </div>
               </div>
@@ -364,7 +364,7 @@ function AuditLedger() {
                     ) : (
                       <span className={value < 0n ? 'text-error' : 'text-primary'}>
                         {value > 0n ? '+' : '−'}
-                        {weiToEthTrimmed(value < 0n ? -value : value, 4)} ETH
+                        {formatUsdgNumber(value < 0n ? -value : value, 4)} USDG
                       </span>
                     )}
                   </td>

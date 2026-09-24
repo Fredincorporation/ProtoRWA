@@ -4,11 +4,15 @@ import Link from 'next/link';
 
 import { InvestClientWrapper } from './invest-client';
 import { Icon } from '@/components/ui/icon';
-import { getProjectBySlug, mockProjects } from '@/lib/data/mock';
+import { mockProjects } from '@/lib/data/mock';
+import { getProjectBySlug } from '@/lib/data/catalogue';
+import { defaultChain, isDeployed } from '@protorwa/shared';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+export const revalidate = 20;
 
 export function generateStaticParams() {
   return mockProjects.map((project) => ({ slug: project.slug }));
@@ -16,7 +20,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   return {
     title: project ? `Commit capital - ${project.title}` : 'Commit capital',
     description: project
@@ -35,11 +39,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
  */
 export default async function InvestPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) notFound();
 
-  const deployed = Boolean(process.env.NEXT_PUBLIC_PROJECT_REGISTRY);
+  // Reflects the protocol deployment on the chain the app actually targets
+  // (Robinhood Chain testnet), not the legacy Arbitrum env var.
+  const deployed = isDeployed(defaultChain.id);
 
   return (
     <>

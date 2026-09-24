@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 import { Icon } from '@/components/ui/icon';
 import { mockProjects } from '@/lib/data/mock';
-import { formatEthNumber, formatNumber, percentOf } from '@/lib/format';
+import { defaultChain, type Project } from '@protorwa/shared';
+import { formatUsdgNumber, formatNumber, percentOf } from '@/lib/format';
 import { projectStatus } from '@/lib/status';
 
 export const metadata: Metadata = {
@@ -23,8 +24,27 @@ export const metadata: Metadata = {
  * rendered disabled with the reason stated, rather than as buttons that do
  * nothing.
  */
-/** 5-KPI Metric Horizon matching Stitch Screen 11 */
-function StudioKpiHorizon() {
+/** 5-KPI Metric Horizon — every figure derived from the demo project set. */
+function StudioKpiHorizon({ projects }: { projects: Project[] }) {
+  const wei = (v: string) => BigInt(v || '0');
+  const sum = (pick: (p: Project) => bigint) =>
+    projects.reduce((acc, p) => acc + pick(p), 0n);
+
+  const totalCommitted = sum((p) => wei(p.escrow.totalCommitted));
+  const totalReleased = sum((p) => wei(p.escrow.totalReleased));
+  const totalLocked = sum((p) => wei(p.escrow.locked));
+  const disbursedPct = percentOf(totalReleased, totalCommitted);
+
+  const evidenceMilestones = projects.flatMap((p) =>
+    p.milestones
+      .filter((m) => m.status === 'EVIDENCE')
+      .map((m) => ({ project: p.title, title: m.title })),
+  );
+  const disputedCount = projects.reduce(
+    (acc, p) => acc + p.milestones.filter((m) => m.status === 'DISPUTED').length,
+    0,
+  );
+
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-sm mb-space-lg">
       <div className="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden">
@@ -33,11 +53,11 @@ function StudioKpiHorizon() {
           <Icon name="account_balance" size={18} className="text-primary" />
         </div>
         <div className="mt-space-md">
-          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">135.00 ETH</span>
+          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">{formatUsdgNumber(totalCommitted)} USDG</span>
         </div>
         <div className="mt-space-xs flex items-center gap-1.5 font-mono text-label-sm text-primary">
           <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-          <span>3 live hardware lines (100% funded)</span>
+          <span>{projects.length} tracked hardware lines</span>
         </div>
       </div>
 
@@ -47,10 +67,10 @@ function StudioKpiHorizon() {
           <Icon name="lock_open" size={18} className="text-secondary" />
         </div>
         <div className="mt-space-md">
-          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">66.00 ETH</span>
+          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">{formatUsdgNumber(totalReleased)} USDG</span>
         </div>
         <div className="mt-space-xs flex items-center gap-1.5 font-mono text-label-sm text-secondary">
-          <span className="font-semibold">48.9%</span>
+          <span className="font-semibold">{disbursedPct.toFixed(1)}%</span>
           <span className="text-on-surface-variant">disbursed post-audit</span>
         </div>
       </div>
@@ -61,7 +81,7 @@ function StudioKpiHorizon() {
           <Icon name="lock_clock" size={18} className="text-tertiary" />
         </div>
         <div className="mt-space-md">
-          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">69.00 ETH</span>
+          <span className="font-display text-headline-md text-on-surface font-semibold tracking-tight">{formatUsdgNumber(totalLocked)} USDG</span>
         </div>
         <div className="mt-space-xs font-mono text-label-sm text-on-surface-variant truncate">
           Awaiting milestone ratification
@@ -74,25 +94,25 @@ function StudioKpiHorizon() {
           <Icon name="how_to_vote" size={18} className="text-tertiary" />
         </div>
         <div className="mt-space-md flex items-baseline gap-2">
-          <span className="font-display text-headline-md text-on-surface font-semibold">1 Active</span>
-          <span className="font-mono text-label-sm text-tertiary font-semibold">(HelioFrost #03)</span>
+          <span className="font-display text-headline-md text-on-surface font-semibold">{evidenceMilestones.length} Open</span>
         </div>
-        <div className="mt-space-xs font-mono text-label-sm text-on-surface-variant">
-          Quorum currently at 72%
+        <div className="mt-space-xs font-mono text-label-sm text-on-surface-variant truncate">
+          {evidenceMilestones[0]
+            ? `${evidenceMilestones[0].project} · ${evidenceMilestones[0].title}`
+            : 'No evidence windows in flight'}
         </div>
       </div>
 
       <div className="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col justify-between">
         <div className="flex items-center justify-between">
-          <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">IoT Factory Oracles</span>
-          <Icon name="sensors" size={18} className="text-primary" />
+          <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">Open Disputes</span>
+          <Icon name="gavel" size={18} className={disputedCount > 0 ? 'text-error' : 'text-primary'} />
         </div>
         <div className="mt-space-md flex items-baseline gap-2">
-          <span className="font-display text-headline-md text-on-surface font-semibold">4 Online</span>
-          <span className="font-mono text-label-sm text-primary font-semibold">100% Pings</span>
+          <span className="font-display text-headline-md text-on-surface font-semibold">{disputedCount} Flagged</span>
         </div>
         <div className="mt-space-xs font-mono text-label-sm text-on-surface-variant">
-          Shenzhen &amp; Austin Cells
+          {disputedCount > 0 ? 'Escalated to protocol oracle' : 'Nothing under oracle review'}
         </div>
       </div>
     </section>
@@ -143,13 +163,13 @@ export default function StudioPage() {
       </header>
 
       <section className="mx-auto max-w-7xl px-space-lg py-space-lg lg:px-margin">
-        {/* 5-KPI Metric Horizon (Screen 11) */}
-        <StudioKpiHorizon />
+        {/* 5-KPI Metric Horizon — derived from the demo project set */}
+        <StudioKpiHorizon projects={mockProjects} />
 
         <div className="mb-space-md flex-wrap items-center gap-space-sm rounded border-tertiary/40 bg-tertiary/5 p-space-sm">
           <Icon name="info" size={18} className="shrink-0 text-tertiary" />
           <p className="font-mono text-label-sm text-tertiary">
-            Demo mode: connected as Founder Helio (ThermoVolt Labs). Contract writes verify against live deployed MilestoneEscrow on Arbitrum Sepolia.
+            Demo mode: connected as Founder Helio (ThermoVolt Labs). Contract writes verify against the live deployed MilestoneEscrow on {defaultChain.name}.
           </p>
         </div>
 
@@ -186,7 +206,7 @@ export default function StudioPage() {
                     <div>
                       <div className="text-outline">Raised</div>
                       <div className="tabular text-on-surface">
-                        {formatEthNumber(committed, 1)} / {formatEthNumber(target, 1)} ETH
+                        {formatUsdgNumber(committed, 1)} / {formatUsdgNumber(target, 1)} USDG
                       </div>
                     </div>
                     <div>
@@ -196,7 +216,7 @@ export default function StudioPage() {
                     <div>
                       <div className="text-outline">Released</div>
                       <div className="tabular text-secondary">
-                        {formatEthNumber(project.escrow.totalReleased, 1)} ETH
+                        {formatUsdgNumber(project.escrow.totalReleased, 1)} USDG
                       </div>
                     </div>
                     <div>
@@ -216,7 +236,7 @@ export default function StudioPage() {
                         Next: {nextMilestone.title}
                       </span>
                       <span className="text-outline">
-                        ({formatEthNumber(nextMilestone.trancheAmount, 1)} ETH tranche,{' '}
+                        ({formatUsdgNumber(nextMilestone.trancheAmount, 1)} USDG tranche,{' '}
                         {nextMilestone.status === 'EVIDENCE' ? 'in review' : 'pending'})
                       </span>
                     </div>
@@ -235,7 +255,7 @@ export default function StudioPage() {
                       className="inline-flex items-center gap-2 rounded border border-primary/40 bg-primary/10 px-space-sm py-2 font-mono text-label-md text-primary transition-colors hover:bg-primary/20"
                     >
                       <Icon name="upload_file" size={16} />
-                      Submit evidence (Screen 27)
+                      Submit evidence
                     </Link>
                   ) : (
                     <button

@@ -8,15 +8,31 @@ import {
   VotingDesk,
 } from '@/components/project/milestone-vote-panel';
 import { ProjectMediaShowcase } from '@/components/project/project-media-showcase';
+import { ProjectCidGallery } from '@/components/project/project-cid-gallery';
 import { Badge, StatusDot } from '@/components/ui/badge';
 import { Icon } from '@/components/ui/icon';
 import { Progress } from '@/components/ui/progress';
-import { mockProjects, getProjectBySlug, mockUpdates } from '@/lib/data/mock';
+import { mockProjects, mockUpdates } from '@/lib/data/mock';
+import { getProjectBySlug } from '@/lib/data/catalogue';
 import { getProjectMedia } from '@/lib/project-media';
-import { formatDate, formatEthNumber, formatNumber, percentOf, weiToEth } from '@/lib/format';
-import { categoryMap, milestoneStatus, projectStatus } from '@/lib/status';
+import { formatDate, formatNumber, formatUsdgNumber, percentOf } from '@/lib/format';
+import { categoryMap, isRefundableStatus, isTradableStatus, milestoneStatus, projectStatus } from '@/lib/status';
+import { ClaimRefundPanel } from '@/components/project/claim-refund-panel';
 import { cn } from '@/lib/utils';
+import { defaultChain, getContracts, protocolAddressUrl } from '@protorwa/shared';
 import type { IndustryCategory, Project } from '@protorwa/shared';
+
+/**
+ * Explorer link for the escrow that actually holds this project's capital.
+ *
+ * The address comes from the env-driven contract registry rather than a literal,
+ * so redeploying does not leave the link pointing at the previous deployment -
+ * which is what a hardcoded fallback does the moment the deployment changes.
+ */
+const escrowExplorerUrl = (() => {
+  const address = getContracts(defaultChain.id).milestoneEscrow;
+  return address ? protocolAddressUrl(address) : null;
+})();
 
 /**
  * Project detail (/projects/[slug]).
@@ -31,14 +47,23 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-/** Pre-renders every demo project at build time. */
+/**
+ * Re-render within ~20s of a commitment landing.
+ *
+ * The chain reader caches live state for a short window; matching the page
+ * revalidate period means a newly published project or a fresh commit surfaces
+ * without a rebuild, while mock slugs stay pre-rendered.
+ */
+export const revalidate = 20;
+
+/** Pre-renders every demo project at build time. Live slugs render on demand. */
 export function generateStaticParams() {
   return mockProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return { title: 'Project not found' };
   return {
     title: project.title,
@@ -57,11 +82,11 @@ function SummaryRail({ project }: { project: Project }) {
   const releasedPct = percentOf(released, target);
 
   const rows = [
-    { label: 'Funding target', value: `${formatEthNumber(target, 2)} ETH` },
-    { label: 'Committed', value: `${formatEthNumber(committed, 2)} ETH` },
-    { label: 'Released from escrow', value: `${formatEthNumber(released, 2)} ETH` },
-    { label: 'Still locked', value: `${formatEthNumber(locked, 2)} ETH` },
-    { label: 'Claim price', value: `${formatEthNumber(project.claimPrice, 4)} ETH` },
+    { label: 'Funding target', value: `${formatUsdgNumber(target, 2)} USDG` },
+    { label: 'Committed', value: `${formatUsdgNumber(committed, 2)} USDG` },
+    { label: 'Released from escrow', value: `${formatUsdgNumber(released, 2)} USDG` },
+    { label: 'Still locked', value: `${formatUsdgNumber(locked, 2)} USDG` },
+    { label: 'Claim price', value: `${formatUsdgNumber(project.claimPrice, 4)} USDG` },
     { label: 'Claims committed', value: `${formatNumber(project.claimsCommitted)} / ${formatNumber(project.totalClaims)}` },
     { label: 'Funding deadline', value: formatDate(project.escrow.fundingDeadline) },
   ];
@@ -194,7 +219,7 @@ function MilestoneTimeline({ project }: { project: Project }) {
 
                 <div className="flex items-center gap-space-sm">
                   <span className="font-mono text-label-md tabular text-secondary">
-                    {weiToEth(milestone.trancheAmount)} ETH
+                    {formatUsdgNumber(milestone.trancheAmount)} USDG
                   </span>
                   <Badge tone={status.tone}>
                     <StatusDot tone={status.tone === 'brand' ? 'brand' : 'neutral'} pulse={milestone.status === 'EVIDENCE'} />
@@ -236,7 +261,7 @@ function MilestoneTimeline({ project }: { project: Project }) {
                       className="inline-flex items-center gap-1.5 rounded border border-primary/40 bg-primary/10 px-space-sm py-1 font-mono text-label-sm text-primary transition-colors hover:bg-primary/20"
                     >
                       <Icon name="open_in_new" size={14} />
-                      Open Full Voting Terminal (Screen 06)
+                      Open Full Voting Terminal
                     </Link>
                   </div>
                   <QuorumMeter milestone={milestone} />
@@ -312,13 +337,16 @@ function UpdatesFeed({ projectId }: { projectId: string }) {
 
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) notFound();
 
   const status = projectStatus(project.status);
   const category = categoryMap[project.category as IndustryCategory];
-  const media = getProjectMedia(slug);
+  const media = getProjectMedia(slug, {
+    coverCid: project.coverCid,
+    galleryCids: project.galleryCids,
+  });
 
   return (
     <>
@@ -337,19 +365,25 @@ export default async function ProjectPage({ params }: PageProps) {
             </div>
             <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-high text-on-surface">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span>ESCROW STATE: ACTIVE ON ARBITRUM SEPOLIA</span>
+              <span>ESCROW STATE: ACTIVE ON {defaultChain.name.toUpperCase()}</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {escrowExplorerUrl ? (
             <a
-              href={`https://sepolia.arbiscan.io/address/${project.escrow.escrowAddress ?? '0x19f2190C1c50B2E4403ff4bd78c05598aBabbD16'}`}
+              href={escrowExplorerUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors"
             >
               <Icon name="open_in_new" size={12} />
-              <span>EXPLORER (0x19f2...bD16)</span>
+              <span>ESCROW CONTRACT</span>
             </a>
+            ) : (
+              <span className="px-2.5 py-1 rounded bg-surface-container-high text-outline font-mono text-label-sm">
+                NO ESCROW CONFIGURED
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -400,13 +434,15 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {/* Quick-action links */}
             <div className="flex flex-wrap items-center gap-space-sm">
-              <Link
-                href={`/market/${project.title.split(/\s+/).map(w => w[0]).join('').slice(0,6).toLowerCase()}`}
-                className="inline-flex items-center gap-1.5 rounded border border-secondary/40 bg-secondary/10 px-space-sm py-1.5 font-mono text-label-sm text-secondary transition-colors hover:bg-secondary/20"
-              >
-                <Icon name="candlestick_chart" size={15} />
-                Trade Claims
-              </Link>
+              {isTradableStatus(project.status) && (
+                <Link
+                  href={`/market/p/${project.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded border border-secondary/40 bg-secondary/10 px-space-sm py-1.5 font-mono text-label-sm text-secondary transition-colors hover:bg-secondary/20"
+                >
+                  <Icon name="candlestick_chart" size={15} />
+                  Trade Claims
+                </Link>
+              )}
               {project.status === 'IN_PRODUCTION' && (
                 <Link
                   href={`/studio/${project.slug}/milestones/2/submit`}
@@ -424,7 +460,21 @@ export default async function ProjectPage({ params }: PageProps) {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-space-lg px-space-lg py-space-lg lg:grid-cols-3 lg:px-margin">
         <div className="flex flex-col gap-space-lg lg:col-span-2">
           {/* ── Video / Media Showcase ──────────────────────────────── */}
-          <ProjectMediaShowcase title={project.title} tagline={project.tagline} media={media} />
+          {/* Curated demo projects keep their high-fidelity showcase; any
+              project carrying founder-pinned media renders it from IPFS. */}
+          {media.cover ? (
+            <ProjectMediaShowcase title={project.title} media={media} />
+          ) : (
+            <ProjectCidGallery
+              title={project.title}
+              coverCid={project.coverCid}
+              galleryCids={project.galleryCids}
+              pitchVideoCid={project.pitchVideoCid}
+            />
+          )}
+
+          {/* ── Holder refund (only for cancelled / defaulted) ──────── */}
+          {isRefundableStatus(project.status) && <ClaimRefundPanel project={project} />}
 
           {/* ── Tab nav (anchor-based, no JS) ───────────────────────── */}
           <div className="flex gap-1 overflow-x-auto border-b border-outline-variant/30 pb-0 font-mono text-label-sm">
@@ -467,7 +517,7 @@ export default async function ProjectPage({ params }: PageProps) {
             </h2>
             <div className="grid grid-cols-1 gap-space-md sm:grid-cols-3">
               {[
-                { label: 'Claim price', value: `${formatEthNumber(project.claimPrice, 4)} ETH`, icon: 'sell' },
+                { label: 'Claim price', value: `${formatUsdgNumber(project.claimPrice, 4)} USDG`, icon: 'sell' },
                 { label: 'Total supply', value: formatNumber(project.totalClaims), icon: 'token' },
                 { label: 'Committed', value: `${formatNumber(project.claimsCommitted)} / ${formatNumber(project.totalClaims)}`, icon: 'how_to_vote' },
               ].map(({ label, value, icon }) => (
@@ -495,7 +545,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 </div>
               </div>
               <p className="mt-space-sm text-outline">
-                Capital held in MilestoneEscrow.sol on Arbitrum Sepolia. Released tranche-by-tranche against approved production evidence.
+                Capital held in MilestoneEscrow.sol on {defaultChain.name}. Released tranche-by-tranche against approved production evidence.
               </p>
             </div>
           </section>

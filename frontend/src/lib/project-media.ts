@@ -6,7 +6,15 @@
  * across cards, heroes, and detail pages.
  *
  * Key by project slug so every component can import a single source of truth.
+ *
+ * Live on-chain projects (published through the founder wizard) are not in this
+ * curated map, so `getProjectMedia` layers their real IPFS media underneath the
+ * showcase assets: a curated project keeps its hand-picked art, while any project
+ * without one falls back to its pinned `coverCid` / `galleryCids`.
  */
+
+import { ipfsUrl } from '@/lib/ipfs';
+
 
 export interface ProjectMediaAssets {
   /** Primary card / hero cover image URL. */
@@ -91,16 +99,45 @@ export const projectMedia: Record<string, ProjectMediaAssets> = {
   },
 };
 
-/** Get media for a project, falling back to empty defaults. */
-export function getProjectMedia(slug: string): ProjectMediaAssets {
-  return (
-    projectMedia[slug] ?? {
-      cover: '',
-      videoPoster: '',
-      gallery: [],
-      telemetry: [],
-      specs: [],
-    }
-  );
+/** On-chain media references a live project pins, used as a fallback source. */
+export interface ProjectOnChainMedia {
+  coverCid?: string | null;
+  galleryCids?: readonly string[] | null;
 }
+
+/**
+ * Resolve a project's render-ready media.
+ *
+ * Curated showcase assets win when present (they exercise states a raw chain
+ * read can't). Otherwise the project's pinned IPFS `coverCid` / `galleryCids`
+ * are used, so a live project shows its real photography instead of a blank card.
+ */
+export function getProjectMedia(
+  slug: string,
+  onChain: ProjectOnChainMedia = {},
+): ProjectMediaAssets {
+  const ipfsCover = ipfsUrl(onChain.coverCid) ?? '';
+  const ipfsGallery = (onChain.galleryCids ?? [])
+    .map((cid) => ipfsUrl(cid))
+    .filter((url): url is string => Boolean(url));
+
+  const curated = projectMedia[slug];
+  if (curated) {
+    return {
+      ...curated,
+      cover: curated.cover || ipfsCover,
+      videoPoster: curated.videoPoster || ipfsCover || ipfsGallery[0] || '',
+      gallery: curated.gallery.length ? curated.gallery : ipfsGallery,
+    };
+  }
+
+  return {
+    cover: ipfsCover,
+    videoPoster: ipfsCover || ipfsGallery[0] || '',
+    gallery: ipfsGallery,
+    telemetry: [],
+    specs: [],
+  };
+}
+
 

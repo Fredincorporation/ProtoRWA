@@ -14,6 +14,37 @@ export-abi = ["stylus-sdk/export-abi"]
 [lib]
 crate-type = ["lib", "cdylib"]
 
+# The binary target `cargo stylus` needs.
+#
+# `cargo-stylus` does not read the ABI from the compiled wasm - it *runs the
+# crate natively* and reads reflection output from stdout:
+#
+#   cargo run --target <host> --features export-abi -- <command>
+#
+# A lib+cdylib-only crate therefore fails at the last step of a deploy with
+# "a bin target must be available for `cargo run`".
+#
+# Two wrong fixes are worth recording, because both look correct:
+#
+#   1. No bin at all      -> deploy aborts with the error above.
+#   2. An empty main()    -> deploy SUCCEEDS but writes a contract with no
+#                            interface, because reflection printed nothing.
+#                            The address has valid bytecode, a normal receipt and
+#                            a real activation record, yet reverts with empty
+#                            data on every call. Silent, and indistinguishable
+#                            from a working deploy until something calls it.
+#
+# `src/main.rs` therefore delegates to the SDK's generated entrypoint via
+# `print_abi()`, which is what actually produces the interface.
+#
+# This bin is compiled for the HOST only. `cargo stylus deploy` builds the
+# contract separately for wasm32-unknown-unknown, so the two artifacts never
+# collide - which was the failure mode of an earlier attempt where a wasm-built
+# stub sat beside the real cdylib in the same release directory.
+[[bin]]
+name = "hardware-verifier-reflect"
+path = "src/main.rs"
+
 [profile.release]
 codegen-units = 1
 opt-level = "z"

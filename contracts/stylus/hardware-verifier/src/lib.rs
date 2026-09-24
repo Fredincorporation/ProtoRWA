@@ -64,28 +64,46 @@ impl HardwareVerifier {
     }
 
     /// High-precision token-weighted quorum consensus calculator.
-    /// Determines whether an escrow milestone passes quorum and threshold.
+    ///
+    /// Mirrors `MilestoneEscrow.settleReview()` exactly. The two MUST agree: the
+    /// escrow is the contract that actually moves money, and this function is
+    /// what the UI and the oracle use to predict its decision. A divergence here
+    /// means the interface reports an outcome the chain will not produce.
+    ///
+    /// Two details are easy to get wrong and are the reason this takes explicit
+    /// abstain weight:
+    ///
+    ///   1. Abstentions count toward QUORUM but not toward the approval
+    ///      threshold. Omitting them understates participation, so a milestone
+    ///      that the escrow would approve reads as "below quorum" here.
+    ///   2. The threshold is measured against ELIGIBLE weight, not against the
+    ///      weight that voted. Dividing by `total_voted` inflates the ratio and
+    ///      would pass a proposal the escrow rejects.
+    #[allow(clippy::too_many_arguments)]
     pub fn evaluate_consensus(
         &self,
         _milestone_id: U256,
         approve_weight: U256,
         reject_weight: U256,
+        abstain_weight: U256,
         eligible_weight: U256,
-        min_quorum_bps: U256,   // e.g. 3000 = 30%
+        min_quorum_bps: U256,    // e.g. 2500 = 25%
         pass_threshold_bps: U256 // e.g. 6000 = 60%
     ) -> Result<bool, Vec<u8>> {
         if eligible_weight.is_zero() {
             return Ok(false);
         }
 
-        let total_voted = approve_weight + reject_weight;
-        let quorum_achieved = (total_voted * U256::from(10000)) / eligible_weight >= min_quorum_bps;
+        let bps = U256::from(10_000);
 
-        let pass_achieved = if !total_voted.is_zero() {
-            (approve_weight * U256::from(10000)) / total_voted >= pass_threshold_bps
-        } else {
-            false
-        };
+        // Participation includes abstentions, matching the escrow's `cast`.
+        let total_cast = approve_weight + reject_weight + abstain_weight;
+        let quorum_target = (eligible_weight * min_quorum_bps) / bps;
+        let quorum_achieved = total_cast >= quorum_target;
+
+        // Approval is measured against eligible weight, not against votes cast.
+        let approval_target = (eligible_weight * pass_threshold_bps) / bps;
+        let pass_achieved = approve_weight >= approval_target;
 
         Ok(quorum_achieved && pass_achieved)
     }
@@ -94,4 +112,21 @@ impl HardwareVerifier {
     pub fn is_telemetry_verified(&self, root: B256) -> Result<bool, Vec<u8>> {
         Ok(self.verified_telemetry_roots.get(root))
     }
+}
+
+/// Prints this contract's Solidity interface to stdout.
+///
+/// Called by the binary target in `src/main.rs` so that `cargo stylus` can read
+/// the interface via `cargo run --features export-abi -- <command>`. Without it
+/// the reflection call produces no output, the deployer records an empty ABI,
+/// and the resulting contract reverts on every selector because it has no
+/// discoverable methods.
+///
+/// Gated behind the feature because the SDK only derives `GenerateAbi` when
+/// `export-abi` is enabled - an unconditional call would not compile under a
+/// plain `cargo build`.
+#[cfg(feature = "export-abi")]
+pub fn print_abi() {
+    use stylus_sdk::abi::export::print_from_args;
+    print_from_args::<HardwareVerifier>();
 }

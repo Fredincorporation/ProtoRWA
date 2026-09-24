@@ -132,7 +132,7 @@ Return JSON: { "milestones": [ { "title": string, "description": string,
 
 Task: suggest a claim price, total claim supply, and raise target that are
 internally consistent (price * totalClaims should approximate target).
-Frame numbers in ETH unless told otherwise.
+Frame numbers in USDG unless told otherwise.
 
 Return JSON: { "claimPrice": string, "totalClaims": string, "target": string,
 "notes": string (explain the trade-offs of this structure in <=120 words) }`,

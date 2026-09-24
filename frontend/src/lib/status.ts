@@ -133,6 +133,37 @@ export function projectStatus(status: string): StatusPresentation {
   );
 }
 
+/**
+ * Statuses whose claims are tradable on the secondary market.
+ *
+ * A claim only represents an escrowed production commitment once its funding
+ * round has closed, so DRAFT and FUNDING assets have nothing settled to trade.
+ * CANCELLED and DEFAULTED projects freeze their claims for refund, so they are
+ * untradeable too. Only a delivered build (COMPLETED) or one in production
+ * (IN_PRODUCTION) can change hands. Single source of truth for every "can this
+ * be traded?" gate (market listing, project CTA, terminal route).
+ */
+export const TRADABLE_STATUSES: readonly ProjectStatus[] = ['IN_PRODUCTION', 'COMPLETED'];
+
+export function isTradableStatus(status: string): boolean {
+  return (TRADABLE_STATUSES as readonly string[]).includes(status);
+}
+
+/**
+ * Statuses whose escrow is being returned to claim holders.
+ *
+ * The mirror of {@link TRADABLE_STATUSES}: a CANCELLED or DEFAULTED project
+ * freezes its claims and lets each holder burn their balance for a pro-rata
+ * share of whatever is still locked, via `MilestoneEscrow.claimRefund()`.
+ * Single source of truth for every "can this be refunded?" gate.
+ */
+export const REFUNDABLE_STATUSES: readonly ProjectStatus[] = ['CANCELLED', 'DEFAULTED'];
+
+export function isRefundableStatus(status: string): boolean {
+  return (REFUNDABLE_STATUSES as readonly string[]).includes(status);
+}
+
+
 export function milestoneStatus(status: string): StatusPresentation {
   return (
     milestoneStatusMap[status as MilestoneStatus] ?? {

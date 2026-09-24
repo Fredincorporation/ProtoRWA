@@ -98,7 +98,6 @@ function ShowcaseCard() {
 
       {/* Product photograph from the Stitch design screens. */}
       <div className="relative mb-space-sm h-52 w-full overflow-hidden rounded bg-surface-container-lowest">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt3oGRLiP8fH_I-GBaWkIy2EqJEQNgSzv4Li_JVQG8UHoEE1qpF6bnBkviwjSf_-HfFqIRAg-dP8Op2Bk3FYagfA90Gsap2C_3WJW1EV5fGy1YXDDJNA9JOyx5HPyjW2EpZQwDVdMewgWZKMObd9njfqj17oioJbeFc_l11nNC62PFr-6xaiuP2Rwej-UH97Znq1FepkQk7tSIhIIohuPLbFhspKAr0MGND2u8OIAXTpqDB7PPRThS"
           alt="HelioFrost Pro — solar vaccine cold-chain unit"
@@ -140,9 +139,9 @@ function ShowcaseCard() {
       <div className="mb-space-sm space-y-1">
         <div className="flex justify-between font-mono text-label-sm text-on-surface-variant">
           <span>
-            Raised: {showcase.raised.toLocaleString('en-US')} USDC
+            Raised: {showcase.raised.toLocaleString('en-US')} USDG
           </span>
-          <span>Target: {showcase.target.toLocaleString('en-US')} USDC</span>
+          <span>Target: {showcase.target.toLocaleString('en-US')} USDG</span>
         </div>
         <div
           className="h-2 w-full overflow-hidden rounded bg-surface-container-lowest"

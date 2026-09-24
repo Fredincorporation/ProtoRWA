@@ -5,14 +5,15 @@ import Link from 'next/link';
 import {
   EvidenceList,
   QuorumMeter,
-  VotingDesk,
 } from '@/components/project/milestone-vote-panel';
+import { MilestoneVoteConsole } from '@/components/project/milestone-vote-console';
+import { StylusConsensusPredictor } from '@/components/project/stylus-consensus-predictor';
 import { Badge, StatusDot } from '@/components/ui/badge';
 import { Icon } from '@/components/ui/icon';
-import { getProjectBySlug, mockProjects } from '@/lib/data/mock';
+import { getProjectBySlug, getProjects } from '@/lib/data/catalogue';
 import {
   formatDate,
-  formatEthNumber,
+  formatUsdgNumber,
   formatCountdown,
   shortenAddress,
 } from '@/lib/format';
@@ -22,8 +23,9 @@ interface PageProps {
   params: Promise<{ slug: string; milestoneIndex: string }>;
 }
 
-export function generateStaticParams() {
-  return mockProjects.flatMap((project) =>
+export async function generateStaticParams() {
+  const projects = await getProjects();
+  return projects.flatMap((project) =>
     project.milestones.map((_, i) => ({
       slug: project.slug,
       milestoneIndex: String(i),
@@ -33,7 +35,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, milestoneIndex } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   const milestone = project?.milestones[Number(milestoneIndex)];
   return {
     title: milestone
@@ -54,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
  */
 export default async function MilestoneVotePage({ params }: PageProps) {
   const { slug, milestoneIndex } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
   const idx = Number(milestoneIndex);
@@ -63,9 +65,6 @@ export default async function MilestoneVotePage({ params }: PageProps) {
 
   const status = milestoneStatus(milestone.status);
   const isActive = milestone.status === 'EVIDENCE';
-
-  // Check for Stylus attestation root (field added on-chain after HardwareVerifier call)
-  const stylusAttested = Boolean((milestone as Record<string, unknown>).stylusAttestedRoot);
 
   return (
     <>
@@ -100,24 +99,12 @@ export default async function MilestoneVotePage({ params }: PageProps) {
               </p>
             </div>
 
-            {/* Status + Stylus Oracle badge cluster */}
+            {/* Status badge */}
             <div className="flex flex-wrap items-center gap-space-sm">
               <Badge tone={status.tone}>
                 <StatusDot tone={status.tone === 'brand' ? 'brand' : 'neutral'} pulse={isActive} />
                 {status.label}
               </Badge>
-
-              {stylusAttested ? (
-                <Badge tone="info">
-                  <Icon name="verified" size={12} className="mr-1" />
-                  Stylus Verified
-                </Badge>
-              ) : (
-                <Badge tone="neutral">
-                  <Icon name="pending" size={12} className="mr-1" />
-                  Stylus Attestation Pending
-                </Badge>
-              )}
             </div>
           </div>
         </div>
@@ -125,24 +112,13 @@ export default async function MilestoneVotePage({ params }: PageProps) {
 
       {/* ── Body ─────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-7xl px-space-lg py-space-xl lg:px-margin">
-        {/* Arbitrum Stylus context banner */}
-        <div className="mb-space-lg flex items-start gap-space-sm rounded-lg border border-secondary/30 bg-surface-container-low p-space-md">
-          <Icon name="settings_ethernet" size={18} className="mt-0.5 shrink-0 text-secondary" />
-          <div className="font-mono text-label-sm">
-            <span className="uppercase tracking-wider text-secondary">
-              Arbitrum Stylus — HardwareVerifier
-            </span>
-            <p className="mt-1 text-on-surface-variant">
-              Evidence CIDs are attested by the{' '}
-              <span className="text-secondary">HardwareVerifier</span> Rust contract deployed to
-              Arbitrum Sepolia via Stylus. The contract executes Merkle proof verification at
-              near-native WASM speed, emitting a{' '}
-              <code className="rounded bg-surface-container-highest px-1 text-primary">
-                HardwareBatchVerified
-              </code>{' '}
-              event before the voting window opens.
-            </p>
-          </div>
+        {/* Live Stylus consensus forecast (reads evaluateConsensus on-chain). */}
+        <div className="mb-space-lg">
+          <StylusConsensusPredictor
+            project={project}
+            milestone={milestone}
+            milestoneIndex={idx}
+          />
         </div>
 
         <div className="grid gap-space-lg lg:grid-cols-[1fr_400px]">
@@ -172,7 +148,7 @@ export default async function MilestoneVotePage({ params }: PageProps) {
                   { label: 'Founder', value: shortenAddress(project.founder) },
                   { label: 'Location', value: project.manufacturingLocation },
                   { label: 'Evidence submitted', value: milestone.evidence[0]?.submittedAt ? formatDate(milestone.evidence[0].submittedAt) : '—' },
-                  { label: 'Tranche at stake', value: `${formatEthNumber(milestone.trancheAmount, 2)} ETH` },
+                  { label: 'Tranche at stake', value: `${formatUsdgNumber(milestone.trancheAmount, 2)} USDG` },
                   { label: 'Voting window', value: milestone.votingEndsAt ? formatCountdown(milestone.votingEndsAt) : '—' },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex flex-col gap-0.5 bg-surface-container px-space-md py-space-sm">
@@ -186,12 +162,10 @@ export default async function MilestoneVotePage({ params }: PageProps) {
 
           {/* ── RIGHT: Voting execution desk + tranche card ──────── */}
           <div className="flex flex-col gap-space-lg">
-            <VotingDesk
+            <MilestoneVoteConsole
+              project={project}
               milestone={milestone}
-              eligibleWeight={milestone.votes.eligible}
-              canVote={false}
-              hasVoted={false}
-              pending={false}
+              milestoneIndex={idx}
             />
 
             {/* Escrow Tranche Card */}
@@ -205,7 +179,7 @@ export default async function MilestoneVotePage({ params }: PageProps) {
                 <div className="flex items-baseline justify-between">
                   <span className="text-label-sm text-outline">At stake</span>
                   <span className="text-headline-sm tabular text-primary">
-                    {formatEthNumber(milestone.trancheAmount, 2)} ETH
+                    {formatUsdgNumber(milestone.trancheAmount, 2)} USDG
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-label-sm">
@@ -242,7 +216,7 @@ export default async function MilestoneVotePage({ params }: PageProps) {
                 <code className="rounded bg-surface-container-highest px-1 text-secondary">
                   MilestoneEscrow.sol
                 </code>{' '}
-                on Arbitrum Sepolia. The contract tallies on-chain votes and either releases the
+                on Robinhood Chain. The contract tallies on-chain votes and either releases the
                 tranche to the founder or keeps capital locked.
               </p>
             </div>

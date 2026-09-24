@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils';
 
 interface ProjectMediaShowcaseProps {
   title: string;
-  tagline: string;
   media: ProjectMediaAssets;
 }
 
@@ -20,7 +19,7 @@ interface ProjectMediaShowcaseProps {
  * hardware telemetry HUD at the bottom, and a spec ribbon below.
  * Matches the HelioFrost Pro Terminal design from Stitch Screen 04.
  */
-export function ProjectMediaShowcase({ title, tagline, media }: ProjectMediaShowcaseProps) {
+export function ProjectMediaShowcase({ title, media }: ProjectMediaShowcaseProps) {
   const [playing, setPlaying] = React.useState(false);
   const [activeImg, setActiveImg] = React.useState(0);
 

@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancel superseded runs on the same ref instead of burning runners.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend (typecheck · test · build)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck (shared + frontend)
+        run: pnpm --filter @protorwa/shared --filter @protorwa/frontend run typecheck
+
+      - name: Unit tests
+        run: pnpm --filter @protorwa/shared --filter @protorwa/frontend run test
+
+      - name: Production build
+        # next build reads only public defaults baked into shared/src/chains.ts;
+        # no secrets are required for the build to pass.
+        run: pnpm build
+
+  contracts:
+    name: Contracts (forge build · test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Build
+        working-directory: contracts
+        run: forge build
+
+      - name: Test
+        working-directory: contracts
+        run: forge test -vv

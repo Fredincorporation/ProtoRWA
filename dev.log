@@ -1,0 +1,13 @@
+   ▲ Next.js 15.1.3
+   - Local:        http://localhost:3000
+   - Network:      http://172.26.128.1:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 4.8s
+ ○ Compiling / ...
+ ✓ Compiled / in 90.5s (9629 modules)
+ GET / 200 in 92865ms
+ ○ Compiling /market/[ticker] ...
+ ✓ Compiled /market/[ticker] in 6.8s (9612 modules)
+ GET /market/hp 200 in 9354ms

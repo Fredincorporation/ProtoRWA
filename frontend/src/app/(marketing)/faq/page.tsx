@@ -19,7 +19,7 @@ const sections: DocSection[] = [
       <>
         <p>
           A claim is an ERC-1155 token unit minted against committed capital. If
-          you commit at a claim price of 0.01 ETH, 1,000 units cost 10 ETH and you
+          you commit at a claim price of 5 USDG, 1,000 units cost 5,000 USDG and you
           hold 1,000 units.
         </p>
         <p>

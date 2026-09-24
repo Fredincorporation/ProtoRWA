@@ -6,6 +6,8 @@ import { ClaimToken } from "../src/ClaimToken.sol";
 import { ProjectRegistry } from "../src/ProjectRegistry.sol";
 import { MilestoneEscrow } from "../src/MilestoneEscrow.sol";
 import { SecondaryMarket } from "../src/SecondaryMarket.sol";
+import { IHardwareVerifier } from "../src/IHardwareVerifier.sol";
+import { MockHardwareVerifier } from "./mocks/MockHardwareVerifier.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
@@ -18,6 +20,7 @@ abstract contract Fixture is Test {
     ProjectRegistry internal registry;
     MilestoneEscrow internal escrow;
     SecondaryMarket internal market;
+    MockHardwareVerifier internal verifier;
 
     address internal admin = makeAddr("admin");
     address internal feeRecipient = makeAddr("feeRecipient");
@@ -34,7 +37,10 @@ abstract contract Fixture is Test {
     function setUp() public virtual {
         claimToken = new ClaimToken(admin, "ipfs://base/{id}.json", "ipfs://contract.json");
         registry = new ProjectRegistry(admin, claimToken, IERC20(address(0)));
-        escrow = new MilestoneEscrow(admin, registry, claimToken, IERC20(address(0)));
+        verifier = new MockHardwareVerifier();
+        escrow = new MilestoneEscrow(
+            admin, registry, claimToken, IERC20(address(0)), IHardwareVerifier(address(verifier))
+        );
         market = new SecondaryMarket(
             admin,
             claimToken,

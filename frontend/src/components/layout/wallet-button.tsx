@@ -6,7 +6,7 @@ import { useAccount, useBalance } from 'wagmi';
 
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
-import { chainLabel } from '@protorwa/shared';
+import { chainLabel, getChain } from '@protorwa/shared';
 import { cn } from '@/lib/utils';
 
 /**
@@ -22,6 +22,13 @@ import { cn } from '@/lib/utils';
 export function NetworkChip({ className }: { className?: string }) {
   const { chainId, isConnected } = useAccount();
   const label = isConnected ? chainLabel(chainId) : 'Not connected';
+  /**
+   * True when the connected chain has a verified USDG deployment.
+   *
+   * `getChain` takes a definite number, and wagmi reports `undefined` while
+   * disconnected - so the id is checked rather than passed through.
+   */
+  const usdgChain = isConnected && chainId !== undefined ? Boolean(getChain(chainId)?.usdg) : false;
 
   return (
     <div
@@ -40,6 +47,16 @@ export function NetworkChip({ className }: { className?: string }) {
       <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant">
         {label}
       </span>
+      {/*
+        When the connected chain settles RWA flows in USDG, say so in the chip.
+        Robinhood Chain's dollar layer is USDG rather than USDC, and this is the
+        one place a user glances to see which chain and asset they are on.
+      */}
+      {isConnected && usdgChain ? (
+        <span className="rounded bg-primary/10 px-1.5 py-0.5 font-mono text-label-sm text-primary">
+          USDG
+        </span>
+      ) : null}
     </div>
   );
 }

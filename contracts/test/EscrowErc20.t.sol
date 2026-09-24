@@ -6,6 +6,7 @@ import { ClaimToken } from "../src/ClaimToken.sol";
 import { ProjectRegistry } from "../src/ProjectRegistry.sol";
 import { MilestoneEscrow } from "../src/MilestoneEscrow.sol";
 import { SecondaryMarket } from "../src/SecondaryMarket.sol";
+import { IHardwareVerifier } from "../src/IHardwareVerifier.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
@@ -68,7 +69,9 @@ contract EscrowErc20Test is Test {
 
         claimToken = new ClaimToken(admin, "ipfs://base/{id}.json", "ipfs://contract.json");
         registry = new ProjectRegistry(admin, claimToken, IERC20(address(usdg)));
-        escrow = new MilestoneEscrow(admin, registry, claimToken, IERC20(address(usdg)));
+        escrow = new MilestoneEscrow(
+            admin, registry, claimToken, IERC20(address(usdg)), IHardwareVerifier(address(0))
+        );
         market = new SecondaryMarket(
             admin,
             claimToken,
@@ -201,7 +204,7 @@ contract EscrowErc20Test is Test {
         uint256 balanceBefore = usdg.balanceOf(founder);
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence", bytes32(0), new bytes32[](0));
 
         vm.prank(alice);
         escrow.vote(projectId, 0, true, false);
@@ -301,7 +304,7 @@ contract EscrowErc20Test is Test {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence", bytes32(0), new bytes32[](0));
         vm.prank(alice);
         escrow.vote(projectId, 0, true, false);
         vm.prank(bob);
@@ -323,7 +326,7 @@ contract EscrowErc20Test is Test {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence", bytes32(0), new bytes32[](0));
         vm.prank(alice);
         escrow.vote(projectId, 0, true, false);
         vm.prank(bob);
@@ -378,7 +381,7 @@ contract EscrowErc20Test is Test {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence", bytes32(0), new bytes32[](0));
 
         vm.prank(admin);
         escrow.escalate(projectId, 0, "ipfs://rationale");

@@ -7,6 +7,7 @@ import { ClaimToken } from "../src/ClaimToken.sol";
 import { ProjectRegistry } from "../src/ProjectRegistry.sol";
 import { MilestoneEscrow } from "../src/MilestoneEscrow.sol";
 import { SecondaryMarket } from "../src/SecondaryMarket.sol";
+import { IHardwareVerifier } from "../src/IHardwareVerifier.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
@@ -19,13 +20,19 @@ import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  *   ClaimToken.BURNER_ROLE  -> MilestoneEscrow   (burn on refund)
  *   ClaimToken.FREEZER_ROLE -> admin             (freeze during dispute)
  *
- * Usage:
- *   forge script/Deploy.sol --rpc-url $ARBITRUM_SEPOLIA_RPC_URL --broadcast
+ * Usage (Robinhood Chain testnet; settlement is USDG, gas is native ETH):
+ *   forge script "script/Deploy.sol:Deploy" \
+ *     --rpc-url https://rpc.testnet.chain.robinhood.com --broadcast
  *
  * Required env:
- *   PRIVATE_KEY          deployer key (also becomes initial admin)
- *   PAYMENT_TOKEN        ERC-20 address, or omit for native ETH
+ *   PRIVATE_KEY          deployer key (also becomes initial admin); holds testnet ETH for gas
+ *   PAYMENT_TOKEN        USDG (6-decimal) address used for all settlement
  *   FEE_RECIPIENT        protocol fee beneficiary (defaults to admin)
+ * Optional env:
+ *   HARDWARE_VERIFIER    deployed Stylus HardwareVerifier address. When set, the
+ *                        escrow gates hardware-committed milestones on its
+ *                        Merkle proof. Defaults to address(0), which disables
+ *                        attestation and keeps every milestone non-gated.
  */
 contract Deploy is Script {
     function run() external {
@@ -34,6 +41,7 @@ contract Deploy is Script {
 
         address paymentToken = vm.envOr("PAYMENT_TOKEN", address(0));
         address feeRecipient = vm.envOr("FEE_RECIPIENT", admin);
+        address hardwareVerifier = vm.envOr("HARDWARE_VERIFIER", address(0));
 
         string memory baseUri = vm.envOr("CLAIM_TOKEN_BASE_URI", string("ipfs://protorwa/{id}.json"));
         string memory contractUri =
@@ -43,7 +51,13 @@ contract Deploy is Script {
 
         ClaimToken claimToken = new ClaimToken(admin, baseUri, contractUri);
         ProjectRegistry registry = new ProjectRegistry(admin, claimToken, IERC20(paymentToken));
-        MilestoneEscrow escrow = new MilestoneEscrow(admin, registry, claimToken, IERC20(paymentToken));
+        MilestoneEscrow escrow = new MilestoneEscrow(
+            admin,
+            registry,
+            claimToken,
+            IERC20(paymentToken),
+            IHardwareVerifier(hardwareVerifier)
+        );
         SecondaryMarket market = new SecondaryMarket(
             admin,
             claimToken,
@@ -64,6 +78,7 @@ contract Deploy is Script {
         _report(
             admin,
             paymentToken,
+            hardwareVerifier,
             address(claimToken),
             address(registry),
             address(escrow),
@@ -75,6 +90,7 @@ contract Deploy is Script {
     function _report(
         address admin,
         address paymentToken,
+        address hardwareVerifier,
         address claimToken,
         address registry,
         address escrow,
@@ -85,6 +101,10 @@ contract Deploy is Script {
         console2.log("admin            ", admin);
         console2.log("paymentToken     ", paymentToken == address(0) ? "native ETH" : "");
         if (paymentToken != address(0)) console2.log("  token address  ", paymentToken);
+        console2.log(
+            "hardwareVerifier ",
+            hardwareVerifier == address(0) ? "disabled (no attestation)" : vm.toString(hardwareVerifier)
+        );
         console2.log("ClaimToken       ", claimToken);
         console2.log("ProjectRegistry  ", registry);
         console2.log("MilestoneEscrow  ", escrow);

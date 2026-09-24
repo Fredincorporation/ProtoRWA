@@ -8,6 +8,7 @@ import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.s
 
 import { ProjectRegistry } from "./ProjectRegistry.sol";
 import { ClaimToken } from "./ClaimToken.sol";
+import { IHardwareVerifier } from "./IHardwareVerifier.sol";
 
 /**
  * @title MilestoneEscrow
@@ -68,8 +69,26 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
     ClaimToken public immutable claimToken;
     IERC20 public immutable paymentToken;
 
+    /**
+     * @notice The Stylus hardware verifier, or `address(0)` when attestation is
+     *         disabled for this deployment.
+     * @dev Immutable so the escrow's trust anchor cannot be moved after deploy.
+     *      A zero address means no milestone may opt into attestation; every
+     *      `submitEvidence` then behaves exactly as before the verifier existed.
+     */
+    IHardwareVerifier public immutable verifier;
+
     /// @notice Project id => milestone index => review state.
     mapping(uint256 => mapping(uint256 => Review)) public reviews;
+
+    /**
+     * @notice Project id => milestone index => the telemetry root the founder
+     *         committed up front. Zero means the milestone is not hardware-gated.
+     * @dev Committing before the review opens is what makes the attestation
+     *      non-gameable: the founder cannot tailor the root to evidence they
+     *      already know will be inspected.
+     */
+    mapping(uint256 => mapping(uint256 => bytes32)) public committedRoots;
 
     /// @notice Project id => milestone index => voter => weight used.
     mapping(uint256 => mapping(uint256 => mapping(address => uint256))) public voteWeight;
@@ -113,11 +132,17 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
      * ------------------------------------------------------------------ */
 
     event EscrowDeposited(uint256 indexed projectId, uint256 amount);
+    event CommitmentSet(
+        uint256 indexed projectId,
+        uint256 indexed milestoneIndex,
+        bytes32 root
+    );
     event EvidenceSubmitted(
         uint256 indexed projectId,
         uint256 indexed milestoneIndex,
         string evidenceCid,
-        uint64 endsAt
+        uint64 endsAt,
+        bool attested
     );
     event VoteCast(
         uint256 indexed projectId,
@@ -160,6 +185,9 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
     error OversizedHolderSet(uint256 participants);
     error RefundUnavailable();
     error TransferFailed();
+    error NoVerifier();
+    error CommitmentLocked(uint256 projectId, uint256 milestoneIndex);
+    error AttestationFailed(uint256 projectId, uint256 milestoneIndex);
 
     /* ------------------------------------------------------------------ *
      * Construction
@@ -169,12 +197,14 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
         address admin,
         ProjectRegistry registry_,
         ClaimToken claimToken_,
-        IERC20 paymentToken_
+        IERC20 paymentToken_,
+        IHardwareVerifier verifier_
     ) {
         if (admin == address(0)) revert NotFound(0);
         registry = registry_;
         claimToken = claimToken_;
         paymentToken = paymentToken_;
+        verifier = verifier_;
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(ORACLE_ROLE, admin);
     }
@@ -279,15 +309,50 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
      * ------------------------------------------------------------------ */
 
     /**
+     * @notice Commits the Merkle root a milestone's telemetry must open to.
+     * @dev One-shot and immutable: setting it again would let the founder pick a
+     *      root *after* seeing the evidence, which is exactly the game the
+     *      pre-commitment exists to prevent. Requires a verifier to be wired, so
+     *      a committed root can never strand a milestone as un-submittable.
+     * @param root The `batchRoot` that later `submitEvidence` proofs are checked
+     *             against. Must be non-zero.
+     */
+    function setCommitment(uint256 projectId, uint256 milestoneIndex, bytes32 root) external {
+        ProjectRegistry.Project memory project = registry.getProject(projectId);
+        if (project.founder != msg.sender) revert NotFound(projectId);
+        if (address(verifier) == address(0)) revert NoVerifier();
+        if (root == bytes32(0)) revert NotFound(projectId);
+        if (committedRoots[projectId][milestoneIndex] != bytes32(0)) {
+            revert CommitmentLocked(projectId, milestoneIndex);
+        }
+        Review storage review = reviews[projectId][milestoneIndex];
+        if (review.open || review.outcome == ReviewOutcome.APPROVED) {
+            revert CommitmentLocked(projectId, milestoneIndex);
+        }
+
+        committedRoots[projectId][milestoneIndex] = root;
+        emit CommitmentSet(projectId, milestoneIndex, root);
+    }
+
+    /**
      * @notice Opens a review window for a milestone and snapshots vote weight.
+     * @dev When the milestone has a committed telemetry root, the batch's
+     *      `leaf`/`proof` must reproduce that root via the Stylus verifier before
+     *      the review opens. Milestones with no committed root skip this entirely
+     *      and behave exactly as a pre-attestation deployment.
      * @param projectId Project being reviewed.
      * @param milestoneIndex Milestone under review.
      * @param evidenceCid IPFS pointer to the production evidence.
+     * @param leaf A telemetry leaf claimed to be a member of the committed root.
+     * @param proof Merkle branch proving `leaf`'s membership.
      */
-    function submitEvidence(uint256 projectId, uint256 milestoneIndex, string calldata evidenceCid)
-        external
-        nonReentrant
-    {
+    function submitEvidence(
+        uint256 projectId,
+        uint256 milestoneIndex,
+        string calldata evidenceCid,
+        bytes32 leaf,
+        bytes32[] calldata proof
+    ) external nonReentrant {
         ProjectRegistry.Project memory project = registry.getProject(projectId);
         if (project.founder != msg.sender) revert NotFound(projectId);
         if (project.status != ProjectRegistry.ProjectStatus.IN_PRODUCTION) {
@@ -306,15 +371,11 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
             revert NotFound(projectId);
         }
 
-        // Snapshot eligible weight from the indexed participant set.
-        address[] storage holders = _participants[projectId];
-        uint256 eligible;
-        for (uint256 i = 0; i < holders.length; ++i) {
-            uint256 weight = claimToken.balanceOf(holders[i], projectId);
-            snapshotWeight[projectId][holders[i]] = weight;
-            eligible += weight;
-        }
-
+        // Hardware attestation gate (no-op unless a root was committed), then
+        // the eligible-weight snapshot. Kept in helpers so this frame's stack
+        // stays shallow.
+        bool attested = _attestIfCommitted(projectId, milestoneIndex, leaf, proof);
+        uint256 eligible = _snapshotEligible(projectId);
         if (eligible == 0) revert NoWeight();
 
         review.open = true;
@@ -327,7 +388,37 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
         review.trancheAmount = milestone.trancheAmount;
         review.outcome = ReviewOutcome.PENDING;
 
-        emit EvidenceSubmitted(projectId, milestoneIndex, evidenceCid, review.endsAt);
+        emit EvidenceSubmitted(projectId, milestoneIndex, evidenceCid, review.endsAt, attested);
+    }
+
+    /**
+     * @dev Runs the Stylus Merkle check when a root is committed; otherwise a
+     *      no-op so non-gated milestones behave as before attestation existed.
+     */
+    function _attestIfCommitted(
+        uint256 projectId,
+        uint256 milestoneIndex,
+        bytes32 leaf,
+        bytes32[] calldata proof
+    ) private returns (bool) {
+        bytes32 root = committedRoots[projectId][milestoneIndex];
+        if (root == bytes32(0)) return false;
+
+        uint256 compositeId = uint256(keccak256(abi.encodePacked(projectId, milestoneIndex)));
+        if (!verifier.verifyHardwareBatch(bytes32(projectId), compositeId, root, proof, leaf)) {
+            revert AttestationFailed(projectId, milestoneIndex);
+        }
+        return true;
+    }
+
+    /// @dev Snapshots each participant's claim balance; returns total eligible weight.
+    function _snapshotEligible(uint256 projectId) private returns (uint256 eligible) {
+        address[] storage holders = _participants[projectId];
+        for (uint256 i = 0; i < holders.length; ++i) {
+            uint256 weight = claimToken.balanceOf(holders[i], projectId);
+            snapshotWeight[projectId][holders[i]] = weight;
+            eligible += weight;
+        }
     }
 
     /* ------------------------------------------------------------------ *

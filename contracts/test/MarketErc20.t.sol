@@ -6,6 +6,7 @@ import { ClaimToken } from "../src/ClaimToken.sol";
 import { ProjectRegistry } from "../src/ProjectRegistry.sol";
 import { MilestoneEscrow } from "../src/MilestoneEscrow.sol";
 import { SecondaryMarket } from "../src/SecondaryMarket.sol";
+import { IHardwareVerifier } from "../src/IHardwareVerifier.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import { MockUsdg } from "./EscrowErc20.t.sol";
@@ -52,7 +53,9 @@ contract MarketErc20Test is Test {
 
         claimToken = new ClaimToken(admin, "ipfs://base/{id}.json", "ipfs://contract.json");
         registry = new ProjectRegistry(admin, claimToken, IERC20(address(usdg)));
-        escrow = new MilestoneEscrow(admin, registry, claimToken, IERC20(address(usdg)));
+        escrow = new MilestoneEscrow(
+            admin, registry, claimToken, IERC20(address(usdg)), IHardwareVerifier(address(0))
+        );
         market =
             new SecondaryMarket(admin, claimToken, registry, escrow, IERC20(address(usdg)), feeRecipient);
 

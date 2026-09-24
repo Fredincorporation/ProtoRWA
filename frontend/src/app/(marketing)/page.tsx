@@ -7,7 +7,7 @@ import { HowItWorks } from '@/components/marketing/how-it-works';
 import { ProblemMatrix } from '@/components/marketing/problem-matrix';
 import { Icon } from '@/components/ui/icon';
 import { mockProjects, openReviewCount, totalLocked } from '@/lib/data/mock';
-import { formatEthNumber, formatNumber } from '@/lib/format';
+import { formatUsdgNumber, formatNumber } from '@/lib/format';
 
 export const metadata: Metadata = {
   title: 'Physical Product RWAs, Milestone-Backed',
@@ -21,7 +21,7 @@ function StatStrip() {
   const reviews = openReviewCount();
 
   const stats = [
-    { label: 'Escrowed', value: `${formatEthNumber(locked, 2)} ETH` },
+    { label: 'Escrowed', value: `${formatUsdgNumber(locked, 2)} USDG` },
     { label: 'Projects', value: formatNumber(mockProjects.length) },
     { label: 'Open reviews', value: formatNumber(reviews) },
     { label: 'Settlement', value: 'Vote-gated' },

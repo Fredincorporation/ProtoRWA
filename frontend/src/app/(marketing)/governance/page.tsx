@@ -5,9 +5,9 @@ import { Badge, StatusDot } from '@/components/ui/badge';
 import { Icon } from '@/components/ui/icon';
 import { SegmentedProgress } from '@/components/ui/progress';
 import { mockProjects } from '@/lib/data/mock';
-import { formatDate, formatEthNumber, percentOf, weiToEthTrimmed } from '@/lib/format';
+import { formatDate, formatUsdgNumber, percentOf } from '@/lib/format';
 import { milestoneStatus, projectStatus } from '@/lib/status';
-import { PROTOCOL } from '@protorwa/shared';
+import { PROTOCOL, defaultChain } from '@protorwa/shared';
 
 export const metadata: Metadata = {
   title: 'Governance & Oracle Oversight',
@@ -105,7 +105,7 @@ function OversightQueue() {
                   <div className="text-right">
                     <div className="font-mono text-label-sm text-outline">Tranche</div>
                     <div className="font-mono tabular text-secondary">
-                      {formatEthNumber(milestone.trancheAmount, 2)} ETH
+                      {formatUsdgNumber(milestone.trancheAmount, 2)} USDG
                     </div>
                   </div>
                 </div>
@@ -347,15 +347,15 @@ function EscrowOverview() {
         <dl className="grid-cols-3 gap-space-sm font-mono text-label-sm">
           <div>
             <dt className="text-outline">Locked</dt>
-            <dd className="tabular text-primary">{weiToEthTrimmed(totals.locked, 2)} ETH</dd>
+            <dd className="tabular text-primary">{formatUsdgNumber(totals.locked, 2)} USDG</dd>
           </div>
           <div>
             <dt className="text-outline">Released</dt>
-            <dd className="tabular text-secondary">{weiToEthTrimmed(totals.released, 2)} ETH</dd>
+            <dd className="tabular text-secondary">{formatUsdgNumber(totals.released, 2)} USDG</dd>
           </div>
           <div>
             <dt className="text-outline">Refunded</dt>
-            <dd className="tabular text-on-surface">{weiToEthTrimmed(totals.refunded, 2)} ETH</dd>
+            <dd className="tabular text-on-surface">{formatUsdgNumber(totals.refunded, 2)} USDG</dd>
           </div>
         </dl>
 
@@ -366,7 +366,7 @@ function EscrowOverview() {
               <span className="flex shrink-0 items-center gap-space-sm">
                 <span className="text-outline">{projectStatus(project.status).label}</span>
                 <span className="tabular text-on-surface">
-                  {weiToEthTrimmed(project.escrow.locked, 2)} ETH locked
+                  {formatUsdgNumber(project.escrow.locked, 2)} USDG locked
                 </span>
               </span>
             </li>
@@ -387,7 +387,7 @@ function PortfolioBento() {
           <Icon name="account_balance_wallet" size={20} className="text-primary" />
         </div>
         <div className="my-space-sm">
-          <div className="font-display text-headline-lg font-bold text-on-surface tracking-tight">42.50 ETH</div>
+          <div className="font-display text-headline-lg font-bold text-on-surface tracking-tight">42.50 USDG</div>
           <div className="flex items-center gap-1 font-mono text-label-sm text-primary font-semibold mt-0.5">
             <Icon name="trending_up" size={14} />
             +18.4% Net Return
@@ -404,7 +404,7 @@ function PortfolioBento() {
           <Icon name="lock_clock" size={20} className="text-secondary" />
         </div>
         <div className="my-space-sm">
-          <div className="font-display text-headline-lg font-bold text-on-surface tracking-tight">28.00 ETH</div>
+          <div className="font-display text-headline-lg font-bold text-on-surface tracking-tight">28.00 USDG</div>
           <div className="font-mono text-label-sm text-on-surface-variant mt-0.5">Held in Stage Contracts</div>
         </div>
         <div className="flex items-center gap-1 font-mono text-label-sm text-secondary">
@@ -434,12 +434,12 @@ function PortfolioBento() {
           <Icon name="payments" size={20} className="text-primary" />
         </div>
         <div className="my-space-sm">
-          <div className="font-display text-headline-lg font-bold text-primary tracking-tight">3.65 ETH</div>
+          <div className="font-display text-headline-lg font-bold text-primary tracking-tight">3.65 USDG</div>
           <div className="font-mono text-label-sm text-on-surface-variant mt-0.5">Automated Disbursements</div>
         </div>
         <div className="flex items-center gap-1 font-mono text-label-sm text-primary">
           <Icon name="check_circle" size={14} />
-          Arbitrum Sepolia Verified
+          {defaultChain.name} Verified
         </div>
       </div>
 
@@ -476,13 +476,15 @@ function UrgentVoteBanner() {
               Urgent Governance Action Required
             </span>
             <span className="font-mono text-label-sm text-outline">•</span>
-            <span className="font-mono text-label-sm text-on-surface-variant">Arbitrum Sepolia Chain ID 421614</span>
+            <span className="font-mono text-label-sm text-on-surface-variant">
+              {defaultChain.name} Chain ID {defaultChain.id}
+            </span>
           </div>
           <h2 className="font-display text-headline-md text-on-surface font-bold">
             HelioFrost Pro: Milestone 03 Production Run QA Voting Open
           </h2>
           <p className="font-body-md text-on-surface-variant">
-            Founder ThermoVolt Labs submitted environmental chamber thermal telemetry and factory ISO 9001 test reports. 30 ETH escrow tranche release pending backer quorum.
+            Founder ThermoVolt Labs submitted environmental chamber thermal telemetry and factory ISO 9001 test reports. 30 USDG escrow tranche release pending backer quorum.
           </p>
         </div>
         <div className="flex items-center gap-space-sm self-start lg:self-auto">
@@ -512,7 +514,7 @@ export default function GovernancePage() {
                 </span>
                 <span className="flex items-center gap-1 font-mono text-label-sm text-on-surface-variant">
                   <StatusDot tone="brand" pulse />
-                  Arbitrum Sepolia Active
+                  {defaultChain.name} Active
                 </span>
               </div>
               <h1 className="font-display text-headline-lg tracking-tight text-on-surface">

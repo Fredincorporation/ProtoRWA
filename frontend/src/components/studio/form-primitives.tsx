@@ -60,12 +60,20 @@ export function Field({ label, hint, error, action, children, className }: Field
   );
 }
 
-/** Shared input styling, so text/textarea/select stay visually identical. */
+/**
+ * Shared input styling, so text/textarea/select stay visually identical.
+ *
+ * The explicit `border` width matters: Tailwind's preflight sets `border-width:0`,
+ * so a bare `border-<color>` renders an invisible box and the field reads as
+ * static text. The 1px border, hover state, and focus ring are what make these
+ * unmistakably editable.
+ */
 export const inputClass =
-  'w-full rounded border-outline-variant/50 bg-surface-container-lowest px-space-sm py-2 ' +
+  'w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest px-space-sm py-2 ' +
   'font-mono text-label-md text-on-surface placeholder:text-outline ' +
-  'focus:border-primary/60 focus:outline-none disabled:opacity-50 ' +
-  'aria-[invalid=true]:border-error/60';
+  'transition-colors hover:border-outline-variant ' +
+  'focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none ' +
+  'disabled:opacity-50 aria-[invalid=true]:border-error/60';
 
 export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} className={cn(inputClass, props.className)} />;

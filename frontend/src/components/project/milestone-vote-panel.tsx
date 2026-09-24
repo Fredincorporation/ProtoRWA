@@ -6,7 +6,7 @@ import { Badge, StatusDot } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { SegmentedProgress } from '@/components/ui/progress';
-import { formatCountdown, formatNumber, percentOf } from '@/lib/format';
+import { formatCountdown, formatNumber, formatUsdg, percentOf } from '@/lib/format';
 import { milestoneStatus } from '@/lib/status';
 import { cn } from '@/lib/utils';
 import { PROTOCOL, type Milestone } from '@protorwa/shared';
@@ -144,12 +144,12 @@ export function QuorumMeter({
         <div>
           <div className="text-outline">Eligible claims</div>
           {/*
-           * Vote weight is expressed in whole claim units, not raw wei. Voting
-           * weight tracks claim counts 1:1 in the contract, so displaying the
-           * raw balance printed 19-digit numbers to the user.
+           * Vote weight is expressed in whole claim units, not raw base units.
+           * Balances are USDG-scale (6 decimals), so divide by 1e6 to recover the
+           * claim count; the old 1e18 wei divisor printed near-zero values.
            */}
           <div className="tabular text-on-surface">
-            {formatNumber(Number(eligible) / 1e18)} claims
+            {formatNumber(Number(eligible) / 1e6)} claims
           </div>
         </div>
         <div>
@@ -159,7 +159,7 @@ export function QuorumMeter({
         <div>
           <div className="text-outline">Tranche at stake</div>
           <div className="tabular text-secondary">
-            {(Number(BigInt(milestone.trancheAmount)) / 1e18).toFixed(2)} ETH
+            {formatUsdg(milestone.trancheAmount, 2)}
           </div>
         </div>
       </div>

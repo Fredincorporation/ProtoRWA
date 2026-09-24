@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Icon } from '@/components/ui/icon';
 import { projectStatus } from '@/lib/status';
-import { formatEthNumber, formatNumber } from '@/lib/format';
+import { formatUsdgNumber, formatNumber } from '@/lib/format';
 import { getProjectMedia } from '@/lib/project-media';
 import type { Project } from '@protorwa/shared';
 
@@ -103,13 +103,13 @@ function BatchCard({ project }: BatchCardProps) {
           <div>
             <span className="text-outline">Escrow Target:</span>
             <div className="font-semibold tabular text-on-surface">
-              {formatEthNumber(project.targetWei, 2)} ETH
+              {formatUsdgNumber(project.targetWei, 2)} USDG
             </div>
           </div>
           <div>
             <span className="text-outline">Claim Price:</span>
             <div className="font-semibold tabular text-on-surface">
-              {formatEthNumber(project.claimPriceWei, 4)} ETH
+              {formatUsdgNumber(project.claimPriceWei, 4)} USDG
             </div>
           </div>
           <div>
@@ -121,7 +121,7 @@ function BatchCard({ project }: BatchCardProps) {
           <div>
             <span className="text-outline">Committed:</span>
             <div className="font-semibold tabular text-on-surface">
-              {formatEthNumber(project.committedWei, 2)} ETH
+              {formatUsdgNumber(project.committedWei, 2)} USDG
             </div>
           </div>
         </div>
@@ -155,7 +155,10 @@ export function toBatchCard(project: Project): BatchCardProps['project'] {
   const target = BigInt(project.escrow.target || '0');
   const committed = BigInt(project.escrow.totalCommitted || '0');
   const fundedBps = target === 0n ? 0 : Number((committed * 10_000n) / target);
-  const { cover } = getProjectMedia(project.slug);
+  const { cover } = getProjectMedia(project.slug, {
+    coverCid: project.coverCid,
+    galleryCids: project.galleryCids,
+  });
 
   return {
     id: project.id,

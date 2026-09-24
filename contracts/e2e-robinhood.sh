@@ -120,10 +120,11 @@ echo "   nextProj   $(call "$REGISTRY" 'nextProjectId()(uint256)')"
 
 # ---------------------------------------------------------------------------
 say "1. Create project"
-# 1 USDG per claim, 100 claims => 100 USDG target. Denominations are in USDG's
-# 6 decimals throughout: 1e6 base units per token.
+# 1 USDG per claim. The target is sized to the founder's current USDG balance so
+# a single backer can sell out the raise (the fast path worth exercising). Base
+# units are USDG's 6 decimals: 1e6 per token.
 CLAIM_PRICE=1000000          # 1 USDG
-TOTAL_CLAIMS=100
+TOTAL_CLAIMS=40
 TARGET=$((CLAIM_PRICE * TOTAL_CLAIMS))
 DEADLINE=$(( $(date +%s) + 3600 ))   # one hour from now
 
@@ -211,8 +212,38 @@ send "$REGISTRY" 'settleFunding(uint256)' "$PROJECT_ID"
 ok "FundingSettled emitted (target met -> IN_PRODUCTION)"
 
 # ---------------------------------------------------------------------------
-say "7. Founder submits milestone evidence"
-send "$ESCROW" 'submitEvidence(uint256,uint256,string)' "$PROJECT_ID" 0 "bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi"
+say "7. Founder submits ATTESTED milestone evidence (escrow calls Stylus)"
+# Build a 2-leaf Merkle batch with the same sorted-pair keccak the client and the
+# Rust verifier use, derived from this project's id so the root is unique per run
+# (a fresh root makes the before/after isTelemetryVerified check meaningful).
+S0=$(printf '0x%064x' $((PROJECT_ID * 10 + 1)))
+S1=$(printf '0x%064x' $((PROJECT_ID * 10 + 2)))
+LEAF0=$(cast keccak "$S0")
+LEAF1=$(cast keccak "$S1")
+if [[ "$LEAF0" < "$LEAF1" ]]; then COMB="0x${LEAF0:2}${LEAF1:2}"; else COMB="0x${LEAF1:2}${LEAF0:2}"; fi
+ROOT=$(cast keccak "$COMB")
+echo "   leaf0=$LEAF0"
+echo "   leaf1=$LEAF1"
+echo "   root =$ROOT"
+
+# The founder commits the batch root BEFORE opening the review - the pre-commitment
+# the gate is built around. One-shot: it cannot be swapped after the fact.
+send "$ESCROW" 'setCommitment(uint256,uint256,bytes32)' "$PROJECT_ID" 0 "$ROOT"
+ok "committedRoots[0]=$ROOT"
+BEFORE=$(call "$VERIFIER" 'isTelemetryVerified(bytes32)(bool)' "$ROOT")
+ok "isTelemetryVerified(root) BEFORE submit: $BEFORE  (expect false)"
+
+# submitEvidence carries the opening; the escrow calls verifyHardwareBatch and only
+# opens the review if the Stylus confirms leaf0+proof reproduces the committed root.
+send "$ESCROW" 'submitEvidence(uint256,uint256,string,bytes32,bytes32[])' \
+  "$PROJECT_ID" 0 "bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi" "$LEAF0" "[$LEAF1]"
+AFTER=$(call "$VERIFIER" 'isTelemetryVerified(bytes32)(bool)' "$ROOT")
+ok "isTelemetryVerified(root) AFTER  submit: $AFTER  (expect true - the ESCROW attested it)"
+if [ "$AFTER" != "true" ]; then
+  echo "   FAIL: escrow did not attest the root via the Stylus verifier" >&2
+  exit 1
+fi
+
 REVIEW=$(call "$ESCROW" 'reviews(uint256,uint256)(bool,uint64,uint64,uint256,uint256,uint256,uint256,uint256,uint8)' "$PROJECT_ID" 0 | sed 's/[()]//g')
 ok "review raw: $REVIEW"
 # Field order: open, endsAt, snapshotAt, eligible, approve, reject, abstain, tranche, outcome
@@ -246,9 +277,9 @@ if [ "$WAIT" -gt 0 ]; then
   sleep "$WAIT"
 fi
 
-FOUNDER_BEFORE=$(call "$USDG" 'balanceOf(address)(uint256)' "$FOUNDER")
+FOUNDER_BEFORE=$(call "$USDG" 'balanceOf(address)(uint256)' "$FOUNDER" | awk '{print $1}')
 send "$ESCROW" 'settleReview(uint256,uint256)' "$PROJECT_ID" 0
-FOUNDER_AFTER=$(call "$USDG" 'balanceOf(address)(uint256)' "$FOUNDER")
+FOUNDER_AFTER=$(call "$USDG" 'balanceOf(address)(uint256)' "$FOUNDER" | awk '{print $1}')
 
 ok "founder USDG: $FOUNDER_BEFORE -> $FOUNDER_AFTER"
 ok "delta: $((FOUNDER_AFTER - FOUNDER_BEFORE))  (tranche 1 = $T1)"
@@ -261,14 +292,21 @@ ok "escrowBalance remaining: $(call "$ESCROW" 'escrowBalance(uint256)(uint256)' 
 ok "totalAccounted now:      $(call "$ESCROW" 'totalAccounted()(uint256)')"
 
 # ---------------------------------------------------------------------------
-say "10. Stylus HardwareVerifier - attest a batch root"
-# A single-leaf Merkle tree: the root equals the leaf, so an empty proof is a
-# valid proof. That exercises the keccak path and the storage write without
-# needing to construct a multi-level tree off-chain.
-LEAF=0x1111
-send "$VERIFIER" 'verify_hardware_batch(bytes32,uint256,bytes32,bytes32[],bytes32)' \
-  0x2222 0 "$LEAF" "[]" "$LEAF"
-ok "is_telemetry_verified: $(call "$VERIFIER" 'is_telemetry_verified(bytes32)(bool)' "$LEAF")"
+say "10. Stylus HardwareVerifier - attestation integrity"
+# The selectors are camelCase (the SDK exports verify_hardware_batch as
+# verifyHardwareBatch); the snake_case Rust spelling reverts with empty data.
+# Proof the gate is selective: a root that was never attested still reads false,
+# so the `true` from step 7 reflects only genuine, escrow-driven attestations.
+BOGUS=$(cast keccak 0xdeadbeef)
+ok "isTelemetryVerified(bogus $BOGUS): $(call "$VERIFIER" 'isTelemetryVerified(bytes32)(bool)' "$BOGUS")  (expect false)"
+# A committed root cannot be overwritten. Sent from the founder so the revert is
+# the one-shot CommitmentLocked guard, not the founder-access check.
+LOCKED=$(cast call "$ESCROW" 'setCommitment(uint256,uint256,bytes32)' "$PROJECT_ID" 0 "$BOGUS" --from "$DEPLOYER" --rpc-url "$RPC" 2>&1 || true)
+echo "   re-commit attempt output: $(printf '%s' "$LOCKED" | head -c 120)"
+case "$LOCKED" in
+  *CommitmentLocked*) ok "re-commit reverted CommitmentLocked (one-shot commitment)" ;;
+  *) echo "   FAIL: re-committing a committed root did not revert with CommitmentLocked" >&2; exit 1 ;;
+esac
 
 # ---------------------------------------------------------------------------
 say "DONE"

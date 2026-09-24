@@ -27,6 +27,11 @@ export const milestoneEscrowAbi = [
         "name": "paymentToken_",
         "type": "address",
         "internalType": "contract IERC20"
+      },
+      {
+        "name": "verifier_",
+        "type": "address",
+        "internalType": "contract IHardwareVerifier"
       }
     ],
     "stateMutability": "nonpayable"
@@ -102,6 +107,30 @@ export const milestoneEscrowAbi = [
   },
   {
     "type": "function",
+    "name": "committedRoots",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "deposit",
     "inputs": [
       {
@@ -112,6 +141,24 @@ export const milestoneEscrowAbi = [
     ],
     "outputs": [],
     "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "depositToken",
+    "inputs": [
+      {
+        "name": "projectId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
   },
   {
     "type": "function",
@@ -595,6 +642,29 @@ export const milestoneEscrowAbi = [
   },
   {
     "type": "function",
+    "name": "setCommitment",
+    "inputs": [
+      {
+        "name": "projectId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "milestoneIndex",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "root",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "settleReview",
     "inputs": [
       {
@@ -653,6 +723,16 @@ export const milestoneEscrowAbi = [
         "name": "evidenceCid",
         "type": "string",
         "internalType": "string"
+      },
+      {
+        "name": "leaf",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "proof",
+        "type": "bytes32[]",
+        "internalType": "bytes32[]"
       }
     ],
     "outputs": [],
@@ -679,6 +759,19 @@ export const milestoneEscrowAbi = [
   },
   {
     "type": "function",
+    "name": "totalAccounted",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "totalRefunded",
     "inputs": [
       {
@@ -692,6 +785,19 @@ export const milestoneEscrowAbi = [
         "name": "",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "verifier",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IHardwareVerifier"
       }
     ],
     "stateMutability": "view"
@@ -755,6 +861,31 @@ export const milestoneEscrowAbi = [
   },
   {
     "type": "event",
+    "name": "CommitmentSet",
+    "inputs": [
+      {
+        "name": "projectId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "milestoneIndex",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "root",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "EscrowDeposited",
     "inputs": [
       {
@@ -799,6 +930,12 @@ export const milestoneEscrowAbi = [
         "type": "uint64",
         "indexed": false,
         "internalType": "uint64"
+      },
+      {
+        "name": "attested",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
       }
     ],
     "anonymous": false
@@ -1074,6 +1211,38 @@ export const milestoneEscrowAbi = [
   },
   {
     "type": "error",
+    "name": "AttestationFailed",
+    "inputs": [
+      {
+        "name": "projectId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "milestoneIndex",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "CommitmentLocked",
+    "inputs": [
+      {
+        "name": "projectId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "milestoneIndex",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
     "name": "InsufficientEscrow",
     "inputs": []
   },
@@ -1092,6 +1261,11 @@ export const milestoneEscrowAbi = [
         "internalType": "uint256"
       }
     ]
+  },
+  {
+    "type": "error",
+    "name": "NoVerifier",
+    "inputs": []
   },
   {
     "type": "error",

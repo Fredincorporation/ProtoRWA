@@ -90,7 +90,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         MilestoneEscrow.Review memory review = escrow.getReview(projectId, 0);
         assertEq(review.eligibleWeight, TOTAL_CLAIMS);
@@ -100,7 +100,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         vm.prank(alice);
         escrow.vote(projectId, 0, true, false);
@@ -114,7 +114,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         // Carol sells to Alice after the snapshot; Alice's weight must not grow.
         vm.prank(carol);
@@ -140,7 +140,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         vm.prank(alice);
         escrow.vote(projectId, 0, true, false);
@@ -163,7 +163,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         // Only 1000/10000 = 10% of weight votes; quorum is 25%.
         vm.prank(carol);
@@ -182,7 +182,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         // 3000 approve / 6000 reject / 1000 abstain.
         // Quorum (25%) is met by the 10000 cast, but 3000 of 10000 eligible =
@@ -207,7 +207,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         // Exactly 60% approve (alice's 6000 of 10000) meets the threshold.
         vm.prank(alice);
@@ -229,7 +229,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         vm.expectRevert();
         escrow.settleReview(projectId, 0);
@@ -240,7 +240,7 @@ contract ProtoRwaFlowTest is Fixture {
 
         vm.prank(alice);
         vm.expectRevert(abi.encodeWithSelector(MilestoneEscrow.NotFound.selector, projectId));
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
     }
 
     /* ------------------------------------------------------------------ *
@@ -383,7 +383,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         vm.prank(admin);
         escrow.escalate(projectId, 0, "ipfs://rationale");
@@ -400,7 +400,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         vm.prank(alice);
         vm.expectRevert();
@@ -416,7 +416,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
 
         vm.prank(admin);
         escrow.escalate(projectId, 0, "ipfs://rationale");
@@ -440,7 +440,7 @@ contract ProtoRwaFlowTest is Fixture {
         uint256 projectId = fundedProject();
 
         vm.prank(founder);
-        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1", bytes32(0), new bytes32[](0));
         vm.prank(alice);
         escrow.vote(projectId, 0, true, false);
         vm.prank(bob);

@@ -21,6 +21,13 @@ const badgeVariants = cva(
         warn: 'border-tertiary/40 bg-tertiary/10 text-tertiary',
         danger: 'border-error/40 bg-error/10 text-error',
         success: 'border-primary/50 bg-primary/15 text-primary',
+        /**
+         * Informational chip (network, verifier identity). Called `info` at
+         * three call sites before it existed here, so those badges silently
+         * rendered as `neutral` - cva drops an unknown variant and the visual
+         * difference is subtle enough that nobody notices a *missing* style.
+         */
+        info: 'border-secondary/40 bg-secondary/10 text-secondary',
       },
     },
     defaultVariants: { tone: 'neutral' },

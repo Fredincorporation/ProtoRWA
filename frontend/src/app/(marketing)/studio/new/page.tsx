@@ -26,10 +26,10 @@ export default function NewProjectPage() {
             Register a Hardware Build
           </h1>
           <p className="mt-2 max-w-3xl text-body-md text-on-surface-variant">
-            Three steps to a fundable project: describe the hardware, set the
-            raise structure, then define the milestone schedule that releases
-            escrow. Capital reaches you tranche by tranche, against evidence your
-            backers approve.
+            Four steps to a fundable project: describe the hardware, upload the
+            media backers judge it by, set the raise structure, then define the
+            milestone schedule that releases escrow. Capital reaches you tranche
+            by tranche, against evidence your backers approve.
           </p>
         </div>
       </header>

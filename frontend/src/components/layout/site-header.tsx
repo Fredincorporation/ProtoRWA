@@ -7,8 +7,10 @@ import { BrandLockup } from '@/components/ui/brand';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { DemoModeSwitcher } from '@/components/layout/demo-mode-switcher';
-import { MainNav } from '@/components/layout/main-nav';
+import { MainNav, primaryNav } from '@/components/layout/main-nav';
 import { NetworkChip, WalletButton } from '@/components/layout/wallet-button';
+import { useOnboarding } from '@/components/onboarding/onboarding-dialog';
+import { dashboardPathFor } from '@/lib/dashboard';
 
 /**
  * Fixed site header.
@@ -19,6 +21,10 @@ import { NetworkChip, WalletButton } from '@/components/layout/wallet-button';
  */
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { role } = useOnboarding();
+
+  /** Mobile nav mirrors the desktop gate rather than listing every destination. */
+  const mobileNav = primaryNav.filter((item) => !item.roles || item.roles.includes(role));
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-outline-variant/30 bg-surface/90 shadow-[0_1px_8px_rgba(0,0,0,0.4)] backdrop-blur-xl">
@@ -31,7 +37,13 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-space-md">
-          <DemoModeSwitcher />
+          {/*
+           * DemoModeSwitcher is gated behind admin. It links straight into
+           * judge flows (commit, vote, submit) and has no business in a
+           * visitor's header - an ordinary investor landing on /explore should
+           * not be handed a founder submission shortcut.
+           */}
+          {role === 'admin' ? <DemoModeSwitcher /> : null}
           <NetworkChip />
 
           <WalletButton />
@@ -66,13 +78,16 @@ export function SiteHeader() {
       {mobileOpen ? (
         <div className="border-t border-outline-variant/30 bg-surface-container-lowest xl:hidden">
           <nav className="flex flex-col px-space-lg py-space-sm" aria-label="Mobile">
-            {[
-              { label: 'Explore Projects', href: '/explore' },
-              { label: 'How It Works', href: '/how-it-works' },
-              { label: 'Secondary Market', href: '/market' },
-              { label: 'Founder Studio', href: '/studio' },
-              { label: 'Governance', href: '/governance' },
-            ].map((item) => (
+            <Link
+              href={dashboardPathFor(role)}
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-outline-variant/20 py-3 font-label-md text-on-surface"
+            >
+              Dashboard
+            </Link>
+            {/* Driven by the same gated list as the desktop nav, so the two
+                cannot drift and neither one leaks a role-restricted route. */}
+            {mobileNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

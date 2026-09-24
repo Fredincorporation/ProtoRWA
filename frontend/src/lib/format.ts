@@ -7,28 +7,33 @@
 
 import { PROTOCOL } from '@protorwa/shared';
 
-const WEI_PER_ETHER = 10n ** 18n;
+/** USDG has 6 decimals and is pegged ~1:1 to USD. */
+const USDG_UNIT = 10n ** 6n;
 
-/** Formats a wei amount as a compact ETH string, e.g. "12.5 ETH". */
-export function formatEth(wei: bigint | string, options?: { maxDecimals?: number }): string {
-  const value = typeof wei === 'string' ? BigInt(wei || '0') : wei;
-  const maxDecimals = options?.maxDecimals ?? 4;
-
-  const whole = value / WEI_PER_ETHER;
-  const fraction = value % WEI_PER_ETHER;
-
-  if (fraction === 0n) return `${whole} ETH`;
-
-  // Pad the fraction so we can slice a fixed number of decimals.
-  const fractionStr = fraction.toString().padStart(18, '0').slice(0, maxDecimals);
-  const trimmed = fractionStr.replace(/0+$/, '');
-
-  return trimmed.length > 0 ? `${whole}.${trimmed} ETH` : `${whole} ETH`;
+/**
+ * Formats USDG base units as a trimmed dollar string (no symbol).
+ *
+ * The protocol settles in USDG, so money coming from the chain must be read at
+ * 6 decimals, not the 18-decimal ETH path above. Reading a $5 tranche (5_000_000
+ * base units) as wei would render as 0.000000000005 - the exact scale bug the
+ * settlement module warns about.
+ */
+export function formatUsdgNumber(baseUnits: bigint | string, maxDecimals = 4): string {
+  const value = typeof baseUnits === 'string' ? BigInt(baseUnits || '0') : baseUnits;
+  const whole = value / USDG_UNIT;
+  const fraction = value % USDG_UNIT;
+  if (fraction === 0n) return whole.toString();
+  const fractionStr = fraction
+    .toString()
+    .padStart(6, '0')
+    .slice(0, maxDecimals)
+    .replace(/0+$/, '');
+  return fractionStr.length > 0 ? `${whole}.${fractionStr}` : whole.toString();
 }
 
-/** Formats wei as a plain decimal number string (no unit suffix). */
-export function formatEthNumber(wei: bigint | string, maxDecimals = 4): string {
-  return formatEth(wei, { maxDecimals }).replace(' ETH', '');
+/** Formats USDG base units with a symbol, e.g. "5.40 USDG". */
+export function formatUsdg(baseUnits: bigint | string, maxDecimals = 2): string {
+  return `${formatUsdgNumber(baseUnits, maxDecimals)} USDG`;
 }
 
 /** Formats a large integer with thousands separators, e.g. "10,000". */
@@ -114,34 +119,4 @@ export function weiToGwei(wei: bigint | string, decimals = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
-}
-
-/**
- * Formats a wei amount as a non-fixed but readable ETH figure.
- *
- * Used for order-book notionals, where forcing trailing zeros on a value like
- * 1.08 makes the column noisy. Trailing zeros are trimmed instead.
- */
-export function weiToEthTrimmed(wei: bigint | string, maxDecimals = 4): string {
-  const value = typeof wei === 'string' ? BigInt(wei || '0') : wei;
-  const whole = value / WEI_PER_ETHER;
-  const fraction = value % WEI_PER_ETHER;
-  if (fraction === 0n) return whole.toString();
-  const fractionStr = fraction.toString().padStart(18, '0').slice(0, maxDecimals).replace(/0+$/, '');
-  return fractionStr.length > 0 ? `${whole}.${fractionStr}` : whole.toString();
-}
-
-/**
- * Formats a wei amount as a plain ETH figure with fixed decimals.
- *
- * Lives here rather than beside the milestone components because it is called
- * from server components during prerendering, and a `'use client'` module cannot
- * export functions to the server.
- */
-export function weiToEth(wei: bigint | string, decimals = 2): string {
-  const value = typeof wei === 'string' ? BigInt(wei || '0') : wei;
-  const whole = value / WEI_PER_ETHER;
-  const fraction = value % WEI_PER_ETHER;
-  const fractionStr = fraction.toString().padStart(18, '0').slice(0, decimals);
-  return decimals > 0 ? `${whole}.${fractionStr}` : whole.toString();
 }

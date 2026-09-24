@@ -124,6 +124,7 @@
    * substrings, which silently overrode `grid` layouts that also carried a
    * `flex-col` helper (the voting panel columns), crushing them into a single
    * narrow stack. Flex containers must declare `display: flex` explicitly.
+   */
 
   /* Fades long lists into the background. */
   .mask-fade-b {
