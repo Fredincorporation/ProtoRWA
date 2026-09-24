@@ -344,6 +344,11 @@ async function readProjects(registry: Address, escrow: Address): Promise<Project
       const title = String(p.title ?? '');
       // An unset record has an empty title; skip it so we never render a ghost card.
       if (!title || title.length === 0) return null;
+      // Cancelled / defaulted projects are terminal and must not clutter the live
+      // showcase. The escrow still holds any refund state on-chain, but the card
+      // disappears here so an admin cancellation is immediately reflected in the UI.
+      const projectStatus = PROJECT_STATUS[Number(p.status ?? 0)] ?? 'DRAFT';
+      if (projectStatus === 'CANCELLED' || projectStatus === 'DEFAULTED') return null;
 
       const milestoneList = Array.isArray(milestoneRows[index])
         ? (milestoneRows[index] as readonly Record<string, unknown>[])
@@ -421,7 +426,7 @@ async function readProjects(registry: Address, escrow: Address): Promise<Project
           (metadata.description ?? '').trim() ||
           String(p.tagline ?? '') ||
           'No description published for this project.',
-        status: PROJECT_STATUS[Number(p.status ?? 0)] ?? 'DRAFT',
+        status: projectStatus,
         category: normalizeCategory(metadata.category),
         founder: (p.founder as Address) ?? '0x0000000000000000000000000000000000000000',
         manufacturingLocation: metadata.location ?? '',

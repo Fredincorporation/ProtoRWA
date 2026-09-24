@@ -58,22 +58,26 @@ async function readContract({
       fundingDeadline: 0n,
       createdAt: 0n,
       updatedAt: 0n,
-      status: 0,
+      status: projectStatuses.get(id.toString()) ?? 0,
     };
   }
   if (functionName === 'getMilestones') return [];
   return 0n; // escrowBalance / totalRefunded / released / getReview
 }
 
-const { fetchLiveProjects } = await import('@/lib/data/chain');
+/** Per-id registry status ordinals the faked reader returns; defaults to DRAFT (0). */
+const projectStatuses = new Map<string, number>();
+
 const { mockProjects } = await import('@/lib/data/mock');
 
 describe('live project catalogue keys', () => {
   beforeEach(() => {
     vi.resetModules();
+    projectStatuses.clear();
   });
 
   it('namespaces live project ids so they never collide with demo display ids', async () => {
+    const { fetchLiveProjects } = await import('@/lib/data/chain');
     const live = await fetchLiveProjects();
     expect(live.length).toBeGreaterThan(0);
 
@@ -89,4 +93,17 @@ describe('live project catalogue keys', () => {
     const all = [...demoIds, ...liveIds];
     expect(new Set(all).size).toBe(all.length);
   });
+
+  it('drops cancelled and defaulted projects from the live listing', async () => {
+    // Registry ordinals: CANCELLED = 4, DEFAULTED = 5 (see ProjectRegistry.sol).
+    projectStatuses.set('2', 4); // CANCELLED
+    projectStatuses.set('3', 5); // DEFAULTED
+    const { fetchLiveProjects } = await import('@/lib/data/chain');
+    const live = await fetchLiveProjects();
+
+    // Only the DRAFT row (id 1) survives; the terminal-state seeds vanish so an
+    // admin cancellation is reflected without a redeploy.
+    expect(live.map((p) => p.onChainProjectId)).toEqual(['1']);
+  });
 });
+
