@@ -7,5 +7,6 @@ export { claimTokenAbi } from './ClaimToken.js';
 export { projectRegistryAbi } from './ProjectRegistry.js';
 export { milestoneEscrowAbi } from './MilestoneEscrow.js';
 export { secondaryMarketAbi } from './SecondaryMarket.js';
+export { founderActivityAbi } from './FounderActivity.js';
 
 export * from './addresses.js';

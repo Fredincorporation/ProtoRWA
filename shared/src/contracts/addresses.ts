@@ -13,6 +13,12 @@ export interface ProtocolContracts {
   milestoneEscrow: Address;
   secondaryMarket: Address;
   hardwareVerifier?: Address;
+  /**
+   * Standalone social contract (founder profiles, updates, follows). Deployed
+   * independently against the registry, so it is optional and never part of the
+   * `isDeployed` gate — the money flow must work even with no activity contract.
+   */
+  founderActivity?: Address;
 }
 
 /**
@@ -48,6 +54,7 @@ export const contractAddresses: Record<number, Partial<ProtocolContracts>> = {
     milestoneEscrow: addr(process.env.NEXT_PUBLIC_ROBINHOOD_MILESTONE_ESCROW),
     secondaryMarket: addr(process.env.NEXT_PUBLIC_ROBINHOOD_SECONDARY_MARKET),
     hardwareVerifier: addr(process.env.NEXT_PUBLIC_ROBINHOOD_HARDWARE_VERIFIER),
+    founderActivity: addr(process.env.NEXT_PUBLIC_ROBINHOOD_FOUNDER_ACTIVITY),
   },
 
   // Robinhood Chain testnet (verified chain id 46630). The USDG-denominated
@@ -64,6 +71,7 @@ export const contractAddresses: Record<number, Partial<ProtocolContracts>> = {
     milestoneEscrow: addr(process.env.NEXT_PUBLIC_ROBINHOOD_TESTNET_MILESTONE_ESCROW),
     secondaryMarket: addr(process.env.NEXT_PUBLIC_ROBINHOOD_TESTNET_SECONDARY_MARKET),
     hardwareVerifier: addr(process.env.NEXT_PUBLIC_ROBINHOOD_TESTNET_HARDWARE_VERIFIER),
+    founderActivity: addr(process.env.NEXT_PUBLIC_ROBINHOOD_TESTNET_FOUNDER_ACTIVITY),
   },
 
   // Arbitrum Sepolia - current production demo deployment.
@@ -73,6 +81,7 @@ export const contractAddresses: Record<number, Partial<ProtocolContracts>> = {
     milestoneEscrow: addr(process.env.NEXT_PUBLIC_ARB_SEPOLIA_MILESTONE_ESCROW),
     secondaryMarket: addr(process.env.NEXT_PUBLIC_ARB_SEPOLIA_SECONDARY_MARKET),
     hardwareVerifier: addr(process.env.NEXT_PUBLIC_ARB_SEPOLIA_HARDWARE_VERIFIER),
+    founderActivity: addr(process.env.NEXT_PUBLIC_ARB_SEPOLIA_FOUNDER_ACTIVITY),
   },
 
   // Arbitrum One - mainnet target.
@@ -82,6 +91,7 @@ export const contractAddresses: Record<number, Partial<ProtocolContracts>> = {
     milestoneEscrow: addr(process.env.NEXT_PUBLIC_ARB_ONE_MILESTONE_ESCROW),
     secondaryMarket: addr(process.env.NEXT_PUBLIC_ARB_ONE_SECONDARY_MARKET),
     hardwareVerifier: addr(process.env.NEXT_PUBLIC_ARB_ONE_HARDWARE_VERIFIER),
+    founderActivity: addr(process.env.NEXT_PUBLIC_ARB_ONE_FOUNDER_ACTIVITY),
   },
 };
 

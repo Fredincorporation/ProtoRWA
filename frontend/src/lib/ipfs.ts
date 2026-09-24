@@ -83,3 +83,32 @@ export async function pinProjectMetadata(metadata: {
   const file = new File([blob], 'metadata.json', { type: 'application/json' });
   return uploadFile(file);
 }
+
+/**
+ * Pin a founder update body and return its CID.
+ *
+ * Mirrors the `UpdateDoc` shape the data layer resolves, so the contract only
+ * stores this CID and the text renders from the gateway. Attachments are CIDs of
+ * already-pinned media (pass the `uploadFile` results), not re-uploaded bytes.
+ */
+export async function pinUpdateDoc(doc: {
+  title: string;
+  body: string;
+  attachmentCids?: string[];
+}): Promise<UploadResult> {
+  const blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
+  const file = new File([blob], 'update.json', { type: 'application/json' });
+  return uploadFile(file);
+}
+
+/** Pin a founder profile doc (display name / bio / avatar CID) and return its CID. */
+export async function pinProfileDoc(doc: {
+  displayName: string;
+  handle?: string;
+  bio?: string;
+  avatarCid?: string | null;
+}): Promise<UploadResult> {
+  const blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
+  const file = new File([blob], 'profile.json', { type: 'application/json' });
+  return uploadFile(file);
+}

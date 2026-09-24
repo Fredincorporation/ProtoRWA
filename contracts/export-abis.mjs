@@ -24,6 +24,7 @@ const CONTRACTS = [
   { name: 'ProjectRegistry', file: 'ProjectRegistry.sol/ProjectRegistry.json' },
   { name: 'MilestoneEscrow', file: 'MilestoneEscrow.sol/MilestoneEscrow.json' },
   { name: 'SecondaryMarket', file: 'SecondaryMarket.sol/SecondaryMarket.json' },
+  { name: 'FounderActivity', file: 'FounderActivity.sol/FounderActivity.json' },
 ];
 
 if (!existsSync(outDir)) {
@@ -81,6 +82,7 @@ export { claimTokenAbi } from './ClaimToken.js';
 export { projectRegistryAbi } from './ProjectRegistry.js';
 export { milestoneEscrowAbi } from './MilestoneEscrow.js';
 export { secondaryMarketAbi } from './SecondaryMarket.js';
+export { founderActivityAbi } from './FounderActivity.js';
 
 export * from './addresses.js';
 `;
