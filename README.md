@@ -1,8 +1,8 @@
 # ProtoRWA (Tokenized Physical Hardware with Milestone Escrow)
 
-[![Arbitrum Open House](https://img.shields.io/badge/Arbitrum-Buildathon%20Singapore-blue?style=for-the-badge&logo=arbitrum)](https://www.hackquest.io/hackathons/Arbitrum-Open-House-Singapore-Online-Buildathon)
-[![Arbitrum Stylus](https://img.shields.io/badge/Arbitrum-Stylus%20WASM-cyan?style=for-the-badge&logo=rust)](https://docs.arbitrum.io/stylus)
-[![Arbitrum Sepolia](https://img.shields.io/badge/Deployed-Arbitrum%20Sepolia-emerald?style=for-the-badge)](https://sepolia.arbiscan.io)
+[![Live on Robinhood Chain Testnet](https://img.shields.io/badge/Live-Robinhood%20Chain%20Testnet%20(46630)-emerald?style=for-the-badge)](https://explorer.testnet.chain.robinhood.com)
+[![Settled in USDG](https://img.shields.io/badge/Settlement-USDG%20(USD%2C%206%20dp)-blue?style=for-the-badge)](https://explorer.testnet.chain.robinhood.com/address/0x7E955252E15c84f5768B83c41a71F9eba181802F)
+[![Arbitrum Stylus](https://img.shields.io/badge/Stylus-WASM%20Verifier-cyan?style=for-the-badge&logo=rust)](https://docs.arbitrum.io/stylus)
 
 > **ProtoRWA** transforms physical hardware manufacturing into transparent, tokenized on-chain assets. Capital is held in cryptographic escrow and released tranche-by-tranche based on backer quorum and native WASM Merkle verification of sensor telemetry.
 
@@ -16,9 +16,9 @@
 
 ---
 
-## ⚡ Architecture & Arbitrum Stack
+## ⚡ Architecture & Stack
 
-ProtoRWA combines **Solidity protocol contracts**, high-performance **Arbitrum Stylus (Rust WASM)** verification, and a modern **Next.js 15 App Router** frontend:
+ProtoRWA combines **Solidity protocol contracts**, high-performance **Stylus (Rust WASM)** verification, and a modern **Next.js 15 App Router** frontend. All value settles in **USDG** (a USD-pegged, 6-decimal stablecoin); native **ETH is used only for gas**.
 
 ```
 ┌────────────────────────────────────────────────────────┐
@@ -26,7 +26,7 @@ ProtoRWA combines **Solidity protocol contracts**, high-performance **Arbitrum S
 │  - Milestone Voting Terminal (Screen 06)               │
 │  - Founder Evidence Submission Studio (Screen 27)      │
 │  - Asset Claim Secondary Trading Terminal (Screen 23)  │
-│  - Judge Demo Mode Switcher (Backer / Founder / Trade) │
+│  - Demo Mode Switcher (Backer / Founder / Trade)       │
 └──────────────────────────┬─────────────────────────────┘
                            │
                  EVM RPC / Wagmi / Viem
@@ -34,57 +34,59 @@ ProtoRWA combines **Solidity protocol contracts**, high-performance **Arbitrum S
        ┌───────────────────┴───────────────────┐
        ▼                                       ▼
 ┌─────────────────────────────┐   ┌─────────────────────────────┐
-│  Arbitrum Sepolia Solidity  │   │   Arbitrum Stylus (Rust)    │
+│  Robinhood Chain Solidity   │   │   Stylus Verifier (Rust)    │
 │  - ProjectRegistry.sol      │   │   HardwareVerifier (WASM)   │
 │  - ClaimToken.sol (ERC1155) │   │   - Merkle proof validation │
 │  - MilestoneEscrow.sol      │   │   - Telemetry attestation   │
 │  - SecondaryMarket.sol      │   │   - Token-weighted quorum   │
+│  (all settled in USDG)      │   │                             │
 └─────────────────────────────┘   └─────────────────────────────┘
 ```
 
-### Why Arbitrum Stylus?
+### Why a Stylus (Rust WASM) verifier?
 Hardware telemetry verification (Merkle trees of sensor data, BOM hashes, and environmental test logs) requires heavy cryptographic computation (`keccak256` hashing across tree siblings).
-Running this inside EVM bytecode would be prohibitive in gas and execution limits. By leveraging **Arbitrum Stylus**, `HardwareVerifier.wasm` executes at near-native speed with fractional gas costs.
+Running this inside EVM bytecode would be prohibitive in gas and execution limits. By leveraging **Stylus**, `HardwareVerifier.wasm` executes at near-native speed with fractional gas costs.
 
 ---
 
-## 📜 Verified On-Chain Deployments (Arbitrum Sepolia - Chain ID: `421614`)
+## 📜 Verified On-Chain Deployment (Robinhood Chain Testnet — Chain ID: `46630`)
 
-All protocol contracts have been deployed on Arbitrum Sepolia with wired and verified roles:
+All protocol contracts are deployed on Robinhood Chain testnet with wired and verified roles. Settlement is **USDG** throughout; native ETH is gas only.
 
 | Contract | Address | Explorer |
 | :--- | :--- | :--- |
-| **ProjectRegistry** | `0xE9Aaa276502C691f824E2484eecF46C71Cb99eC3` | [View on Arbiscan](https://sepolia.arbiscan.io/address/0xE9Aaa276502C691f824E2484eecF46C71Cb99eC3) |
-| **ClaimToken (ERC-1155)** | `0x5540b1b1049614F304368B17cd8eaBb80BE92dAD` | [View on Arbiscan](https://sepolia.arbiscan.io/address/0x5540b1b1049614F304368B17cd8eaBb80BE92dAD) |
-| **MilestoneEscrow** | `0x19f2190C1c50B2E4403ff4bd78c05598aBabbD16` | [View on Arbiscan](https://sepolia.arbiscan.io/address/0x19f2190C1c50B2E4403ff4bd78c05598aBabbD16) |
-| **SecondaryMarket** | `0x2Ad4fCb52E9B41eBd11b49Ac9c6838ad27B20086` | [View on Arbiscan](https://sepolia.arbiscan.io/address/0x2Ad4fCb52E9B41eBd11b49Ac9c6838ad27B20086) |
-| **HardwareVerifier (Stylus WASM)** | `0x510f4d65e9f7778b09ad52a4ec19c590a934f913` | [View on Arbiscan](https://sepolia.arbiscan.io/address/0x510f4d65e9f7778b09ad52a4ec19c590a934f913) |
+| **ProjectRegistry** | `0xb1432dCD392eD0296E2d72c000850Fb3b2f68DFF` | [View](https://explorer.testnet.chain.robinhood.com/address/0xb1432dCD392eD0296E2d72c000850Fb3b2f68DFF) |
+| **ClaimToken (ERC-1155)** | `0x691f490F01cf808987540F34724253eA54B221D8` | [View](https://explorer.testnet.chain.robinhood.com/address/0x691f490F01cf808987540F34724253eA54B221D8) |
+| **MilestoneEscrow** | `0x2d57cc0e20e742E9E451aC4d340A0013b3b3Cd00` | [View](https://explorer.testnet.chain.robinhood.com/address/0x2d57cc0e20e742E9E451aC4d340A0013b3b3Cd00) |
+| **SecondaryMarket** | `0x232FBC0085cd182Afe7838864C26824a48F3B504` | [View](https://explorer.testnet.chain.robinhood.com/address/0x232FBC0085cd182Afe7838864C26824a48F3B504) |
+| **HardwareVerifier (Stylus WASM)** | `0x774a47d68c0148ffa14a154beb740154f0e4c129` | [View](https://explorer.testnet.chain.robinhood.com/address/0x774a47d68c0148ffa14a154beb740154f0e4c129) |
+| **USDG (settlement token)** | `0x7E955252E15c84f5768B83c41a71F9eba181802F` | [View](https://explorer.testnet.chain.robinhood.com/address/0x7E955252E15c84f5768B83c41a71F9eba181802F) |
 
-### 🟢 Live Seeded Hardware Project (Project #1)
-The primary showcase project **HelioFrost Pro** is registered and active on Arbitrum Sepolia:
+Role wiring, USDG settlement, the market fee skim, bid/list escrow round-trips and holder refunds are exercised against this deployment by the shell E2Es in `contracts/` (`e2e-robinhood.sh`, `e2e-market-refund.sh`), which read their target addresses from `frontend/.env.local`.
+
+### 🟢 Live Seeded Hardware Project — HelioFrost Pro (Project #1)
+The showcase project is created on the live registry above:
 - **Project ID**: `1`
 - **Status**: `FUNDING`
-- **Target**: `0.05 ETH` (1,000 claim units @ 0.00005 ETH)
+- **Target**: `5,000 USDG` (1,000 claim units @ 5 USDG each)
 - **On-chain Milestone Count**: `4 tranches`
-- **Creation Tx**: [`0xf811da25...`](https://sepolia.arbiscan.io/tx/0xf811da25e79f0569c17373fe6e057596058212b0f14a861668dfb005bf42c8ff)
-- **Milestones Schedule Tx**: [`0xf0cc0aed...`](https://sepolia.arbiscan.io/tx/0xf0cc0aedc25c85bfe59234b8ea15478b01a47b0a168094cb8cb46493e1cf515b)
-- **Funding Opened Tx**: [`0xff23db08...`](https://sepolia.arbiscan.io/tx/0xff23db08fdb46777b95c17ffe1bf494fede7ec14aef399a844a055fb969747e5)
+- Seeded via `contracts/script/SeedLiveProject.sol`.
 
 ---
 
 ## 🚀 Key User Journeys & Screen Implementations
 
 1. **Backer Voting & Escrow Consensus Terminal (Screen 06)**:
-   - Route: `/projects/[slug]/milestones/[id]/vote`
+   - Route: `/projects/[slug]/milestones/[milestoneIndex]/vote`
    - Real-time `QuorumMeter`, IPFS evidence inspector, Stylus Oracle attestation badge, and permissionless settlement triggers.
 2. **Founder Milestone Evidence Studio (Screen 27)**:
-   - Route: `/studio/[slug]/milestones/[id]/submit`
+   - Route: `/studio/[slug]/milestones/[milestoneIndex]/submit`
    - Form for uploading factory BOM receipts, QA reports, and trigger for `HardwareVerifier` WASM Merkle evaluation.
 3. **Claim Trading Terminal (Screen 23)**:
-   - Route: `/market/[ticker]`
+   - Route: `/market/p/[id]`
    - Live two-column orderbook ladder with bid/ask depth, recent fills ledger, order slip with 1% protocol fee calculation, and physical unit redemption card.
-4. **Judge Demo Mode Switcher**:
-   - Header pill component allowing hackathon reviewers to immediately jump between:
+4. **Demo Mode Switcher**:
+   - Header pill component allowing reviewers to immediately jump between:
      - 🗳️ **Backer Vote**
      - 🏭 **Founder Submit**
      - 📈 **Trade Claim**

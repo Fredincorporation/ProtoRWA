@@ -406,4 +406,61 @@ contract ProtoRwaFlowTest is Fixture {
         vm.expectRevert();
         escrow.oracleResolve(projectId, 0, true, "no");
     }
+
+    /* ------------------------------------------------------------------ *
+     * Oracle idempotency (regression: oracleResolve used to be re-appliable,
+     * paying the tranche out a second time on an already-settled review).
+     * ------------------------------------------------------------------ */
+
+    function test_Oracle_CannotDoubleResolve() public {
+        uint256 projectId = fundedProject();
+
+        vm.prank(founder);
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+
+        vm.prank(admin);
+        escrow.escalate(projectId, 0, "ipfs://rationale");
+
+        uint256 founderBefore = founder.balance;
+        vm.prank(admin);
+        escrow.oracleResolve(projectId, 0, true, "release tranche 1");
+        assertEq(founder.balance - founderBefore, 60 ether, "first resolve should pay one tranche");
+
+        // A second release of the same milestone must be rejected, not silently
+        // drained again.
+        vm.prank(admin);
+        vm.expectRevert(abi.encodeWithSelector(MilestoneEscrow.ReviewClosed.selector, projectId, 0));
+        escrow.oracleResolve(projectId, 0, true, "second release");
+
+        assertEq(founder.balance - founderBefore, 60 ether, "tranche was released twice");
+        assertEq(escrow.escrowBalance(projectId), 40 ether, "escrow drained by a replayed resolve");
+    }
+
+    function test_Oracle_CannotEscalateAfterSettlement() public {
+        uint256 projectId = fundedProject();
+
+        vm.prank(founder);
+        escrow.submitEvidence(projectId, 0, "ipfs://evidence-1");
+        vm.prank(alice);
+        escrow.vote(projectId, 0, true, false);
+        vm.prank(bob);
+        escrow.vote(projectId, 0, true, false);
+        vm.warp(block.timestamp + VOTING_PERIOD + 1);
+        escrow.settleReview(projectId, 0);
+
+        // The review is already APPROVED; escalating it would reset the outcome to
+        // PENDING and re-open it for a second release, so escalate must refuse.
+        vm.prank(admin);
+        vm.expectRevert(abi.encodeWithSelector(MilestoneEscrow.ReviewClosed.selector, projectId, 0));
+        escrow.escalate(projectId, 0, "ipfs://too-late");
+    }
+
+    function test_Oracle_CannotResolveWithoutEvidence() public {
+        uint256 projectId = fundedProject();
+
+        // No submitEvidence, so there is no snapshot to resolve against.
+        vm.prank(admin);
+        vm.expectRevert(abi.encodeWithSelector(MilestoneEscrow.NoReview.selector, projectId, 0));
+        escrow.oracleResolve(projectId, 0, true, "nothing was submitted");
+    }
 }

@@ -98,6 +98,16 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
     /// @notice Project id => remaining custodied balance.
     mapping(uint256 => uint256) public escrowBalance;
 
+    /**
+     * @notice Total ERC-20 base units this contract has accounted for.
+     *
+     * @dev Exists so `depositToken` can verify a reported amount against the real
+     *      token balance instead of trusting the caller. Native ETH needs no
+     *      equivalent because `msg.value` is supplied by the EVM and cannot be
+     *      misreported.
+     */
+    uint256 public totalAccounted;
+
     /* ------------------------------------------------------------------ *
      * Events
      * ------------------------------------------------------------------ */
@@ -169,7 +179,7 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
         _grantRole(ORACLE_ROLE, admin);
     }
 
-    /// @notice Accepts committed capital forwarded by the registry.
+    /// @notice Accepts native-ETH committed capital forwarded by the registry.
     /// @dev Restricted to the registry so escrow accounting can never be
     ///      credited by an unrelated deposit that bypasses commit().
     function deposit(uint256 projectId) external payable {
@@ -177,6 +187,49 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
         if (msg.value == 0) revert InsufficientEscrow();
         escrowBalance[projectId] += msg.value;
         emit EscrowDeposited(projectId, msg.value);
+    }
+
+    /**
+     * @notice Credits an ERC-20 commitment that has already been transferred in.
+     *
+     * @dev Why this exists alongside the payable `deposit`:
+     *
+     *      A token commitment cannot be pushed with calldata value - `msg.value`
+     *      is always zero for an ERC-20 transfer - so the payable `deposit()`
+     *      credits nothing when the payment token is not native. The ERC-20 flow
+     *      is therefore pull-then-account: the registry transfers the tokens in
+     *      and then reports the amount here.
+     *
+     *      The reported amount is cross-checked against the escrow's actual
+     *      balance delta rather than trusted, so a compromised or buggy registry
+     *      cannot inflate `escrowBalance` and release capital that was never
+     *      deposited. Without this check the accounting would be a claim about
+     *      the funds rather than a fact about them.
+     *
+     * @param projectId Project the commitment belongs to.
+     * @param amount Token base units that the registry has transferred in.
+     */
+    function depositToken(uint256 projectId, uint256 amount) external {
+        if (msg.sender != address(registry)) revert TransferFailed();
+        if (address(paymentToken) == address(0)) revert TransferFailed();
+        if (amount == 0) revert InsufficientEscrow();
+
+        /*
+         * Verify against the real balance rather than the reported figure.
+         *
+         * `accountedBalance` is the sum of everything this contract believes it
+         * holds; comparing the observed token balance against it means the
+         * credited amount can only ever reflect tokens that genuinely arrived.
+         * Comparing against `escrowBalance[projectId]` alone would miss tokens
+         * that were sent directly to the contract and never attributed.
+         */
+        uint256 observed = paymentToken.balanceOf(address(this));
+        uint256 accounted = totalAccounted + amount;
+        if (observed < accounted) revert InsufficientEscrow();
+
+        totalAccounted = accounted;
+        escrowBalance[projectId] += amount;
+        emit EscrowDeposited(projectId, amount);
     }
 
     /// @dev Bare transfers are rejected: capital must arrive via deposit() so it
@@ -359,6 +412,10 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
             (bool ok, ) = recipient.call{ value: amount }("");
             if (!ok) revert TransferFailed();
         } else {
+            // Keep the accounted total in step with the token balance, or the
+            // next depositToken() would compare against a stale figure and
+            // reject a legitimate commitment.
+            totalAccounted -= amount;
             paymentToken.safeTransfer(recipient, amount);
         }
     }
@@ -368,11 +425,20 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
      * ------------------------------------------------------------------ */
 
     /// @notice Escalates a milestone to the protocol oracle for resolution.
+    /// @dev Only a live, still-pending review may be escalated. This prevents the
+    ///      oracle path from resurrecting an already-settled milestone (resetting
+    ///      its outcome to `PENDING`) and thereby releasing the tranche a second
+    ///      time via `oracleResolve`.
     function escalate(uint256 projectId, uint256 milestoneIndex, string calldata rationaleCid)
         external
         onlyRole(ORACLE_ROLE)
     {
         Review storage review = reviews[projectId][milestoneIndex];
+        if (review.snapshotAt == 0) revert NoReview(projectId, milestoneIndex);
+        if (!review.open || review.outcome != ReviewOutcome.PENDING) {
+            revert ReviewClosed(projectId, milestoneIndex);
+        }
+
         review.open = false;
         review.outcome = ReviewOutcome.PENDING;
         emit MilestoneEscalated(projectId, milestoneIndex, rationaleCid);
@@ -381,6 +447,12 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
     /**
      * @notice Resolves an escalated or oversized review.
      * @param release True to release the tranche, false to reject.
+     * @dev Idempotency guard: only a review that is still awaiting a decision
+     *      (`snapshotAt != 0`, outcome `PENDING`) may be resolved. Without this a
+     *      second `oracleResolve`, or one applied to a milestone already settled by
+     *      `settleReview`, would call `_release` again and pay the tranche out a
+     *      second time - a silent drain of escrowed capital that only reverts when
+     *      the balance happens to be short.
      */
     function oracleResolve(
         uint256 projectId,
@@ -389,6 +461,9 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
         string calldata rationale
     ) external onlyRole(ORACLE_ROLE) nonReentrant {
         Review storage review = reviews[projectId][milestoneIndex];
+        if (review.snapshotAt == 0) revert NoReview(projectId, milestoneIndex);
+        if (review.outcome != ReviewOutcome.PENDING) revert ReviewClosed(projectId, milestoneIndex);
+
         uint256 amount = review.trancheAmount;
 
         review.open = false;
@@ -436,6 +511,9 @@ contract MilestoneEscrow is AccessControl, ReentrancyGuard {
             (bool ok, ) = payable(msg.sender).call{ value: payout }("");
             if (!ok) revert TransferFailed();
         } else {
+            // Mirrors the release path: refunds leave the contract, so the
+            // accounted total must fall with them.
+            totalAccounted -= payout;
             paymentToken.safeTransfer(msg.sender, payout);
         }
 
