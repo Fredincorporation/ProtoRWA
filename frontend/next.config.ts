@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       // IPFS gateways used for project media and milestone evidence.
+      { protocol: 'https', hostname: 'ipfs.filebase.io' },
       { protocol: 'https', hostname: '*.mypinata.cloud' },
       { protocol: 'https', hostname: 'ipfs.io' },
       { protocol: 'https', hostname: 'gateway.pinata.cloud' },

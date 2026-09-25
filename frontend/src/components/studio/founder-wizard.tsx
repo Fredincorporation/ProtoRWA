@@ -209,12 +209,21 @@ export function FounderWizard() {
     try {
       // 0. Pin the metadata document; its CID is stored on-chain.
       setPhase('pinning');
+      // A pitch video may be an IPFS CID (proxied upload) or an R2 https URL
+      // (direct presigned upload). Only the CID form gets wrapped in ipfs://;
+      // an absolute URL is stored verbatim so ipfsUrl() renders it as-is.
+      const videoRef = values.pitchVideoCid
+        ? /^https?:\/\//i.test(values.pitchVideoCid)
+          ? values.pitchVideoCid
+          : ipfsRef(values.pitchVideoCid)
+        : null;
       const { cid: metadataCid } = await pinProjectMetadata({
         name: values.title,
         description: values.description,
         image: values.coverCid ? ipfsRef(values.coverCid) : null,
         gallery: values.galleryCids.map(ipfsRef),
-        video: values.pitchVideoCid ? ipfsRef(values.pitchVideoCid) : null,
+        video: videoRef,
+        videoHash: values.pitchVideoHash || null,
       });
 
       // 1. createProject -> recover projectId from the ProjectCreated event.
@@ -426,6 +435,7 @@ export function FounderWizard() {
               value={draft.pitchVideoCid}
               error={errors.pitchVideoCid?.message}
               onChange={(cid) => setValue('pitchVideoCid', cid, { shouldValidate: true })}
+              onHashChange={(hash) => setValue('pitchVideoHash', hash)}
             />
 
             <div className="grid-cols-1 gap-space-md lg:grid-cols-2">

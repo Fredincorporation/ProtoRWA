@@ -18,10 +18,18 @@
 
 import { NextResponse } from 'next/server';
 
+import { MAX_UPLOAD_BYTES, MAX_UPLOAD_MB } from '@/lib/upload-limits';
+
 export const runtime = 'nodejs';
 
-/** Single-file cap: a pitch video pinned from a laptop should stay under this. */
-const MAX_BYTES = 100 * 1024 * 1024;
+/**
+ * Single-file cap. Must stay under the platform's serverless request-body limit
+ * (4.5 MB on Vercel) because the file is proxied through this function. The
+ * value and its rationale live in `@/lib/upload-limits` (env-overridable via
+ * MAX_UPLOAD_BYTES). To accept larger media on a body-capped host you must move
+ * to a presigned direct-to-bucket upload — but that returns an object-store URL,
+ * not an IPFS CID, so it is a media-model change, not a drop-in.
+ */
 
 /** Public Filebase IPFS gateway used for rendering pinned content. */
 const GATEWAY = 'https://ipfs.filebase.io/ipfs';
@@ -80,9 +88,13 @@ export async function POST(request: Request) {
   if (!(file instanceof File) || file.size === 0) {
     return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
   }
-  if (file.size > MAX_BYTES) {
+  if (file.size > MAX_UPLOAD_BYTES) {
     return NextResponse.json(
-      { error: `File is too large (${(file.size / 1024 / 1024).toFixed(1)} MB, limit ${MAX_BYTES / 1024 / 1024} MB)` },
+      {
+        error: `File is too large (${(file.size / 1024 / 1024).toFixed(1)} MB, limit ${MAX_UPLOAD_MB} MB).`,
+        detail:
+          'Uploads are proxied through a serverless function, which caps the request body. Use a smaller file, or switch media hosting to a presigned direct-to-bucket upload.',
+      },
       { status: 413 },
     );
   }

@@ -78,8 +78,12 @@ export async function pinProjectMetadata(metadata: {
   image?: string | null;
   gallery?: string[];
   video?: string | null;
+  videoHash?: string | null;
 }): Promise<UploadResult> {
-  const blob = new Blob([JSON.stringify(metadata, null, 2)], { type: 'application/json' });
+  const { videoHash, ...rest } = metadata;
+  const doc: Record<string, unknown> = { ...rest };
+  if (videoHash) doc.videoHash = `sha256:${videoHash}`;
+  const blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
   const file = new File([blob], 'metadata.json', { type: 'application/json' });
   return uploadFile(file);
 }

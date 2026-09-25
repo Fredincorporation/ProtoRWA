@@ -72,7 +72,13 @@ export const projectDraftSchema = z
     galleryCids: z
       .array(z.string().trim().min(1))
       .min(1, 'Add at least one project photo'),
+    // Pitch video reference: either an IPFS CID (proxied upload) or a full
+    // Cloudflare R2 https URL (direct presigned upload). The registry never
+    // stores this; it lives in the pinned metadata document. `pitchVideoHash`
+    // records the SHA-256 of the bytes the founder uploaded, so the object's
+    // integrity is checkable independent of the CDN.
     pitchVideoCid: z.string().trim().min(1, 'A founder pitch video is required'),
+    pitchVideoHash: z.string().trim().default(''),
 
     // Step 3: raise (USDG amounts)
     targetEth: usdgAmount,
@@ -180,6 +186,7 @@ export function emptyDraft(): ProjectDraft {
     coverCid: '',
     galleryCids: [],
     pitchVideoCid: '',
+    pitchVideoHash: '',
     // A realistic hardware raise: 50,000 USDG (~$50k) across 10,000 claims at
     // 5 USDG each, open for a month. 100 USDG is a demo number, not a build.
     targetEth: '50000',

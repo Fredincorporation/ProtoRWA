@@ -5,6 +5,8 @@ import { toast } from 'sonner';
 
 import { Icon } from '@/components/ui/icon';
 import { ipfsUrl, uploadFile } from '@/lib/ipfs';
+import { uploadVideoToR2 } from '@/lib/r2';
+import { MAX_UPLOAD_BYTES, MAX_VIDEO_BYTES, R2_VIDEO_ENABLED } from '@/lib/upload-limits';
 import { cn } from '@/lib/utils';
 
 /**
@@ -20,8 +22,13 @@ import { cn } from '@/lib/utils';
 const IMAGE_ACCEPT = 'image/png,image/jpeg,image/webp,image/avif';
 const VIDEO_ACCEPT = 'video/mp4,video/webm,video/quicktime';
 
-const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
-const MAX_VIDEO_BYTES = 100 * 1024 * 1024;
+// Images are always pinned through the proxied `/api/upload`, so they are capped
+// at the serverless body limit (see @/lib/upload-limits). Video uses the larger
+// R2 ceiling when direct upload is enabled; when it falls back to the IPFS proxy
+// it is capped at that proxy's body limit instead, so the pre-check never lets a
+// file through that the route would reject with a 413.
+const MAX_IMAGE_BYTES = MAX_UPLOAD_BYTES;
+const MAX_VIDEO_LIMIT = R2_VIDEO_ENABLED ? MAX_VIDEO_BYTES : MAX_UPLOAD_BYTES;
 const MAX_GALLERY = 8;
 
 interface FieldMessage {
@@ -235,11 +242,62 @@ export function GalleryField({
 export function PitchVideoField({
   value,
   onChange,
+  onHashChange,
   error,
-}: FieldMessage & { value: string; onChange: (cid: string) => void }) {
+}: FieldMessage & {
+  value: string;
+  onChange: (ref: string) => void;
+  onHashChange?: (hash: string) => void;
+}) {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const { busy, upload } = useUploader(VIDEO_ACCEPT, MAX_VIDEO_BYTES, 'Pitch video');
+  const [busy, setBusy] = React.useState(false);
   const preview = ipfsUrl(value);
+
+  const clear = () => {
+    onChange('');
+    onHashChange?.('');
+  };
+
+  const handleFile = async (file: File) => {
+    if (!file.type.startsWith('video/')) {
+      toast.error('Unsupported pitch video type', {
+        description: `Allowed: ${VIDEO_ACCEPT.replace(/,/g, ', ')}`,
+      });
+      return;
+    }
+    if (file.size > MAX_VIDEO_LIMIT) {
+      toast.error('Pitch video too large', {
+        description: `Maximum ${Math.round(MAX_VIDEO_LIMIT / 1024 / 1024)} MB.`,
+      });
+      return;
+    }
+
+    setBusy(true);
+    try {
+      if (R2_VIDEO_ENABLED) {
+        // Direct browser -> R2 upload: bytes bypass the serverless body cap, so
+        // large pitch videos work. We store the public URL and the SHA-256 hash.
+        const { url, hash } = await uploadVideoToR2(file);
+        toast.success('Pitch video uploaded', { description: url });
+        onChange(url);
+        onHashChange?.(hash);
+      } else {
+        // Fallback: pin through the IPFS proxy (small files only).
+        const { cid } = await uploadFile(file);
+        toast.success('Pitch video pinned', { description: cid });
+        onChange(cid);
+        onHashChange?.('');
+      }
+    } catch (err) {
+      toast.error('Could not upload pitch video', {
+        description: err instanceof Error ? err.message : 'Unknown error',
+      });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const isUrl = /^https?:\/\//i.test(value);
 
   return (
     <div className="flex-col gap-1.5">
@@ -257,11 +315,11 @@ export function PitchVideoField({
           <video src={preview} controls playsInline className="aspect-video w-full" />
           <div className="flex items-center justify-between px-space-sm py-2">
             <span className="truncate font-mono text-label-sm text-outline" title={value}>
-              ipfs://{value}
+              {isUrl ? value : `ipfs://${value}`}
             </span>
             <button
               type="button"
-              onClick={() => onChange('')}
+              onClick={clear}
               className="inline-flex items-center gap-1 font-mono text-label-sm text-on-surface-variant transition-colors hover:text-error"
             >
               <Icon name="delete" size={14} />
@@ -280,7 +338,9 @@ export function PitchVideoField({
           )}
         >
           <Icon name={busy ? 'hourglass_top' : 'movie'} size={28} className={busy ? 'animate-pulse' : ''} />
-          <span className="font-mono text-label-sm">{busy ? 'Pinning…' : 'Upload pitch video'}</span>
+          <span className="font-mono text-label-sm">
+            {busy ? (R2_VIDEO_ENABLED ? 'Uploading…' : 'Pinning…') : 'Upload pitch video'}
+          </span>
         </button>
       )}
 
@@ -293,8 +353,7 @@ export function PitchVideoField({
           const file = fileFromEvent(event);
           event.target.value = '';
           if (!file) return;
-          const cid = await upload(file);
-          if (cid) onChange(cid);
+          await handleFile(file);
         }}
       />
 
@@ -305,7 +364,7 @@ export function PitchVideoField({
         </p>
       ) : (
         <p className="text-label-sm text-outline">
-          MP4, WebM or MOV · up to {Math.round(MAX_VIDEO_BYTES / 1024 / 1024)} MB. Backers watch this before committing.
+          MP4, WebM or MOV · up to {Math.round(MAX_VIDEO_LIMIT / 1024 / 1024)} MB. Backers watch this before committing.
         </p>
       )}
     </div>
